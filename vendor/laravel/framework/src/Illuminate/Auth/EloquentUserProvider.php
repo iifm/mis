@@ -131,6 +131,8 @@ class EloquentUserProvider implements UserProvider
         else{
             return false;
         }
+      // return $this->hasher->check($plain, $user->getAuthPassword());
+    
     }
 
     /**

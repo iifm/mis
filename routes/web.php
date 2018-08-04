@@ -18,7 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/dashboard', 'HomeController@dashboard');
+Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
 
 
 //user-details routes
@@ -102,7 +102,7 @@ Route::post('/changePassword','HomeController@changePassword');
 Route::get('/conveyance-report','ReportController@conveyanceReport')->name('conveyanceReport');
 Route::get('/conveyance-report/data','ReportController@conveyanceDate');
 
-Route::get('/backup-database','DatabaseBackupController@backup');
+/*Route::get('/backup-database','DatabaseBackupController@backup');*/
 
 
 //Inventory Management Routes
@@ -110,6 +110,5 @@ Route::resource('/product','ProductController');
 
 Route::resource('/assign','AssignProductController');
 Route::get('/get-product/{category}','AssignProductController@getProduct');
-
 
 Route::get('/send-mail','LeaveController@sendMail');

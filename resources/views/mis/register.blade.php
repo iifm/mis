@@ -30,7 +30,7 @@
         
           <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}"
              class="register-form">
-                        @csrf
+                      {{csrf_field()}}
           <h3 class="register-head"><i class="fa fa-lg fa-fw fa-user"></i>SIGN UP</h3>
            
           <div class="form-group">

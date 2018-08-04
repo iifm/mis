@@ -83,7 +83,7 @@
     </div>  
   </div>
 </div>
-
+ <!-- url('storage/app/profile/'.$user->profile)  -->
 @else
 @foreach($user_detail as $user) 
 <div class="row">
@@ -91,7 +91,7 @@
     <div class="col-md-3">
     
    <div class="card tile" style="height: 320px;">
-    <img class="" width="100%" height="200" src="{{ url('storage/profile/'.$user->profile) }}" alt="Profile image">
+    <img class="" width="100%" height="200" src="{{URL::To('storage/app/profile/'.$user->profile)}}" alt="Profile image">
     <div class="card-body">
       <h4 class="card-title" style="font-family: Times New Roman;text-align: center;">{{Auth::user()->name}}</h4>
       <p class="card-text" style="text-align: center">{{$user->designation}}
@@ -170,8 +170,12 @@
               <td>{{$value->endyear}}</td>
               <td>{{$value->specialization}}</td>
               <td>{{$value->percentage}}</td>
-
-              <td><a href="{{ url('storage/education/'.$value->certificate) }}" target="_blank"><img src="{{ url('storage/education/'.$value->certificate) }}"  height="50px" width="50px"></a></td>
+             
+              <td>
+                 @if(($value->certificate)!='')
+                <a href="{{ URL::To('storage/app/education/'.$value->certificate) }}" target="_blank"><img src="{{ URL::To('storage/app/education/'.$value->certificate) }}"  height="50px" width="50px"></a>
+                @endif
+              </td>
 
               <td><a href="{{url('/education-delete')}}/{{$value->id}}" class="btn btn-danger fa fa-trash" onclick="return confirm('Are you sure you want to delete this item?');"></a></td>
             </tr>
@@ -210,8 +214,19 @@
               <td>{{$value->fromdate}}</td>
               <td>{{$value->todate}}</td>
               <td>{{$value->address}}</td>
-               <td><a href="{{ url('storage/professional/'.$value->offerletter) }}" target="_blank"><img src="{{ url('storage/professional/'.$value->offerletter) }}" alt="Click Here"  height="50px" width="50px"></a></td>
-               <td><a href="{{ url('storage/professional/'.$value->relievingletter) }}" target="_blank"><img src="{{ url('storage/professional/'.$value->relievingletter) }}" alt="Click Here"  height="50px" width="50px"></a></td>
+
+               <td>
+                @if(($value->offerletter)!='')
+                <a href="{{ URL::To('storage/app/professional/'.$value->offerletter) }}" target="_blank"><img src="{{ URL::To('storage/app/professional/'.$value->offerletter) }}" alt="Click Here"  height="50px" width="50px">
+                </a>
+                @endif
+              </td>
+               <td>
+                 @if(($value->relievingletter)!='')
+                <a href="{{ URL::To('storage/app/professional/'.$value->relievingletter) }}" target="_blank"><img src="{{ URL::To('storage/app/professional/'.$value->relievingletter) }}" alt="Click Here"  height="50px" width="50px">
+                  @endif
+                </a>
+              </td>
               <td><a href="{{url('/profession-delete')}}/{{$value->id}}" class="btn btn-danger fa fa-trash" onclick="return confirm('Are you sure you want to delete this item?');"></a></td>
             </tr>
           </tbody>
@@ -241,6 +256,10 @@
              <tr>
               <th>Permanent Address</th>
               <td>{{$detail->pstreet}} {{$detail->pcity}} {{$detail->pstate}}</td>
+            </tr>
+            <tr>
+              <th>Contact Number</th>
+              <td>{{$detail->mobile}}</td>
             </tr>
              <tr>
               <th>Alternate Contact Number</th>

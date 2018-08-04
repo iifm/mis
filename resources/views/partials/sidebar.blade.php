@@ -2,14 +2,14 @@
 <div class="sidebar" data-toggle="sidebar" ></div>
     <aside class="app-sidebar" style="overflow: scroll">
       @if(Session::has('profile'))
-      <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" height="60px" width="60px;" src="{{ url('storage/profile/'.Session::get('profile')) }}" alt="User Image">
+      <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" height="60px" width="60px;" src="{{ URL::To('storage/app/profile/'.Session::get('profile')) }}" alt="User Image">
         <div>
           <p class="app-sidebar__user-name">{{Auth::user()->name}}</p>
           <p class="app-sidebar__user-designation">{{Auth::user()->email}}</p>
         </div>
       </div>
       @else
-      <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" height="60px" width="60px;" src="{{ URL::asset('images/user.png') }}" alt="User Image">
+      <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" height="60px" width="60px;" src="{{ URL::asset('images/user.jpeg') }}" alt="User Image">
         <div>
           <p class="app-sidebar__user-name">{{Auth::user()->name}}</p>
           <p class="app-sidebar__user-designation">{{Auth::user()->email}}</p>

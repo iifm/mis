@@ -68,25 +68,28 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-       
+     
+        //dd($data);
         $user =User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'password' => md5($data['password']),
         ]);
 
+        //dd($user);
         $UserDetails = new UserDetails;
          $UserDetails->user_id = $user->id;
          $UserDetails->save();
 
-         $work_experience = new UserWorkExperience;
+       /*  $work_experience = new UserWorkExperience;
         $work_experience->user_id = $user->id;
         $work_experience->save();
 
         $UserEducation = new UserEducation;
         $UserEducation->user_id = $user->id;
-        $UserEducation->save();
+        $UserEducation->save();*/
 
+       // return redirect()->route('dashboard');
         return $user;
 
     }
