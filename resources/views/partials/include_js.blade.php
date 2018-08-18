@@ -100,7 +100,7 @@ input.clockpicker({
     autoclose: true
 });
 
-    </script>
+ </script>
 
 <!-- Alert -->
 
@@ -128,3 +128,29 @@ input.clockpicker({
         });
       });
 </script>
+
+
+ <script type="text/javascript">
+    $(document).ready(function(){
+    
+      $(function () {
+      $('.char-only').keydown(function (e) {
+          if (e.shiftKey || e.ctrlKey || e.altKey) {
+              e.preventDefault();
+          } else {
+              var key = e.keyCode;
+              if (!((key == 8) ||(key == 9) || (key == 32) || (key == 46) || (key >= 35 && key <= 40) || (key >= 65 && key <= 90))) {
+                  e.preventDefault();
+              }
+          }
+      });
+  });
+
+  $(".numbers-only").on("keypress keyup blur",function (event) {    
+           $(this).val($(this).val().replace(/[^\d].+/, ""));
+            if ((event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+        });
+});
+  </script>

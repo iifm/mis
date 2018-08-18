@@ -8,11 +8,20 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!-- Main CSS-->
     {!!View('partials.include_css')!!}
-
+<style type="text/css">
+ table {
+  height: 100px;
+  overflow-y: scroll;
+}
+a {
+    text-decoration: none !important;
+}
+</style>
 
   </head>
   
@@ -30,6 +39,7 @@
     <!-- Main Content-->
     <main class="app-content">
       <div class="app-title">
+
         <div>
           <h1><i class="fa fa-dashboard"></i> Dashboard</h1>
           
@@ -39,87 +49,178 @@
           <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
         </ul>
       </div>
+       <?php if(Session::has('message')) {?>
+        <div id="alert" class="alert alert-success">{{ Session::get('message') }}
+
+        </div><?php } ?>
       <div class="row">
-        <div class="col-md-6 col-lg-3">
-          <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
-            <div class="info">
-              <h4>Users</h4>
-              <p><b>5</b></p>
+        <div class="col-md-6 col-lg-4">
+          <a href="{{url('/leave-view')}}">
+          <div class="widget-small primary coloured-icon"><i class="icon fa fa-calendar fa-3x"></i>
+            <div class="" style="width: 100%; padding:14px 0 5px 0">
+             <center><h6>Total Applied Leaves</h6></center> 
+              <center><h3><b>{{$totleaves}}</b></h3></center>
             </div>
           </div>
+          </a>
         </div>
-        <div class="col-md-6 col-lg-3">
-          <div class="widget-small info coloured-icon"><i class="icon fa fa-thumbs-o-up fa-3x"></i>
-            <div class="info">
-              <h4>Likes</h4>
-              <p><b>25</b></p>
+        <div class="col-md-6 col-lg-4">
+          <a href="{{url('/on-duty/index')}}">
+          <div class="widget-small info coloured-icon"><i class="icon fa fa-tag fa-3x"></i>
+            <div class="" style="width: 100%">
+            <center><h6 >Total Applied On-Dutys</h6></center>  
+             <center><h3><b>{{$totod}}</b></h3></center> 
             </div>
           </div>
+          </a>
         </div>
-        <div class="col-md-6 col-lg-3">
-          <div class="widget-small warning coloured-icon"><i class="icon fa fa-files-o fa-3x"></i>
-            <div class="info">
-              <h4>Uploades</h4>
-              <p><b>10</b></p>
+        <div class="col-md-6 col-lg-4">
+          <a href="{{url('/conveyance/index')}}">
+          <div class="widget-small warning coloured-icon"><i class="icon fa fa-inr fa-3x"></i>
+            <div class="" style="width: 100%">
+            <center><h6>Total Applied Conveyances</h6></center>  
+             <center><h3><b>{{$totconveyance}}</b></h3></center> 
             </div>
           </div>
+          </a>
         </div>
-        <div class="col-md-6 col-lg-3">
-          <div class="widget-small danger coloured-icon"><i class="icon fa fa-star fa-3x"></i>
-            <div class="info">
-              <h4>Stars</h4>
-              <p><b>500</b></p>
-            </div>
-          </div>
-        </div>
+       
       </div>
       <div class="row">
-        <div class="col-md-6">
-          <div class="tile">
-            <h3 class="tile-title">Monthly Sales</h3>
-            <div class="embed-responsive embed-responsive-16by9">
-              <canvas class="embed-responsive-item" id="lineChartDemo"></canvas>
+        <div class="col-md-4">
+          <div class="tile" style="min-height: 480px">
+            <h5>Employees of Months</h5>
+            <div class="">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                
+                <div class="carousel-inner">
+                   @foreach( $eoms as $eom )
+                  <div class="carousel-item {{ $loop->first ? 'active' : '' }}"">
+                     <img   src="{{ URL::To('storage/app/public/images/'.$eom->image) }}"" alt="First slide" height="350px" width="100%">
+                       <div style="width: 100%; padding:20px">
+                         <h5 style="text-align: center;">{{$eom->empname}}</h5>
+                          <p style="text-align: center;">{{$eom->month}} {{$eom->created_at->year}} <br>
+                          {{$eom->department}}</p>
+
+                      </div>
+                  </div>
+                 @endforeach
+                
+                 
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
-        <div class="col-md-6">
-          <div class="tile">
-            <h3 class="tile-title">Support Requests</h3>
-            <div class="embed-responsive embed-responsive-16by9">
-              <canvas class="embed-responsive-item" id="pieChartDemo"></canvas>
+              
+            <div class="col-md-4" >
+                     <div class="row">
+                <div class="col-md-12">
+                <div class="tile">
+                  <div class="table-wrapper-scroll-y"></div>
+                   <h5>Today Events</h5>  
+                   @php $i=1; @endphp
+                      <table width="100%" id="events">
+                        <thead>
+                          <tr>
+                          <th>#</th>
+                          <th>Name</th>
+                          <th>Event Name</th>
+                          <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                       
+                          @foreach($todays_event as $event)
+                          <tr>
+                          <td>{{$i++}}</td>
+                          <td>{{$event['name']}}</td>
+                          <td>{{$event['event']}}</td>
+                          <td><a href="{{url('/send-wish')}}/{{$event['user_id']}}" class="btn btn-primary fa fa-envelope" title="Send Wish"></a></td>
+                          </tr>
+                          @endforeach
+                         
+                        </tbody>
+                      </table>
+                      
+                    
+                </div>
+                </div>
+              </div>
+              <div class="tile">
+                <h5>Upcoming Events</h5> 
+                 <li style="list-style-type: none;" class="dropdown"><a class="app-nav__item btn btn-success" href="#" data-toggle="dropdown" aria-label="Show notifications"><i class="fa fa-birthday-cake  fa-lg"> BIRTHDAYS</i></a>
+          <ul style="list-style-type: none;" class="app-notification dropdown-menu dropdown-menu-right">
+            <li class="app-notification__title">This month have {{count($monthBirthday)}} Birthdays.</li>
+            <div class="app-notification__content">
+              @foreach($monthBirthday as $value)
+              <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-birthday-cake fa-stack-1x fa-inverse"></i></span></span>
+                  <div>
+                    <p class="app-notification__message">{{$value->username}}</p>
+                    <p class="app-notification__meta">{{ date('F j',strtotime($value->dob))}}</p>
+                  </div></a>
+                </li>
+                @endforeach
             </div>
+            <li class="app-notification__footer"><a href="#">See all notifications.</a></li>
+          </ul>
+        </li>
+         <li style="list-style-type: none; margin-top: 10px;" class="dropdown"><a class="app-nav__item btn btn-info" href="#" data-toggle="dropdown" aria-label="Show notifications"><i class="fa fa-gift"> ANNIVERSARIES</i></a>
+          <ul style="list-style-type: none;" class="app-notification dropdown-menu dropdown-menu-right">
+            <li class="app-notification__title">This Month have {{count($monthAniversary)}}  Anniveraries  .</li>
+            <div class="app-notification__content">
+              @foreach($monthAniversary as $value)
+              <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-gift fa-stack-1x fa-inverse"></i></span></span>
+                  <div>
+                    <p class="app-notification__message">{{$value->username}}</p>
+                    <p class="app-notification__meta">{{ date('F j',strtotime($value->doj))}}</p>
+                  </div></a>
+                </li>
+              @endforeach
+            </div>
+            <li class="app-notification__footer"><a href="#">See all Anniversaries.</a></li>
+          </ul>
+        </li>
+           <li style="list-style-type: none; margin-top: 10px;" class="dropdown"><a class="app-nav__item btn btn-danger" href="#" data-toggle="dropdown" aria-label="Show notifications"><i class="fa fa-trophy">  WORK ANNIVERSARIES</i></a>
+          <ul style="list-style-type: none;" class="app-notification dropdown-menu dropdown-menu-right">
+            <li class="app-notification__title">This Month have {{count($monthWorkAniversary)}} Work Aniversaries.</li>
+            <div class="app-notification__content">
+              @foreach($monthWorkAniversary as $mwa)
+              <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-trophy fa-stack-1x fa-inverse"></i></span></span>
+                  <div>
+                    <p class="app-notification__message">{{$mwa->username}}</p>
+                    <p class="app-notification__meta">{{ date('F j',strtotime($mwa->doj))}}</p>
+                  </div></a></li>
+                  @endforeach
+            </div>
+            <li class="app-notification__footer"><a href="#">See all notifications.</a></li>
+          </ul>
+        </li>
+              </div>
+       
           </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="tile">
-            <h3 class="tile-title">Features</h3>
-            <ul>
-              <li>Built with Bootstrap 4, SASS and PUG.js</li>
-              <li>Fully responsive and modular code</li>
-              <li>Seven pages including login, user profile and print friendly invoice page</li>
-              <li>Smart integration of forgot password on login page</li>
-              <li>Chart.js integration to display responsive charts</li>
-              <li>Widgets to effectively display statistics</li>
-              <li>Data tables with sort, search and paginate functionality</li>
-              <li>Custom form elements like toggle buttons, auto-complete, tags and date-picker</li>
-              <li>A inbuilt toast library for providing meaningful response messages to user's actions</li>
-            </ul>
-            <p>Vali is a free and responsive admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.</p>
-            <p>Vali is is light-weight, expendable and good looking theme. The theme has all the features required in a dashboard theme but this features are built like plug and play module. Take a look at the <a href="http://pratikborsadiya.in/blog/vali-admin" target="_blank">documentation</a> about customizing the theme colors and functionality.</p>
-            <p class="mt-4 mb-4"><a class="btn btn-primary mr-2 mb-2" href="http://pratikborsadiya.in/blog/vali-admin" target="_blank"><i class="fa fa-file"></i>Docs</a><a class="btn btn-info mr-2 mb-2" href="https://github.com/pratikborsadiya/vali-admin" target="_blank"><i class="fa fa-github"></i>GitHub</a><a class="btn btn-success mr-2 mb-2" href="https://github.com/pratikborsadiya/vali-admin/archive/master.zip" target="_blank"><i class="fa fa-download"></i>Download</a></p>
+           <div class="col-md-4">
+              <div class="tile">
+                <h5>New Updates</h5>   
+                <ul>
+                <a href="#"><li class="btn btn-danger form-control">HR Policy</li></a>  
+                  <a href="{{url('/conveyance/policy')}}"><li class="btn btn-info form-control">Conveyance Policy</li></a> 
+                   
+                </ul>
+              </div>
           </div>
+       
         </div>
-        <div class="col-md-6">
-          <div class="tile">
-            <h3 class="tile-title">Compatibility with frameworks</h3>
-            <p>This theme is not built for a specific framework or technology like Angular or React etc. But due to it's modular nature it's very easy to incorporate it into any front-end or back-end framework like Angular, React or Laravel.</p>
-            <p>Go to <a href="http://pratikborsadiya.in/blog/vali-admin" target="_blank">documentation</a> for more details about integrating this theme with various frameworks.</p>
-            <p>The source code is available on GitHub. If anything is missing or weird please report it as an issue on <a href="https://github.com/pratikborsadiya/vali-admin" target="_blank">GitHub</a>. If you want to contribute to this theme pull requests are always welcome.</p>
-          </div>
-        </div>
-      </div>
+     
+      
     </main>
 
 
@@ -127,7 +228,54 @@
 
     <!-- Essential javascripts for application to work-->
     {!!View('partials.include_js')!!}
+  <!--   <script src="https://code.jquery.com/jquery-3.3.1.js" ></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script> -->
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#example').DataTable( {
+        "scrollY":        "80px",
+        "scrollCollapse": true,
+        "paging":         false,
+        "searching":  false,
+        "bInfo" : false
+    } );
+} );
 
+
+/*var numShown = 2; // Initial rows shown & index
+var numMore = 5;  // Increment
+
+var $table = $('table').find('tbody');  // tbody containing all the rows
+var numRows = $table.find('tr').length; // Total # rows
+
+$(function () {
+    // Hide rows and add clickable div
+    $table.find('tr:gt(' + (numShown - 1) + ')').hide().end()
+        .after('<tbody id="more"><tr><td colspan="' +
+               $table.find('tr:first td').length + '"><div><a style="cursor: pointer; ">Show <span>' +
+               numMore + '</span> More</a></div</tbody></td></tr>');
+
+    $('#more').click(function() {
+        numShown = numShown + numMore;
+        // no more "show more" if done
+        if (numShown >= numRows) {
+            $('#more').remove();
+        }
+        // change rows remaining if less than increment
+        if (numRows - numShown < numMore) {
+            $('#more span').html(numRows - numShown);
+        }
+        $table.find('tr:lt(' + numShown + ')').show();
+    });
+
+});*/
+
+ $('.carousel').carousel({
+  interval: 2000,
+})
+
+
+</script>
     
   </body>
 

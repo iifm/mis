@@ -8,7 +8,7 @@
     {!!View('partials.include_css')!!}
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
+ 
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
@@ -53,11 +53,12 @@
             <div class="tile-body">
               <form action="{{url('/conveyance-report/data')}}" method="get" autocomplete="off">
                 {{csrf_field()}}
-                <table width="50%" style="min-width:350px; ">
+                <table width="50%" style="min-width:600px; ">
                   <thead>
                     <tr>
-                  <th width="40%"><label class="form-group">TO</label></th>
-                  <th width="40%"><label class="form-group">FROM</label></th>
+                  <th width="20%"><label class="form-group">TO</label></th>
+                  <th width="20%"><label class="form-group">FROM</label></th>
+                    <th width="40%"><label class="form-group">SELECT EMPLOYEE</label></th>
                   <th width="20%"><label class="form-group"></label></th>
                   </tr>
                   
@@ -66,6 +67,13 @@
                     <tr>
                     <td><input type="text" class="form-control datepicker" placeholder="Start Date" name="strtDate"></td>
                     <td><input type="text" class="form-control datepicker" placeholder="End Date" name="endDate"></td>
+                    <td><select class="form-control" name="employee">
+                      <option value="">Select Employee</option>
+                      @foreach($users as $user)
+                      <option value="{{$user->id}}">{{$user->name}}</option>
+                      @endforeach
+                    </select>
+                  </td>
                      <td align=""><input type="submit" name="" class="btn btn-primary" style="margin-left: 25px; width: 100px;"> </td>
                     </tr>
                     <tr>
@@ -139,7 +147,9 @@
 
  <script>
   $( function() {
-    $( ".datepicker" ).datepicker();
+    $( ".datepicker" ).datepicker({
+       dateFormat:'yy-mm-dd'
+    });
   } );
   </script>
 

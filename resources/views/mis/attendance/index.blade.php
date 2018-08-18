@@ -18,8 +18,9 @@
   <div class="app-title">
     <div>
       <h1>
-        <i class="fa fa-th-list"></i> Attendance Management
+        <i class="fa fa-th-list"></i> Attendance Management <a href="{{url('/attendance-view')}}" class="btn btn-primary fa fa-eye">View Attendance</a>
       </h1>
+
     </div>
   </div>
   <div class="row">

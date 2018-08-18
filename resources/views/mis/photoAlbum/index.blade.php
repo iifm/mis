@@ -59,15 +59,21 @@
         <div class="col-md-12">
         @foreach($photos as $photo)
         <div class="col-md-4"  style="height: 350px;">
+
             <div class="card">
-                <img class="zoom" width="100%" height="" src="{{ url('storage/photos/'.$photo->photo) }}" alt="Card image">
+
+                <img class="zoom" width="100%" height="" src="{{ URL::To('storage/app/public/photos/'.$photo->photo) }}" alt="Card image">
+
                 <div class="card-body">
               <center><strong>Added By</strong></center> 
-               <center><strong>   <p class="card-text">{{$photo->addedby}}</p></strong></center> 
-                 <center><strong>Photo Category : {{$photo->category}}</strong></center> 
-                 <center> <strong><p class="card-text"></p></strong></center> 
+               <center><strong>   <p class="card-text">{{$photo->addedby}}</p></strong>
+                 <strong>Photo Category : {{$photo->category}}</strong>
+                  <strong><p class="card-text"></p></strong>
+                  <a href="{{url('/photo-album-delete')}}/{{$photo->id}}" class="card-text btn btn-danger fa fa-trash"> Delete Image</a></center>
                 </div>
+
           </div>
+
         </div>
       @endforeach
            

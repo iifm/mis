@@ -24,14 +24,13 @@
    <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-th-list"></i> On-Duty Management</h1>
+          <h1><i class="fa fa-th-list"></i> On-Duty Management   <a href="{{url('/on-duty/create')}}" class="btn btn-primary fa fa-plus">ADD On-Duty Request</a></h1>
         </div>
       
       </div>
       <div class="row">
         <div class="col-md-12">
-            <a href="{{url('/on-duty/create')}}" class="btn btn-primary fa fa-plus btn-lg">ADD On-Duty Request</a>
-
+          
           <div class="tile">
             <div class="tile-body">
               <div id="table" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
@@ -53,37 +52,26 @@
                 <thead>
                   <tr role="row">
                     <th>#</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th >Mobile</th>
                     <th>OD Date</th>
                     <th>In Time</th>
                     <th>Out Time</th>
                     <th>OD Type</th>
-                    <th>Reason</th>
                     <th>Status</th>
                     <th style="text-align: center;">Approval From</th>
-                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   
-          <?php foreach ($onduty as  $value) {  ?>
+          <?php foreach ($finaldatas as  $value) {  ?>
                 <tr role="row" class="odd">
                     <td><?= $i++;?></td>
-                    <td><?= $value->empname;?></td>
-                    <td><?= $value->empemail;?></td>
-                    <td><?= $value->empmobile;?></td>
-                     <td><?= $value->od_date;?></td>
-                    <td><?= $value->intime;?></td>
-                    <td><?= $value->outtime;?></td>
-                    <td><?= $value->odtype;?></td>
-                    <td><?= $value->reason;?></td>
-                    <td><?= $value->approvalfrom;?></td>
-                    <td><?= $value->status;?></td>
-                    <td><a href="{{url('/on-duty/edit')}}/<?= $value->id;?>" class="btn btn-primary fa fa-pencil"></a>
-                        <a href="{{url('/on-duty/delete')}}/<?= $value->id;?>" class="btn btn-danger fa fa-trash demoSwal"></a>
-                    </td>
+                     <td><?= $value['od_date']; ?></td>
+                    <td><?= $value['intime'];?></td>
+                    <td><?= $value['outtime'];?></td>
+                    <td><?= $value['odtype'];?></td>
+                    <td><?= $value['approvalfrom'];?></td>
+                    <td><?= $value['status'];?></td>
+                   
                   </tr>
                
         </tbody>

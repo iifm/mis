@@ -19,6 +19,12 @@ class UserDetailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+      public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
        
@@ -146,7 +152,9 @@ class UserDetailController extends Controller
 
      public function official()
     {
-       return view('mis.user_detail.official');
+       $id=Auth::user()->id;
+        $user_detail =UserDetails::where('user_id',$id)->get();
+       return view('mis.user_detail.official',compact('user_detail'));
     }
 
      public function officialAdd(Request $request)
@@ -161,12 +169,22 @@ class UserDetailController extends Controller
         $locationcentre=$request->input('locationcentre');
         $sip=\Request::ip();
         $id=Auth::user()->id;
+         //$username=Auth::user()->id;
 
          $profile=$request->file('profile');
-        $filename =$id.$profile->getClientOriginalName();
+
+         $filename='';
+
+        if ($request->hasFile('profile')) {
+            $filename =$name.'_'.$id.'_'.$profile->getClientOriginalName();
         $request->file('profile')->storeAs('/profile', $filename);
-      
+
+
         $official=UserDetails::where('user_id',$id)->update(['profile'=>$filename,'doj'=>$doj,'designation'=>$designation,'department'=>$department,'locationcentre'=>$locationcentre,'sip'=>$sip,'mobile'=>$mobile]);
+        }
+        else{
+            $official=UserDetails::where('user_id',$id)->update(['doj'=>$doj,'designation'=>$designation,'department'=>$department,'locationcentre'=>$locationcentre,'sip'=>$sip,'mobile'=>$mobile]);
+        }
 
         $user=User::where('id',$id)->update(['name'=>$name,'email'=>$email]);
           Session::flash('message','Your Details Updated Successfully !!');
@@ -194,6 +212,7 @@ class UserDetailController extends Controller
         $pstate=$request->input('pstate');        
         $sip=\Request::ip();
         $id=Auth::user()->id;
+
 
         
         $official=UserDetails::where('user_id',$id)->update(['gender'=>$gender,'dob'=>$dob,'cstreet'=>$cstreet,'ccity'=>$ccity,'cstate'=>$cstate,'pstreet'=>$pstreet,'pcity'=>$pcity,'pstate'=>$pstate,'altno'=>$altno]);

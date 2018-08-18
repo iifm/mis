@@ -30,35 +30,15 @@
         </div>
       </div>
       <div class="row">
-        <a href="{{URL::previous()}}" class="fa fa-arrow-circle-left btn btn-primary btn-lg"> Back</a>
-        <form action="{{url('/leave-store')}}" method="post" autocomplete="off">
+        
+        <form action="{{url('/leave-store')}}" method="post" autocomplete="off" id="leave_form">
 
             {{ csrf_field() }}
       <div id="official_info" class="row">
         <div class="col-md-12">
           <div class="tile">
-             <h5 class="tile" style="color: #009688; text-align: center;"><p class="fa fa-calendar"> Leave/Comp-off Application Form</p></h5>
+             <h5  style="color: #009688; text-align: center;"><p class="fa fa-calendar"> Leave/Comp-off Application Form</p></h5>
             <div class="row">
-             
-             <div class="col-md-4"> 
-                <div class="form-group">
-                  <strong><label for="">Name</label></strong>  
-                    <input class="form-control" id="name" name="name" type="text" value="{{Auth::user()->name}}" aria-describedby="emailHelp" placeholder="Enter Full Name" readonly>
-                </div>
-             </div>
-             <div class="col-md-4"> 
-              <div class="form-group">
-                  <strong><label for="">Email ID</label></strong>  
-                    <input class="form-control" id="email" name="email" value="{{Auth::user()->email}}" type="email" aria-describedby="emailHelp" placeholder="Email Id (Enter Only Official-ID)" readonly>
-                </div>
-             </div>
-              <div class="col-md-4"> 
-              <div class="form-group">
-                   <strong><label for="">Mobile</label></strong> 
-                    <input class="form-control" id="mobile" name="mobile" type="text" aria-describedby="emailHelp" placeholder="Mobile" required>
-                </div>
-             </div>
-             
              
              <div class="col-md-4"> 
               <div class="form-group">
@@ -81,16 +61,16 @@
              <div class="col-md-3"> 
               <div class="form-group ">
                   <strong>  <label for="">Leave Type</label></strong><br>
-                    <input class="animated-checkbox"  type="checkbox" value="Compensatory Off" name="leaveoff[]" id="leaveoff"> Compensatory Off<br><br>
-                    <input type="checkbox" value="Casual Leave" name="leaveoff[]"> Casual Leave <br><br>
-                    <input type="checkbox" value="Half day Leave" name="leaveoff[]"> Half day Leave
+                    <input class="leaveSelect"  type="checkbox" value="Compensatory Off" name="leaveoff[]" id="leaveoff"> Compensatory Off<br><br>
+                    <input class="leaveSelect" type="checkbox" value="Casual Leave" name="leaveoff[]"> Casual Leave <br><br>
+                    <input class="leaveSelect" type="checkbox" value="Half day Leave" name="leaveoff[]"> Half day Leave
 
                 </div>
              </div>
              <div class="col-md-9"> 
               <div class="form-group">
                     <strong><label for="">Reason</label></strong>
-                    <textarea class="form-control" name="reason" id="reason" rows="5" placeholder="Explain your reason for leave" required></textarea>
+                    <textarea class="form-control capitalize char-only" name="reason" id="reason" rows="5" placeholder="Explain your reason for leave" required></textarea>
                 </div>
              </div>
 
@@ -99,7 +79,6 @@
               <input type="text" class="form-control" name="agdcompoff" id="agdcompoff" placeholder="Pic a date" >
              </div>
              <div class="col-md-6"> 
-              
              </div>
              <br>
              <div class="col-lg-12" style="padding-bottom:0; margin-bottom:10px;">
@@ -107,48 +86,18 @@
               </div>
               <table>
                   <tbody><tr><td>
-                    <p style="margin-right:20px; min-width:180px; float:left;"><input type="checkbox" name="approvalfrom[]" id="approvalfrom" value="hb@iifm.co.in_51"> Hemant Bisht</p>
-                    
-                    <p style="margin-right:20px; min-width:180px; float:left;"><input type="checkbox" name="approvalfrom[]" id="approvalfrom" value="pc@iifm.co.in_206"> Pranav Chaturvedi</p>
-                    
-                    <p style="margin-right:20px; min-width:180px; float:left;"><input type="checkbox" name="approvalfrom[]" id="approvalfrom" value="jibani.singh@iifm.co.in_68"> Jibani Singh</p>
-                    
-                    <p style="margin-right:20px; min-width:180px; float:left;"><input type="checkbox" name="approvalfrom[]" id="approvalfrom" value="gaurav@prathamonline.com_39"> Gaurav Singh</p>
-                    
-                    <p style="margin-right:20px; min-width:180px; float:left;"><input type="checkbox" name="approvalfrom[]" id="approvalfrom" value="nira.sinha@iifm.co.in_29"> Nira Sinha</p>
-                    
-                    <p style="margin-right:20px; min-width:180px; float:left;"><input type="checkbox" name="approvalfrom[]" id="approvalfrom" value="sunil.verma@iifm.co.in_105"> Sunil Verma</p>
-                    
-                    <p style="margin-right:20px; min-width:180px; float:left;"><input type="checkbox" name="approvalfrom[]" id="approvalfrom" value="ranjan.vakil@iifm.co.in_122"> Vakil Ranjan</p>
-                    
-                    <p style="margin-right:20px; min-width:180px; float:left;"><input type="checkbox" name="approvalfrom[]" id="approvalfrom" value="amit.jain@iifm.co.in_66"> Amit Jain</p>
-                     
-                    <p style="margin-right:20px; min-width:180px; float:left;"><input type="checkbox" name="approvalfrom[]" id="approvalfrom" value="manish.ram@iifm.co.in_1"> Manish Ram</p>
-                    
-                    <p style="margin-right:20px; min-width:180px; float:left;"><input type="checkbox" name="approvalfrom[]" id="approvalfrom" value="rohit.kapoor@prathamonline.com_325"> Rohit Kapoor</p>
-                    
-                    <p style="margin-right:20px; min-width:180px; float:left;"><input type="checkbox" name="approvalfrom[]" id="approvalfrom" value="amit.vig@prathamonline.com_125"> Amit Vig</p>
-                     
-                    <p style="margin-right:20px; min-width:180px; float:left;"><input type="checkbox" name="approvalfrom[]" id="approvalfrom" value="vidhi@prathamonline.com_34"> Vidhi Mangla</p>
-                     
-                    <p style="margin-right:20px; min-width:180px; float:left;"><input type="checkbox" name="approvalfrom[]" id="approvalfrom" value="dharmandra.kandari@iifm.co.in_52"> Dharmendra Kandari</p>
-                    
-                    <p style="margin-right:20px; min-width:180px; float:left;"><input type="checkbox" name="approvalfrom[]" id="approvalfrom" value="asif.mufti@prathamonline.com_225"> Asif Mufti</p>
 
-                    <p style="margin-right:20px; min-width:180px; float:left;"><input type="checkbox" name="approvalfrom[]" id="approvalfrom" value="vikrant.bahl@iifm.co.in_272"> Vikrant Bahl</p>
-
-                    <p style="margin-right:20px; min-width:180px; float:left;"><input type="checkbox" name="approvalfrom[]" id="approvalfrom" value="puneet.khurana@iifm.co.in_271"> Puneet Khurana</p> 
-                    
-                    <p style="margin-right:20px; min-width:180px; float:left;"><input type="checkbox" name="approvalfrom[]" id="approvalfrom" value="reeturaj.goswami@prathamonline.com_264"> Reeturaj Goswami</p>  
-                    
-                    <p style="margin-right:20px; min-width:180px; float:left;"><input type="checkbox" name="approvalfrom[]" id="approvalfrom" value="amandeep@prathamonline.com_378"> Amandeep Rajgotra</p>
+                  @foreach($managers as $manager)
+                    <p style="margin-right:20px; min-width:180px; float:left;"><input class="messageCheckbox"   type="checkbox" name="approvalfrom[]" id="approvalfrom" value="{{$manager->id}}"> {{$manager->name}}</p>
+                    @endforeach
+              
                     
                   </td></tr>
                 </tbody></table>
            
             </div>
             <div class="tile-footer">
-              <button class="btn btn-primary" type="submit">Submit</button>
+              <button class="btn btn-primary" type="submit" id="leave_submit">Submit</button>
            
             </div>
           </div>
@@ -164,17 +113,18 @@
 
  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
    <script src="{{ asset('js/main.js') }}" ></script>
-
+   
    
 <script>
  $(document).ready(function(){
-  
+
     var $datepicker1 =  $( "#leavefrom" );
     var $datepicker2 =  $( "#leaveto" );
   var $datepicker3 =  $( "#agdcompoff" );
   
   $datepicker1.datepicker({
     minDate: 0,
+   dateFormat:'yy-mm-dd',
         onClose: function() {     
       var fromDate = $datepicker1.datepicker('getDate');
       var currentDate = new Date();  
@@ -188,6 +138,8 @@
     }); 
 
     $datepicker2.datepicker({
+         dateFormat:'yy-mm-dd',
+
         onClose: function() {
       
             var fromDate = $datepicker1.datepicker('getDate');
@@ -229,6 +181,23 @@
       var day = date.getDay();
       return [(day == 0), ''];
   }
+
+ });
+ </script>
+
+ <script type="text/javascript">
+   $(document).ready(function(){
+    $("#leave_form").submit(function(){
+      // alert("jhg");
+    if ($('.messageCheckbox').filter(':checked').length < 2){
+        alert("Select Atleast Two ApprovalFrom");
+    return false;
+    }
+    if ($('.leaveSelect').filter(':checked').length < 1){
+        alert("Select Atleast One Leave Type");
+    return false;
+    }
+    });
 });
  </script>
 

@@ -2,7 +2,7 @@
 <html lang="en">
   
 <head>
-    <title>IIFM MIS</title>
+    <title>Leave</title>
 
     <!-- Main CSS-->
     {!!View('partials.include_css')!!}
@@ -24,71 +24,94 @@
    <main class="app-content">
       <div class="app-title">
         <div>
-          <h4><i class="fa fa-th-list"></i>Leave Management  <a href="{{url('/leave-add')}}" class="btn btn-primary fa fa-plus">ADD Leave Request</a></h4>
+          <h4><i class="fa fa-th-list"></i> Leave Management  <a href="{{url('/leave-add')}}" class="btn btn-primary fa fa-plus"> Apply Leave</a></h4>
 
         </div>
-        <ul class="app-breadcrumb breadcrumb side">
-          <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-          <li class="breadcrumb-item">Leave</li>
-          <li class="breadcrumb-item active"><a href="#">Leave Management</a></li>
-        </ul>
+       
       </div>
       <div class="row">
         <div class="col-md-12">
-           
+           <div class="row">
+             <div class="tile" style="width: 100%;margin-left: 12px; margin-right: 12px;">
+               <h4 style="padding: 10px;">Leave Details</h4>
+                  <div class="row">
+        <div class="col-md-6 col-lg-3">
+          <div class="widget-small primary coloured-icon"><i class="icon fa fa-calendar fa-3x"></i>
+            <div class="info">
+              <h6 style="text-align: center;  padding:5px 0">Total Leaves</h5">
+              <h3 style="text-align: center;"><b>{{$total_leaves}}</b></h3>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-6 col-lg-3">
+          <div class="widget-small warning coloured-icon"><i class="icon fa fa-calendar-o fa-3x"></i>
+            <div class="info">
+              <h6 style="text-align: center; padding:5px 0;">Leave Applied</h5">
+              <h3 style="text-align: center;"><b>{{$leave_applied}}</b></h3>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="widget-small danger coloured-icon"><i class="icon fa fa-calendar-check-o fa-3x"></i>
+            <div class="info">
+              <h6 style="text-align: center; padding:5px 0;">Leave Approved</h5">
+              <h3 style="text-align: center;"><b>{{$leave_approved}}</b></h3>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="widget-small info coloured-icon"><i class="icon fa fa-clock-o fa-3x"></i>
+            <div class="info">
+              <h6 style="text-align: center; padding:5px 0">Leave Balance</h5">
+              <h3 style="text-align: center;"><b>{{$total_leaves-$leave_applied}}</b></h3>
+            </div>
+          </div> 
+        </div>
+      </div>
+              
+             </div>
+           </div>
 
           <div class="tile">
             <div class="tile-body">
               <div id="table" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
-                <div class="row">
-                  <div class="col-sm-12 col-md-6">
-                    <div class="dataTables_length" id="sampleTable_length">
-                   
-                </div>
-              </div>
-              
-            </div>
-            <div class="row"><div class="col-sm-12 pre-scrollable">
+            
+            <div class="row">
+              <div class="col-sm-12 pre-scrollable">
               <?php $i=1;?>
                <?php if(Session::has('message')) {?>
         <div id="alert" class="alert alert-success">{{ Session::get('message') }}
 
         </div><?php } ?>
-              <table class="table table-hover table-bordered dataTable no-footer" id="sampleTable" role="grid" aria-describedby="sampleTable_info">
+              <table class="table" id="sampleTable">
                 <thead>
                   <tr role="row">
                     <th>#</th>
-                     <th>Name</th>
-                    <th>Email</th>
-                    <th >Mobile</th>
                     <th>Leave Type</th>
                     <th>Start Date</th>
                     <th >End Date </th>
-                    <th>Reason</th>
-                    <th width="20%">Status</th>
-                    <th style="text-align: center;">Approval From</th>
-                    <th style="width: 20%">Action</th>
+                    <th >Status</th>
+                    <th >Approval From</th>
+                   <!--  <th style="padding-left: 50px; padding-right: 50px;">Action</th> -->
                   </tr>
                 </thead>
                 <tbody>
-                  
-          <?php foreach ($leave as  $value) { ?>
+                @php $i=1; @endphp
+
+                @foreach($finaldatas as $data)
                 <tr role="row" class="odd">
-                    <td><?= $i++;?></td>
-                     <td><?= $value->empname ?></td>
-                      <td><?= $value->empmail ?></td>
-                       <td><?= $value->empmobile ?></td>
-                    <td><?= $value->leavetype ?></td>
-                    <td><?= $value->leavefrom ?></td>
-                    <td><?= $value->leaveto ?></td>
-                    <td><?= $value->reason ?></td>
-                    <td><?= $value->status ?></td>
-                    <td ><?= $value->approvalfrom ?></td>
-                    <td ><a href="{{url('/leave-edit')}}/<?= $value->id;?>" class="btn btn-primary fa fa-pencil"></a>
-                        <a href="{{url('/leave-delete')}}/<?= $value->id;?>"  class="btn btn-danger fa fa-trash "></a>
-                    </td>
+                    <td>{{$i++}}</td>
+                    <td>{{$data['type']}}</td>
+                    <td>{{$data['from']}}</td>
+                    <td>{{$data['to']}}</td>
+                    <td>{{$data['status']}}</td>
+                  <td>{{$data['approval']}}</td>
+                    
+                  
                   </tr>
-                <?php } ?>
+                  @endforeach
+              
         </tbody>
           </table>
         </div>

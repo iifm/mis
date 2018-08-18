@@ -67,20 +67,20 @@
                <div class="col-md-3"> 
                 <div class="form-group">
                     <label for="exampleInputEmail1">School/Institution</label>
-                    <input type="text" name="schoolname" class="form-control" id="schoolname" placeholder="School/Institution">
+                    <input type="text" name="schoolname" class="form-control char-only capitalize" id="schoolname" placeholder="School/Institution" required="">
                 </div>
              </div>
              <div class="col-md-3"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">Board/University</label>
-                    <input class="form-control" id="board" name="board" type="text" aria-describedby="emailHelp" placeholder="Board/University" required="">
+                    <input class="form-control capitalize char-only" id="board" name="board" type="text" aria-describedby="emailHelp" placeholder="Board/University" required="">
                 </div>
              </div>
 
               <div class="col-md-3 "> 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Specialization</label>
-                    <input class="form-control" id="specialization" name="specialization" type="text" aria-describedby="emailHelp" placeholder="Specialization" required="">
+                    <input class="form-control capitalize char-only" id="specialization" name="specialization" type="text" aria-describedby="emailHelp" placeholder="Specialization" required="">
                 </div>
              </div>
             <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
@@ -101,13 +101,13 @@
               <div class="col-md-3 "> 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Percentage/Grades</label>
-                    <input class="form-control" id="percentage" name="percentage" type="text" aria-describedby="emailHelp" placeholder="Percentage(%)" required="">
+                    <input class="form-control numbers-only" id="percentage" maxlength="2" name="percentage" type="text" aria-describedby="emailHelp" placeholder="Percentage(%)" required="">
                 </div>
              </div>
               <div class="col-md-3 "> 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Upload Certificate/Degree</label>
-                    <input class="form-control" id="certificate" name="certificate" type="file" aria-describedby="emailHelp" placeholder="Upload Certificate/Degree">
+                    <input class="form-control" id="certificate" onchange="return fileValidation()" name="certificate" type="file" aria-describedby="emailHelp" placeholder="Upload Certificate/Degree">
                 </div>
              </div>
                     <input  id="addedby" name="addedby" type="hidden" value="{{Auth::user()->name}}">
@@ -131,28 +131,10 @@
 
     <!-- Essential javascripts for application to work-->
     {!!View('partials.include_js')!!}
-<script type="text/javascript">
-  // Add new input with associated 'remove' link when 'add' button is clicked.
-$('.add_course').click(function(e) {
-    e.preventDefault();
-
-    $(".education_form").append(
-        '<li>'
-
-      + '<div class="row"><div class="col-md-12"><div class="col-md-3"> <div class="form-group"><label for="exampleInputEmail1">Course Name</label><select class="form-control" name="course[]" id="course"><option>Select Course</option> <option>10th</option><option>12th</option><option>Graducation</option><option>Post Graducation</option><option>Diploma/Certificate</option><option>Other</option> </select></div></div><div class="col-md-2"><div class="form-group"><label for="exampleInputEmail1">Start Year</label><input class="form-control date-own" id="strtyear" name="strtyear[]" type="text" aria-describedby="emailHelp" placeholder="Start Year"></div></div><div class="col-md-2"> <div class="form-group"><label for="exampleInputEmail1">End Year</label><input class="form-control date-own" id="endyear" name="endyear[]" type="text" aria-describedby="emailHelp" placeholder="End Year"></div></div><div class="col-md-3"><div class="form-group"><label for="exampleInputEmail1">College/Institution</label><input class="form-control" id="college" name="college[]" type="text" aria-describedby="emailHelp" placeholder="College/Institution"></div></div><div class="col-md-3 "><div class="form-group"><label for="exampleInputEmail1">Specialization</label><input class="form-control" id="specialization" name="specialization[]" type="text" aria-describedby="emailHelp" placeholder="Specialization"></div></div><div class="col-md-3 "><div class="form-group"><label for="exampleInputEmail1">Percentage/Grades</label><input class="form-control" id="percentage" name="percentage[]" type="text" aria-describedby="emailHelp" placeholder="Percentage(%)"></div></div><div class="col-md-3 "> <div class="form-group"><label for="exampleInputEmail1">Added By</label><input class="form-control" id="addedby" name="addedby[]" type="text" aria-describedby="emailHelp" placeholder="Added By"></div></div></div></div>'
-      + '<a href="#" class="remove_education btn btn-danger fa fa-trash" > Remove</a>'
-      + '</li>');
-});
 
 
 
-// Remove parent of 'remove' link when link is clicked.
-$('.education_form').on('click', '.remove_education', function(e) {
-    e.preventDefault();
 
-    $(this).parent().remove();
-});
-</script>    
      <script type="text/javascript">
       $('.date-own').datepicker({
          minViewMode: 2,
@@ -160,6 +142,29 @@ $('.education_form').on('click', '.remove_education', function(e) {
          autoclose: true,
        });
   </script>
+
+  <script>
+ function fileValidation(){
+    var fileInput = document.getElementById('certificate');
+    var filePath = fileInput.value;
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+    if(!allowedExtensions.exec(filePath)){
+        alert('Please upload file having extensions .jpeg/.jpg/.png/.gif only.');
+        fileInput.value = '';
+        return false;
+    }else{
+        //Image preview
+        if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('imagePreview').innerHTML = '<img src="'+e.target.result+'" height="150px" width="150px"/>';
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    }
+}
+</script>
+
 
   </body>
 

@@ -20,14 +20,10 @@
     
     {!!View('partials.header')!!}
 
-
-
-
     <!-- Sidebar menu-->
     {!!View('partials.sidebar')!!}
 
 
-    
     <!-- Main Content-->
   <main class="app-content">
       <div class="app-title">
@@ -51,7 +47,7 @@
             <div class="col-md-3"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">Company Name</label>
-                    <input class="form-control" id="company" name="company" type="text" aria-describedby="emailHelp" placeholder="Company Name" required="">
+                    <input class="form-control char-only capitalize" id="company" name="company" type="text" aria-describedby="emailHelp" placeholder="Company Name" required="">
                 </div>
              </div>
               <div class="col-md-3"> 
@@ -70,25 +66,25 @@
               <div class="col-md-3"> 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Designation</label>
-                    <input class="form-control" id="designation1" name="designation1" type="text" aria-describedby="emailHelp" placeholder="Designation" required="">
+                    <input class="form-control char-only capitalize" id="designation1" name="designation1" type="text" aria-describedby="emailHelp" placeholder="Designation" required="">
                 </div>
              </div>
               <div class="col-md-6 "> 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Company Address</label>
-                    <textarea class="form-control" name="address" id="address" placeholder="Company Address" rows="4" required=""></textarea>
+                    <textarea class="form-control capitalize" name="address" id="address" placeholder="Company Address" rows="4" required=""></textarea>
              </div>
             </div>
             <div class="col-md-3"> 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Offer/Appointment Letter</label>
-                    <input class="form-control" id="offerletter" name="offerletter" type="file" aria-describedby="emailHelp" placeholder="">
+                    <input class="form-control" id="offerletter" name="offerletter" onchange="return fileValidation2();" type="file" aria-describedby="emailHelp" placeholder="">
                 </div>
              </div>
              <div class="col-md-3"> 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Relieving/Experience Letter</label>
-                    <input class="form-control" id="relievingletter" name="relievingletter" type="file" aria-describedby="emailHelp" placeholder="">
+                    <input class="form-control" id="relievingletter" onchange="return fileValidation();" name="relievingletter" type="file" aria-describedby="emailHelp" placeholder="">
                 </div>
              </div>
           </div>
@@ -96,7 +92,7 @@
         </ul>
        
     <div class="tile-footer">
-              <button class="btn btn-success fa fa-save" type="submit">  Submit</button>
+              <button class="btn btn-success fa fa-save" type="submit"> Submit</button>
            
             </div>
             </form> 
@@ -106,8 +102,6 @@
     </main>
 
    
-
-
     <!-- Essential javascripts for application to work-->
     {!!View('partials.include_js')!!}
 
@@ -130,6 +124,52 @@
          format: 'yyyy'
        });
   </script>
+  
+<script>
+ function fileValidation(){
+    var fileInput = document.getElementById('relievingletter');
+    var filePath = fileInput.value;
+
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+    if(!allowedExtensions.exec(filePath)){
+        alert('Please upload file having extensions .jpeg/.jpg/.png/.gif only.');
+        fileInput.value = '';
+        return false;
+    }else{
+        //Image preview
+        if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('imagePreview').innerHTML = '<img src="'+e.target.result+'" height="150px" width="150px"/>';
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    }
+}
+</script>
+<script>
+ function fileValidation2(){
+    var fileInput = document.getElementById('offerletter');
+    var filePath = fileInput.value;
+    
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+    if(!allowedExtensions.exec(filePath)){
+        alert('Please upload file having extensions .jpeg/.jpg/.png/.gif only.');
+        fileInput.value = '';
+        return false;
+    }else{
+        //Image preview
+        if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('imagePreview').innerHTML = '<img src="'+e.target.result+'" height="150px" width="150px"/>';
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    }
+}
+</script>
+
 
   </body>
 

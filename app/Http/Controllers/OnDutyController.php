@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\OnDuty;
 use Session;
 use Auth;
+use App\User;
 
 class OnDutyController extends Controller
 {
@@ -14,10 +15,64 @@ class OnDutyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+      public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-     $onduty=OnDuty::all();
-     return view('mis.onduty.index',compact('onduty'));
+    // $onduty=OnDuty::all()->orderBy('id','');
+        $cyear=date('Y');
+         $strtYear=date('Y').'-04-01';
+       $endYear=date('Y',strtotime('+1 year')).'-03-31';
+      $id=Auth::user()->id;
+        $onduty=OnDuty::where('empid',$id)
+                    ->whereBetween('od_date',[$strtYear,$endYear])
+                    ->orderBy('id','DESC')->get();
+                    //dd($onduty);
+
+
+          $od_datas[] = '';  
+              
+                $names='';
+                $usernames='';  
+                $appfrom[]='';
+             foreach ($onduty as  $value) {
+                
+
+                $appfrom = $value->approvalfrom;
+                
+                //dd($appfrom);
+
+                $name[]='';
+
+                $appfromnamesarr = explode(',', $appfrom);
+                $appfrom=array_filter($appfromnamesarr);
+                
+                $appfromname=User::whereIn('email',$appfrom)->pluck('name')->toArray();   
+                $names = implode(',',$appfromname); 
+
+                $usernames = trim($names,",");
+                    
+                  $od_datas[] =  array(
+                                    'od_date'=> $value->od_date,
+                                    'intime'=> $value->intime,
+                                    'outtime'=> $value->outtime,
+                                    'odtype'=> $value->odtype,
+                                    'approvalfrom'=> $usernames,
+                                    'status'=>$value->status,
+                                    'user_id' => $value->empid
+                  );            
+                  $usernames='';  //dd($value);
+                  $names='';
+
+                 //dd($names);
+                 
+             }
+           $finaldatas = array_filter($od_datas); 
+           //return $finaldatas;
+    return view('mis.onduty.index',compact(['finaldatas']));
 
     }
 
@@ -28,7 +83,8 @@ class OnDutyController extends Controller
      */
     public function create()
     {
-         return view('mis.onduty.create');
+        $managers=User::where('role',1)->get();
+         return view('mis.onduty.create',compact('managers'));
     }
 
     /**
@@ -39,12 +95,12 @@ class OnDutyController extends Controller
      */
     public function store(Request $request)
     {
+        
+       // dd($request->all());
          $status="Pending";
         $ip= \Request::ip();
        $id=Auth::user()->id;
-        $empname = $request->Input('name');
-        $empemail = $request->Input('email');
-        $empmobile = $request->Input('mobile');
+       
         $od_date = $request->Input('od_date');
         $intime = $request->Input('intime');
         $outtime = $request->Input('outtime');
@@ -56,7 +112,7 @@ class OnDutyController extends Controller
         $status = $status;
        
 
-        $data=OnDuty::create(['empid'=> $id,'empname'=>$empname, 'empemail'=>$empemail, 'empmobile' =>$empemail,'od_date' =>$od_date,'intime' =>$intime,'outtime' =>$outtime,'odtype' =>$odtype,'reason' =>$reason,'approvalfrom' =>$manager_array,'status' =>$status,'sip' =>$ip]);
+        $data=OnDuty::create(['empid'=> $id,'od_date' =>$od_date,'intime' =>$intime,'outtime' =>$outtime,'odtype' =>$odtype,'reason' =>$reason,'approvalfrom' =>$manager_array,'status' =>$status,'sip' =>$ip]);
 
          Session::flash('message','On-Duty Request Sent Successfully !!');
 

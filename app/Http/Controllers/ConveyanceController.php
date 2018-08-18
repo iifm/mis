@@ -14,10 +14,20 @@ class ConveyanceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+      public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
       $id=Auth::user()->id;
-       $conveyance=Conveyance::where('user_id',$id)->get();
+          $strtYear=date('Y').'-04-01';
+       $endYear=date('Y',strtotime('+1 year')).'-03-31';
+
+       $conveyance=Conveyance::where('user_id',$id)
+                    ->whereBetween('con_date',[$strtYear,$endYear])
+                    ->get();
         return view('mis.conveyance.index',compact('conveyance'));
 
     }

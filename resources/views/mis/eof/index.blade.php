@@ -41,11 +41,11 @@
         <div class="col-md-12">
         @foreach($eom as $e)
         <div class="col-md-4"  >
-            <div class="card" style="height: 350px;">
-                <img class="" width="100%" height="200" src="{{ url('storage/images/'.$e->image) }}" alt="Card image">
+            <div class="card" style="height: 400px; margin-top: 30px;">
+               <center> <img class="" width="250px;" height="300" src="{{ URL::To('storage/app/public/images/'.$e->image) }}" alt="Card image"></center>
                 <div class="card-body">
                <center><strong>Employee of Month</strong></center> 
-               <center><strong>   <p class="card-text">{{$e->month}} {{$e->created_at->year}}</p></strong></center> 
+               <center><strong> <p class="card-text">{{$e->month}}  {{$e->created_at->year}}</p></strong></center> 
               <center> <strong><p class="card-text">{{$e->empname}}</p></strong></center> 
 
                 <center> <p class="card-text">Department {{$e->department}}</p></center> 
