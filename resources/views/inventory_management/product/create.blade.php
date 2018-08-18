@@ -52,7 +52,7 @@
              <div class="col-md-4"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">Product Category</label>
-                    <select class="form-control" name="category" required="" id="category">
+                    <select class="form-control" name="category" required="" id="category" required="">
                       <option value="">Select Category</option>
                       @foreach($category as $value)
                       <option value="{{$value->id}}">{{$value->name}}</option>
@@ -63,20 +63,20 @@
             <div class="col-md-4"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">Product Name</label>
-                    <input class="form-control" id="pname" name="pname" type="text" aria-describedby="emailHelp" placeholder="Product Name" required="">
+                    <input class="form-control capitalize char-only" id="pname" name="pname" type="text" aria-describedby="emailHelp" placeholder="Product Name" required="">
                 </div>
              </div>
              <div class="col-md-4"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">Product Company</label>
-                   <input class="form-control" id="pcompany" name="pcompany" type="text" aria-describedby="emailHelp" placeholder="Product Company">
+                   <input class="form-control capitalize char-only" id="pcompany" name="pcompany" type="text" aria-describedby="emailHelp" placeholder="Product Company" required="">
 
                 </div>
              </div>
               <div class="col-md-4"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">Product Model</label>
-                    <input class="form-control" id="pmodel" name="pmodel" type="text" aria-describedby="emailHelp" placeholder="Product Model">
+                    <input class="form-control" id="pmodel" name="pmodel" type="text" aria-describedby="emailHelp" placeholder="Product Model" required="">
 
                 </div>
              </div>
@@ -91,7 +91,7 @@
               <div class="col-md-4"> 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Condition/Remarks</label>
-                    <input class="form-control" id="pcondition" name="pcondition" type="text" aria-describedby="emailHelp" placeholder="Condition/Remarks" required="">
+                    <input class="form-control capitalize char-only" id="pcondition" name="pcondition" type="text" aria-describedby="emailHelp" placeholder="Condition/Remarks" required="">
                 </div>
              </div>
              <div class="col-md-4"> 
@@ -104,13 +104,13 @@
              <div class="col-md-4"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">Description</label>
-                    <textarea class="form-control" rows="3" placeholder="Product Brief Description" name="pdescription" id="pdescription" required=""></textarea>
+                    <textarea class="form-control " rows="3" placeholder="Product Brief Description" name="pdescription" id="pdescription" required=""></textarea>
                 </div>
              </div>
               <div class="col-md-4"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">Upload Invoice</label>
-                    <input class="form-control" id="pinvoice" name="pinvoice" type="file" aria-describedby="emailHelp" placeholder="Upload Invoice" required="">
+                    <input class="form-control" id="pinvoice" onchange="return fileValidation();" name="pinvoice" type="file" aria-describedby="emailHelp" placeholder="Upload Invoice" required="">
                 </div>
              </div>
           </div>
@@ -132,7 +132,27 @@
 
     <!-- Essential javascripts for application to work-->
     {!!View('partials.include_js')!!}
-
+<script>
+ function fileValidation(){
+    var fileInput = document.getElementById('pinvoice');
+    var filePath = fileInput.value;
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+    if(!allowedExtensions.exec(filePath)){
+        alert('Please upload file having extensions .jpeg/.jpg/.png/.gif only.');
+        fileInput.value = '';
+        return false;
+    }else{
+        //Image preview
+        if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('imagePreview').innerHTML = '<img src="'+e.target.result+'" height="150px" width="150px"/>';
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    }
+}
+</script>
   </body>
 
 <!-- Mirrored from pratikborsadiya.in/vali-admin/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 05 Jul 2018 06:07:27 GMT -->

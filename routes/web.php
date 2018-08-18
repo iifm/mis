@@ -52,17 +52,28 @@ Route::get('/leave-view', 'LeaveController@index')->name('leave.index');
 Route::post('/leave-store', 'LeaveController@store');
 Route::post('/leave-edit/{id}', 'LeaveController@store');
 Route::get('/leave-delete/{id}', 'LeaveController@destroy');
+Route::get('leave-approval/{id}/{uid}','LeaveController@leaveApproval')->name('leave-approval');
+Route::post('leave-approved/{id}/{uid}','LeaveController@leaveApproved')->name('leave-approved');
 
 
 //attendance routes
 Route::get('/attendance', 'AttendanceController@index')->name('attendance.index');
 Route::post('/attendance/store', 'AttendanceController@store');
+Route::get('/attendance-view','AttendanceController@viewAttendance');
+Route::get('/self-attendace-detail','AttendanceController@attendanceDetails');
+Route::get('/update-user-attendance/{id}/{date}/{type}','AttendanceController@updateInAttendance');
+Route::post('/updated-user-attendance','AttendanceController@updateIn');
+Route::get('/update-user-out-attendance/{id}/{date}/{type}','AttendanceController@updateOutAttendance');
+Route::post('/updated-userout-attendance','AttendanceController@updateOut');
+
+
 
 //photo-album routes
 Route::get('/photo-album', 'PhotoAlbumController@index')->name('photo.index');
 Route::get('/photo-album/create', 'PhotoAlbumController@create')->name('photo.create');
 Route::post('/photo-album/store', 'PhotoAlbumController@store');
 Route::post('/photo-album/add-category', 'PhotoAlbumController@addCategory');
+Route::get('/photo-album-delete/{id}','PhotoAlbumController@destroy');
 
 
 //conveyance routes
@@ -112,3 +123,8 @@ Route::resource('/assign','AssignProductController');
 Route::get('/get-product/{category}','AssignProductController@getProduct');
 
 Route::get('/send-mail','LeaveController@sendMail');
+
+//dashboard routes
+Route::get('/send-wish/{id}','HomeController@sendWish');
+Route::post('/wish-send','HomeController@wishEmail')->name('wish-send');
+

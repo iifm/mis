@@ -49,10 +49,9 @@
     
             <form action="{{url('/photo-album/store')}}" method="post" enctype="multipart/form-data">          
                  {{ csrf_field() }}
-                 <div class="col-lg-10"> 
-                        <label>Added By</label>
-                        <input class="form-control input-lg" type="text" name="addedby" id="addedby" placeholder="Added By" required="">
-                </div>  
+                
+                        <input  type="hidden" name="addedby" id="addedby" value="{{Auth::user()->name}}">
+             
 
                
                 <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
@@ -69,7 +68,7 @@
              
                 <div class="col-lg-10"> 
                         <label>Upload Image</label>
-                        <input class="form-control input-lg" type="file" name="photo" id="photo" placeholder="Upload your Image" required="">
+                        <input class="form-control input-lg" type="file" name="photo" onchange="return fileValidation();" id="photo" placeholder="Upload your Image" required="">
                 </div>   
                 <div class="col-lg-12" ><br>
                     <button class="btn btn-success text-uppercase fa fa-save " type="submit">  Submit</button><br><br>
@@ -110,7 +109,27 @@
 
     <!-- Essential javascripts for application to work-->
     {!!View('partials.include_js')!!}
-
+<script>
+ function fileValidation(){
+    var fileInput = document.getElementById('photo');
+    var filePath = fileInput.value;
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+    if(!allowedExtensions.exec(filePath)){
+        alert('Please upload file having extensions .jpeg/.jpg/.png/.gif only.');
+        fileInput.value = '';
+        return false;
+    }else{
+        //Image preview
+        if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('imagePreview').innerHTML = '<img src="'+e.target.result+'" height="150px" width="150px"/>';
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    }
+}
+</script>
   </body>
 
 <!-- Mirrored from pratikborsadiya.in/vali-admin/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 05 Jul 2016 06:07:27 GMT -->

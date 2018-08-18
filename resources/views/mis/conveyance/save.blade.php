@@ -321,7 +321,6 @@
         </a>
       </h4> 
     </div>
-      <a href="{{URL::previous()}}" class="fa fa-arrow-circle-left btn btn-primary btn-lg"> Back</a>
   </div>
    <form action="{{url('/conveyance/store')}}" method="post" style="width:100%" enctype="multipart/form-data">
       {{ csrf_field() }}

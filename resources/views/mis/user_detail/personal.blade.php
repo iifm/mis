@@ -49,18 +49,18 @@
             <div class="col-md-6"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">Gender</label>
-                    <select class="form-control" name="gender" id="gender">
-                      <option>Select Gender</option>
-                      <option>Male</option>
-                      <option>Female</option>
-                      <option>Other</option>
+                    <select class="form-control" name="gender" id="gender" required="">
+                      <option value="">Select Gender</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                      <option value="Other">Other</option>
                     </select>
                 </div>
              </div>
               <div class="col-md-6"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">Date Of Birth</label>
-                    <input class="form-control demoDate" id="dob" name="dob" type="text" aria-describedby="emailHelp" placeholder="Date Of Birth">
+                    <input class="form-control demoDate" id="dob" name="dob" type="text" aria-describedby="emailHelp" placeholder="Date Of Birth" required="">
                 </div>
              </div>
 
@@ -69,20 +69,20 @@
               <div class="col-md-6"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">Street Address</label>
-                    <textarea class="form-control" name="cstreet" id="cstreet" rows="4" placeholder="Street Address"></textarea>
+                    <textarea class="form-control capitalize char-only" name="cstreet" id="cstreet" rows="4" placeholder="Street Address" required=""></textarea>
                 </div>
              </div>
 
               <div class="col-md-6"> 
                 <div class="form-group">
                     <label for="exampleInputEmail1">City</label>
-                    <input class="form-control" id="ccity" name="ccity" type="text" aria-describedby="emailHelp" placeholder="City">
+                    <input class="form-control capitalize char-only" id="ccity" name="ccity" type="text" aria-describedby="emailHelp" placeholder="City" required="">
                 </div>
              </div>
               <div class="col-md-6"> 
                 <div class="form-group">
                     <label for="exampleInputEmail1">State</label>
-                    <input class="form-control" id="cstate" name="cstate" type="text" aria-describedby="emailHelp" placeholder="State">
+                    <input class="form-control capitalize char-only" id="cstate" name="cstate" type="text" aria-describedby="emailHelp" placeholder="State" required="">
              </div>
             </div>
           <strong> Check If Current and Permanent Adress Same</strong> 
@@ -92,26 +92,26 @@
               <div class="col-md-6"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">Street Address</label>
-                    <textarea class="form-control" name="pstreet" id="pstreet" rows="4" placeholder="Street Address"></textarea>
+                    <textarea class="form-control capitalize char-only" name="pstreet" id="pstreet" rows="4" placeholder="Street Address" required=""></textarea>
                 </div>
              </div>
 
               <div class="col-md-6"> 
                 <div class="form-group">
                     <label for="exampleInputEmail1">City</label>
-                    <input class="form-control" id="pcity" name="pcity" type="text" aria-describedby="emailHelp" placeholder="City">
+                    <input class="form-control capitalize char-only" id="pcity" name="pcity" type="text" aria-describedby="emailHelp" placeholder="City" required="">
                 </div>
              </div>
               <div class="col-md-6"> 
                 <div class="form-group">
                     <label for="exampleInputEmail1">State</label>
-                    <input class="form-control" id="pstate" name="pstate" type="text" aria-describedby="emailHelp" placeholder="State">
+                    <input class="form-control capitalize char-only" id="pstate" name="pstate" type="text" aria-describedby="emailHelp" placeholder="State" required="">
              </div>
           </div>
            <div class="col-md-6"> 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Alternate Contact Number  </label>
-                    <input class="form-control" id="altno" name="altno" type="text" aria-describedby="emailHelp" placeholder="Alternate Contact Number">
+                    <input class="form-control numbers-only" id="altno" name="altno" maxlength="10" type="text" aria-describedby="emailHelp" placeholder="Alternate Contact Number" required="">
              </div>
           </div>
           </li>

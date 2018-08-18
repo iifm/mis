@@ -17,6 +17,12 @@ class PhotoAlbumController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+      public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
          
@@ -101,7 +107,9 @@ class PhotoAlbumController extends Controller
      */
     public function destroy($id)
     {
-        //
+        PhotoAlbum::where('id',$id)->delete();
+          Session::flash('message','Your Photo Deleted Successfully !!');
+        return redirect()->route('photo.index');
     }
 
     public function addCategory(Request $request){

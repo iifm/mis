@@ -5,8 +5,6 @@
   
     <title>IIFM MIS</title>
     
-    
-
     <!-- Main CSS-->
     {!!View('partials.include_css')!!}
  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">

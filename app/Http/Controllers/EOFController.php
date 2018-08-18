@@ -15,9 +15,14 @@ class EOFController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+      public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-      $eom=  HallOfFame::all();
+      $eom=  HallOfFame::orderBy('id','DESC')->get();
       return view('mis.eof.index',compact('eom'));
 
     }

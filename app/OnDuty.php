@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class OnDuty extends Model
 {
-     protected $fillable = [ 'empid','empname','empemail',	'empmobile','od_date','intime','outtime','odtype','reason','approvalfrom','status','sip'];
+     protected $fillable = [ 'empid','od_date','intime','outtime','odtype','reason','approvalfrom','status','sip'];
 
 }
 	

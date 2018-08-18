@@ -53,20 +53,20 @@
               <div class="col-md-4"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">Father Name</label>
-                    <input class="form-control" id="fname" name="fname" type="text" aria-describedby="emailHelp" placeholder="Father Name" required="">
+                    <input class="form-control capitalize char-only" id="fname" name="fname" type="text" aria-describedby="emailHelp" placeholder="Father Name" required="">
                 </div>
              </div>
 
               <div class="col-md-4"> 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Father's Occuption</label>
-                    <input class="form-control" id="foccup" name="foccup" type="text" aria-describedby="emailHelp" placeholder="Father's Occuption" required="">
+                    <input class="form-control capitalize char-only" id="foccup" name="foccup" type="text" aria-describedby="emailHelp" placeholder="Father's Occuption" required="">
                 </div>
              </div>
               <div class="col-md-4"> 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Father's Contact Number</label>
-                    <input class="form-control" id="fcontact" name="fcontact" type="text" aria-describedby="emailHelp" placeholder="Father's Contact Number" required="">
+                    <input class="form-control numbers-only" maxlength="10" id="fcontact" name="fcontact" type="text" aria-describedby="emailHelp" placeholder="Father's Contact Number" required="">
              </div>
             </div>
 
@@ -77,28 +77,26 @@
             <div class="col-md-12">
               
             <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
-           
-             
-
-       <strong><h4>Mother's Detail</h4></strong>
+         
+            <strong><h4>Mother's Detail</h4></strong>
              <hr>
               <div class="col-md-4"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">Mother Name</label>
-                    <input class="form-control" id="mname" name="mname" type="text" aria-describedby="emailHelp" placeholder="Mother Name" required="">
+                    <input class="form-control capitalize char-only" id="mname" name="mname" type="text" aria-describedby="emailHelp" placeholder="Mother Name" required="">
                 </div>
              </div>
 
               <div class="col-md-4"> 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Mother's Occuption</label>
-                    <input class="form-control" id="moccup" name="moccup" type="text" aria-describedby="emailHelp" placeholder="Mother's Occuption" required="">
+                    <input class="form-control capitalize char-only" id="moccup" name="moccup" type="text" aria-describedby="emailHelp" placeholder="Mother's Occuption" required="">
                 </div>
              </div>
               <div class="col-md-4"> 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Mother's Contact Number</label>
-                    <input class="form-control" id="mcontact" name="mcontact" type="text" aria-describedby="emailHelp" placeholder="Mother's Contact Number" required="">
+                    <input class="form-control numbers-only" id="mcontact" name="mcontact" type="text" aria-describedby="emailHelp" placeholder="Mother's Contact Number" required="">
              </div>
           </div>
 
@@ -113,7 +111,7 @@
               <div class="col-md-6"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">Marital Status</label>
-                    <select class="form-control" name="maritalstatus" id="maritalstatus">
+                    <select class="form-control" name="maritalstatus" id="maritalstatus" required="">
                       <option value="">Select Your Marital Status</option>
                       <option value="Single">Single</option>
                       <option value="Married">Married</option>
