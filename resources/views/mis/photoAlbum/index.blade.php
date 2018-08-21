@@ -18,10 +18,10 @@
 }
 
 .zoom {
-    padding: 50px;
+    padding: 20px;
     background-color: white;
     transition: transform .2s;
-    width: 250px;
+    width: 230px;
     height: 250px;
     margin: 0 auto;
 }

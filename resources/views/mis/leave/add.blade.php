@@ -189,7 +189,7 @@
    $(document).ready(function(){
     $("#leave_form").submit(function(){
       // alert("jhg");
-    if ($('.messageCheckbox').filter(':checked').length < 2){
+    if ($('.messageCheckbox').filter(':checked').length < 1){
         alert("Select Atleast Two ApprovalFrom");
     return false;
     }
