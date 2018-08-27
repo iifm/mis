@@ -29,11 +29,10 @@
    <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-trophy"></i> Hall Of Fame</h1>
+          <h1 class="heading_title"><i class="fa fa-trophy"></i> Employees Of the Month</h1>
           
         </div>
       </div>
-        <a href="{{url('/hall-of-fame/create')}}" class="btn btn-success fa fa-plus"> Employee of Month</a>
         @if(Session::has('message'))
         <div class="alert alert-success">{{Session::get('message')}}</div>
         @endif
@@ -44,7 +43,7 @@
             <div class="card" style="height: 400px; margin-top: 30px;">
                <center> <img class="" width="250px;" height="300" src="{{ URL::To('storage/app/public/images/'.$e->image) }}" alt="Card image"></center>
                 <div class="card-body">
-               <center><strong>Employee of Month</strong></center> 
+               <center><strong>Employee of the Month</strong></center> 
                <center><strong> <p class="card-text">{{$e->month}}  {{$e->created_at->year}}</p></strong></center> 
               <center> <strong><p class="card-text">{{$e->empname}}</p></strong></center> 
 

@@ -5,7 +5,7 @@
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
   
-    <title>IIFM MIS</title>
+    <title>Official Information</title>
     
     
 
@@ -28,14 +28,14 @@
   <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-building"></i> User Official Information </h1>
+          <h1 class="heading_title"><i class="fa fa-building"></i> User Official Information </h1>
         </div>
+          <a href="{{URL::previous()}}" class="fa fa-arrow-circle-left btn btn-danger" style="background: #009688; border:none"> Back</a>   
       </div>
       <div class="row  tile">
-      <!--   <a href="#" class="btn btn-primary fa fa-plus add_course">ADD</a> -->
-       <a href="{{URL::previous()}}" class="fa fa-arrow-circle-left btn btn-danger"> Back</a>
+     
         <div class="col-md-12">
-          <form action="{{url('/user-official/add')}}" method="post" autocomplete="off" enctype="multipart/form-data">
+          <form action="{{url('/user-official/add')}}/{{$id}}" method="post" autocomplete="off" enctype="multipart/form-data">
 
             {{ csrf_field() }}
           <ul style="list-style-type: none;" class="education_form">
@@ -43,23 +43,23 @@
               <div class="row">
             <div class="col-md-12">
               @foreach($user_detail as $value)
-            <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+           
             <div class="col-md-6"> 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Employee ID</label>
-                    <input class="form-control" value="IIFM00{{Auth::user()->id}}"  name="" type="text" aria-describedby="emailHelp" readonly>
+                    <input class="form-control" value="IIFM00{{$value->userid}}"  name="" type="text" aria-describedby="emailHelp" readonly>
                 </div>
              </div>
             <div class="col-md-6"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">Name</label>
-                    <input class="form-control capitalize char-only" id="name" name="name" type="text" aria-describedby="emailHelp" placeholder="Full Name" value="{{Auth::user()->name}}" required="">
+                    <input class="form-control capitalize char-only" id="name" name="name" type="text" aria-describedby="emailHelp" placeholder="Full Name" value="{{$value->name}}" required="">
                 </div>
              </div>
               <div class="col-md-6"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">Email ID</label>
-                    <input class="form-control" id="email" name="email" type="email" aria-describedby="emailHelp" value="{{Auth::user()->email}}" placeholder="Email ID(Only Official Email-ID)" required="">
+                    <input class="form-control" id="email" name="email" type="email" aria-describedby="emailHelp" value="{{$value->email}}" placeholder="Email ID(Only Official Email-ID)" required="">
                 </div>
              </div>
               <div class="col-md-6"> 

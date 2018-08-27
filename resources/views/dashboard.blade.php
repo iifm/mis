@@ -41,7 +41,7 @@ a {
       <div class="app-title">
 
         <div>
-          <h1><i class="fa fa-dashboard"></i> Dashboard</h1>
+          <h1 class="heading_title"><i class="fa fa-dashboard"></i> Dashboard</h1>
           
         </div>
         <ul class="app-breadcrumb breadcrumb">
@@ -58,7 +58,7 @@ a {
           <a href="{{url('/leave-view')}}">
           <div class="widget-small primary coloured-icon"><i class="icon fa fa-calendar fa-3x"></i>
             <div class="" style="width: 100%; padding:14px 0 5px 0">
-             <center><h6>Total Applied Leaves</h6></center> 
+             <center><h6 class="heading_title">Total Applied Leaves</h6></center> 
               <center><h3><b>{{$totleaves}}</b></h3></center>
             </div>
           </div>
@@ -67,8 +67,8 @@ a {
         <div class="col-md-6 col-lg-4">
           <a href="{{url('/on-duty/index')}}">
           <div class="widget-small info coloured-icon"><i class="icon fa fa-tag fa-3x"></i>
-            <div class="" style="width: 100%">
-            <center><h6 >Total Applied On-Dutys</h6></center>  
+            <div class="" style="width: 100%; padding:14px 0 5px 0">
+            <center><h6 class="heading_title">Total Applied On-Duties</h6></center>  
              <center><h3><b>{{$totod}}</b></h3></center> 
             </div>
           </div>
@@ -77,8 +77,8 @@ a {
         <div class="col-md-6 col-lg-4">
           <a href="{{url('/conveyance/index')}}">
           <div class="widget-small warning coloured-icon"><i class="icon fa fa-inr fa-3x"></i>
-            <div class="" style="width: 100%">
-            <center><h6>Total Applied Conveyances</h6></center>  
+            <div class="" style="width: 100%; padding:14px 0 5px 0">
+            <center><h6 class="heading_title">Total Applied Conveyances</h6></center>  
              <center><h3><b>{{$totconveyance}}</b></h3></center> 
             </div>
           </div>
@@ -89,7 +89,7 @@ a {
       <div class="row">
         <div class="col-md-4">
           <div class="tile" style="min-height: 480px">
-            <h5>Employees of Months</h5>
+            <h5 class="heading_title">Employee of the Month</h5>
             <div class="">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 
@@ -126,7 +126,7 @@ a {
                 <div class="col-md-12">
                 <div class="tile">
                   <div class="table-wrapper-scroll-y"></div>
-                   <h5>Today Events</h5>  
+                   <h5 class="heading_title">Today's Event(s)</h5>  
                    @php $i=1; @endphp
                       <table width="100%" id="events">
                         <thead>
@@ -144,7 +144,7 @@ a {
                           <td>{{$i++}}</td>
                           <td>{{$event['name']}}</td>
                           <td>{{$event['event']}}</td>
-                          <td><a href="{{url('/send-wish')}}/{{$event['user_id']}}" class="btn btn-primary fa fa-envelope" title="Send Wish"></a></td>
+                          <td><a href="{{url('/send-wish')}}/{{$event['user_id']}}/{{$event['event']}}" class="btn btn-primary fa fa-envelope" title="Send Wish"></a></td>
                           </tr>
                           @endforeach
                          
@@ -156,7 +156,7 @@ a {
                 </div>
               </div>
               <div class="tile">
-                <h5>Upcoming Events</h5> 
+                <h5 class="heading_title">Upcoming Events</h5> 
                  <li style="list-style-type: none;" class="dropdown"><a class="app-nav__item btn btn-success" href="#" data-toggle="dropdown" aria-label="Show notifications"><i class="fa fa-birthday-cake  fa-lg"> BIRTHDAYS</i></a>
           <ul style="list-style-type: none;" class="app-notification dropdown-menu dropdown-menu-right">
             <li class="app-notification__title">This month have {{count($monthBirthday)}} Birthdays.</li>
@@ -209,9 +209,9 @@ a {
           </div>
            <div class="col-md-4">
               <div class="tile">
-                <h5>New Updates</h5>   
+                <h5 class="heading_title">New Updates</h5>   
                 <ul>
-                <a href="#"><li class="btn btn-danger form-control">HR Policy</li></a>  
+                <a href="#"><li class="btn btn-danger form-control">HR Policies</li></a>  
                   <a href="{{url('/conveyance/policy')}}"><li class="btn btn-info form-control">Conveyance Policy</li></a> 
                    
                 </ul>

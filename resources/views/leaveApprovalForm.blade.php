@@ -7,7 +7,9 @@
 	<title></title>
 </head>
 <body>
-<div class="col-md-12">
+    @if(Session::has('message'))
+ <div id="alert" class="alert alert-success">{{ Session::get('message') }}<div class="col-md-12">
+    @endif
 	<div class="col-md-1"></div>
     <div class="col-md-10">
     
@@ -109,5 +111,12 @@
 		</form>
      </div>
 </div>
+<script>
+   window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove();
+    });
+}, 4000);
+    </script>
 </body>
 </html>

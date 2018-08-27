@@ -42,7 +42,7 @@
    <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-inr"></i> Conveyance Report</h1>
+          <h1 class="heading_title"><i class="fa fa-file-excel-o"></i> Conveyance Report</h1>
           
         </div>
         

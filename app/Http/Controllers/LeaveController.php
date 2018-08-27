@@ -79,12 +79,15 @@ class LeaveController extends Controller
                 $name[]='';
 
                 $appfromnamesarr = explode(',', $appfrom);
+               // dd($appfromnamesarr);
                 $appfrom=array_filter($appfromnamesarr);
-                
-                $appfromname=User::whereIn('email',$appfrom)->pluck('name')->toArray();   
+                //dd($appfrom);
+                $appfromname=User::whereIn('id',[$appfrom])->pluck('name')->toArray();   
+              //  dd($appfromname);
                 $names = implode(',',$appfromname); 
 
                 $usernames = trim($names,",");
+               // dd($appfromname);
                     
                   $leave_datas[] =  array(
                                     'type'=> $value->leavetype,
@@ -221,7 +224,8 @@ class LeaveController extends Controller
         $comment= $request->comment;
        
        $data=Leave::where('id',$id)->update(['status'=>$actionstatus,'comment'=>$comment,'approvedby'=>$uid]);
-       return 'success';
+       Session::flash('message','Leave Status Updated Successfully!!');
+       return back();
     }
 
 

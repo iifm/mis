@@ -5,7 +5,7 @@
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
   
-    <title>IIFM MIS</title>
+    <title>User Family Information</title>
     
     
 
@@ -24,49 +24,45 @@
     <!-- Sidebar menu-->
     {!!View('partials.sidebar')!!}
 
-
-    
     <!-- Main Content-->
   <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-users"></i> User Family Information </h1>
+          <h1 class="heading_title"><i class="fa fa-users"></i> User Family Information </h1>
         </div>
+          <a href="{{URL::previous()}}" class="fa fa-arrow-circle-left btn btn-danger" style="background: #009688; border:none"> Back</a>   
       </div>
       <div class="row  tile">
       <!--   <a href="#" class="btn btn-primary fa fa-plus add_course">ADD</a> -->
-       <a href="{{URL::previous()}}" class="fa fa-arrow-circle-left btn btn-danger"> Back</a>
         <div class="col-md-12">
-          <form action="{{url('/user-family/add')}}" method="post" autocomplete="off">
+          <form action="{{url('/user-family/add')}}/{{$id}}" method="post" autocomplete="off">
 
             {{ csrf_field() }}
-          
+          @foreach($user_details as $data)
         <div class="row">
             <div class="col-md-12">
               
             <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
            
-             
-
-             <strong><h4>Father's Detail</h4></strong>
+             <strong><h4 class="heading_title">Father's Detail</h4></strong>
              <hr>
               <div class="col-md-4"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">Father Name</label>
-                    <input class="form-control capitalize char-only" id="fname" name="fname" type="text" aria-describedby="emailHelp" placeholder="Father Name" required="">
+                    <input class="form-control capitalize char-only" value="{{$data->fname}}" id="fname" name="fname" type="text" aria-describedby="emailHelp" placeholder="Father Name" required="">
                 </div>
              </div>
 
               <div class="col-md-4"> 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Father's Occuption</label>
-                    <input class="form-control capitalize char-only" id="foccup" name="foccup" type="text" aria-describedby="emailHelp" placeholder="Father's Occuption" required="">
+                    <input class="form-control capitalize char-only" value="{{$data->foccup}}" id="foccup" name="foccup" type="text" aria-describedby="emailHelp" placeholder="Father's Occuption" required="">
                 </div>
              </div>
               <div class="col-md-4"> 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Father's Contact Number</label>
-                    <input class="form-control numbers-only" maxlength="10" id="fcontact" name="fcontact" type="text" aria-describedby="emailHelp" placeholder="Father's Contact Number" required="">
+                    <input class="form-control numbers-only" maxlength="10"value="{{$data->fcontact}}" id="fcontact" name="fcontact" type="text" aria-describedby="emailHelp" placeholder="Father's Contact Number" required="">
              </div>
             </div>
 
@@ -78,25 +74,25 @@
               
             <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
          
-            <strong><h4>Mother's Detail</h4></strong>
+            <strong><h4 class="heading_title">Mother's Detail</h4></strong>
              <hr>
               <div class="col-md-4"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">Mother Name</label>
-                    <input class="form-control capitalize char-only" id="mname" name="mname" type="text" aria-describedby="emailHelp" placeholder="Mother Name" required="">
+                    <input class="form-control capitalize char-only" value="{{$data->mname}}" id="mname" name="mname" type="text" aria-describedby="emailHelp" placeholder="Mother Name" required="">
                 </div>
              </div>
 
               <div class="col-md-4"> 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Mother's Occuption</label>
-                    <input class="form-control capitalize char-only" id="moccup" name="moccup" type="text" aria-describedby="emailHelp" placeholder="Mother's Occuption" required="">
+                    <input class="form-control capitalize char-only" value="{{$data->moccup}}" id="moccup" name="moccup" type="text" aria-describedby="emailHelp" placeholder="Mother's Occuption" required="">
                 </div>
              </div>
               <div class="col-md-4"> 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Mother's Contact Number</label>
-                    <input class="form-control numbers-only" id="mcontact" name="mcontact" type="text" aria-describedby="emailHelp" placeholder="Mother's Contact Number" required="">
+                    <input class="form-control numbers-only" id="mcontact" value="{{$data->mcontact}}" name="mcontact" type="text" aria-describedby="emailHelp" placeholder="Mother's Contact Number" required="">
              </div>
           </div>
 
@@ -106,13 +102,13 @@
          <div class="row">
             <div class="col-md-12">
            
-           <strong><h4>Marital Status</h4></strong>
+           <strong><h4 class="heading_title">Marital Status</h4></strong>
              <hr>
               <div class="col-md-6"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">Marital Status</label>
                     <select class="form-control" name="maritalstatus" id="maritalstatus" required="">
-                      <option value="">Select Your Marital Status</option>
+                      <option value="{{$data->maritalstatus}}">{{$data->maritalstatus}}</option>
                       <option value="Single">Single</option>
                       <option value="Married">Married</option>
                     </select>
@@ -122,27 +118,27 @@
               <div class="col-md-6"> 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Spouse Name</label>
-                    <input class="form-control" id="spname" name="spname" type="text" aria-describedby="emailHelp" placeholder="Spouse Name"  >
+                    <input class="form-control" id="spname" name="spname" value="{{$data->spname}}" type="text" aria-describedby="emailHelp" placeholder="Spouse Name"  >
                 </div>
              </div>
               <div class="col-md-6"> 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Spouse Occuption</label>
-                    <input class="form-control" id="spoccup" name="spoccup" type="text" aria-describedby="emailHelp" placeholder="Spouse Occuption">
+                    <input class="form-control" id="spoccup" name="spoccup" value="{{$data->spoccup}}" type="text" aria-describedby="emailHelp" placeholder="Spouse Occuption">
              </div>
           </div>
            <div class="col-md-6"> 
                 <div class="form-group">
                     <label for="exampleInputEmail1 demoDate">Marriage Anniversery Date</label>
-                    <input class="form-control" id="anniversary" name="anniversary" type="text" aria-describedby="emailHelp" placeholder="Marriage Anniversery Date">
+                    <input class="form-control demoDate" id="anniversary" value="{{$data->anniversary}}" name="anniversary" type="text" aria-describedby="emailHelp" placeholder="Marriage Anniversery Date">
              </div>
           </div>
-
+          @endforeach
        
       </div>    
     </div>
     <div class="tile-footer">
-              <button class="btn btn-success fa fa-save" type="submit">  Submit</button>
+              <button class="btn btn-success fa fa-save" type="submit" style="background: #009688; border:none">  Submit</button>
            
             </div>
             </form> 

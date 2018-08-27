@@ -164,6 +164,8 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Unisharp\Ckeditor\ServiceProvider::class,
+        App\Providers\AgentServiceProvider::class,
+
         
        
 
@@ -232,6 +234,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => 'Collective\Html\FormFacade',
         'Html' => 'Collective\Html\HtmlFacade',
+        'Agent' => Jenssegers\Agent\Facades\Agent::class,
+
 
     ],
 

@@ -18,7 +18,7 @@
   <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-eye"></i> Conveyance Policy</h1>
+          <h1 class="heading_title"><i class="fa fa-eye"></i> Conveyance Policy</h1>
         </div>
       </div>
         <a href="{{URL::previous()}}" class="fa fa-arrow-circle-left btn btn-primary btn-lg"> Back</a>

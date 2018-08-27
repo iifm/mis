@@ -61,7 +61,7 @@
              <div class="col-md-3"> 
               <div class="form-group ">
                   <strong>  <label for="">Leave Type</label></strong><br>
-                    <input class="leaveSelect"  type="checkbox" value="Compensatory Off" name="leaveoff[]" id="leaveoff"> Compensatory Off<br><br>
+                    <input class="leaveSelect"  type="checkbox" value="Compensatory Off" name="leaveoff[]" id="leave_compoff"> Compensatory Off<br><br>
                     <input class="leaveSelect" type="checkbox" value="Casual Leave" name="leaveoff[]"> Casual Leave <br><br>
                     <input class="leaveSelect" type="checkbox" value="Half day Leave" name="leaveoff[]"> Half day Leave
 
@@ -74,7 +74,7 @@
                 </div>
              </div>
 
-             <div class="col-md-6"> 
+             <div class="col-md-6 compoff"> 
               <h5 style="font-weight:bold;color: red!important; margin-bottom: 10px;  font-family: Times New Roman">Select Sunday Date against Comp off (In case of comp off only)</h5>
               <input type="text" class="form-control" name="agdcompoff" id="agdcompoff" placeholder="Pic a date" >
              </div>
@@ -82,7 +82,7 @@
              </div>
              <br>
              <div class="col-lg-12" style="padding-bottom:0; margin-bottom:10px;">
-                 <h3 style="color:#135cb0; margin-top: 20px; font-family: Times New Roman">Approval From <font style="font-size:14px; color:#FF0000;">(Select Maximum 3)</font></h3>
+                 <h3 style="color:#135cb0; margin-top: 20px; font-family: Times New Roman">Select Reporting Manager(s) <font style="font-size:14px; color:#FF0000;">(Select Maximum 3)</font></h3>
               </div>
               <table>
                   <tbody><tr><td>
@@ -198,9 +198,25 @@
     return false;
     }
     });
+
 });
  </script>
+<script type="text/javascript">
+  $(document).ready(function(){
+     $('.compoff').hide();
+   $('#leave_compoff').click(function(){
+     if($(this).prop("checked") == true){
+                //alert("Checkbox is checked.");
+        $('.compoff').show();
+      }
+       else if($(this).prop("checked") == false){
+                $('.compoff').hide();
+            }
 
+
+   });
+  });
+</script>
   </body>
 
 <!-- Mirrored from pratikborsadiya.in/vali-admin/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 05 Jul 2018 06:07:27 GMT

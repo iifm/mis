@@ -39,14 +39,15 @@
   <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-graduation-cap "></i> User Education </h1>
+          <h1 class="heading_title"><i class="fa fa-graduation-cap "></i> User Educational Information</h1>
         </div>
+        <a href="{{URL::previous()}}" class="fa fa-arrow-circle-left btn btn-danger" style="background: #009688; border:none"> Back</a>   
       </div>
       <div class="row  tile">
       <!--   <a href="#" class="btn btn-primary fa fa-plus add_course">ADD</a> -->
-       <a href="{{URL::previous()}}" class="fa fa-arrow-circle-left btn btn-danger"> Back</a>
+       
         <div class="col-md-12">
-          <form action="{{url('/user-education/update')}}" method="post" autocomplete="off" enctype="multipart/form-data">
+          <form action="{{url('/user-education/update')}}/{{$id}}" method="post" autocomplete="off" enctype="multipart/form-data">
 
             {{ csrf_field() }}
           <ul style="list-style-type: none;" class="education_form">
@@ -117,7 +118,7 @@
         </ul>
        
     <div class="tile-footer">
-              <button class="btn btn-success fa fa-save" type="submit">  Submit</button>
+              <button class="btn btn-success fa fa-save" type="submit" style="background: #009688;border: none;">  Submit</button>
            
             </div>
             </form> 
