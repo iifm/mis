@@ -56,7 +56,7 @@ class ConveyanceController extends Controller
      
       $count = $request->input('tcount');
       $filename='';
-
+     // dd($request->all());
       for ($i=1; $i <= $count ; $i++) { 
          $file = $request->file('uploadfile'.$i);
          if ($request->hasFile('uploadfile'.$i)) {
@@ -94,55 +94,33 @@ class ConveyanceController extends Controller
        
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show()
-    {
-         return view('mis.conveyance.policy');
-    }
+   
+   public function approveConveyance($id,$amount,$approver)
+   {
+     // $approved_by=Auth::user()->id();
+      $data=explode(",", $id);
+      $con_id=$data[0];
+      $action=$data[1];
+      
+      if($action=="approve"){
+        $approve_con=Conveyance::where('id',$con_id)->update(['approved_amount'=>$amount,'status'=>'Approve','approved_by'=>$approver]);
+          return "Conveyance Approved Successfully !!";
+      }
+     elseif ($action=="disapprove") {
+       $approve_con=Conveyance::where('id',$con_id)->update(['status'=>'Rejected','rejected_by'=>$approver]);
+          return "Conveyance Rejected Successfully !!";
+     }
+     
+   }
+   public function reAction($id)
+   {
+      Conveyance::where('id',$id)->update(['status'=>"PENDING",'approved_amount'=>'','approved_by'=>'','rejected_by'=>'']);
+      return "Conveyance Status Changed Successfully !!";
+   }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
-      public function policy()
-    {
-       
-
-    }
+   public function show()
+   {
+    return view('mis.conveyance.policy');
+   }
 
 }

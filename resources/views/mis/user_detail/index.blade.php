@@ -4,12 +4,14 @@
 
 <head>
     
-    <title>IIFM MIS</title>
-    
-
+    <title>User Profile</title> 
     <!-- Main CSS-->
     {!!View('partials.include_css')!!}
      <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+     <style type="text/css">
+       .tile-title .btn{float: right;}
+     </style>
 
   </head>
   
@@ -17,9 +19,6 @@
     <!-- Navbar-->
     
     {!!View('partials.header')!!}
-
-
-
 
     <!-- Sidebar menu-->
     {!!View('partials.sidebar')!!}
@@ -35,24 +34,24 @@
      @endif
       
 
-  @if(count($user_detail)==0)
+@if(count($user_detail)==0)
 
 <div class="row">
   <div class="col-md-12">
     <div class="col-md-3">
-   <div class="card tile" style="height: 320px;">
-    <img class="" width="100%" height="200" src="{{ URL::asset('images/user.png') }}" alt="Profile image">
-    <div class="card-body">
-      <h4 class="card-title" style="font-family: Times New Roman;text-align: center;">{{Auth::user()->name}}</h4>
-
-      <p class="card-text" style="text-align: center">
+      <div class="card tile" style="height: 320px;">
+        <img class="" width="100%" height="200" src="{{ URL::asset('images/user.png') }}" alt="Profile image">
+        <div class="card-body">
+          <h4 class="card-title" style="font-family: Times New Roman;text-align: center;">{{Auth::user()->name}}</h4>
+          <p class="card-text" style="text-align: center">
+        </div>
+      </div> 
     </div>
-  </div> 
-    </div>
-     <div class="col-md-9 tile">
-       <h3 class="tile-title" style="font-family: Times New Roman">OFFICIAL INFORMATION  <a class="btn btn-success fa fa-plus" href="{{url('/user-official')}}"></a> <a class="btn btn-success fa fa-pencil" href="{{url('/user-official')}}"></a></h3>
+    <div class="col-md-9 tile">
+      <h3 class="tile-title heading_title">OFFICIAL INFORMATION 
+       <a class="btn btn-success fa fa-plus" href="{{url('/user-official')}}"></a> <a class="btn btn-success fa fa-pencil" href="{{url('/user-official')}}/{{Auth::user()->id}}"></a></h3>
 
-            <table class="table">
+          <table class="table">
             <tr>
               <th>Email ID</th>
               <td>{{Auth::user()->email}}</td>
@@ -73,12 +72,15 @@
               <th>Location/Centre</th>
               <td> Add Your Location/Centre</td>
             </tr>
-             <tr>
+            <tr>
               <th>Date Of Joining</th>
               <td> Add Your Date Of Joining</td>
             </tr>
-
-            </table>
+            <tr>
+              <th>Date Of Birth</th>
+              <td> Add Your Date Of Birth</td>
+            </tr>
+          </table>
        
     </div>  
   </div>
@@ -88,26 +90,50 @@
 @foreach($user_detail as $user) 
 <div class="row">
   <div class="col-md-12">
-    <div class="col-md-3">
-    
-   <div class="card tile" style="height: 320px;">
-    <img class="" width="100%" height="200" src="{{URL::To('storage/app/profile/'.$user->profile)}}" alt="Profile image">
+     @if($user->profile=='')
+    <div class="col-md-3" style="padding: 0px;">
+   <div class="card tile" style="min-height: 320px; margin-right: 20px; margin-left: -10px; padding: 0px">
+    <img class="" width="100%" src="{{ URL::To('public/images/usser.png') }}" alt="Profile image">
     <div class="card-body">
-      <h4 class="card-title" style="font-family: Times New Roman;text-align: center;">{{Auth::user()->name}}</h4>
-      <p class="card-text" style="text-align: center">{{$user->designation}}
-    </div>
-  </div>
+        <h4 class="card-title" style="font-family: Times New Roman;text-align: center;">{{$user->name}}</h4>
+       <h4 class="card-title" style="font-family: Times New Roman;text-align: center;">{{$user->designation}}</h4>
       
     </div>
+  </div> 
+    </div>
+    @else
+     <div class="col-md-3" style="padding: 0px;">
+   <div class="card tile" style="min-height: 320px; margin-right: 20px; margin-left: -10px; padding: 0px;">
+    <!-- <div style="padding:0; margin:0; width:100%; height:250px; background:url('{{URL::To('storage/app/profile/'.$user->profile)}}') no-repeat center;">
+      
+    </div> -->
+    
+    <img class="" width="100%" src="{{URL::To('storage/app/profile/'.$user->profile)}}" alt="Profile image">
+    
+    <div class="card-body">
+      <h4 class="card-title" style="font-family: Times New Roman;text-align: center;">{{$user->name}}</h4>
+       <h4 class="card-title" style="font-family: Times New Roman;text-align: center;">{{$user->designation}}</h4>
+    </div>
+  </div> 
+    </div>
+      @endif
+
      <div class="col-md-9 tile">
-       <h3 class="tile-title" style="font-family: Times New Roman">OFFICIAL INFORMATION  <a class="btn btn-success fa fa-pencil" href="{{url('/user-official')}}"></a> 
+        
+       <h3 class="tile-title heading_title">OFFICIAL INFORMATION 
+        @if($view_details=='SHOW')
+
+        <a class="btn btn-success fa fa-pencil" href="{{url('/user-official')}}/{{$user_id}}" style="background: #009688;border: none;"></a>
+        @endif
+      </h3>
+       
          <!--  @if(Auth::user()->role=='Admin')
         <a class="btn btn-info fa fa-eye" href="#"> VIEW ALL EMPLOYEE</a></h3>
         @endif -->
             <table class="table">
             <tr>
               <th>Email ID</th>
-              <td>{{Auth::user()->email}}</td>
+              <td>{{$user->email}}</td>
             </tr>
              <tr>
               <th>Mobile</th>
@@ -115,7 +141,7 @@
             </tr>
              <tr>
               <th>Employee ID</th>
-              <td>IIFM{{ str_pad(Auth::user()->id,4,"0",STR_PAD_LEFT) }}</td>
+              <td>IIFM{{ str_pad($user->user_id,4,"0",STR_PAD_LEFT) }}</td>
             </tr>
              <tr>
               <th>Department</th>
@@ -129,7 +155,10 @@
               <th>Date Of Joining</th>
               <td>{{$user->doj}}</td>
             </tr>
-
+            <tr>
+              <th>Date Of Birth</th>
+              <td>{{$user->dob}}</td>
+            </tr>
             </table>
        
     </div>
@@ -137,11 +166,16 @@
 </div>
 @endforeach
 @endif
+
+@if($view_details=='SHOW')
 <div class="row">
   <div class="col-md-12 tile">
-     <h3 class="tile-title" style="font-family: Times New Roman">EDUCATIONAL INFORMATION <a href="{{url('/user-education/add')}}" class="btn btn-success fa fa-plus"></a> </h3>
-      <table class="table-responsive table" >
-          
+
+     
+     <h3 class="tile-title heading_title">EDUCATIONAL INFORMATION <a href="{{url('/user-education/add')}}/{{$user_id}}" class="btn btn-success fa fa-plus" style="background: #009688;border: none;"></a> </h3>
+
+
+      <table class="table-responsive table" >     
            <thead >
             <tr>
               <th>#</th>
@@ -153,7 +187,9 @@
               <th>Specialization</th>
               <th>Percentage/Grades</th>
               <th>Certificate</th>
+              
               <th>Action</th>
+           
               <!-- <th>Action</th> -->
               
             </tr>
@@ -176,8 +212,10 @@
                 <a href="{{ URL::To('storage/app/education/'.$value->certificate) }}" target="_blank"><img src="{{ URL::To('storage/app/education/'.$value->certificate) }}"  height="50px" width="50px"></a>
                 @endif
               </td>
-
-              <td><a href="{{url('/education-delete')}}/{{$value->id}}" class="btn btn-danger fa fa-trash" onclick="return confirm('Are you sure you want to delete this item?');"></a></td>
+              <td>
+                <a href="{{url('/education-edit')}}/{{$value->id}}/{{$user_id}}" class="btn btn-primary fa fa-pencil" style="background: #009688; border:none"></a>
+                <a href="{{url('/education-delete')}}/{{$value->id}}/{{$user_id}}" class="btn btn-danger fa fa-trash" onclick="return confirm('Are you sure you want to delete this item?');"></a>
+              </td>
             </tr>
           @endforeach
           </tbody>
@@ -187,7 +225,9 @@
 
 <div class="row">
   <div class="col-md-12 tile">
-     <h3 class="tile-title" style="font-family: Times New Roman">PROFESSIONAL INFORMATION <a href="{{url('/user-professional')}}" class="btn btn-success fa fa-plus"></a></h3>
+    
+     <h3 class="tile-title heading_title">WORK EXPERIENCE(S) <a href="{{url('/user-professional')}}/{{$user_id}}" class="btn btn-success fa fa-plus" style="background: #009688;border: none;"></a></h3>
+    
        <table class="table-responsive table" >
            <thead>
             <tr>
@@ -199,7 +239,7 @@
               <th width="20%">Company Address</th>
               <th width="10%">Offer/Appointment Letter</th>
               <th width="10%" align="center">Relieving/Experience Letter</th>
-               <th width="5%">Action</th>
+               <th width="10%">Action</th>
              
               
             </tr>
@@ -227,7 +267,10 @@
                   @endif
                 </a>
               </td>
-              <td><a href="{{url('/profession-delete')}}/{{$value->id}}" class="btn btn-danger fa fa-trash" onclick="return confirm('Are you sure you want to delete this item?');"></a></td>
+               <td><a href="{{url('/user-professional/edit')}}/{{$value->id}}/{{$user_id}}" class="btn btn-primary fa fa-pencil" style="background: #009688; border:none"></a>
+              <a href="{{url('/profession-delete')}}/{{$value->id}}/{{$user_id}}" class="btn btn-danger fa fa-trash" onclick="return confirm('Are you sure you want to delete this item?');"></a></td>
+
+             
             </tr>
           </tbody>
           @endforeach
@@ -236,9 +279,11 @@
   </div>
 </div>
 
-  <div class="row">
+<div class="row">
   <div class="col-md-12 tile">
-     <h3 class="tile-title" style="font-family: Times New Roman">PERSONAL INFORMATION <a href="{{url('/user-personal')}}" class="btn btn-success fa fa-plus"></a></h3>
+    
+     <h3 class="tile-title heading_title">PERSONAL INFORMATION <a href="{{url('/user-personal')}}/{{$user_id}}" class="btn btn-success fa fa-pencil" style="background: #009688;border: none;"></a></h3>
+    
      @foreach($user_detail as $detail)
       <table class="table" width="100%">
             <tr>
@@ -268,11 +313,13 @@
             @endforeach
             </table>
   </div>
-  </div>
+</div>
 
-  <div class="row">
+<div class="row">
   <div class="col-md-12 tile">
-     <h3 class="tile-title" style="font-family: Times New Roman">FAMILY INFORMATION  <a href="{{url('/user-family')}}" class="btn btn-success fa fa-plus"></a></h3>
+    
+     <h3 class="tile-title heading_title">FAMILY INFORMATION  <a href="{{url('/user-family')}}/{{$user_id}}" class="btn btn-success fa fa-pencil" style="background: #009688;border: none;"></a></h3>
+    
      @foreach($user_detail as $family)
       <table class="table">
             <tr>
@@ -319,6 +366,7 @@
           @endforeach
   </div>
 </div>
+@endif
 </main>
 
 

@@ -23,26 +23,25 @@ Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
 
 //user-details routes
 Route::get('/user-details', 'UserDetailController@index')->name('user.index');
-Route::get('/user-education/add', 'UserDetailController@education');
-Route::get('/education-delete/{id}', 'UserDetailController@educationDelete');
+Route::get('/user-details/{id}', 'UserDetailController@index')->name('search_user');
+Route::get('/user-education/add/{id}', 'UserDetailController@education');
+Route::get('/education-delete/{id}/{user_id}', 'UserDetailController@educationDelete');
+Route::get('/education-edit/{id}/{user_id}', 'UserDetailController@educationEdit');
+Route::post('/user/education/update/{id}/{user_id}','UserDetailController@userEducationUpdate');
 
-/*Route::get('/user-education/edit', 'UserDetailController@educationedit');
-*/
-Route::post('/user-education/update', 'UserDetailController@educationAdd');
-Route::post('/user-details/store', 'UserDetailController@store');
-Route::get('/user-details/edit/{id}', 'UserDetailController@edit');
-Route::get('/user-professional', 'UserDetailController@professional');
-Route::get('/profession-delete/{id}', 'UserDetailController@professionalDelete');
+Route::post('/user-education/update/{id}', 'UserDetailController@educationAdd');
+Route::get('/user-professional/{id}', 'UserDetailController@professional');
+Route::get('/profession-delete/{id}/{user_id}', 'UserDetailController@professionalDelete');
+Route::post('/user-professional/update/{id}', 'UserDetailController@professionalAdd');
+Route::get('/user-professional/edit/{id}/{user_id}','UserDetailController@professionalEdit');
+Route::post('/user/professional/update/{id}/{user_id}','UserDetailController@professionalUpdate');
 
-Route::post('/user-professional/update', 'UserDetailController@professionalAdd');
-Route::get('/user-official', 'UserDetailController@official');
-Route::post('/user-official/add', 'UserDetailController@officialAdd');
-Route::get('/user-personal', 'UserDetailController@personal');
-Route::post('/user-personal/add', 'UserDetailController@personalAdd');
-Route::get('/user-family', 'UserDetailController@family');
-Route::post('/user-family/add', 'UserDetailController@familyAdd');
-
-
+Route::get('/user-official/{id}', 'UserDetailController@official');
+Route::post('/user-official/add/{id}', 'UserDetailController@officialAdd');
+Route::get('/user-personal/{id}', 'UserDetailController@personal');
+Route::post('/user-personal/add/{id}', 'UserDetailController@personalAdd');
+Route::get('/user-family/{id}', 'UserDetailController@family');
+Route::post('/user-family/add/{id}', 'UserDetailController@familyAdd');
 
 
 //leave routes
@@ -65,8 +64,8 @@ Route::get('/update-user-attendance/{id}/{date}/{type}','AttendanceController@up
 Route::post('/updated-user-attendance','AttendanceController@updateIn');
 Route::get('/update-user-out-attendance/{id}/{date}/{type}','AttendanceController@updateOutAttendance');
 Route::post('/updated-userout-attendance','AttendanceController@updateOut');
-
-
+Route::get('/attendance-approval/{id}/{from}/{user_id}','AttendanceController@attendanceApprove')->name('attendanceApprove');
+Route::post('/attendance-approved/{id}/{from}/{user_id}','AttendanceController@attendanceApproved');
 
 //photo-album routes
 Route::get('/photo-album', 'PhotoAlbumController@index')->name('photo.index');
@@ -81,6 +80,8 @@ Route::get('/conveyance', 'ConveyanceController@create');
 Route::get('/conveyance/index', 'ConveyanceController@index')->name('conveyance.index');
 Route::post('/conveyance/store', 'ConveyanceController@store');
 Route::get('/conveyance/policy', 'ConveyanceController@show');
+Route::get('/conveyance-approve/{id}/{amount}/{approver}','ConveyanceController@approveConveyance');
+Route::get('/conveyance/re-action/{id}','ConveyanceController@reAction');
 
 
 
@@ -89,6 +90,7 @@ Route::get('/hall-of-fame', 'EOFController@index')->name('eof.index');
 Route::get('/hall-of-fame/create', 'EOFController@create');
 Route::get('/hall-of-fame/create', 'EOFController@create');
 Route::post('/hall-of-fame/store', 'EOFController@store');
+Route::get('employee-department/{id}','EOFController@getDepartment');
 
 
 
@@ -112,6 +114,13 @@ Route::post('/changePassword','HomeController@changePassword');
 //Report 
 Route::get('/conveyance-report','ReportController@conveyanceReport')->name('conveyanceReport');
 Route::get('/conveyance-report/data','ReportController@conveyanceDate');
+Route::get('/attendance-report','ReportController@attendanceReport')->name('attendanceReport');
+Route::get('/attendance-report/data','ReportController@attendanceData');
+Route::get('/leave-report','ReportController@leaveReport')->name('leaveReport');
+Route::get('/leave-report/data','ReportController@leaveDate');
+
+
+
 
 /*Route::get('/backup-database','DatabaseBackupController@backup');*/
 
@@ -125,7 +134,7 @@ Route::get('/get-product/{category}','AssignProductController@getProduct');
 Route::get('/send-mail','LeaveController@sendMail');
 
 //dashboard routes
-Route::get('/send-wish/{id}','HomeController@sendWish');
+Route::get('/send-wish/{id}/{subject}','HomeController@sendWish');
 Route::post('/wish-send','HomeController@wishEmail')->name('wish-send');
 
 //search routes
@@ -133,5 +142,10 @@ Route::get('/search-employee','SearchController@index');
 Route::get('/search/user/action/{search}','SearchController@Search');
 Route::get('/search/user/{id}','SearchController@searchResult')->name('search_result');
 
+//user management routes
+Route::get('/user-management/index','UserManagementController@index')->name('usermanagement.index');
+Route::get('user-management/view/{id}','UserManagementController@show');
+Route::get('/user-management/edit/{id}','UserManagementController@edit');
+Route::get('/update-user-status/{id}','UserManagementController@statusEdit');
 
 

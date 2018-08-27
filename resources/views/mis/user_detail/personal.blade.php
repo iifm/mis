@@ -5,7 +5,7 @@
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
   
-    <title>IIFM MIS</title>
+    <title> User Personal Information</title>
     
     
 
@@ -30,14 +30,16 @@
   <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-user"></i> User Personal Information </h1>
+          <h1 class="heading_title"><i class="fa fa-user"></i> User Personal Information </h1>
         </div>
+          <a href="{{URL::previous()}}" class="fa fa-arrow-circle-left btn btn-danger" style="background: #009688; border:none"> Back</a>   
       </div>
+      @foreach($user_detail as $data)
       <div class="row  tile">
       <!--   <a href="#" class="btn btn-primary fa fa-plus add_course">ADD</a> -->
-       <a href="{{URL::previous()}}" class="fa fa-arrow-circle-left btn btn-danger"> Back</a>
+      
         <div class="col-md-12">
-          <form action="{{url('/user-personal/add')}}" method="post" autocomplete="off">
+          <form action="{{url('/user-personal/add')}}/{{$id}}" method="post" autocomplete="off">
 
             {{ csrf_field() }}
           <ul style="list-style-type: none;" class="education_form">
@@ -50,7 +52,7 @@
               <div class="form-group">
                     <label for="exampleInputEmail1">Gender</label>
                     <select class="form-control" name="gender" id="gender" required="">
-                      <option value="">Select Gender</option>
+                      <option value="{{$data->gender}}">{{$data->gender}}</option>
                       <option value="Male">Male</option>
                       <option value="Female">Female</option>
                       <option value="Other">Other</option>
@@ -60,65 +62,65 @@
               <div class="col-md-6"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">Date Of Birth</label>
-                    <input class="form-control demoDate" id="dob" name="dob" type="text" aria-describedby="emailHelp" placeholder="Date Of Birth" required="">
+                    <input class="form-control demoDate" id="dob" value="{{$data->dob}}" name="dob" type="text" aria-describedby="emailHelp" placeholder="Date Of Birth" required="">
                 </div>
              </div>
 
-             <strong><h4>Current Address</h4></strong>
+             <strong><h4 class="heading_title">Current Address</h4></strong>
              <hr>
               <div class="col-md-6"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">Street Address</label>
-                    <textarea class="form-control capitalize char-only" name="cstreet" id="cstreet" rows="4" placeholder="Street Address" required=""></textarea>
+                    <textarea class="form-control capitalize char-only" name="cstreet" id="cstreet" rows="4" placeholder="Street Address" required="">{{$data->cstreet}}</textarea>
                 </div>
              </div>
 
               <div class="col-md-6"> 
                 <div class="form-group">
                     <label for="exampleInputEmail1">City</label>
-                    <input class="form-control capitalize char-only" id="ccity" name="ccity" type="text" aria-describedby="emailHelp" placeholder="City" required="">
+                    <input class="form-control capitalize char-only" value="{{$data->ccity}}" id="ccity" name="ccity" type="text" aria-describedby="emailHelp" placeholder="City" required="">
                 </div>
              </div>
               <div class="col-md-6"> 
                 <div class="form-group">
                     <label for="exampleInputEmail1">State</label>
-                    <input class="form-control capitalize char-only" id="cstate" name="cstate" type="text" aria-describedby="emailHelp" placeholder="State" required="">
+                    <input class="form-control capitalize char-only" id="cstate" value="{{$data->cstate}}" name="cstate" type="text" aria-describedby="emailHelp" placeholder="State" required="">
              </div>
             </div>
           <strong> Check If Current and Permanent Adress Same</strong> 
             <input type="checkbox" id="copyaddress" style="height: 15px; width: 15px; margin-left: 10px;">
-             <strong><h4>Permanent Address</h4></strong>
+             <strong><h4 class="heading_title">Permanent Address</h4></strong>
              <hr>
               <div class="col-md-6"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">Street Address</label>
-                    <textarea class="form-control capitalize char-only" name="pstreet" id="pstreet" rows="4" placeholder="Street Address" required=""></textarea>
+                    <textarea class="form-control capitalize char-only" name="pstreet" id="pstreet" rows="4" placeholder="Street Address" required="">{{$data->pstreet}}</textarea>
                 </div>
              </div>
 
               <div class="col-md-6"> 
                 <div class="form-group">
                     <label for="exampleInputEmail1">City</label>
-                    <input class="form-control capitalize char-only" id="pcity" name="pcity" type="text" aria-describedby="emailHelp" placeholder="City" required="">
+                    <input class="form-control capitalize char-only" value="{{$data->pcity}}" id="pcity" name="pcity" type="text" aria-describedby="emailHelp" placeholder="City" required="">
                 </div>
              </div>
               <div class="col-md-6"> 
                 <div class="form-group">
                     <label for="exampleInputEmail1">State</label>
-                    <input class="form-control capitalize char-only" id="pstate" name="pstate" type="text" aria-describedby="emailHelp" placeholder="State" required="">
+                    <input class="form-control capitalize char-only" id="pstate" value="{{$data->pstate}}" name="pstate" type="text" aria-describedby="emailHelp" placeholder="State" required="">
              </div>
           </div>
            <div class="col-md-6"> 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Alternate Contact Number  </label>
-                    <input class="form-control numbers-only" id="altno" name="altno" maxlength="10" type="text" aria-describedby="emailHelp" placeholder="Alternate Contact Number" required="">
+                    <input class="form-control numbers-only" id="altno" value="{{$data->altno}}" name="altno" maxlength="10" type="text" aria-describedby="emailHelp" placeholder="Alternate Contact Number" required="">
              </div>
           </div>
           </li>
         </ul>
-       
+       @endforeach
     <div class="tile-footer">
-              <button class="btn btn-success fa fa-save" type="submit">  Submit</button>
+              <button class="btn btn-success fa fa-save" type="submit" style="background: #009688; border:none">  Submit</button>
            
             </div>
             </form> 

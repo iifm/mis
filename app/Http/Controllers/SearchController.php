@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\User;
 use URL;
+use App\UserWorkExperience;
 
 class SearchController extends Controller
 {
@@ -15,29 +16,41 @@ class SearchController extends Controller
     }
     public function Search(Request $request,$search)
     {
-    	$search=DB::table('users')
-    					->where('name','like',"%".$search."%")
+    	$array_user[]='';
+        $search=DB::table('users')
+                        ->where('name','like',"%".$search."%")
+                        ->join('user_details','user_details.user_id','=','users.id')
+                        ->where('user_details.status','Active')	
+                        ->select('users.id as user_id','user_details.*','users.*')
     					->orderBy('name')
     					->get();
-
+                       // dd($search);
       
-    		foreach ($search as  $value) {
-    			  $link=URL::route('search_result',['id'=>$value->id]);
-    			$array_user[] = "<a href='$link'>".$value->name."</a> <br>";
-    			
-    		}
+		foreach ($search as  $value) {
+			$link=URL::route('search_user',['id'=>$value->user_id]);
+			$array_user[] = "<a href='$link'>".$value->name."</a> <br>";
+			
+		}
     		 
-    		return $array_user;
+		return $array_user;
     }
 
     public function searchResult($id)
     {
     	//return $id;
-        $datas=User::where('users.id',$id)
-                ->join('user_details','user_details.user_id','=','users.id')
-                ->select('users.name as user_name','users.email as user_email','user_details.mobile as user_mobile','user_details.designation as user_designation','user_details.department as user_department','user_details.locationcentre as user_locationcentre')
-                ->get();
-        return view('mis.search_result',compact('datas'));
+         $useredu=  DB::table('user_educations')
+                ->where('user_id',$id)
+                ->join('education_options','user_educations.edu_option','=','education_options.id')
+                ->select('user_educations.*', 'education_options.name as course_type', 'education_options.id as education_id')->get();
+
+        $user_detail=User::where('users.id',$id)
+                    ->where('user_details.status','Active')
+                    ->join('user_details','user_details.user_id','=','users.id')
+                    ->select('users.*','user_details.*','users.id as user_id')
+                    ->get();
+                  //  dd($user_detail);
+         $user_work = UserWorkExperience::where('user_id',$id)->get();
+        return view('mis.user_detail.index',compact(['user_detail','useredu','user_work']));
     }
 
     

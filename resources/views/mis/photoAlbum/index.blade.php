@@ -5,7 +5,7 @@
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
     
-    <title>IIFM MIS</title>
+    <title>Photo Album</title>
     
 
     <!-- Main CSS-->
@@ -48,9 +48,10 @@
    <main class="app-content">
       <div class="app-title">
         <div>
-          <h4><i class="fa fa-file-image-o"></i> Photo Album Management   <a href="{{url('/photo-album/create')}}" class="btn btn-success fa fa-plus">Add Photo</a></h4>
+          <h3 class="heading_title"><i class="fa fa-file-image-o"></i> Photo Album Management  </h3>
  
         </div>
+         <a href="{{url('/photo-album/create')}}" class="btn btn-success fa fa-plus pull-right">Add Photo</a>
       </div>
         @if(Session::has('message'))
         <div class="alert alert-success">{{Session::get('message')}}</div>
@@ -58,7 +59,7 @@
       <div class="row tile">
         <div class="col-md-12">
         @foreach($photos as $photo)
-        <div class="col-md-4"  style="height: 350px;">
+        <div class="col-md-4"  style="height: 400px;">
 
             <div class="card">
 

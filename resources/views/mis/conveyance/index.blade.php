@@ -2,7 +2,7 @@
 <html lang="en">
   
 <head>
-    <title>IIFM MIS</title>
+    <title>View Conveyance</title>
     <!-- Main CSS-->
     {!!View('partials.include_css')!!}
 </head>
@@ -19,12 +19,12 @@
 <main class="app-content">
   <div class="app-title">
     <div>
-      <h4>
-        <i class="fa fa-th-list"></i> Conveyance Management 
-        <a href="{{url('/conveyance')}}" class="btn btn-primary fa fa-plus"> ADD Conveyance</a>
-        <a href="{{url('/conveyance/policy')}}" class="btn btn-primary fa fa-eye"> View Conveyance Policy</a>
+      <h4 class="heading_title">
+        <i class="fa fa-th-list"></i> Conveyance Management     
       </h4>
     </div>
+      <a href="{{url('/conveyance')}}" class="btn btn-primary fa fa-plus pull-right"> ADD Conveyance</a>
+    
   </div>
   <div class="row">
     <div class="col-md-12">
@@ -38,7 +38,9 @@
                 <div id="alert" class="alert alert-success">{{ Session::get('message') }}
 
                 </div><?php } ?>
-      
+                <div id="success_msg" class="alert alert-success" style="display: none;">
+                  
+                </div>
                   <table class="table table-hover table-stripped" id="sampleTable" role="grid" >
                      <thead>
                         <tr role="row">
@@ -49,12 +51,14 @@
                           <th>Travel Mode</th>
                           <th>Distance</th>
                           <th>Amount</th>
-                          <th>Status</th>
-                          <th style="width: 20%">Action</th>
+                          <th>Manager's Action</th>
+                         
                         </tr>
                     </thead>
-                      @foreach($conveyance as $con)
+                     
                     <tbody>
+                     
+                       @foreach($conveyance as $con)
                       <tr role="row" class="odd">
                         <td><?= $i++;?></td>
                         <td>{{$con->con_date}}</td>
@@ -69,14 +73,20 @@
                          @endif
                         <td>{{$con->distance}}</td>
                         <td>{{$con->amount}}</td>
-                        <td>{{$con->status}}</td>
-                        <td>
-                          <a href="" class="btn btn-primary fa fa-pencil"></a>
-                          <a href="" onclick="return confirm('Are You Sure Want to delete this?')" class="btn btn-danger fa fa-trash"></a>
+                        @if($con->status=='PENDING')
+                        <td align="right">
+                           <input type="hidden" name="approver" id="approver" value="{{Auth::user()->id}}">
+                          <input type="text" class="approved_amount" name="" value="{{$con->amount}}" id="approved_amount_{{$con->id}}" style="width:60px;">
+                          <button type="button" value="{{$con->id}},approve," class="btn btn-primary fa fa-thumbs-up approve" id="{{$con->id}}"></button>
+                          <button type="button" value="{{$con->id}},disapprove" class="btn btn-danger fa fa-thumbs-down disapprove" id="{{$con->id}}"></button>
                         </td>
+                       @else
+                           <td align="right"><b>{{$con->approved_amount}}  {{$con->status}}</b> <button value="{{$con->id}}" class="btn btn-danger fa fa-close action_again"></button> </td>
+                       @endif
                    </tr>
+                     @endforeach
                 </tbody>
-                 @endforeach
+                
            </table>
           </div>
         </div>
@@ -89,7 +99,38 @@
 
     <!-- Essential javascripts for application to work-->
     {!!View('partials.include_js')!!}
-
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.approve').on('click',function(){
+      var id_action=$(this).val();
+      var con_id = $(this).attr('id');
+      var approver=$('#approver').val();
+      var appr_amount = $('#approved_amount_'+con_id).val();
+        $.get("{{url('/conveyance-approve')}}/"+id_action+"/"+appr_amount+"/"+approver,function(data){
+            alert(data);
+            location.reload();
+          
+        });
+    });
+     $('.disapprove').on('click',function(){
+       var id_action=$(this).val();
+      var con_id = $(this).attr('id');
+      var approver=$('#approver').val();
+      var appr_amount = $('#approved_amount_'+con_id).val();
+        $.get("{{url('/conveyance-approve')}}/"+id_action+"/"+appr_amount+"/"+approver,function(data){
+             alert(data);
+              location.reload();   
+        });
+    });
+    $('.action_again').on('click',function(){
+      var action_again=$(this).val();
+      $.get("{{url('/conveyance/re-action')}}/"+action_again,function(data){
+            alert(data);
+             location.reload();  
+      });
+    })
+  });
+</script>
  </body>
 
 </html>

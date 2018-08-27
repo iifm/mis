@@ -42,7 +42,7 @@ class OnDutyController extends Controller
                 
 
                 $appfrom = $value->approvalfrom;
-                
+               // dd($appfrom);
                 //dd($appfrom);
 
                 $name[]='';

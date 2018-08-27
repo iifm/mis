@@ -45,7 +45,7 @@
    <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-calendar"></i> Attendance Management</h1>
+          <h1><i class="fa fa-eye"></i> View Attendance </h1>
           
         </div>
       </div>
@@ -61,12 +61,12 @@
                     <tr>
                   <th width="20%"><label class="form-group">TO</label></th>
                   <th width="20%"><label class="form-group">FROM</label></th>
-                     @if(Auth::user()->role==1)
+                   <!--   @if(Auth::user()->role==1)
                   <th width="40%"><label class="form-group">SELECT EMPLOYEE</label></th>
                    @elseif(Auth::user()->role==3)
                     <th width="40%"><label class="form-group">EMPLOYEE NAME</label></th>
                   @endif
-                  <th width=""><label class="form-group"></label></th>
+                  <th width=""><label class="form-group"></label></th> -->
                   </tr>
                   
                   </thead>
@@ -74,7 +74,7 @@
                     <tr>
                     <td><input type="text" class="form-control datepicker" id="StartDate" placeholder="Start Date" name="strtDate"></td>
                     <td><input type="text" class="form-control datepicker" id="EndDate" placeholder="End Date" name="endDate" readonly=""></td>
-                    @if(Auth::user()->role==1)
+                   <!--  @if(Auth::user()->role==1)
                     <td><select class="form-control" name="employee">
                       <option value="">Select Employee</option>
                       @foreach($users as $user)
@@ -88,8 +88,8 @@
                      
                     </select>
                   </td>
-                  @endif
-
+                  @endif -->
+                    <input type="hidden" name="employee" value="{{Auth::user()->id}}">
                      <td align=""><input type="submit" name="" class="btn btn-primary" style="margin-left: 25px; width: 100px;"> </td>
                     </tr>
                     <tr>
@@ -201,7 +201,7 @@
 <script type="text/javascript">
         $('#table').DataTable( {
         dom: 'lBfrtip',
-        buttons: [
+       /* buttons: [
               
             {
                 extend:    'excelHtml5',
@@ -216,7 +216,7 @@
                 titleAttr: 'Copy'
 
             },
-        ]
+        ]*/
     } );
   </script>
   </body>

@@ -128,7 +128,7 @@
    $(document).ready(function(){
     $("#od_form").submit(function(){
       // alert("jhg");
-    if ($('.approvalMsg').filter(':checked').length < 2){
+    if ($('.approvalMsg').filter(':checked').length < 1){
         alert("Select Atleast Two ApprovalFrom");
     return false;
     }

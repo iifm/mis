@@ -128,7 +128,7 @@
 		<table align="center" cellpadding="0" cellspacing="0" border="0"><tr><td width="600" class="featured05MC" style="margin-top: 0;margin-bottom: 0;padding-top: 0;padding-bottom: 20px;color: #555555;border-collapse: collapse;padding-left: 0;padding-right: 0;margin-left: 0;margin-right: 0;">
 			<table class="featured05imageTable" cellpadding="0" cellspacing="0" border="0"><tr><td class="featured05image" width="600" style="margin-top: 0;margin-bottom: 0;padding-top: 0;padding-bottom: 0;color: #555555;border-collapse: collapse;padding-left: 0;padding-right: 0;margin-left: 0;margin-right: 0;">
 				<a href="#" target="_blank" style="color: #ad77bb;text-decoration: none;">
-				<img hspace="0" vspace="0" src="http://vnvn00038.avdtv.com/images/file/p9po_auc0ggBAKxs/w600/responsive-web-design-bread-fancy-00038-strawberry-jam-birthday-cake.jpg" width="600" height="300" alt="" title="" style="border: 0;display: block;outline: none;"></a>
+				<img hspace="0" vspace="0" src="{{$data['image']}}" width="400" alt="" title="" style="border: 0;display: block;outline: none;"></a>
 			</td></tr></table>	
 		</td></tr></table>
 		<!------- END FEATURED-05 MODULE ------->

@@ -5,17 +5,13 @@
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
   
-    <title>IIFM MIS</title>
-    
-    
-
+    <title>Employee Of the Month</title>
+ 
     <!-- Main CSS-->
     {!!View('partials.include_css')!!}
  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-   
-
+  
    </head>
-    
 
   </head>
   
@@ -23,9 +19,6 @@
     <!-- Navbar-->
     
     {!!View('partials.header')!!}
-
-
-
 
     <!-- Sidebar menu-->
     {!!View('partials.sidebar')!!}
@@ -36,12 +29,11 @@
   <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-trophy "></i> Hall Of Fame </h1>
+          <h1 class="heading_title"><i class="fa fa-trophy "></i> Hall Of Fame </h1>
         </div>
+         <a href="{{URL::previous()}}" class="fa fa-arrow-circle-left btn btn-danger" style="background: #009688; border:none"> Back</a>   
       </div>
       <div class="row  tile">
-      <!--   <a href="#" class="btn btn-primary fa fa-plus add_course">ADD</a> -->
-       <a href="{{URL::previous()}}" class="fa fa-arrow-circle-left btn btn-danger"> Back</a>
         <div class="col-md-12">
           <form action="{{url('/hall-of-fame/store')}}" method="post" enctype="multipart/form-data"  autocomplete="off">
 
@@ -54,7 +46,13 @@
             <div class="col-md-6"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">Employee Name</label>
-                    <input class="form-control capitalize char-only" id="empname" name="empname" type="text" aria-describedby="emailHelp" placeholder="Employee Name" required="">
+                    <select class="form-control" id="empname" name="empname" required="">
+                      <option value="">Select Employee</option>
+                      @foreach($users as $user)
+                      <option value="{{$user->user_id}}">{{$user->name}}</option>
+                      @endforeach
+                    </select>
+                   
                 </div>
              </div>
               <div class="col-md-6"> 
@@ -87,18 +85,8 @@
               <div class="col-md-6"> 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Department</label>
-                    <select class="form-control" name="department" id="department">
-                      <option value="">Select Department</option>
-                      <option value="Information Technology(IT)">Information Technology(IT)</option>
-                      <option value="SALES">SALES</option>
-                      <option value="ACADEMIC">ACADEMIC</option>
-                      <option value="FINANCE">FINANCE</option>
-                      <option value="FINANCE">GRAPHIC DESIGNER</option>
-                      <option value="ADMIN">ADMIN</option>
-                      <option value="MARKETTING">MARKETTING</option>
-                      <option value="TELE COUNSELLING">TELE COUNSELLING</option>
-                      <option value="OTHERS">OTHERS</option>
-                    </select>
+                    <input type="text" name="department" id="department" class="form-control">
+                  
                 </div>
              </div>
              <div class="col-md-6"> 
@@ -112,7 +100,7 @@
         </ul>
        
     <div class="tile-footer">
-              <button class="btn btn-success fa fa-save" type="submit">  Submit</button>
+              <button class="btn btn-success fa fa-save" type="submit" style="background: #009688; border:none">  Submit</button>
            
             </div>
             </form> 
@@ -146,6 +134,15 @@
         }
     }
 }
+</script>
+<script type="text/javascript">
+  $('#empname').on('change',function(){
+      var id=$(this).val();
+      $.get("{{url('employee-department')}}/"+id,function(data){
+          $('#department').val(data);
+         // alert(data);
+      });
+  });
 </script>
   </body>
 

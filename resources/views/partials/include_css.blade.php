@@ -10,4 +10,10 @@
  .capitalize{
     text-transform: capitalize;
  }
+ .heading_title{
+ 	font-family: 'Bree Serif', serif !important;
+ }
+ /* font-family: 'Bree Serif', serif; */
 </style>
+
+<link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet">

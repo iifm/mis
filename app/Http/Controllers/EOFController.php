@@ -7,6 +7,8 @@ use Auth;
 use App\HallOfFame;
 use Storage;
 use Session;
+use App\User;
+use App\UserDetails;
 
 class EOFController extends Controller
 {
@@ -26,6 +28,11 @@ class EOFController extends Controller
       return view('mis.eof.index',compact('eom'));
 
     }
+    public function getDepartment($id)
+    {
+        $department=UserDetails::where('user_id',$id)->pluck('department');
+        return $department;
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -34,7 +41,13 @@ class EOFController extends Controller
      */
     public function create()
     {
-         return view('mis.eof.create');
+         $users=User::join('user_details','user_details.user_id','=','users.id')
+                        ->where('user_details.status','Active')
+                        ->select('users.id as user_id','users.*','user_details.*')
+                        ->orderBy('users.name')
+                        ->get();
+                      //$users= strtoupper($users);
+         return view('mis.eof.create',compact('users'));
     }
 
     /**
