@@ -128,3 +128,10 @@ Route::get('/send-mail','LeaveController@sendMail');
 Route::get('/send-wish/{id}','HomeController@sendWish');
 Route::post('/wish-send','HomeController@wishEmail')->name('wish-send');
 
+//search routes
+Route::get('/search-employee','SearchController@index');
+Route::get('/search/user/action/{search}','SearchController@Search');
+Route::get('/search/user/{id}','SearchController@searchResult')->name('search_result');
+
+
+

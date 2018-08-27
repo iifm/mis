@@ -17,6 +17,7 @@
       </div>
       @endif
       <ul class="app-menu">
+         <li><a class="app-menu__item" href="{{url('/search-employee')}}"><i class="app-menu__icon fa fa-search"></i><span class="app-menu__label">Search</span></a></li>
         <li><a class="app-menu__item" href="{{url('/dashboard')}}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
          <li><a class="app-menu__item " href="{{url('/user-details')}}"><i class="app-menu__icon fa fa-user"></i><span class="app-menu__label">User Profile</span></a></li>
       
