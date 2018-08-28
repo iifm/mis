@@ -7,13 +7,13 @@ use Hash;
 use Auth;
 use App\Leave;
 use App\OnDuty;
-use App\Conveyance;
 use App\UserDetails;
 use App\HallOfFame;
 use App\User;
 use App\Wishes;
 use Mail;
 use Session;
+use App\Attendance;
 
 class HomeController extends Controller
 {
@@ -41,6 +41,8 @@ class HomeController extends Controller
         $strtYear=date('Y').'-04-01';
           $profile='';
           $department='';
+          $current_date=date('Y-m-d');
+          $id=Auth::user()->id;
        //dd($strtYear);
         $endYear=date('Y',strtotime('+1 year')).'-03-31';
         $cyear= date("Y");
@@ -63,9 +65,7 @@ class HomeController extends Controller
         }
 
         Session::put('profile', $profile);
-        Session::put('department',$department);
-
-        
+        Session::put('department',$department);    
 
         $strtYear=date('Y').'-04-01';
         $endYear=date('Y',strtotime('+1 year')).'-03-31';
@@ -81,18 +81,26 @@ class HomeController extends Controller
                         ->where('leavetype','!=','Comp Off')
                         ->whereBetween('leavefrom',[$strtYear,$endYear])
                         ->count();
+        $intime='';
+        $outtime='';
+        $inTime=Attendance::where('date',$current_date)
+                                    ->where('member_id',$id)
+                                    ->where('type','IN')
+                                    ->get();
+            foreach ($inTime as  $value) {
+               $intime=$value->time;
+            }
 
-        /* $totod=OnDuty::where('empid',$id)
-                        ->whereYear('od_date',$cyear)
-                        ->count();
-        $totod=OnDuty::where('empid',$id)->count();
-*/
+          $ouTime=Attendance::where('date',$current_date)
+                                    ->where('member_id',$id)
+                                    ->where('type','OUT')
+                                    ->get();
+                                   // dd($ouTime);
+        foreach ($ouTime as  $value) {
+           $outtime=$value->time;
+        }
+    
         $todays_event = [];
-
-        $totconveyance=Conveyance::where('user_id',$id)
-                        ->whereYear('con_date',$cyear)
-                          ->whereMonth('con_date',$cmonth)
-                        ->sum('amount');
 
         $birthdays=UserDetails::whereDay('dob',$cdate)
                     ->whereMonth('dob',$cmonth)
@@ -165,8 +173,8 @@ class HomeController extends Controller
         //dd($totleaves);
 
                      Session::put('event', $todays_event);
-
-        return view('dashboard',compact(['totleaves','totconveyance','totod','birthdays','anniversary','workanniversary','monthBirthday','monthWorkAniversary','monthAniversary','eoms','todays_event']));
+                    // dd($outtime);
+        return view('dashboard',compact(['totleaves','totod','birthdays','anniversary','workanniversary','monthBirthday','monthWorkAniversary','monthAniversary','eoms','todays_event','intime','outtime']));
     }
 
      public function changePasswordView()

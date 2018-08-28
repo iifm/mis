@@ -165,6 +165,8 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Unisharp\Ckeditor\ServiceProvider::class,
         App\Providers\AgentServiceProvider::class,
+        Stevebauman\Location\LocationServiceProvider::class,
+
 
         
        
@@ -235,6 +237,8 @@ return [
         'Form' => 'Collective\Html\FormFacade',
         'Html' => 'Collective\Html\HtmlFacade',
         'Agent' => Jenssegers\Agent\Facades\Agent::class,
+        'Location' => Stevebauman\Location\Facades\Location::class,
+
 
 
     ],

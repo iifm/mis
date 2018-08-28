@@ -75,11 +75,21 @@ a {
           </a>
         </div>
         <div class="col-md-6 col-lg-4">
-          <a href="{{url('/conveyance/index')}}">
-          <div class="widget-small warning coloured-icon"><i class="icon fa fa-inr fa-3x"></i>
+          <a href="#">
+          <div class="widget-small warning coloured-icon"><i class="icon fa fa-map-marker fa-3x"></i>
             <div class="" style="width: 100%; padding:14px 0 5px 0">
-            <center><h6 class="heading_title">Total Applied Conveyances</h6></center>  
-             <center><h3><b>{{$totconveyance}}</b></h3></center> 
+            <center>
+              @if($intime!='' && $outtime!='')
+              <h6 class="heading_title">Today's Attendance</h6>
+              <table style="height:auto; width:80%"><tr><td align="center"><b>IN</b> : {{$intime}}</td><td align="center"><b>OUT</b>: {{$outtime}}</td></tr></table>
+              @elseif($intime)
+                <table style="height:auto; width:80%"><tr><td align="center"><b>IN-TIME</b> : {{$intime}}</td></tr><tr><td align="center"> <a href="{{url('/attendance')}}" class="btn btn-warning btn-sm" style="color:#fff; margin-top: 5px;">Mark Out Attendance</a></td></tr></table>
+               
+              @else
+               <h6 class="heading_title" style="color: black;">Today's Attendance</h6>
+              <a href="{{url('/attendance')}}" class="btn btn-warning btn-sm" style="color:#fff; margin-top:5px;">Mark Attendance</a>
+              @endif
+            </center>
             </div>
           </div>
           </a>
