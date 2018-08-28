@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use Session;
 use App\Conveyance;
+use DB;
 
 class ConveyanceController extends Controller
 {
@@ -23,11 +24,18 @@ class ConveyanceController extends Controller
     {
       $id=Auth::user()->id;
           $strtYear=date('Y').'-04-01';
-       $endYear=date('Y',strtotime('+1 year')).'-03-31';
 
+       $endYear=date('Y-m-d',strtotime("+1 day"));
+      
        $conveyance=Conveyance::where('user_id',$id)
-                    ->whereBetween('con_date',[$strtYear,$endYear])
+                    ->whereBetween('con_date',[$strtYear, $endYear])
                     ->get();
+            // $conveyance=DB::table('conveyances')
+            //             ->where('user_id',$id)
+            //            ->where('con_date','<=',$strtYear)
+            //            ->where('con_date','>=',$endYear)
+            //            ->get();
+          //dd($conveyance);
         return view('mis.conveyance.index',compact('conveyance'));
 
     }
@@ -56,12 +64,15 @@ class ConveyanceController extends Controller
      
       $count = $request->input('tcount');
       $filename='';
+      $id=Auth::user()->id;
+        $name=str_replace(' ', '_', Auth::user()->name);
+
      // dd($request->all());
       for ($i=1; $i <= $count ; $i++) { 
          $file = $request->file('uploadfile'.$i);
          if ($request->hasFile('uploadfile'.$i)) {
-             $filename =$i.$file->getClientOriginalName();
-               $file->storeAs('/public/conveyance', $filename);
+             $filename =$id."_".$name."_".strtotime(date('Y-m-d H:i:s'))."_".$file->getClientOriginalName();
+               $file->storeAs('storage/app/public/conveyance', $filename);
          }               
       }
 
