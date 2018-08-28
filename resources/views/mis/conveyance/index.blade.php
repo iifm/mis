@@ -49,6 +49,7 @@
                           <th>Travel From</th>
                           <th >Travel To</th>
                           <th>Travel Mode</th>
+                          <th>Image</th>
                           <th>Distance</th>
                           <th>Amount</th>
                           <th>Manager's Action</th>
@@ -71,6 +72,7 @@
                          @else
                          <td>{{$con->mode}}</td>
                          @endif
+                         <td><a href="{{URL::To('storage/app/conveyance')}}/{{$con->uploadcimg}}" target="_blank"><img src="{{URL::To('storage/app/conveyance')}}/{{$con->uploadcimg}}" height="50px" width="50px"></a></td>
                         <td>{{$con->distance}}</td>
                         <td>{{$con->amount}}</td>
                         @if($con->status=='PENDING')
