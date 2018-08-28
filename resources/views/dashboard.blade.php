@@ -210,7 +210,7 @@ a {
            <div class="col-md-4">
               <div class="tile">
                 <h5 class="heading_title">New Updates</h5>   
-                <ul>
+                <ul style="padding-left: 0px;">
                 <a href="#"><li class="btn btn-danger form-control">HR Policies</li></a>  
                   <a href="{{url('/conveyance/policy')}}"><li class="btn btn-info form-control">Conveyance Policy</li></a> 
                    
