@@ -1,5 +1,4 @@
 
-<div class="sidebar" data-toggle="sidebar" ></div>
     <aside class="app-sidebar" style="overflow: scroll">
       @if(Session::has('profile'))
         @if(Session::has('department'))
