@@ -20,7 +20,7 @@
       <ul class="app-menu">
          <li><a class="app-menu__item" href="{{url('/dashboard')}}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
          <li><a class="app-menu__item" href="{{url('/search-employee')}}"><i class="app-menu__icon fa fa-search"></i><span class="app-menu__label">Search Employee</span></a></li>
-           @if(!$agent->isMobile())
+           @if($agent->isMobile())
          <li><a class="app-menu__item" href="{{url('/attendance')}}"><i class="app-menu__icon fa fa-check"></i><span class="app-menu__label">Mark Attendance</span></a></li>
          @endif
 
