@@ -72,7 +72,7 @@ class ConveyanceController extends Controller
          $file = $request->file('uploadfile'.$i);
          if ($request->hasFile('uploadfile'.$i)) {
              $filename =$id."_".$name."_".strtotime(date('Y-m-d H:i:s'))."_".$file->getClientOriginalName();
-               $file->storeAs('storage/app/public/conveyance', $filename);
+               $file->storeAs('conveyance/', $filename);
          }               
       }
 
