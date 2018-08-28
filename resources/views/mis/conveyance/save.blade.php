@@ -44,7 +44,7 @@
         $prevmonth = date('01 F Y', strtotime('-1 months'));
       ?>
       $(this).datepicker({ 
-        dateFormat: 'yy-dd-mm',
+        dateFormat: 'yy-mm-dd',
         minDate: "<?php echo $prevmonth;?>", 
         maxDate: new Date(),
         onSelect: function(){
@@ -57,7 +57,7 @@
         $currmonth = date('01 F Y');
       ?>
       $(this).datepicker({ 
-        dateFormat: 'yy-dd-mm', 
+        dateFormat: 'yy-mm-dd', 
         maxDate: new Date(),
         onSelect: function(){
             $(this).prop( "readOnly", true ); 
