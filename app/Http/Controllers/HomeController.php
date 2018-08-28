@@ -39,10 +39,13 @@ class HomeController extends Controller
     public function dashboard()
     {
         $strtYear=date('Y').'-04-01';
+          $profile='';
+          $department='';
        //dd($strtYear);
         $endYear=date('Y',strtotime('+1 year')).'-03-31';
         $cyear= date("Y");
         $cdate= date("d");
+       // dd($cdate);
         $cmonth= date("m");
 
        //  dd($cmonth);
@@ -55,6 +58,7 @@ class HomeController extends Controller
                     ->get();
         foreach ($user_detail as  $value) {    
             $profile=$value->profile; 
+            //dd($profile);
             $department=$value->department;
         }
 
@@ -87,8 +91,11 @@ class HomeController extends Controller
 
         $totconveyance=Conveyance::where('user_id',$id)
                         ->whereYear('con_date',$cyear)
+                          ->whereMonth('con_date',$cmonth)
                         ->sum('amount');
+
         $birthdays=UserDetails::whereDay('dob',$cdate)
+                    ->whereMonth('dob',$cmonth)
                      ->where('status','Active')
                      ->join('users','users.id','=','user_details.user_id')
                      ->select('user_details.*','users.name as username','users.id as user_id')
@@ -103,6 +110,7 @@ class HomeController extends Controller
                 }
 
           $anniversary=UserDetails::whereDay('anniversary',$cdate)
+                    ->whereMonth('anniversary',$cmonth)
                      ->where('status','Active')
                      ->join('users','users.id','=','user_details.user_id')
                      ->select('user_details.*','users.name as username','users.id as user_id')
@@ -119,6 +127,7 @@ class HomeController extends Controller
 
 
          $workanniversary=UserDetails::whereDay('doj',$cdate)
+                      ->whereMonth('doj',$cmonth)
                      ->where('status','Active')
                      ->join('users','users.id','=','user_details.user_id')
                      ->select('user_details.*','users.name as username','users.id as user_id')
