@@ -76,6 +76,8 @@ class AttendanceController extends Controller
 
     public function store(Request $request)
     {
+       
+     // dd($request->all());
        Attendance::create($request->all());
        Session::flash('message','Your Attendance Recorded successfully!!');
 

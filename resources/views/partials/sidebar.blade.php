@@ -20,7 +20,7 @@
       <ul class="app-menu">
          <li><a class="app-menu__item" href="{{url('/dashboard')}}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
          <li><a class="app-menu__item" href="{{url('/search-employee')}}"><i class="app-menu__icon fa fa-search"></i><span class="app-menu__label">Search Employee</span></a></li>
-           @if($agent->isMobile())
+           @if(!$agent->isMobile())
          <li><a class="app-menu__item" href="{{url('/attendance')}}"><i class="app-menu__icon fa fa-check"></i><span class="app-menu__label">Mark Attendance</span></a></li>
          @endif
 
@@ -44,26 +44,8 @@
             
           </ul>
         </li>
-       <!--   <li><a class="app-menu__item " href="{{url('/user-details')}}"><i class="app-menu__icon fa fa-user"></i><span class="app-menu__label">User Profile</span></a></li>
       
-        </li>
-          <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-envelope-open"></i><span class="app-menu__label">Leave</span><i class="treeview-indicator fa fa-angle-right"></i></a>
-          <ul class="treeview-menu">
-            <li><a class="treeview-item" href="{{url('/leave')}}"><i class="icon fa fa-briefcase"></i>Leave Request</a></li>
-             <li><a class="treeview-item" href="{{url('/leave-view')}}"><i class="icon fa fa-eye"></i>Leave Detail</a></li>
-            
-          </ul>
-        </li>
-        <li><a class="app-menu__item " href="{{url('/on-duty')}}"><i class="app-menu__icon fa fa-tag "></i><span class="app-menu__label">On-Duty</span></a></li>
-          <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-calendar"></i><span class="app-menu__label">Attendance</span><i class="treeview-indicator fa fa-angle-right"></i></a>
-          <ul class="treeview-menu">
-            <li><a class="treeview-item" href="{{url('/attendance')}}"><i class="icon fa fa-briefcase"></i>Mark Attendance</a></li>
-             <li><a class="treeview-item" href="{{url('/attendance-view')}}"><i class="icon fa fa-eye"></i>View Attendance </a></li>
-            
-          </ul>
-        </li>
-        -->   <!-- <li><a class="app-menu__item" href="{{url('/conveyance')}}"><i class="app-menu__icon fa fa-inr"></i><span class="app-menu__label">Conveyance</span></a></li> -->
-            <li><a class="app-menu__item" href="{{url('/hall-of-fame')}}"><i class="app-menu__icon fa fa-trophy"></i><span class="app-menu__label">Hall OF Fame</span></a></li>
+            <li><a class="app-menu__item" href="{{url('/hall-of-fame')}}"><i class="app-menu__icon fa fa-trophy"></i><span class="app-menu__label">Hall of Fame</span></a></li>
              <li><a class="app-menu__item" href="{{url('/photo-album')}}"><i class="app-menu__icon fa fa-file-image-o"></i><span class="app-menu__label">Photo Album</span></a></li>
              <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-file"></i><span class="app-menu__label">Report</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">

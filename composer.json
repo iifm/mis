@@ -12,6 +12,7 @@
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "5.4.*",
         "midium/laravel-ckeditor": "dev-master",
+        "stevebauman/location": "^3.0",
         "unisharp/laravel-ckeditor": "^4.7"
     },
     "require-dev": {
