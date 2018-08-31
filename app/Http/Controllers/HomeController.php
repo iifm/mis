@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Hash;
 use Auth;
 use App\Leave;
+use App\UploadCategory;
 use App\OnDuty;
 use App\UserDetails;
 use App\HallOfFame;
@@ -63,9 +64,16 @@ class HomeController extends Controller
             //dd($profile);
             $department=$value->department;
         }
-
+      
         Session::put('profile', $profile);
         Session::put('department',$department);    
+
+         $policyEditType=UploadCategory::where('type','text')->get();     
+         Session::put('policyType', $policyEditType);
+        
+         $downloadType=UploadCategory::where('type','file')->get();     
+         Session::put('downloadType', $downloadType);
+   
 
         $strtYear=date('Y').'-04-01';
         $endYear=date('Y',strtotime('+1 year')).'-03-31';
@@ -157,6 +165,7 @@ class HomeController extends Controller
                      ->get();
 
           $monthWorkAniversary=UserDetails::whereMonth('doj',$cmonth)
+                    ->whereYear('doj','<',$cyear)
                      ->where('status','Active')
                      ->join('users','users.id','=','user_details.user_id')
                      ->select('user_details.*','users.name as username')

@@ -24,10 +24,10 @@
    <main class="app-content">
       <div class="app-title">
         <div>
-          <h4><i class="fa fa-product-hunt"></i>Product Management  <a href="{{route('product.create')}}" class="btn btn-primary fa fa-plus">ADD Product</a></h4>
+          <h4><i class="fa fa-product-hunt"></i>Product Management </h4>
 
         </div>
-        
+         <a href="{{route('product.create')}}" class="btn btn-primary fa fa-plus">ADD Product</a>
       </div>
       <div class="row">
         <div class="col-md-12">

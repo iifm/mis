@@ -3,7 +3,7 @@
   
 <head>
   
-    <title>IIFM MIS</title> 
+    <title>Conveyance Policy</title> 
     <!-- Main CSS-->
     {!!View('partials.include_css')!!}
 </head>
@@ -20,8 +20,9 @@
         <div>
           <h1 class="heading_title"><i class="fa fa-eye"></i> Conveyance Policy</h1>
         </div>
+         <a href="{{URL::previous()}}" class="fa fa-arrow-circle-left btn btn-primary btn-lg"> Back</a>
+
       </div>
-        <a href="{{URL::previous()}}" class="fa fa-arrow-circle-left btn btn-primary btn-lg"> Back</a>
       <div class="row">
         <div class="col-md-12">
           <div class="tile">

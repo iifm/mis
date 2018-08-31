@@ -12,6 +12,8 @@
     <!-- Main CSS-->
     {!!View('partials.include_css')!!}
  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
    </head>
   
   
@@ -62,7 +64,7 @@
               <div class="col-md-6"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">Date Of Birth</label>
-                    <input class="form-control demoDate" id="dob" value="{{$data->dob}}" name="dob" type="text" aria-describedby="emailHelp" placeholder="Date Of Birth" required="">
+                    <input class="form-control" id="dob" value="{{$data->dob}}" name="dob" type="text" aria-describedby="emailHelp" placeholder="Date Of Birth" required="">
                 </div>
              </div>
 
@@ -129,12 +131,7 @@
 
     </main>
 
-   
-
-
-    <!-- Essential javascripts for application to work-->
-    {!!View('partials.include_js')!!}
-
+ 
 <script type="text/javascript">
   $(document).ready(function(){
     $("#copyaddress").on("click", function(){
@@ -153,7 +150,17 @@
 
 </script>
 
+<script src="{{ asset('js/main.js') }}" ></script>
 
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#dob" ).datepicker({ dateFormat:'yy-mm-dd'});
+  } );
+  </script>
+
+  </body>
   </body>
 
 <!-- Mirrored from pratikborsadiya.in/vali-admin/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 05 Jul 2018 06:07:27 GMT -->

@@ -2,7 +2,7 @@
     <aside class="app-sidebar" style="overflow: scroll">
       @if(Session::has('profile'))
         @if(Session::has('department'))
-      <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" height="60px" width="60px;" src="{{ URL::To('storage/app/profile/'.Session::get('profile')) }}" alt="User Image">
+      <div class="app-sidebar__user"><a href="{{url('/user-details')}}"><img class="app-sidebar__user-avatar" height="60px" width="60px;" src="{{ URL::To('storage/app/profile/'.Session::get('profile')) }}" alt="User Image"></a>
         <div>
           <p class="app-sidebar__user-name">{{Auth::user()->name}}</p>
           <p class="app-sidebar__user-designation">{{Session::get('department')}}</p>
@@ -40,8 +40,26 @@
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="{{url('/user-management/index')}}"><i class="icon fa fa-users"></i>User Management</a></li>
              <li><a class="treeview-item" href="{{url('/hall-of-fame/create')}}"><i class="icon fa fa-trophy"></i>Add Employee of the Month</a></li>
-            
-            
+               <li><a class="treeview-item" href="{{url('/department/index')}}"><i class="icon fa fa-building-o"></i>Department</a></li>     
+          </ul>
+        </li>
+
+            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-upload"></i><span class="app-menu__label">News Upload/Update</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+          <ul class="treeview-menu">
+             <li><a class="treeview-item" href="{{url('/upload/category/index')}}"><i class="icon fa fa-list"></i>Category</a></li>
+             <li><a class="treeview-item" href="{{url('admin/news-upload')}}"><i class="icon fa fa-upload"></i>News Update/Upload</a></li>
+          </ul>
+        </li>
+
+         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-download"></i><span class="app-menu__label">Downloads</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+          <ul class="treeview-menu">
+             @if(Session::has('downloadType'))
+            @foreach(Session::get('downloadType') as $type)
+            <li><a class="treeview-item" href="{{url('/download')}}/{{$type->id}}"><i class="icon fa fa-download"></i>{{$type->name}}
+            </a></li>
+            @endforeach
+            @endif
+        
           </ul>
         </li>
       
@@ -56,9 +74,15 @@
           </ul>
         </li>
          <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-user-secret"></i><span class="app-menu__label">Policy</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+       
           <ul class="treeview-menu">
-            <li><a class="treeview-item" href="#"><i class="icon fa fa-file"></i>HR Policies</a></li>
-             <li><a class="treeview-item" href="{{url('/conveyance/policy')}}"><i class="icon fa fa-file"></i>Conveyance Policy</a></li>
+            @if(Session::has('policyType'))
+            @foreach(Session::get('policyType') as $type)
+            <li><a class="treeview-item" href="{{url('/policy-view')}}/{{$type->id}}"><i class="icon fa fa-file"></i>{{$type->name}}
+            </a></li>
+            @endforeach
+            @endif
+            
             
           </ul>
         </li>
