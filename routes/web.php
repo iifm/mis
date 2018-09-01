@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('mis.login');
-});
+})->name('root');
 
 Auth::routes();
 
@@ -148,4 +148,43 @@ Route::get('user-management/view/{id}','UserManagementController@show');
 Route::get('/user-management/edit/{id}','UserManagementController@edit');
 Route::get('/update-user-status/{id}','UserManagementController@statusEdit');
 
+//admin zone
+Route::get('admin/news-index','AdminController@index')->name('news.index');
+Route::get('admin/news-edit/{id}','AdminController@edit');
+Route::get('admin/news-delete/{id}','AdminController@destroy');
+Route::get('admin/news-upload','AdminController@uploadNews');
+Route::post('admin/news-upload/store','AdminController@uploadstore');
+Route::post('admin/news-upload/update/{id}','AdminController@update');
 
+
+//policy
+Route::get('/policy-view/{id}','PolicyController@index')->name('policy.index');
+Route::get('/policy/edit/{id}','PolicyController@create');
+Route::post('/policy/update/{id}','PolicyController@policyUpdate');
+
+//department
+Route::get('/department/index','DepartmentController@index')->name('department.index');
+Route::get('/department/create','DepartmentController@create');
+Route::post('/department/store','DepartmentController@store');
+Route::get('/department/edit/{id}','DepartmentController@edit');
+Route::post('/department/update/{id}','DepartmentController@update');
+Route::get('/department/delete/{id}','DepartmentController@destroy');
+
+//reset password
+Route::get('/reset-password','ResetPasswordController@index')->name('reset-password');
+Route::post('/reset-password/send','ResetPasswordController@sendEmail');
+Route::get('/reset-password/form/{id}','ResetPasswordController@sendResetPasswordForm')->name('reset-password-form');
+Route::post('/reset-password/change-password/{id}','ResetPasswordController@passwordChanged');
+
+//upload category routes
+Route::get('/upload/category/index','UploadCategoryController@index')->name('uploadCategory.index');
+Route::get('/upload/category/create','UploadCategoryController@create');
+Route::post('/upload/category/store','UploadCategoryController@store');
+Route::get('/upload/category/edit/{id}','UploadCategoryController@edit');
+Route::post('/upload/category/update/{id}','UploadCategoryController@update');
+Route::get('/upload/category/delete/{id}','UploadCategoryController@destroy');
+
+//downloads routes
+Route::get('/download/{id}','DownloadController@index');
+Route::get('/press-release/view/{id}','HomeController@pressReleaseView');
+Route::get('/announcement/view/{id}','HomeController@announcementView');

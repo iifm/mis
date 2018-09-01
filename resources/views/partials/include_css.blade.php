@@ -7,11 +7,10 @@
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
  <style type="text/css" media="screen">
- .capitalize{
-    text-transform: capitalize;
- }
+
  .heading_title{
  	font-family: 'Bree Serif', serif !important;
+ 	font-weight: 500 !important;
  }
  /* font-family: 'Bree Serif', serif; */
 </style>

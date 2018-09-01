@@ -98,7 +98,7 @@ a {
       </div>
       <div class="row">
         <div class="col-md-4">
-          <div class="tile" style="min-height: 480px">
+          <div class="tile" style="min-height: 400px">
             <h5 class="heading_title">Employee of the Month</h5>
             <div class="">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -174,8 +174,8 @@ a {
               @foreach($monthBirthday as $value)
               <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-birthday-cake fa-stack-1x fa-inverse"></i></span></span>
                   <div>
-                    <p class="app-notification__message">{{$value->username}}</p>
-                    <p class="app-notification__meta">{{ date('F j',strtotime($value->dob))}}</p>
+                    <p class="app-notification__message">{{strtoupper($value['username'])}}</p>
+                    <p class="app-notification__meta">{{ date('F j',strtotime($value['dob']))}}</p>
                   </div></a>
                 </li>
                 @endforeach
@@ -190,8 +190,8 @@ a {
               @foreach($monthAniversary as $value)
               <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-gift fa-stack-1x fa-inverse"></i></span></span>
                   <div>
-                    <p class="app-notification__message">{{$value->username}}</p>
-                    <p class="app-notification__meta">{{ date('F j',strtotime($value->doj))}}</p>
+                    <p class="app-notification__message">{{strtoupper($value['username'])}}</p>
+                    <p class="app-notification__meta">{{ date('F j',strtotime($value['doj']))}}</p>
                   </div></a>
                 </li>
               @endforeach
@@ -206,8 +206,8 @@ a {
               @foreach($monthWorkAniversary as $mwa)
               <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-trophy fa-stack-1x fa-inverse"></i></span></span>
                   <div>
-                    <p class="app-notification__message">{{$mwa->username}}</p>
-                    <p class="app-notification__meta">{{ date('F j',strtotime($mwa->doj))}}</p>
+                    <p class="app-notification__message">{{strtoupper($mwa['username'])}}</p>
+                    <p class="app-notification__meta">{{ date('F j',strtotime($mwa['doj']))}}</p>
                   </div></a></li>
                   @endforeach
             </div>
@@ -218,11 +218,23 @@ a {
        
           </div>
            <div class="col-md-4">
+             
               <div class="tile">
-                <h5 class="heading_title">New Updates</h5>   
-                <ul style="padding-left: 0px;">
-                <a href="#"><li class="btn btn-danger form-control">HR Policies</li></a>  
-                  <a href="{{url('/conveyance/policy')}}"><li class="btn btn-info form-control">Conveyance Policy</li></a> 
+                <h5 class="heading_title">Announcements</h5>   
+                <ul style="padding-left: 0px; list-style: none;">
+                  @foreach($announcements as $announcement)
+               <li class="fa fa-bullhorn" style="width: 100%"> {{$announcement->subject}}<a href="{{url('/announcement/view')}}/{{$announcement->id}}" class="btn btn-info fa fa-eye pull-right" style="color: #fff"></a></li>  
+                 @endforeach
+                   
+                </ul>
+              </div>
+
+                 <div class="tile">
+                <h5 class="heading_title ">Press Release</h5>   
+                <ul style="padding-left: 0px; list-style: none;">
+                @foreach($pressReases as $pressRease)
+               <li class=" fa fa-newspaper-o " style="width: 100%"> {{$pressRease->subject}} <a href="{{url('/press-release/view')}}/{{$pressRease->id}}" class="btn btn-warning fa fa-eye pull-right" style="color: #fff"></a></li>  
+                @endforeach
                    
                 </ul>
               </div>

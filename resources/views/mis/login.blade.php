@@ -1,4 +1,3 @@
-@extends('partials.include_css')
 
 <!DOCTYPE html>
 <html>
@@ -6,13 +5,7 @@
 <!-- Mirrored from pratikborsadiya.in/vali-admin/page-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 05 Jul 2018 06:07:29 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Main CSS-->
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-    <!-- Font-icon css-->
-    <link rel="stylesheet" type="text/css" href="../../maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
     <title>Login - MIS IIFM</title>
       <!-- Main CSS-->
     {!!View('partials.include_css')!!}
@@ -26,7 +19,11 @@
       <div >
         <h1 style="color: white; font-family: sans-serif;">IIFM MIS </h1>
       </div>
-      <div class="login-box">
+        <?php if(Session::has('message')) {?>
+        <div id="alert" class="alert alert-success">{{ Session::get('message') }}
+
+        </div><?php } ?>
+      <div class="login-box" style="min-height: 520px;">
         <form class="login-form" method="POST" action="{{ route('login') }}" >
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
           
@@ -59,12 +56,13 @@
               <div class="animated-checkbox">
                 
               </div>
-               <p class="semibold-text mb-2"><a href="#" data-toggle="flip"> NEW USER? SIGN UP</a></p>
+               <p class="semibold-text mb-2 fa fa-user"><a href="#" data-toggle="flip"> SIGN UP</a></p>
               
             </div>
           </div>
           <div class="form-group btn-container">
             <button class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</button>
+            <a href="{{url('/reset-password')}}" class="btn btn-primary btn-lg btn-block fa fa fa-key" style="font-weight: bold;"> FORGOT PASSWORD</a>
           </div>
         </form>
 

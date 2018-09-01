@@ -10,6 +10,7 @@ use Auth;
 use App\User;
 use Session;
 use DB;
+use App\Department;
 
 
 class UserDetailController extends Controller
@@ -294,11 +295,12 @@ class UserDetailController extends Controller
      public function official($id)
     {
        //$id=Auth::user()->id;
+        $departments=Department::all();
         $user_detail =UserDetails::join('users','users.id','=','user_details.user_id')
                                 ->where('users.id',$id)
                                 ->select('users.*','user_details.*','users.id as userid')
                                 ->get();
-       return view('mis.user_detail.official',compact(['user_detail','id']));
+       return view('mis.user_detail.official',compact(['user_detail','id','departments']));
     }
 
      public function officialAdd(Request $request,$id)
