@@ -57,6 +57,8 @@
                     <option value="">Category Type</option>
                     <option value="file">Upload/Download</option>
                     <option value="text">Policy</option>
+                     <option value="press">Press Release</option>
+                      <option value="announcement">Announcement</option>
                   </select>
                    
                 </div>

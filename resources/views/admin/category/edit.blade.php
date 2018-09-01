@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   
-<!-- Mirrored from pratikborsadiya.in/vali-admin/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 05 Jul 2018 06:07:14 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+
 <head>
   
     <title> Upload Category Management</title>
@@ -58,6 +57,8 @@
                     <option value="">Category Type</option>
                     <option value="file">Upload/Download</option>
                     <option value="text">Policy</option>
+                      <option value="press">Press Release</option>
+                       <option value="announcement">Announcement</option>
                   </select>
                    
                 </div>

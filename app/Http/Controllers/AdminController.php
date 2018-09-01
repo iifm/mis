@@ -30,7 +30,10 @@ class AdminController extends Controller
 
     public function uploadNews()
     {
-       $categories=UploadCategory::where('type','file')->get();
+       $categories=UploadCategory::where('type','file')
+                                ->orWhere('type','press')
+                                 ->orWhere('type','announcement')
+                                ->get();
         return view('admin.upload',compact('categories'));
     }
 
@@ -99,7 +102,10 @@ class AdminController extends Controller
                                 ->select('news_uploads.*','upload_categories.name as cat_name')
                                 ->get();
 
-        $categories=UploadCategory::where('type','file')->get();
+        $categories=UploadCategory::where('type','file')
+                                ->orWhere('type','press')
+                                 ->orWhere('type','announcement')
+                                ->get();;
         return view('admin.newsEdit',compact(['newUploads','id','categories']));
     }
 

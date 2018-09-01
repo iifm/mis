@@ -14,6 +14,7 @@ use App\User;
 use App\Wishes;
 use Mail;
 use Session;
+use App\NewsUpload;
 use App\Attendance;
 
 class HomeController extends Controller
@@ -53,6 +54,16 @@ class HomeController extends Controller
 
        //  dd($cmonth);
         $id=Auth::id();
+
+
+        $pressReases=NewsUpload::join('upload_categories','upload_categories.id','=','news_uploads.category')
+                                ->where('upload_categories.type','press')
+                                ->select('news_uploads.*')->get();
+
+        $announcements=NewsUpload::join('upload_categories','upload_categories.id','=','news_uploads.category')
+                                ->where('upload_categories.type','announcement')
+                                ->select('news_uploads.*')->get();
+                               // dd($pressReases);
 
         $user_detail=User::where('users.id',$id)
                     ->where('user_details.status','Active')
@@ -157,33 +168,117 @@ class HomeController extends Controller
                             );
                     }
 
-        $monthBirthday=UserDetails::whereMonth('dob',$cmonth)
+        $monthBirthday_days_sorted=UserDetails::whereMonth('dob',$cmonth)
                      ->where('status','Active')
-                     ->join('users','users.id','=','user_details.user_id')
+                      ->whereday('dob','>=',$cdate)
+                       ->join('users','users.id','=','user_details.user_id')
                      ->select('user_details.*','users.name as username')
-                     ->orderBy('user_details.dob','DESC')
-                     ->get();
+                     ->orderBy('dob','ASC')
+                     ->pluck('dob')->toArray();
+                     $dob_days=[];
 
-          $monthWorkAniversary=UserDetails::whereMonth('doj',$cmonth)
+                     foreach ($monthBirthday_days_sorted as  $monthBirthday_day_sorted) {
+                         $dob_days[]= date('d',strtotime($monthBirthday_day_sorted));
+                     }
+
+                     sort($dob_days);
+
+                     $monthBirthday=[];
+
+                     foreach ($dob_days as  $dob_day) {
+                       $monthBirthday_users= UserDetails::whereMonth('dob',$cmonth)
+                     ->where('status','Active')
+                      ->whereday('dob','=',$dob_day)
+                       ->join('users','users.id','=','user_details.user_id')
+                        ->select('user_details.*','users.name as username','users.id as user_id' )
+                        ->orderBy('dob','ASC')
+                        ->get();
+
+                        foreach ($monthBirthday_users as  $monthBirthday_user) {
+                           $monthBirthday[]=[
+                                              'username'=>$monthBirthday_user->username,
+                                              'dob'=>$monthBirthday_user->dob,
+                                              'user_id'=>$monthBirthday_user->user_id
+                                                ];
+
+                        }
+                     }
+
+          $monthWork_day_sorted=UserDetails::whereMonth('doj',$cmonth)
                     ->whereYear('doj','<',$cyear)
+                      ->whereday('doj','>=',$cdate)
+                     ->where('status','Active')
+                      ->join('users','users.id','=','user_details.user_id')
+                     ->select('user_details.*','users.name as username')
+                     ->orderBy('doj','ASC')
+                     ->pluck('doj')->toArray();
+                    //dd($monthWorkAniversary);
+                     $doj_day=[];
+                    foreach ($monthWork_day_sorted as  $value) {
+                      $doj_day[]= date('d',strtotime($value));
+                        //dd($value);
+                    }
+                    sort($doj_day);
+                    $monthWorkAniversary=[];
+            foreach($doj_day as $doj_month_day){
+            $monthWorkAniversary_user=UserDetails::whereMonth('doj',$cmonth)
+                    ->whereYear('doj','<',$cyear)
+                      ->whereday('doj',$doj_month_day)
+                     ->where('status','Active')
+                      ->join('users','users.id','=','user_details.user_id')
+                     ->select('user_details.*','users.name as username','users.id as user_id')
+                     ->orderBy('doj','ASC')
+                     ->get();
+                     foreach ($monthWorkAniversary_user as  $data) {
+                         $monthWorkAniversary[]=[
+                             'doj'=>$data->doj,
+                             'username'=>$data->username,
+                             'user_id'=>$data->user_id,
+                       ];
+                     }
+                
+             }   
+              //dd($month_anniversary_data); 
+                    $monthAniversary_days=[];
+          $monthAniversary_days=UserDetails::whereMonth('anniversary',$cmonth)
+                      ->whereday('anniversary','>=',$cdate)
                      ->where('status','Active')
                      ->join('users','users.id','=','user_details.user_id')
                      ->select('user_details.*','users.name as username')
-                     ->orderBy('user_details.doj','DESC')
-                     ->get();
-          $monthAniversary=UserDetails::whereMonth('anniversary',$cmonth)
+                     ->orderBy('user_details.anniversary','ASC')
+                     ->pluck('anniversary')->toArray();
 
+                     $anniversary_days=[];
+                      foreach ($monthWork_day_sorted as  $value) {
+                      $anniversary_days[]= date('d',strtotime($value));
+                        //dd($value);
+                    }
+                     sort($anniversary_days);
+
+                     foreach ($anniversary_days as  $anniversary_day) {
+                    $monthAniversaryUser_days  =  UserDetails::whereMonth('anniversary',$cmonth)
+                      ->whereday('anniversary','=',$anniversary_day)
                      ->where('status','Active')
                      ->join('users','users.id','=','user_details.user_id')
-                     ->select('user_details.*','users.name as username')
-                     ->orderBy('user_details.doj','DESC')
+                     ->select('user_details.*','users.name as username','users.id as user_id')
+                     ->orderBy('user_details.anniversary','ASC')
                      ->get();
+                            $monthAniversary=[];
+                        foreach ($monthAniversaryUser_days as  $monthAniversaryUser_day) {
+                            $monthAniversary[]=[
+                                                'username'=>$monthAniversaryUser_day->username,
+                                                'anniversary'=>$monthAniversaryUser_day->anniversary,
+                                                'user_id'=>$monthAniversaryUser_day->user_id
+
+                                            ];
+                        }
+                     }
                     // dd($monthWorkAniversary);
         //dd($totleaves);
 
                      Session::put('event', $todays_event);
                     // dd($outtime);
-        return view('dashboard',compact(['totleaves','totod','birthdays','anniversary','workanniversary','monthBirthday','monthWorkAniversary','monthAniversary','eoms','todays_event','intime','outtime']));
+        return view('dashboard',compact(['totleaves','totod','birthdays','anniversary','workanniversary','monthBirthday','monthWorkAniversary','monthAniversary','eoms','todays_event','intime','outtime','pressReases','announcements']));
     }
 
      public function changePasswordView()
@@ -273,6 +368,30 @@ class HomeController extends Controller
 
            Session::flash('message','Your Message sent Successfully!!');
            return redirect()->route('dashboard');
+    }
+
+
+    public function pressReleaseView($id)
+    {
+       $announcements=NewsUpload::where('id',$id)->get();
+
+         $announcementDatas=NewsUpload::join('upload_categories','upload_categories.id','=','news_uploads.category')
+                                ->where('upload_categories.type','press')
+                                ->where('news_uploads.id','!=',$id)
+                                ->select('news_uploads.*')->get();
+
+        return view('admin.announcement',compact(['announcements','announcementDatas']));
+    }
+
+    public function announcementView($id)
+    {
+         $announcements=NewsUpload::where('id',$id)->get();
+         
+        $announcementDatas=NewsUpload::join('upload_categories','upload_categories.id','=','news_uploads.category')
+                                ->where('upload_categories.type','announcement')
+                                ->where('news_uploads.id','!=',$id)
+                                ->select('news_uploads.*')->get();
+        return view('admin.announcement',compact(['announcements','announcementDatas']));
     }
 
     

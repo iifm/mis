@@ -10,6 +10,7 @@
 
  .heading_title{
  	font-family: 'Bree Serif', serif !important;
+ 	font-weight: 500 !important;
  }
  /* font-family: 'Bree Serif', serif; */
 </style>

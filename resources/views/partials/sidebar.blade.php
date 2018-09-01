@@ -40,16 +40,12 @@
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="{{url('/user-management/index')}}"><i class="icon fa fa-users"></i>User Management</a></li>
              <li><a class="treeview-item" href="{{url('/hall-of-fame/create')}}"><i class="icon fa fa-trophy"></i>Add Employee of the Month</a></li>
-               <li><a class="treeview-item" href="{{url('/department/index')}}"><i class="icon fa fa-building-o"></i>Department</a></li>     
+               <li><a class="treeview-item" href="{{url('/department/index')}}"><i class="icon fa fa-building-o"></i>Department</a></li> 
+                <li><a class="treeview-item" href="{{url('/upload/category/index')}}"><i class="icon fa fa-list"></i>Add Category</a></li>
+             <li><a class="treeview-item" href="{{url('admin/news-upload')}}"><i class="icon fa fa-upload"></i>News Update/Upload</a></li>    
           </ul>
         </li>
 
-            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-upload"></i><span class="app-menu__label">News Upload/Update</span><i class="treeview-indicator fa fa-angle-right"></i></a>
-          <ul class="treeview-menu">
-             <li><a class="treeview-item" href="{{url('/upload/category/index')}}"><i class="icon fa fa-list"></i>Category</a></li>
-             <li><a class="treeview-item" href="{{url('admin/news-upload')}}"><i class="icon fa fa-upload"></i>News Update/Upload</a></li>
-          </ul>
-        </li>
 
          <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-download"></i><span class="app-menu__label">Downloads</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
