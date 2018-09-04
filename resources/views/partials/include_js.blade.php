@@ -135,7 +135,7 @@ input.clockpicker({
     
       $(function () {
       $('.char-only').keydown(function (e) {
-          if (e.shiftKey || e.ctrlKey || e.altKey) {
+          if (e.ctrlKey || e.altKey) {
               e.preventDefault();
           } else {
               var key = e.keyCode;

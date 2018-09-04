@@ -105,6 +105,9 @@ class LeaveController extends Controller
              }
            $finaldatas = array_filter($leave_datas); 
                //return $leave_datas;
+
+
+         
         return view('mis.leave.index',compact(['finaldatas','total_leaves','leave_applied','leave_approved']));
     }
 
@@ -134,10 +137,22 @@ class LeaveController extends Controller
        $leavefrom = $request->Input('leavefrom');
        $leaveto = $request->Input('leaveto');
        $totdays = $request->Input('totdays');
+
+      // dd($totdays);
         $leaveoff = $request->Input('leaveoff');
+     // dd($leaveoff);
+   /*    $half_day = array_search('Half day Leave',[$leaveoff]);
+
+           //dd($half_day);
+           if ($half_day!='false') {
+            $totdays=$totdays - 0.5;
+           }
+*/
+           //dd($totdays);
         $leavetype=implode(',', $leaveoff);
+
         $reason = $request->Input('reason');  
-        $agdcompoff = $request->Input('agdcompoff');
+        $agdcompoff = $request->Input('agdcompoff'); 
         $approvalfrom = $request->Input('approvalfrom');
       // dd($approvalfrom);
 

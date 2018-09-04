@@ -13,6 +13,7 @@ use App\HallOfFame;
 use App\User;
 use App\Wishes;
 use Mail;
+use DB;
 use Session;
 use App\NewsUpload;
 use App\Attendance;
@@ -44,6 +45,7 @@ class HomeController extends Controller
           $profile='';
           $department='';
           $current_date=date('Y-m-d');
+            $currenDate = date('Y-m-d');
           $id=Auth::user()->id;
        //dd($strtYear);
         $endYear=date('Y',strtotime('+1 year')).'-03-31';
@@ -68,7 +70,8 @@ class HomeController extends Controller
         $user_detail=User::where('users.id',$id)
                     ->where('user_details.status','Active')
                     ->join('user_details','user_details.user_id','=','users.id')
-                    ->select('users.*','user_details.*','users.id as user_id')
+                    ->join('departments','departments.id','=','user_details.department')
+                    ->select('users.*','user_details.*','users.id as user_id','departments.name as department')
                     ->get();
         foreach ($user_detail as  $value) {    
             $profile=$value->profile; 
@@ -96,10 +99,16 @@ class HomeController extends Controller
 
         $eoms=HallOfFame::orderBy('id','desc')->get();
        
-         $totleaves=Leave::where('empid',$id)
+         $totleaves=Leave::whereBetween('leavefrom',[$strtYear,$currenDate])
+                        ->where('empid',$id)
                         ->where('leavetype','!=','Comp Off')
-                        ->whereBetween('leavefrom',[$strtYear,$endYear])
-                        ->count();
+                        ->select(DB::raw('sum(totalleave) as total_leaves'))
+                        ->get();
+                        //dd($totleaves);
+
+                        foreach ($totleaves as  $value) {
+                            $totleaves=$value->total_leaves;
+                        }
         $intime='';
         $outtime='';
         $inTime=Attendance::where('date',$current_date)

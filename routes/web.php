@@ -107,7 +107,7 @@ Route::post('/on-duty/store', 'OnDutyController@store');
 
 
 //Change Password
-Route::get('/cange-password','HomeController@changePasswordView')->name('changePassword');
+Route::get('/change-password','HomeController@changePasswordView')->name('changePassword');
 Route::post('/changePassword','HomeController@changePassword');
 
 
@@ -141,6 +141,9 @@ Route::post('/wish-send','HomeController@wishEmail')->name('wish-send');
 Route::get('/search-employee','SearchController@index');
 Route::get('/search/user/action/{search}','SearchController@Search');
 Route::get('/search/user/{id}','SearchController@searchResult')->name('search_result');
+Route::get('/search-by-department/{department}','SearchController@searchByDepartment');
+//Route::get('/search-by-department/result/{id}','SearchController@searchByDepartment');
+
 
 //user management routes
 Route::get('/user-management/index','UserManagementController@index')->name('usermanagement.index');

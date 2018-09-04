@@ -43,7 +43,8 @@ class UserDetailController extends Controller
         
          $user_detail=User::where('users.id',$user_id)
                     ->join('user_details','user_details.user_id','=','users.id')
-                    ->select('users.*','user_details.*','users.id as user_id')
+                    ->join('departments','departments.id','=','user_details.department')
+                    ->select('users.*','user_details.*','users.id as user_id','departments.name as department')
                     ->get();
 
            // dd($user_detail);
@@ -96,7 +97,7 @@ class UserDetailController extends Controller
 
      public function educationAdd(Request $request,$id)
      {
-
+       // return $id;
         $user_id=$id;
          $edu_option=$request->input('edu_option');
          $schoolname=$request->input('schoolname');
@@ -118,11 +119,11 @@ class UserDetailController extends Controller
         UserEducation::create(['user_id'=>$user_id,'edu_option'=>$edu_option,'schoolname'=>$schoolname,'board'=>$board,'certificate'=>$filename,'specialization'=>$specialization,'strtyear'=>$strtyear,'endyear'=>$endyear,'percentage'=>$percentage,'sip'=>$sip,'addedby'=>$addedby]);
         Session::flash('message','Your Details Updated Successfully !!');
 
-         if(Auth::user()->id==$id){
+         if(Auth::user()->id==$user_id){
         return redirect()->route('user.index');
         }
         else{
-             return redirect()->route('usermanagement.index');
+             return redirect()->route('search_user',['id'=>$user_id]);
         }
 
     }
@@ -151,7 +152,7 @@ class UserDetailController extends Controller
         return redirect()->route('user.index');
         }
         else{
-             return redirect()->route('usermanagement.index');
+             return redirect()->route('search_user',['id'=>$user_id]);
         }
     }
 
@@ -162,7 +163,7 @@ class UserDetailController extends Controller
         return redirect()->route('user.index');
         }
         else{
-             return redirect()->route('usermanagement.index');
+             return redirect()->route('search_user',['id'=>$user_id]);
         }
     }
     public function educationEdit($id,$user_id)
@@ -183,7 +184,7 @@ class UserDetailController extends Controller
         return redirect()->route('user.index');
         }
         else{
-             return redirect()->route('usermanagement.index');
+             return redirect()->route('search_user',['id'=>$user_id]);
         }
        
     }
@@ -228,7 +229,7 @@ class UserDetailController extends Controller
         return redirect()->route('user.index');
         }
         else{
-             return redirect()->route('usermanagement.index');
+             return redirect()->route('search_user',['id'=>$user_id]);
         }
        
 
@@ -288,7 +289,7 @@ class UserDetailController extends Controller
         return redirect()->route('user.index');
         }
         else{
-             return redirect()->route('usermanagement.index');
+             return redirect()->route('search_user',['id'=>$user_id]);
         }
     }
 
@@ -337,7 +338,7 @@ class UserDetailController extends Controller
         return redirect()->route('user.index');
         }
         else{
-             return redirect()->route('usermanagement.index');
+             return redirect()->route('search_user',['id'=>$id]);
         }
 
     }
@@ -370,13 +371,13 @@ class UserDetailController extends Controller
         $official=UserDetails::where('user_id',$id)->update(['gender'=>$gender,'dob'=>$dob,'cstreet'=>$cstreet,'ccity'=>$ccity,'cstate'=>$cstate,'pstreet'=>$pstreet,'pcity'=>$pcity,'pstate'=>$pstate,'altno'=>$altno]);
        // return $official;
           Session::flash('message','Your Details Updated Successfully !!');
-          return back();
-        /* if(Auth::user()->id==$id){
+         // return back();
+         if(Auth::user()->id==$id){
         return redirect()->route('user.index');
         }
         else{
-             return redirect()->route('usermanagement.index');
-        }*/
+             return redirect()->route('search_user',['id'=>$id]);
+        }
 
     }
 
@@ -407,9 +408,17 @@ class UserDetailController extends Controller
       
         $official=UserDetails::where('user_id',$id)->update(['fname'=>$fname,'foccup'=>$foccup,'fcontact'=>$fcontact,'mname'=>$mname,'moccup'=>$moccup,'mcontact'=>$mcontact,'maritalstatus'=>$maritalstatus,'spname'=>$spname,'spoccup'=>$spoccup,'anniversary'=>$anniversary]);
 
-          Session::flash('message','Your Details Updated Successfully !!');
-        return redirect()->route('user.index');
+                 Session::flash('message','Your Details Updated Successfully !!');
 
+
+           if(Auth::user()->id==$id){
+        return redirect()->route('user.index');
+        }
+        else{
+             return redirect()->route('search_user',['id'=>$id]);
+        }
+           Session::flash('message','Your Details Updated Successfully !!');
+       
     }
     
 }

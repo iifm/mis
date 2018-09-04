@@ -40,11 +40,11 @@
     $('body').on('focus',".datepick", function(){
       <?php
       $date = date("d");
-      if($date <= '12'){
+            if($date <= '12'){
         $prevmonth = date('01 F Y', strtotime('-1 months'));
       ?>
       $(this).datepicker({ 
-        dateFormat: 'yy-mm-dd',
+        dateFormat: 'dd MM yy',
         minDate: "<?php echo $prevmonth;?>", 
         maxDate: new Date(),
         onSelect: function(){
@@ -53,11 +53,13 @@
       });
       <?php
       }
+      
       else{
         $currmonth = date('01 F Y');
       ?>
       $(this).datepicker({ 
-        dateFormat: 'yy-mm-dd', 
+        dateFormat: 'dd MM yy',
+        minDate: "<?php echo $currmonth;?>", 
         maxDate: new Date(),
         onSelect: function(){
             $(this).prop( "readOnly", true ); 
@@ -66,7 +68,7 @@
       <?php 
       }
       ?>
-      
+      //$(this).prop( "disabled", true );
     });
     $(document).on('change','.ratefind',function(){
       
@@ -322,7 +324,7 @@
      <a href="{{url('/conveyance/index')}}" class="btn btn-primary fa fa-eye pull-right" >View All Conveyances
         </a>
   </div>
-   <form action="{{url('/conveyance/store')}}" method="post" style="width:100%" enctype="multipart/form-data">
+   <form action="{{url('/conveyance/store')}}" method="post" style="width:100%" enctype="multipart/form-data" autocomplete="off">
       {{ csrf_field() }}
     <div class="row tile" style="width:100%">
       <div class="col-md-12">
@@ -342,66 +344,7 @@
  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  
    <script src="{{ asset('js/main.js') }}" ></script>
 
-<script>
- $(document).ready(function(){ 
-    var $datepicker1 =  $( "#leavefrom" );
-    var $datepicker2 =  $( "#leaveto" );
-    var $datepicker3 =  $( "#agdcompoff" );
-  
-  $datepicker1.datepicker({
-    minDate: 0,
-      onClose: function() {     
-      var fromDate = $datepicker1.datepicker('getDate');
-      var currentDate = new Date();  
-      var curdatecheck = new Date(currentDate - fromDate);
-      var firstdate = curdatecheck/1000/60/60/24;
-      if(firstdate>1) {
-       
-      }
-      $(this).prop( "readOnly", true ); 
-    },
-    }); 
-    $datepicker2.datepicker({
-      onClose: function() {
-        var fromDate = $datepicker1.datepicker('getDate');
-        var toDate = $datepicker2.datepicker('getDate');
-        // date difference in millisec
-        var diff = new Date(toDate - fromDate);
-        // date difference in days
-        var days = diff/1000/60/60/24;
-           // alert(days);
-        if(fromDate==null){
-        alert('Please Select Start Date First');
-        document.getElementById('leaveto').value=null;
-        document.getElementById('totdays').value=null;
-      }
-      else if(days<0 || days>100 && fromDate!= '' ) {
-        alert('To date should be onward date');
-        document.getElementById('leaveto').value=null;
-        document.getElementById('totdays').value=null;
-      }
-      
-      else {
-         document.getElementById('totdays').value=days+1;
-      }
-      $(this).prop( "readOnly", true ); 
-        }
-    });
 
-    // Enable Sunday only
-  $datepicker3.datepicker({
-      minDate: -14,
-        maxDate: 0,
-      beforeShowDay: enableSUNDAYS
-  });
-
-  // Custom function to enable SUNDAY only in jquery calender
-  function enableSUNDAYS(date) {
-      var day = date.getDay();
-      return [(day == 0), ''];
-  }
-});
- </script>
 
   </body>
 </html>

@@ -24,10 +24,10 @@
    <main class="app-content">
       <div class="app-title">
         <div>
-          <h4><i class="fa fa-tasks"></i>Product Assignment Management  <a href="{{route('assign.create')}}" class="btn btn-primary fa fa-plus">Assign Product</a></h4>
+          <h4><i class="fa fa-tasks"></i>Product Assignment Management  </h4>
 
         </div>
-        
+        <a href="{{route('assign.create')}}" class="btn btn-primary fa fa-plus">Assign Product</a>
       </div>
       <div class="row">
         <div class="col-md-12">

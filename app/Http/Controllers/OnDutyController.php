@@ -7,6 +7,8 @@ use App\OnDuty;
 use Session;
 use Auth;
 use App\User;
+use Mail;
+use URL;
 
 class OnDutyController extends Controller
 {
@@ -25,7 +27,8 @@ class OnDutyController extends Controller
     // $onduty=OnDuty::all()->orderBy('id','');
         $cyear=date('Y');
          $strtYear=date('Y').'-04-01';
-       $endYear=date('Y',strtotime('+1 year')).'-03-31';
+       $endYear=date('Y-m-d');
+       //dd($endYear);
       $id=Auth::user()->id;
         $onduty=OnDuty::where('empid',$id)
                     ->whereBetween('od_date',[$strtYear,$endYear])
@@ -50,7 +53,7 @@ class OnDutyController extends Controller
                 $appfromnamesarr = explode(',', $appfrom);
                 $appfrom=array_filter($appfromnamesarr);
                 
-                $appfromname=User::whereIn('email',$appfrom)->pluck('name')->toArray();   
+                $appfromname=User::whereIn('id',$appfrom)->pluck('name')->toArray();   
                 $names = implode(',',$appfromname); 
 
                 $usernames = trim($names,",");
@@ -108,11 +111,49 @@ class OnDutyController extends Controller
         $reason = $request->Input('reason');
          $manager = $request->Input('leaveoff2');
          $manager_array=implode(",",$manager );
-
+           $name=Auth::user()->name;
         $status = $status;
        
 
-        $data=OnDuty::create(['empid'=> $id,'od_date' =>$od_date,'intime' =>$intime,'outtime' =>$outtime,'odtype' =>$odtype,'reason' =>$reason,'approvalfrom' =>$manager_array,'status' =>$status,'sip' =>$ip]);
+        $datas=OnDuty::create(['empid'=> $id,'od_date' =>$od_date,'intime' =>$intime,'outtime' =>$outtime,'odtype' =>$odtype,'reason' =>$reason,'approvalfrom' =>$manager_array,'status' =>$status,'sip' =>$ip]);
+
+//dd($data);
+         $odfromname=User::find($datas->empid);
+           
+            $to_email=User::whereIn('id',$manager)->pluck('email')->toArray();
+             $uids=User::whereIn('id',$manager)->pluck('id')->toArray();
+           
+          
+             $default_to=['manish.ram@iifm.co.in'];
+
+             $email_array=array_merge($to_email,$default_to);
+          //dd($email_array);
+              
+          $subject = "On-Duty Request From " .$odfromname->name ."  on ". date("l jS \of F Y h:i:s A");
+          $replyto=['manish.ram@iifm.co.in','sarita.sharma@iifm.co.in','hr@iifm.co.in','ankit.kapoor@iifm.co.in'];
+          $data= array('name' => $name, 'od_date' => $od_date,'intime'=>$intime,'odtype'=>$odtype, 'outtime'=>$outtime,'reason'=>$reason);
+    
+            Mail::send('mail.od_mail',  ['data' => $data], function ($message)use($replyto,$email_array,$subject) {
+                     $message->from('sharmasarita505@gmail.com', 'PRATHAM Education');
+                        $message->to($email_array);
+                        $message->subject($subject);
+                        $message->replyTo($replyto);
+                    });
+
+
+
+            /* foreach ($email_array as $to) {
+                foreach ($uids as  $uid) {
+                
+                  Mail::send('mail.od_mail',  ['data' => $data,'link'=>URL::route('leave-approval',['id'=>$datas->id,'uid'=>$uid])], function ($message)use($replyto,$to,$subject) {
+                     $message->from('sharmasarita505@gmail.com', 'PRATHAM Education');
+                        $message->to($to);
+                        $message->subject($subject);
+                        $message->replyTo($replyto);
+                    });
+            
+                 }
+               }*/
 
          Session::flash('message','On-Duty Request Sent Successfully !!');
 

@@ -30,13 +30,29 @@
         <div class="col-md-12">
           <div class="tile">
             <div class="tile-body">
-             <div class="col-lg-12 col-lg-offset-1">
+              <div class="row">
+             <div class="col-md-4 col-lg-offset-1">
+              <label>Search By Name</label>
                 <div class="input-group">
-                   
-                    <input type="text" autocomplete="off" id="search" class="form-control input-lg" placeholder="Search Here">
+                    <input type="text" autocomplete="off" id="search" style="text-align: left;" class="form-control input-lg" placeholder="Enter Name">
                 </div>
               </div>
-              <div id="txtHint" class="title-color col-lg-12" style="padding-top:0px; text-align:left; padding-left:30px; " >
+              <div class="col-md-4 col-lg-offset-1">
+              <label>Search By Department</label>
+                <div class="input-group">
+                    <select class="form-control" name="department" id="department">
+                      <option value="">Select Department</option>
+                      @foreach($departments as $department)
+                      <option value="{{$department->id}}">{{$department->name}}</option>
+                      @endforeach
+                    </select>
+                </div>
+                <ol  id="departmentResult" style="list-style: none;">
+                
+                </ol>
+              </div>
+              </div>
+              <div id="txtHint" class="title-color col-lg-4" style="padding-top:0px; margin-left: -10px;  " >
                   <b>Search results will be listed here</b>
               </div>                
             </div>
@@ -65,6 +81,20 @@
 
   });
 });
+
+
+  $('#department').on('change',function(){
+     var department= $(this).val();
+     var result='';
+     $.get("{{url('/search-by-department')}}/"+department,function(data){
+        $.each(data,function(i,item){
+          result+="<li  style='padding:0px; margin-left:-30px;'><a href='{{url('/user-details')}}/"+data[i].user_id+"' style='color: black; '>"+data[i].name+"</a></li>"
+        });
+
+        $('#departmentResult').html(result);
+         
+     });
+  });
    
 
 </script>

@@ -71,7 +71,7 @@
                         <input class="form-control input-lg" type="file" name="photo" onchange="return fileValidation();" id="photo" placeholder="Upload your Image" required="">
                 </div>   
                 <div class="col-lg-12" ><br>
-                    <button class="btn btn-success text-uppercase fa fa-save " type="submit">  Submit</button><br><br>
+                    <button class="btn btn-success text-uppercase fa fa-save " type="submit" style="background: #009688; border:none">  Submit</button><br><br>
                 </div> 
            </form>
            
@@ -92,7 +92,7 @@
                 <label>Write Your Desire Category</label>
                 <input class="form-control input-lg" type="text" name="name" id="name" placeholder="Ex:- Birthday" required=""><br><br>
           
-                <input class="btn btn-success" type="submit"  value="Add Category">
+                <input class="btn btn-success" type="submit"  value="Add Category" style="background: #009688; border:none">
                   
                 </div>
             </form>
