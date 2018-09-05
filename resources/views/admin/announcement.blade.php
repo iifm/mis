@@ -36,28 +36,29 @@
             <div class="tile-body">
                 
               <div class="row">
-                @foreach($announcements as $pressRease)
+                
               <div class="col-md-8">
-                  <h3 class="heading_title" style="color:#007d71; font-weight:400;">{{$pressRease->subject}}</h3>
+                  <h3 class="heading_title" style="color:#007d71; font-weight:400;">{{$post->subject}}</h3>
                     <div class="card-body">                       
-                        @if($pressRease->filetype=='png'||$pressRease->filetype== 'jpg' ||$pressRease->filetype== 'jpeg')
+                        @if($post->filetype=='png'||$post->filetype== 'jpg' ||$post->filetype== 'jpeg')
                         <a href="#">
-                          <center> <img class="img-responsive" src="{{URL::To('storage/app/newUploads')}}/{{$pressRease->uploadfile}}" style="width:100%;" ></center> </a>
-                      @elseif($pressRease->filetype=='pdf') 
-                        <center> <iframe src="{{URL::To('storage/app/newUploads')}}/{{$pressRease->uploadfile}}" height="600px" width="100%"></iframe> </center>   
+                          <center> <img class="img-responsive" src="{{URL::To('storage/app/newUploads')}}/{{$post->uploadfile}}" style="width:100%;" ></center> </a>
+                      @elseif($post->filetype=='pdf') 
+                        <center> <iframe src="{{URL::To('storage/app/newUploads')}}/{{$post->uploadfile}}" height="600px" width="100%"></iframe> </center>   
+                      @else
+                        <p>Nothing To display</p>
                       @endif
                     </div>
                   
               </div>
-              @endforeach
         
 
               <div class="col-md-4">
-                <h5 class="heading_title" style="color:#007d71; font-weight:400; margin-bottom:20px;">Other Announcement(s)</h5>   
+                <h5 class="heading_title" style="color:#007d71; font-weight:400; margin-bottom:20px;">Other </h5>   
                 <table class="table">
-               @foreach($announcementDatas as $announcementData)
+               @foreach($otherpostDatas as $announcementData)
                <tr><td><span class="fa fa-bullhorn"></span></td><td><b>{{$announcementData->subject}}</b></td>
-                <td><a href="{{url('/announcement/view')}}/{{$announcementData->id}}" class="btn btn-warning fa fa-eye pull-right" style="color: #fff;"></a></td></tr>
+                <td><a href="{{url('/post/view')}}/{{$announcementData->id}}" class="btn btn-warning fa fa-eye pull-right" style="color: #fff;"></a></td></tr>
 
 
                  @endforeach

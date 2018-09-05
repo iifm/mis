@@ -517,7 +517,7 @@ class AttendanceController extends Controller
                     ->join('attendance_updates','attendance_updates.user_id','=','users.id')
                     ->select('users.name as user_name','users.email as user_email','user_details.mobile as user_mobile','attendance_updates.date as att_date','attendance_updates.time as att_time', 'attendance_updates.type as att_type','attendance_updates.reason as att_reason')
                     ->get();
-      return view('atttendanceApprovalForm',compact(['datas','id','from','user_id']));
+      return view('attendanceApprove',compact(['datas','id','from','user_id']));
     }
     public function attendanceApproved(Request $request,$from,$id,$user_id)
     {
@@ -525,8 +525,10 @@ class AttendanceController extends Controller
        $actionstatus= $request->actionstatus;
         $comment= $request->comment;
         $date=$request->date;
+        //dd($comment);
         $time=$request->time;
         $type=$request->type;
+
         $sip=\Request::ip();
         $data=AttendanceUpdate::where('id',$from)->update(['status'=>$actionstatus,'approvalfrom'=>$id,'comment'=>$comment]);
 
@@ -535,14 +537,14 @@ class AttendanceController extends Controller
                             ->where('time',$time)
                             ->where('type',$type)
                             ->get();
-          // dd($match);                
+          //dd($match);                
         //dd($actionstatus);
         if ($actionstatus=='approved' && count($match)==0) {
            $attendance_update=Attendance::insert(['member_id'=>$user_id,'date'=>$date,'time'=>$time,'type'=>$type,'sip'=>$sip]);
         }
       
-        Session::flash('message','Leave Status Updated Successfully!!');
-       return redirect()->route('attendance.index');
+       Session::flash('message','Attendance Status Updated Successfully!!');
+       return redirect()->route('dashboard');
         //dd($actionstatus);
     }
 }

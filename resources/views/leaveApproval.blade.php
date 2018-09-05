@@ -21,7 +21,7 @@
         </div><?php } ?>
     @foreach($leave_id as $leave)
       <div class="lock-box" style="min-height: 500px;min-width: 700px;">
-        <h4 class="text-center user-name"> Approval Form</h4>
+        <h4 class="text-center user-name">Leave Approval Form</h4>
       <!--   <p class="text-center text-muted">Account Locked</p> -->
         <form class="unlock-form" action="{{url('leave-approved')}}/{{$leave->id}}/{{$uid}}" method="post" style="margin-top: 20px;">
           {{csrf_field()}}
@@ -112,6 +112,7 @@
       </div>
       @endforeach
     </section>
+    <img src="{{URL::To('public/images/mis-logo.png')}}" class="pull-left" height="60" style="position: fixed;left: 20px;bottom: 20px;"> 
     <!-- Essential javascripts for application to work-->
       {!!View('partials.include_js')!!}
 

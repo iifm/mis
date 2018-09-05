@@ -230,7 +230,7 @@ class LeaveController extends Controller
         }
        
        // dd($userDetail);
-        return view('approval',compact(['leave_id','userDetail','from','uid']));
+        return view('leaveApproval',compact(['leave_id','userDetail','from','uid']));
     }
 
     public function leaveApproved(Request $request,$id,$uid){
@@ -240,7 +240,7 @@ class LeaveController extends Controller
        
        $data=Leave::where('id',$id)->update(['status'=>$actionstatus,'comment'=>$comment,'approvedby'=>$uid]);
        Session::flash('message','Leave Status Updated Successfully!!');
-       return back();
+       return redirect()->route('dashboard');
     }
 
 

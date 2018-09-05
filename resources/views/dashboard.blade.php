@@ -59,7 +59,11 @@ a {
           <div class="widget-small primary coloured-icon"><i class="icon fa fa-calendar fa-3x"></i>
             <div class="" style="width: 100%; padding:14px 0 5px 0">
              <center><h6 class="heading_title">Total Applied Leaves</h6></center> 
+             @if($totleaves!='')
               <center><h3><b>{{$totleaves}}</b></h3></center>
+            @else
+              <center><h3><b>0</b></h3></center>
+            @endif
             </div>
           </div>
           </a>
@@ -68,8 +72,12 @@ a {
           <a href="{{url('/on-duty/index')}}">
           <div class="widget-small info coloured-icon"><i class="icon fa fa-tag fa-3x"></i>
             <div class="" style="width: 100%; padding:14px 0 5px 0">
-            <center><h6 class="heading_title">Total Applied On-Duties</h6></center>  
+            <center><h6 class="heading_title">Total Applied On-Duties</h6></center> 
+            @if($totod!='')
              <center><h3><b>{{$totod}}</b></h3></center> 
+            @else
+              <center><h3><b>{{$totod}}</b></h3></center> 
+            @endif
             </div>
           </div>
           </a>
@@ -223,7 +231,7 @@ a {
                 <h5 class="heading_title">Announcements</h5>   
                 <ul style="padding-left: 0px; list-style: none;">
                   @foreach($announcements as $announcement)
-               <li class="fa fa-bullhorn" style="width: 100%"> {{$announcement->subject}}<a href="{{url('/announcement/view')}}/{{$announcement->id}}" class="btn btn-info fa fa-eye pull-right" style="color: #fff"></a></li>  
+               <li class="fa fa-bullhorn" style="width: 100%"> {{$announcement->subject}}<a href="{{url('/post/view')}}/{{$announcement->id}}" class="btn btn-info fa fa-eye pull-right" style="color: #fff"></a></li>  
                  @endforeach
                    
                 </ul>
@@ -233,7 +241,7 @@ a {
                 <h5 class="heading_title ">Press Release</h5>   
                 <ul style="padding-left: 0px; list-style: none;">
                 @foreach($pressReases as $pressRease)
-               <li class=" fa fa-newspaper-o " style="width: 100%"> {{$pressRease->subject}} <a href="{{url('/press-release/view')}}/{{$pressRease->id}}" class="btn btn-warning fa fa-eye pull-right" style="color: #fff"></a></li>  
+               <li class=" fa fa-newspaper-o " style="width: 100%"> {{$pressRease->subject}} <a href="{{url('/post/view')}}/{{$pressRease->id}}" class="btn btn-warning fa fa-eye pull-right" style="color: #fff"></a></li>  
                 @endforeach
                    
                 </ul>

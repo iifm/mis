@@ -380,27 +380,18 @@ class HomeController extends Controller
     }
 
 
-    public function pressReleaseView($id)
+
+    public function postView($id)
     {
-       $announcements=NewsUpload::where('id',$id)->get();
+        $post=NewsUpload::where('id',$id)->first();
 
-         $announcementDatas=NewsUpload::join('upload_categories','upload_categories.id','=','news_uploads.category')
-                                ->where('upload_categories.type','press')
-                                ->where('news_uploads.id','!=',$id)
-                                ->select('news_uploads.*')->get();
 
-        return view('admin.announcement',compact(['announcements','announcementDatas']));
-    }
-
-    public function announcementView($id)
-    {
-         $announcements=NewsUpload::where('id',$id)->get();
          
-        $announcementDatas=NewsUpload::join('upload_categories','upload_categories.id','=','news_uploads.category')
-                                ->where('upload_categories.type','announcement')
+        $otherpostDatas=NewsUpload::join('upload_categories','upload_categories.id','=','news_uploads.category')
+                                ->where('news_uploads.category',$post->category)
                                 ->where('news_uploads.id','!=',$id)
                                 ->select('news_uploads.*')->get();
-        return view('admin.announcement',compact(['announcements','announcementDatas']));
+        return view('admin.announcement',compact(['post','otherpostDatas']));
     }
 
     
