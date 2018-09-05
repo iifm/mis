@@ -1,4 +1,54 @@
+<?php
+namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Hash;
+use Auth;
+use App\Leave;
+use App\UploadCategory;
+use App\OnDuty;
+use App\UserDetails;
+use App\HallOfFame;
+use App\User;
+use App\Wishes;
+use Mail;
+use DB;
+use Session;
+use URL;
+use App\NewsUpload;
+
+        $id=Auth::id();
+
+        $pressReases=NewsUpload::join('upload_categories','upload_categories.id','=','news_uploads.category')
+                                ->where('upload_categories.type','press')
+                                ->select('news_uploads.*')->get();
+
+        $announcements=NewsUpload::join('upload_categories','upload_categories.id','=','news_uploads.category')
+                                ->where('upload_categories.type','announcement')
+                                ->select('news_uploads.*')->get();
+                               // dd($pressReases);
+
+        $user_detail=User::where('users.id',$id)
+                    ->where('user_details.status','Active')
+                    ->join('user_details','user_details.user_id','=','users.id')
+                    ->join('departments','departments.id','=','user_details.department')
+                    ->select('users.*','user_details.*','users.id as user_id','departments.name as department')
+                    ->get();
+        foreach ($user_detail as  $value) {    
+            $profile=$value->profile; 
+            //dd($profile);
+            $department=$value->department;
+        }
+      
+        Session::put('profile', $profile);
+        Session::put('department',$department);    
+
+        $policyEditType=UploadCategory::where('type','text')->get();     
+        Session::put('policyType', $policyEditType);
+        
+        $downloadType=UploadCategory::where('type','file')->get();     
+        Session::put('downloadType', $downloadType);
+    ?>
     <aside class="app-sidebar" style="overflow: scroll">
       @if(Session::has('profile'))
         @if(Session::has('department'))

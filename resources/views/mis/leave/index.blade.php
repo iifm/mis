@@ -48,7 +48,11 @@
           <div class="widget-small warning coloured-icon"><i class="icon fa fa-calendar-o fa-3x"></i>
             <div class="info">
               <h6 style="text-align: center; padding:5px 0;">Leave Applied</h5">
+                @if($leave_applied!='')
               <h3 style="text-align: center;"><b>{{$leave_applied}}</b></h3>
+              @else
+               <h3 style="text-align: center;"><b>0</b></h3>
+               @endif
             </div>
           </div>
         </div>
@@ -56,7 +60,11 @@
           <div class="widget-small danger coloured-icon"><i class="icon fa fa-calendar-check-o fa-3x"></i>
             <div class="info">
               <h6 style="text-align: center; padding:5px 0;">Leave Approved</h5">
+                @if($leave_approved!='')
               <h3 style="text-align: center;"><b>{{$leave_approved}}</b></h3>
+              @else
+            <h3 style="text-align: center;"><b>0</b></h3>
+              @endif
             </div>
           </div>
         </div>

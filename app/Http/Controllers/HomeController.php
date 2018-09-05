@@ -82,11 +82,11 @@ class HomeController extends Controller
         Session::put('profile', $profile);
         Session::put('department',$department);    
 
-         $policyEditType=UploadCategory::where('type','text')->get();     
-         Session::put('policyType', $policyEditType);
+        $policyEditType=UploadCategory::where('type','text')->get();     
+        Session::put('policyType', $policyEditType);
         
-         $downloadType=UploadCategory::where('type','file')->get();     
-         Session::put('downloadType', $downloadType);
+        $downloadType=UploadCategory::where('type','file')->get();     
+        Session::put('downloadType', $downloadType);
    
 
         $strtYear=date('Y').'-04-01';
