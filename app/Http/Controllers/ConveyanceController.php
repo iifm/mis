@@ -29,6 +29,7 @@ class ConveyanceController extends Controller
       
        $conveyance=Conveyance::where('user_id',$id)
                     ->whereBetween('con_date',[$strtYear, $endYear])
+                    ->orderBy('id','DESC')
                     ->get();
             // $conveyance=DB::table('conveyances')
             //             ->where('user_id',$id)
@@ -77,10 +78,10 @@ class ConveyanceController extends Controller
       }
 
       for ($i=1; $i <= $count ; $i++) { 
-        
+        //dd(date('Y-m-d',strtotime($request->input('date'.$i))));
           $conveyance= new Conveyance;        
           $conveyance->user_id = Auth::user()->id;
-          $conveyance->con_date= $request->input('date'.$i);
+          $conveyance->con_date= date('Y-m-d',strtotime($request->input('date'.$i)));
           $conveyance->reason= $request->input('reason'.$i);
           $conveyance->disfrom= $request->input('travelfrom'.$i);
           $conveyance->disto= $request->input('travelto'.$i);

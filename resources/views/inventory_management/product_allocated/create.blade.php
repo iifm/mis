@@ -3,7 +3,7 @@
   
 <head>
   
-    <title>IIFM MIS</title>
+    <title>Product Assignment Management</title>
     
     <!-- Main CSS-->
     {!!View('partials.include_css')!!}
@@ -29,10 +29,11 @@
         <div>
           <h1><i class="fa fa-tasks "></i> Product Assignment Management </h1>
         </div>
+          <a href="{{URL::previous()}}" class="fa fa-arrow-circle-left btn btn-danger" style="background: #009688; border:none"> Back</a>
       </div>
       <div class="row  tile">
       <!--   <a href="#" class="btn btn-primary fa fa-plus add_course">ADD</a> -->
-       <a href="{{URL::previous()}}" class="fa fa-arrow-circle-left btn btn-danger"> Back</a>
+     
         <div class="col-md-12">
           <form action="{{route('assign.store')}}" method="post" enctype="multipart/form-data"  autocomplete="off">
 
@@ -106,7 +107,7 @@
         </ul>
        
     <div class="tile-footer">
-              <button class="btn btn-success fa fa-save" type="submit">  Submit</button>
+              <button class="btn btn-success fa fa-save" type="submit" style="background: #009688; border:none">  Submit</button>
            
             </div>
             </form> 

@@ -51,6 +51,7 @@
                   <tr role="row">
                     <th>#</th>
                     <th style="text-align: left;">Category Name</th>
+                   <th style="text-align: left;">Category Type</th>
                     <th style="text-align: left;">Modified By</th>
                     <th>Action</th>
                   </tr>
@@ -60,7 +61,8 @@
                        @foreach($categories as $cat)
                 <tr style="max-height: 100px;">
                     <td><?= $i++;?></td>
-                     <td style="text-align: left;">{{$cat->name}}</td>
+                    <td style="text-align: left;">{{$cat->name}}</td>
+                    <td style="text-align: left;">{{$cat->type}}</td>
                     <td style="text-align: left;">{{$cat->username}}</td>
 
                     <td style="text-align: left;">

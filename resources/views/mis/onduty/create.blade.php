@@ -3,7 +3,7 @@
   
 <head>
   
-    <title>IIFM MIS</title>
+    <title>IIFM MIS - On-Duty Management </title>
     
     <!-- Main CSS-->
     {!!View('partials.include_css')!!}
@@ -29,10 +29,10 @@
       <div class="app-title">
 
         <div>
-           <h4><i class="fa fa-th-list"></i>On-Duty Management  <a href="{{url('/on-duty/index')}}" class="btn btn-primary fa fa-eye">View Your OD</a></h4>
+           <h4><i class="fa fa-th-list"></i> On-Duty Management  </h4>
  
         </div>
-      
+      <a href="{{url('/on-duty/index')}}" class="btn btn-primary fa fa-eye">View Your OD</a>
       </div>
       <div class="row">
       
@@ -48,7 +48,7 @@
              <div class="col-md-4"> 
               <div class="form-group">
                   <strong><label for="">OD Date</label></strong>  
-                    <input class="form-control" id="od_date" name="od_date" type="text" aria-describedby="emailHelp" placeholder="Start Date" required="">
+                    <input class="form-control" id="od_date" name="od_date" type="text" aria-describedby="emailHelp" placeholder="OD Date" required="">
                 </div>
              </div>
              <div class="col-md-4"> 
@@ -92,7 +92,7 @@
                          </div>
               <div class="col-lg-12" style="margin-bottom:10px;z-index: 999;">
                  @foreach($managers as $manager)          
-               <p style="margin-right:20px; min-width:180px; float:left;"><input class="approvalMsg" type="checkbox" name="leaveoff2[]" id="leaveoff2" value="{{$manager->email}}">{{$manager->name}}</p>
+               <p style="margin-right:20px; min-width:180px; float:left;"><input class="approvalMsg" type="checkbox" name="leaveoff2[]" id="leaveoff2" value="{{$manager->id}}">{{$manager->name}}</p>
                 @endforeach    
                </div>
            

@@ -70,7 +70,7 @@
                     <td><select class="form-control" name="employee">
                       <option value="">Select Employee</option>
                       @foreach($users as $user)
-                      <option value="{{$user->id}}">{{$user->name}}</option>
+                      <option value="{{$user->id}}">{{strtoupper($user->name)}}</option>
                       @endforeach
                     </select>
                   </td>
@@ -112,7 +112,7 @@
                       @foreach($conveyance as $value)
                       <tr role="row" class="odd">
                         <td><?= $i++;?></td>
-                        <td>{{$value->name}}</td>
+                        <td>{{strtoupper($value->name)}}</td>
                         <td>{{$value->con_date}}</td>
                         <td>{{$value->disfrom}}</td>
                         <td>{{$value->disto}}</td>

@@ -2,7 +2,7 @@
 <html lang="en">
   
 <head>
-    <title>IIFM MIS</title>
+    <title>IIFM MIS - On-Duty Management</title>
 
     <!-- Main CSS-->
     {!!View('partials.include_css')!!}
@@ -24,9 +24,9 @@
    <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-th-list"></i> On-Duty Management   <a href="{{url('/on-duty/create')}}" class="btn btn-primary fa fa-plus">ADD On-Duty Request</a></h1>
+          <h1><i class="fa fa-th-list"></i> On-Duty Management   </h1>
         </div>
-      
+      <a href="{{url('/on-duty/create')}}" class="btn btn-primary fa fa-plus">ADD On-Duty Request</a>
       </div>
       <div class="row">
         <div class="col-md-12">
@@ -69,8 +69,8 @@
                     <td><?= $value['intime'];?></td>
                     <td><?= $value['outtime'];?></td>
                     <td><?= $value['odtype'];?></td>
-                    <td><?= $value['approvalfrom'];?></td>
                     <td><?= $value['status'];?></td>
+                    <td><?= $value['approvalfrom'];?></td>
                    
                   </tr>
                

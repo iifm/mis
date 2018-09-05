@@ -8,11 +8,10 @@ use App\NewsUpload;
 
 class DownloadController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+      public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index($id)
     {
       $downloadType=UploadCategory::where('id',$id)->get();

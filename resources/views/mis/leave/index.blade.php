@@ -2,7 +2,7 @@
 <html lang="en">
   
 <head>
-    <title>Leave</title>
+    <title>IIFM MIS - Leave Management </title>
 
     <!-- Main CSS-->
     {!!View('partials.include_css')!!}
@@ -24,10 +24,10 @@
    <main class="app-content">
       <div class="app-title">
         <div>
-          <h4><i class="fa fa-th-list"></i> Leave Management  <a href="{{url('/leave-add')}}" class="btn btn-primary fa fa-plus"> Apply Leave</a></h4>
+          <h4><i class="fa fa-th-list"></i> Leave Management </h4>
 
         </div>
-       
+        <a href="{{url('/leave-add')}}" class="btn btn-primary fa fa-plus"> Apply Leave</a>
       </div>
       <div class="row">
         <div class="col-md-12">

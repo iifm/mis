@@ -6,29 +6,38 @@ use Illuminate\Http\Request;
 use DB;
 use App\User;
 use URL;
+use App\UserDetails;
+use App\Department;
 use App\UserWorkExperience;
 
 class SearchController extends Controller
 {
+   
+  public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-    	return view('mis.search');
+    	$departments=Department::all();
+        return view('mis.search',compact('departments'));
     }
     public function Search(Request $request,$search)
     {
     	$array_user[]='';
-        $search=DB::table('users')
-                        ->where('name','like',"%".$search."%")
+        $search=User::where('users.name','like',"%".$search."%")
                         ->join('user_details','user_details.user_id','=','users.id')
+                        ->join('departments','departments.id','=','user_details.department')
                         ->where('user_details.status','Active')	
-                        ->select('users.id as user_id','user_details.*','users.*')
+                        ->select('users.id as user_id','user_details.*','users.*','departments.name as department')
     					->orderBy('name')
     					->get();
                        // dd($search);
       
 		foreach ($search as  $value) {
 			$link=URL::route('search_user',['id'=>$value->user_id]);
-			$array_user[] = "<a href='$link'>".$value->name."</a> <br>";
+			$array_user[] = "<a href='$link' style='color:black;'>".strtoupper($value->name)." - ".strtoupper($value->department)."</a> <br>";
 			
 		}
     		 
@@ -51,6 +60,18 @@ class SearchController extends Controller
                   //  dd($user_detail);
          $user_work = UserWorkExperience::where('user_id',$id)->get();
         return view('mis.user_detail.index',compact(['user_detail','useredu','user_work']));
+    }
+
+    public function searchByDepartment($id)
+    {
+        $data=UserDetails::where('department',$id)
+                            ->join('users','users.id','=','user_details.user_id')
+                            ->where('user_details.status','Active')
+                            ->select('users.id as user_id','users.*','user_details.*')
+                            ->orderBy('users.name')
+                            ->get();
+
+                    return response()->json($data);
     }
 
     

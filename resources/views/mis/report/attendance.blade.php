@@ -108,7 +108,7 @@
                       @foreach($datas as $data)
                       <tr role="row" class="odd">
                        <td>{{ $i++ }}</td>
-                        <td>{{$data['username']}}</td>
+                        <td>{{strtoupper($data['username'])}}</td>
                         <td>{{$data['date']}}</td> 
                         <td> {{$data['inTime']}} </td>
                          <td> {{$data['outTime']}} </td>

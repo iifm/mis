@@ -89,5 +89,6 @@
             
           </ul>
         </li>
+          <li><a class="app-menu__item" href="{{url('/change-password')}}"><i class="app-menu__icon fa fa-key"></i><span class="app-menu__label">Change Password</span></a></li>
       </ul>
     </aside>

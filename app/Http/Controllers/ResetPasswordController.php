@@ -10,11 +10,7 @@ use App\User;
 
 class ResetPasswordController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         return view('reset_password.resetPassword');

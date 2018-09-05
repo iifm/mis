@@ -555,4 +555,9 @@ class ReportController extends Controller
      
        return view('mis.report.conveyance',compact(['conveyance','users']));
     }
+
+    public function approval()
+    {
+      return view('approval');
+    }
 }

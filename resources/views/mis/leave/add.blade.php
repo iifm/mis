@@ -3,7 +3,7 @@
   
 <head>
   
-    <title>IIFM MIS</title>
+    <title>IIFM MIS - Leave Management</title>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <!-- Main CSS-->
     {!!View('partials.include_css')!!}
@@ -26,8 +26,9 @@
 <main class="app-content">
       <div class="app-title">
         <div>
-          <h4><i class="fa fa-th-list"></i> Leave Management <a href="{{url('/leave-view')}}" class="btn btn-primary fa fa-eye">View Your Leaves</a></h4>
+          <h4><i class="fa fa-th-list"></i> Leave Management </h4>
         </div>
+        <a href="{{url('/leave-view')}}" class="btn btn-primary fa fa-eye">View Your Leaves</a>
       </div>
       <div class="row">
         
@@ -61,9 +62,9 @@
              <div class="col-md-3"> 
               <div class="form-group ">
                   <strong>  <label for="">Leave Type</label></strong><br>
-                    <input class="leaveSelect"  type="checkbox" value="Compensatory Off" name="leaveoff[]" id="leave_compoff"> Compensatory Off<br><br>
+                    <input class="leaveSelect"  type="checkbox" value="Comp Off" name="leaveoff[]" id="leave_compoff"> Compensatory Off<br><br>
                     <input class="leaveSelect" type="checkbox" value="Casual Leave" name="leaveoff[]"> Casual Leave <br><br>
-                    <input class="leaveSelect" type="checkbox" value="Half day Leave" name="leaveoff[]"> Half day Leave
+                    <input class="leaveSelect" type="checkbox" value="Half day Leave" id="halfday" name="leaveoff[]"> Half day Leave
 
                 </div>
              </div>
@@ -163,16 +164,44 @@
       }
       
       else {
-         document.getElementById('totdays').value=days+1;
+         
+         if ($('#halfday').prop('checked')) {
+          document.getElementById('totdays').value=days+0.5;
+         }
+         else{
+          document.getElementById('totdays').value=days+1;
+         }
+
       }
       $(this).prop( "readOnly", true ); 
         }
+    });
+
+    $('#halfday').on('click',function(){      
+       if($(this).prop("checked") == true){
+        var leavedays=  $('#totdays').val();
+                //alert("Checkbox is checked.");
+          if (leavedays=='') {
+            alert('Please Select Leave-Start and Leave-End Dates' );
+          }
+          else{
+             $('#totdays').val(leavedays-0.5);
+          }
+        }
+        else if($(this).prop("checked") == false){
+          var leavedays=  $('#totdays').val();
+          var hday = 0.5;
+          var leaveday_new = +leavedays + +hday;
+                $('#totdays').val(leaveday_new);
+        }
+     
     });
 
     // Enable Sunday only
   $datepicker3.datepicker({
       minDate: -14,
         maxDate: 0,
+       dateFormat:'yy-mm-dd',
       beforeShowDay: enableSUNDAYS
   });
 

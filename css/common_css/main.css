@@ -14972,7 +14972,7 @@ be a descendant of the grid when it is being dragged.
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 40px;
+  padding: 23px 40px 60px 40px;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   -webkit-transition: all 0.5s ease-in-out;

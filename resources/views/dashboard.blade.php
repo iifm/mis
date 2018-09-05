@@ -180,7 +180,7 @@ a {
                 </li>
                 @endforeach
             </div>
-            <li class="app-notification__footer"><a href="#">See all notifications.</a></li>
+          
           </ul>
         </li>
          <li style="list-style-type: none; margin-top: 10px;" class="dropdown"><a class="app-nav__item btn btn-info" href="#" data-toggle="dropdown" aria-label="Show notifications"><i class="fa fa-gift"> ANNIVERSARIES</i></a>
@@ -196,7 +196,7 @@ a {
                 </li>
               @endforeach
             </div>
-            <li class="app-notification__footer"><a href="#">See all Anniversaries.</a></li>
+          
           </ul>
         </li>
            <li style="list-style-type: none; margin-top: 10px;" class="dropdown"><a class="app-nav__item btn btn-danger" href="#" data-toggle="dropdown" aria-label="Show notifications"><i class="fa fa-trophy">  WORK ANNIVERSARIES</i></a>
@@ -211,7 +211,7 @@ a {
                   </div></a></li>
                   @endforeach
             </div>
-            <li class="app-notification__footer"><a href="#">See all notifications.</a></li>
+          
           </ul>
         </li>
               </div>

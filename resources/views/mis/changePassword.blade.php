@@ -5,7 +5,7 @@
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-6" /><!-- /Added by HTTrack -->
 <head>
   
-    <title>IIFM MIS</title>
+    <title>IIFM MIS - Change Password</title>
     
     
 
@@ -93,7 +93,7 @@
  
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" style="background-color: #009688; border: none;">
                                     Change Password
                                 </button>
                             </div>
