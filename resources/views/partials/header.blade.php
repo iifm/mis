@@ -68,7 +68,7 @@
         </li> -->
          <li class="">
                 <a class="app-nav__item" href="{{ route('logout') }}" onclick="event.preventDefault();
-              document.getElementById('logout-form').submit();"><i class="fa fa-sign-out fa-lg"></i><strong> Logout </strong>
+              document.getElementById('logout-form').submit();"><i class="fa fa-power-off fa-lg"></i>
               </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 {{ csrf_field() }}

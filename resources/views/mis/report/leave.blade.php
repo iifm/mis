@@ -111,8 +111,8 @@
                     <tbody>
                      @foreach($finaldatas as $leave)
                       <tr role="row" class="odd">
-                        <td><?= $i++;?></td>
-                        <td>{{$leave['name']}}</td>
+                        <td>{{$loop->iteration}}</td>
+                        <td>{{strtoupper($leave['name'])}}</td>
                         <td>{{$leave['from']}}</td>
                         <td>{{$leave['to']}}</td>
                         <td>{{$leave['days']}}</td>

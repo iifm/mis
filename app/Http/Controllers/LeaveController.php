@@ -230,7 +230,7 @@ class LeaveController extends Controller
         }
        
        // dd($userDetail);
-        return view('leaveApprovalForm',compact(['leave_id','userDetail','from','uid']));
+        return view('approval',compact(['leave_id','userDetail','from','uid']));
     }
 
     public function leaveApproved(Request $request,$id,$uid){

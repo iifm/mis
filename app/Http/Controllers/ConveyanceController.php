@@ -29,6 +29,7 @@ class ConveyanceController extends Controller
       
        $conveyance=Conveyance::where('user_id',$id)
                     ->whereBetween('con_date',[$strtYear, $endYear])
+                    ->orderBy('id','DESC')
                     ->get();
             // $conveyance=DB::table('conveyances')
             //             ->where('user_id',$id)

@@ -191,3 +191,5 @@ Route::get('/upload/category/delete/{id}','UploadCategoryController@destroy');
 Route::get('/download/{id}','DownloadController@index');
 Route::get('/press-release/view/{id}','HomeController@pressReleaseView');
 Route::get('/announcement/view/{id}','HomeController@announcementView');
+
+Route::get('/approval','ReportController@approval');
