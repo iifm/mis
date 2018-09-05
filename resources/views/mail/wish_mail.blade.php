@@ -150,7 +150,8 @@
 		<table align="center" cellpadding="0" cellspacing="0" border="0"><tr><td class="text03bMC" width="540" style="margin-top: 0;margin-bottom: 0;padding-top: 10px;padding-bottom: 0;color: #555555;border-collapse: collapse;padding-left: 0;padding-right: 0;margin-left: 0;margin-right: 0;">
 			<table align="left" cellpadding="0" cellspacing="0" border="0">
 				<tr><td class="text03bBodySummary" style="margin-top: 0;margin-bottom: 0;padding-top: 0;padding-bottom: 0;color: #777777;border-collapse: collapse;padding-left: 0;padding-right: 0;margin-left: 0;margin-right: 0;font-family: Tahoma,Helvetica,Arial,Verdana,sans-serif;font-size: 14px;line-height: 32px;letter-spacing: 0;font-weight: bold;">
-					{{$data['message']}}
+					
+					<?php echo htmlspecialchars_decode($data['message']); ?>
 					</td></tr>	
 			</table>
 		</td></tr></table>

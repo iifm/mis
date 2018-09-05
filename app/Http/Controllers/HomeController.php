@@ -334,9 +334,12 @@ class HomeController extends Controller
        // dd($request);
         $sender_id=Auth::user()->id;
         $sender_name=Auth::user()->name;
-        $sender_dept=UserDetails::where('user_id',$sender_id)->get();
+        $sender_dept=UserDetails::where('user_id',$sender_id)
+                                ->join('departments','departments.id','=','user_details.department')
+                                ->select('user_details.*','departments.name as dept_name')
+                                ->get();
         foreach ($sender_dept as $dept) {
-           $department=$dept->department;
+           $department=$dept->dept_name;
         }
         //dd($sender_dept);
         $message=$request->message;
