@@ -67,7 +67,7 @@ class SearchController extends Controller
         $data=UserDetails::where('department',$id)
                             ->join('users','users.id','=','user_details.user_id')
                             ->where('user_details.status','Active')
-                            ->select('users.id as user_id','users.name as name')
+                            ->select('users.id as user_id','users.name as name','user_details.designation as designation')
                             ->orderBy('users.name')
                             ->get();
 
