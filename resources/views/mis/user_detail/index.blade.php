@@ -49,7 +49,7 @@
     </div>
     <div class="col-md-9 tile">
       <h3 class="tile-title heading_title">OFFICIAL INFORMATION 
-       <a class="btn btn-success fa fa-plus" href="{{url('/user-official')}}"></a> <a class="btn btn-success fa fa-pencil" href="{{url('/user-official')}}/{{Auth::user()->id}}"></a></h3>
+       <a class="btn btn-success fa fa-pencil" href="{{url('/user-official')}}/{{Auth::user()->id}}"></a></h3>
 
           <table class="table">
             <tr>
