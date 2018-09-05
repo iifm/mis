@@ -47,7 +47,7 @@ class UserDetailController extends Controller
                     ->select('users.*','user_details.*','users.id as user_id','departments.name as department')
                     ->get();
 
-           // dd($user_detail);
+           //dd($user_detail);
         foreach ($user_detail as  $value) {    
             $profile=$value->profile; 
             $department=$value->department;
