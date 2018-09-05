@@ -85,9 +85,10 @@
 
   $('#department').on('change',function(){
      var department= $(this).val();
-     alert(department);
+     //alert(department);
      var result='';
      $.get("{{url('/search-by-department')}}/"+department,function(data){
+        console.log(data);
         $.each(data,function(i,item){
           result+="<li  style='padding:0px; margin-left:-30px;'><a href='{{url('/user-details')}}/"+data[i].user_id+"' style='color: black; '>"+data[i].name+"</a></li>"
         });
