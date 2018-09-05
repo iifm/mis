@@ -79,7 +79,7 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Department</label>
                     <select class="form-control" name="department" id="department" required="">
-                      <option value="{{$value->department}}">{{$value->department}}</option>
+                      <option value="{{$value->department_id}}">{{$value->department_name}}</option>
                       @foreach($departments as $department)
                       <option value="{{$department->id}}">{{$department->name}}</option>
                       @endforeach

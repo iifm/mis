@@ -298,8 +298,9 @@ class UserDetailController extends Controller
        //$id=Auth::user()->id;
         $departments=Department::all();
         $user_detail =UserDetails::join('users','users.id','=','user_details.user_id')
+                                ->join('departments','departments.id','=','user_details.department')
                                 ->where('users.id',$id)
-                                ->select('users.*','user_details.*','users.id as userid')
+                                ->select('users.*','user_details.*','users.id as userid','departments.id as department_id','departments.name as department_name')
                                 ->get();
        return view('mis.user_detail.official',compact(['user_detail','id','departments']));
     }
