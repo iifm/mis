@@ -37,7 +37,7 @@ class SearchController extends Controller
       
 		foreach ($search as  $value) {
 			$link=URL::route('search_user',['id'=>$value->user_id]);
-			$array_user[] = "<a href='$link' style='color:black;'>".strtoupper($value->name)." - ".strtoupper($value->department)."</a> <br>";
+			$array_user[] = "<a href='$link' style='color:black; padding-bottom:15px;'>".ucwords($value->name)." - ".ucwords($value->department)."</a> <br>";
 			
 		}
     		 
