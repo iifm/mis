@@ -24,7 +24,7 @@
       </div>
       <div class="lock-box"><img class="rounded-circle user-image" src="{{URL::To('/public/images/usser.png')}}">
         <h4 class="text-center user-name"></h4>
-        <p class="text-center text-muted">Account Locked</p>
+        <p class="text-center text-muted"></p>
         <form class="unlock-form" action="{{url('/reset-password/send')}}" method="post">
           {{csrf_field()}}
           <div class="form-group">

@@ -31,14 +31,18 @@
           <div class="tile">
             <div class="tile-body">
               <div class="row">
-             <div class="col-md-4 col-lg-offset-1">
+             <div class="col-md-6 col-lg-4 col-lg-offset-1">
               <label>Search By Name</label>
                 <div class="input-group">
                     <input type="text" autocomplete="off" id="search" style="text-align: left;" class="form-control input-lg" placeholder="Enter Name">
                 </div>
+                <div id="txtHint" class="title-color col-lg-4" style="padding-top:0px; margin-left: -10px;  " >
+                  <b>Search results will be listed here</b>
+              </div>    
+
               </div>
-              <div class="col-md-4 col-lg-offset-1">
-              <label>Search By Department</label>
+              <div class="col-md-6 col-lg-4 col-lg-offset-1">
+                <label>Search By Department</label>
                 <div class="input-group">
                     <select class="form-control" name="department" id="department">
                       <option value="">Select Department</option>
@@ -52,9 +56,7 @@
                 </ol>
               </div>
               </div>
-              <div id="txtHint" class="title-color col-lg-4" style="padding-top:0px; margin-left: -10px;  " >
-                  <b>Search results will be listed here</b>
-              </div>                
+                          
             </div>
           </div>
         </div>

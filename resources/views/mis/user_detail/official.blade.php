@@ -90,7 +90,12 @@
               <div class="col-md-6"> 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Location/Centre</label>
-                   <input class="form-control capitalize char-only" value="{{$value->locationcentre}}" id="locationcentre" name="locationcentre" type="text" aria-describedby="emailHelp" placeholder="Location/Centre" required="">
+                   <select name="locationcentre" id="locationcentre" class="form-control" required="">
+                     <option value="">Select Location</option>
+                     @foreach($locations as $location)
+                     <option value="{{$location->id}}">{{$location->name}}</option>
+                     @endforeach
+                   </select>
                 </div>
             </div>
             <div class="col-md-6"> 

@@ -15,12 +15,7 @@ use App\Department;
 
 class UserDetailController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
+   
       public function __construct()
     {
         $this->middleware('auth');
@@ -297,12 +292,14 @@ class UserDetailController extends Controller
     {
        //$id=Auth::user()->id;
         $departments=Department::all();
+        $locations=DB::table('locations')->where('parent_id','>',0)->get();
+        //dd($locations);
         $user_detail =UserDetails::join('users','users.id','=','user_details.user_id')
                                 ->join('departments','departments.id','=','user_details.department')
                                 ->where('users.id',$id)
                                 ->select('users.*','user_details.*','users.id as userid','departments.id as department_id','departments.name as department_name')
                                 ->get();
-       return view('mis.user_detail.official',compact(['user_detail','id','departments']));
+       return view('mis.user_detail.official',compact(['user_detail','id','departments','locations']));
     }
 
      public function officialAdd(Request $request,$id)
