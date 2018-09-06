@@ -70,7 +70,7 @@
                 <tr role="row" class="odd">
                     <td><?= $i++;?></td>
                      <td style="text-align: left;">{{$user->name}}</td>
-                    <td style="text-align: left;">{{$user->department}}</td>
+                    <td style="text-align: left;">{{$user->dept_name}}</td>
                     <td style="text-align: left;">{{$user->designation}}</td>
                     <td style="text-align: left;">{{$user->locationcentre}}</td>
                     <td style="text-align: left;">

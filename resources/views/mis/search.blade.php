@@ -36,8 +36,8 @@
                 <div class="input-group">
                     <input type="text" autocomplete="off" id="search" style="text-align: left;" class="form-control input-lg" placeholder="Enter Name">
                 </div>
-                <div id="txtHint" class="title-color col-lg-4" style="padding-top:0px; margin-left: -10px;  " >
-                  <b>Search results will be listed here</b>
+                <div id="txtHint" class="title-color col-lg-12" style="padding-top:0px; margin-left: -10px;  " >
+                
               </div>    
 
               </div>
