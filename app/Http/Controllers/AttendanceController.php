@@ -444,7 +444,7 @@ class AttendanceController extends Controller
              # code...
           
            Mail::send('mail.attendance_approve',  ['data' => $data,'link'=>URL::route('attendanceApprove',['id'=>$att_in->id,'from'=>$approval_id,'user_id'=>$user_id])], function ($message)use($to,$subject) {
-             $message->from('info@prathamonline.in', 'MIS Alert');
+                  $message->from('info@prathamonline.in', 'MIS Alert');
                  $message->to($to);
                  $message->subject($subject);
             });
@@ -495,7 +495,7 @@ class AttendanceController extends Controller
              # code...
           
            Mail::send('mail.attendance_approve',  ['data' => $data,'link'=>URL::route('attendanceApprove',['id'=>$att_in->id,'from'=>$approval_id,'user_id'=>$user_id])], function ($message)use($to,$subject) {
-             $message->from('sharmasarita505@gmail.com', 'PRATHAM Education');
+                 $message->from('info@prathamonline.in', 'MIS Alert');
                  $message->to($to);
                  $message->subject($subject);
             });

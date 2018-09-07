@@ -373,7 +373,7 @@ class HomeController extends Controller
           $data= array('message' => $message,'name'=>$receiver_name,'image'=>$image_path);
 
            Mail::send('mail.wish_mail',  ['data' => $data], function ($message)use($receiver_email,$subject,$sender_mail,$to) {
-             $message->from('info@prathamonline.co.in', 'MIS Alert');
+                $message->from('info@prathamonline.in', 'MIS Alert');
                  $message->to($to);
                 $message->subject($subject);
             });

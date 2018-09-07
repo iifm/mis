@@ -52,7 +52,7 @@ class ResetPasswordController extends Controller
             $data=['link'=>URL::route('reset-password-form',['id'=>$user_id]),'name'=>$user_name];
 
            Mail::send('mail.reset_password',  ['data' => $data], function ($message)use($to_email,$subject) {
-             $message->from('sharmasarita505@gmail.com', 'PRATHAM Education');
+                $message->from('info@prathamonline.in', 'MIS Alert');
                  $message->to($to_email);
                  $message->subject($subject);
             });
