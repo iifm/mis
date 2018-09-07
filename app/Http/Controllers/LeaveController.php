@@ -181,7 +181,7 @@ class LeaveController extends Controller
                 foreach ($uids as  $uid) {
                 
                   Mail::send('mail.leaveapprove',  ['data' => $data,'link'=>URL::route('leave-approval',['id'=>$query->id,'uid'=>$uid])], function ($message)use($replyto,$to,$subject,$approvalfrom) {
-                     $message->from('sharmasarita505@gmail.com', 'PRATHAM Education');
+                     $message->from('info@prathamonline.in', 'PRATHAM Education');
                         $message->to($to);
                         $message->subject($subject);
                         $message->replyTo($replyto);

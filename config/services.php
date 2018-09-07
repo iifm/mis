@@ -14,13 +14,13 @@ return [
     |
     */
 
-    'mailgun' => [
+   /* 'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),
-    ],
+    ],*/
     
     'mandrill' => [
-       'secret' => env('MANDRILL_KEY'),
+       'secret' => 'cWwsKkLw5PpIY82enZJl5A',
    ],
 
     'ses' => [

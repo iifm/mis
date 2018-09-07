@@ -45,13 +45,13 @@
                            @if($data->filetype=='pdf')
                           <a href="{{URL::To('storage/app/newUploads')}}/{{$data->uploadfile}}" download="">
                       <center> <img class="img-responsive" src="{{URL::To('/public/images/pdf.png')}}" height="150px" width="150px"></center> </a>
-                          @elseif($data->filetype=='xls')
+                          @elseif($data->filetype=='xls' || $data->filetype=='xlsx')
                            <a href="{{URL::To('storage/app/newUploads')}}/{{$data->uploadfile}}" download="">
                       <center> <img class="img-responsive" src="{{URL::To('/public/images/xls.png')}}" height="150px" width="150px"></center> </a>
-                          @elseif($data->filetype=='doc')
+                          @elseif($data->filetype=='doc' || $data->filetype=='docx')
                            <a href="{{URL::To('storage/app/newUploads')}}/{{$data->uploadfile}}" download="">
                       <center> <img class="img-responsive" src="{{URL::To('/public/images/doc.png')}}" height="150px" width="150px"></center> </a>
-                       @elseif($data->filetype=='ppt')
+                       @elseif($data->filetype=='ppt' || $data->filetype=='pptx')
                            <a href="{{URL::To('storage/app/newUploads')}}/{{$data->uploadfile}}" download="">
                       <center> <img class="img-responsive" src="{{URL::To('/public/images/ppt.png')}}" height="150px" width="150px"></center> </a>
                            @endif
