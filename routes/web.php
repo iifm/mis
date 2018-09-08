@@ -191,4 +191,6 @@ Route::get('/upload/category/delete/{id}','UploadCategoryController@destroy');
 Route::get('/download/{id}','DownloadController@index');
 Route::get('/post/view/{id}','HomeController@postView');
 
-Route::get('/approval','ReportController@approval');
+/*Route::get('image/editing','ResetPasswordController@getImage');
+Route::post('image/editing/store','ResetPasswordController@makeimage');*/
+Route::get('email-template/test','ResetPasswordController@test');

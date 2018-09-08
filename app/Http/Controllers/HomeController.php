@@ -282,9 +282,7 @@ class HomeController extends Controller
                                             ];
                         }
                      }
-                    // dd($monthWorkAniversary);
-        //dd($totleaves);
-
+                
                      Session::put('event', $todays_event);
                     // dd($outtime);
         return view('dashboard',compact(['totleaves','totod','birthdays','anniversary','workanniversary','monthBirthday','monthWorkAniversary','monthAniversary','eoms','todays_event','intime','outtime','pressReases','announcements']));
@@ -349,20 +347,30 @@ class HomeController extends Controller
         $receiver_id=$request->receiver_id;
         $sip=\Request::ip();
        $sender_mail=Auth::user()->email;
+
+       $birthday_images=[];
+
       // $image_path="https://thumbs.dreamstime.com/b/best-wishes-lettering-text-card-44167686.jpg";
-       $birthday_img="https://asset.holidaycardsapp.com/assets/card/b_day229-6ae37171a98c1ce89a30eb6454e1fe60.png";
-       $anni_img="https://www.ienglishstatus.com/wp-content/uploads/2016/12/50th-Anniversary-Images-Free.png";
-       $work_image="https://quotespics.net/wp-content/uploads/2017/01/CmCx1QjWkAAxlhk.jpg";
+                      
+$birthday_images=[\URL::To('/public/images/bestwish.jpg'),\URL::To('/public/images/birthday1.jpg'),\URL::To('/public/images/birthday2.jpg'),\URL::To('/public/images/birthday3.jpg'),\URL::To('/public/images/birthday4.jpg')];
+$birthday_image=array_rand($birthday_images);
+
+$work_images=[\URL::To('/public/images/bestwish.jpg'),\URL::To('/public/images/work1.jpg'),\URL::To('/public/images/work2.jpg'),\URL::To('/public/images/work3.jpg')];
+$work_image=array_rand($work_images);
+
+$anniversary_images=[\URL::To('/public/images/bestwish.jpg'),\URL::To('/public/images/marriage1.jpg'),\URL::To('/public/images/marriage2.jpg'),\URL::To('/public/images/marriage3.jpg')];
+$anniversary_image=array_rand($anniversary_images);
         $to=['sarita.sharma@iifm.co.in'];
 
         if($sub=="Birthday"){
-           $image_path=$birthday_img; 
+           $image_path="https://www.craftyarts.co.uk/images/anna-griffin-foil-stamp-die-best-wishes-p12706-38747_image.jpg";
         }
         elseif ($sub=="Work Anniversary") {
-            $image_path=$work_image; 
+            $image_path='http://1.bp.blogspot.com/-pwmaggiuHyc/T4afreNvQpI/AAAAAAAAAZw/jOcSUCjuRXc/s640/2911.BestWishesRibbon.jpg';
+            //dd($image_path);
         }
         else{
-            $image_path=$anni_img;
+            $image_path='http://1.bp.blogspot.com/-pwmaggiuHyc/T4afreNvQpI/AAAAAAAAAZw/jOcSUCjuRXc/s640/2911.BestWishesRibbon.jpg';
         }
 
            $query=Wishes::create(['sender_id'=> $sender_id,'message'=>$message,'receiver_id'=>$receiver_id,'sip'=>$sip]);

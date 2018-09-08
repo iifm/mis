@@ -166,6 +166,11 @@ return [
         Unisharp\Ckeditor\ServiceProvider::class,
         App\Providers\AgentServiceProvider::class,
         Stevebauman\Location\LocationServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+
+
+       
+
 
 
         
@@ -238,6 +243,11 @@ return [
         'Html' => 'Collective\Html\HtmlFacade',
         'Agent' => Jenssegers\Agent\Facades\Agent::class,
         'Location' => Stevebauman\Location\Facades\Location::class,
+        'Image' => Intervention\Image\Facades\Image::class,
+
+
+
+
 
 
 

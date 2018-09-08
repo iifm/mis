@@ -133,8 +133,27 @@ class ResetPasswordController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+  /*  public function getImage()
     {
-        //
+        return view('imageDemo');
+    }
+
+ public function makeimage(Request $request)  
+    {  
+       //dd($request->all());
+       $img = \Image::make(public_path('images/birth.png'));
+        $img->text('Happy Birthday @_@ ', 230, 280,function($font){
+           $font->file(public_path('images/font.otf')); 
+           $font->size(40);  
+          $font->color('#000');  
+          $font->align('center');  
+          $font->valign('bottom');  
+        });
+         $img->save(public_path('images/sarita.png'));  
+     // dd($img);
+    }  */
+    public function test()
+    {
+      return view('leaveRequestEmailer');
     }
 }

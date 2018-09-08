@@ -135,10 +135,10 @@
               <th>Email ID</th>
               <td>{{$user->email}}</td>
             </tr>
-             <tr>
+           <!--   <tr>
               <th>Mobile</th>
               <td>{{$user->mobile}}</td>
-            </tr>
+            </tr> -->
              <tr>
               <th>Employee ID</th>
               <td>IIFM{{ str_pad($user->user_id,4,"0",STR_PAD_LEFT) }}</td>
