@@ -352,25 +352,25 @@ class HomeController extends Controller
 
       // $image_path="https://thumbs.dreamstime.com/b/best-wishes-lettering-text-card-44167686.jpg";
                       
-$birthday_images=[\URL::To('/public/images/bestwish.jpg'),\URL::To('/public/images/birthday1.jpg'),\URL::To('/public/images/birthday2.jpg'),\URL::To('/public/images/birthday3.jpg'),\URL::To('/public/images/birthday4.jpg')];
-$birthday_image=array_rand($birthday_images);
-
-$work_images=[\URL::To('/public/images/bestwish.jpg'),\URL::To('/public/images/work1.jpg'),\URL::To('/public/images/work2.jpg'),\URL::To('/public/images/work3.jpg')];
+$birthday_images=['http://www.prathamedu.com/Files_Upload/birthday1_file.jpg','http://www.prathamedu.com/Files_Upload/birthday2_file.jpg','http://www.prathamedu.com/Files_Upload/birthday4_file.jpg ','http://www.prathamedu.com/Files_Upload/birthday3_file.jpg','http://www.prathamedu.com/Files_Upload/birthday5_file.jpg'];
+   $birthday_image = array_rand($birthday_images);
+//dd($birthday_images);
+$work_images=['http://www.prathamedu.com/Files_Upload/work1_file.jpg','http://www.prathamedu.com/Files_Upload/work2_file.jpg','http://www.prathamedu.com/Files_Upload/work3_file.jpg','http://www.prathamedu.com/Files_Upload/work4_file.jpg'];
 $work_image=array_rand($work_images);
 
-$anniversary_images=[\URL::To('/public/images/bestwish.jpg'),\URL::To('/public/images/marriage1.jpg'),\URL::To('/public/images/marriage2.jpg'),\URL::To('/public/images/marriage3.jpg')];
+$anniversary_images=['http://www.prathamedu.com/Files_Upload/anniversary1_file.jpg','http://www.prathamedu.com/Files_Upload/anniversary2_file.jpg','http://www.prathamedu.com/Files_Upload/anniversary3_file.jpg','http://www.prathamedu.com/Files_Upload/anniversary4_file.jpg'];
 $anniversary_image=array_rand($anniversary_images);
         $to=['sarita.sharma@iifm.co.in'];
 
         if($sub=="Birthday"){
-           $image_path="https://www.craftyarts.co.uk/images/anna-griffin-foil-stamp-die-best-wishes-p12706-38747_image.jpg";
+           $image_path=$birthday_images[$birthday_image];
         }
         elseif ($sub=="Work Anniversary") {
-            $image_path='http://1.bp.blogspot.com/-pwmaggiuHyc/T4afreNvQpI/AAAAAAAAAZw/jOcSUCjuRXc/s640/2911.BestWishesRibbon.jpg';
+            $image_path=$anniversary_images[$anniversary_image];
             //dd($image_path);
         }
         else{
-            $image_path='http://1.bp.blogspot.com/-pwmaggiuHyc/T4afreNvQpI/AAAAAAAAAZw/jOcSUCjuRXc/s640/2911.BestWishesRibbon.jpg';
+            $image_path=$anniversary_images[$anniversary_image];
         }
 
            $query=Wishes::create(['sender_id'=> $sender_id,'message'=>$message,'receiver_id'=>$receiver_id,'sip'=>$sip]);

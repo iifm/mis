@@ -122,15 +122,15 @@
 	<!------- END PRE-HEADER / BROWSER VIEW MODULE------->
 	
 	<!------- START 600px WRAPPER ------->
-	<table width="600" align="center" cellpadding="0" cellspacing="0" border="0" class="MCwrapper"><tr><td style="padding-top: 0;padding-bottom: 20px;margin-top: 0;margin-bottom: 0;color: #555555;border-collapse: collapse;padding-left: 0;padding-right: 0;margin-left: 0;margin-right: 0;">
+	<table width="780" align="center" cellpadding="0" cellspacing="0" border="0" class="MCwrapper"><tr><td style="padding-top: 0;padding-bottom: 20px;margin-top: 0;margin-bottom: 0;color: #555555;border-collapse: collapse;padding-left: 0;padding-right: 0;margin-left: 0;margin-right: 0;">
 		
 		<!------- START FEATURED-05 MODULE ------->
-		<table align="center" cellpadding="0" cellspacing="0" border="0"><tr><td width="600" class="featured05MC" style="margin-top: 0;margin-bottom: 0;padding-top: 0;padding-bottom: 20px;color: #555555;border-collapse: collapse;padding-left: 0;padding-right: 0;margin-left: 0;margin-right: 0;">
-			<table class="featured05imageTable" cellpadding="0" cellspacing="0" border="0"><tr><td class="featured05image" width="600" style="margin-top: 0;margin-bottom: 0;padding-top: 0;padding-bottom: 0;color: #555555;border-collapse: collapse;padding-left: 0;padding-right: 0;margin-left: 0;margin-right: 0;">
+		<table class="featured05imageTable" cellpadding="0" cellspacing="0" border="0"><tr><td class="featured05image" width="100%" style="margin-top: 0;margin-bottom: 0;padding-top: 0;padding-bottom: 0;color: #555555;border-collapse: collapse;padding-left: 0;padding-right: 0;margin-left: 0;margin-right: 0;">
 				<a href="#" target="_blank" style="color: #ad77bb;text-decoration: none;">
-				<img hspace="0" vspace="0" src="{{$data['image']}}" width="400" alt="" title="" style="border: 0;display: block;outline: none;"></a>
-			</td></tr></table>	
-		</td></tr></table>
+				<img hspace="0" vspace="0" src="{{$data['image']}}" width="100%" alt="" title="" style="border: 0;display: block;outline: none;"></a><p>&nbsp;</p>
+
+
+			</td></tr></table>
 		<!------- END FEATURED-05 MODULE ------->
 		
 		<!------- START TEXT-03a MODULE ------->
@@ -147,7 +147,7 @@
 		<!------- END TEXT-03a MODULE ------->
 
 		<!------- START TEXT-03b MODULE ------->
-		<table align="center" cellpadding="0" cellspacing="0" border="0"><tr><td class="text03bMC" width="540" style="margin-top: 0;margin-bottom: 0;padding-top: 10px;padding-bottom: 0;color: #555555;border-collapse: collapse;padding-left: 0;padding-right: 0;margin-left: 0;margin-right: 0;">
+		<table align="center" cellpadding="0" cellspacing="0" border="0"><tr><td class="text03bMC" width="100%" style="margin-top: 0;margin-bottom: 0;padding-top: 10px;padding-bottom: 0;color: #555555;border-collapse: collapse;padding-left: 0;padding-right: 0;margin-left: 0;margin-right: 0;">
 			<table align="left" cellpadding="0" cellspacing="0" border="0">
 				<tr><td class="text03bBodySummary" style="margin-top: 0;margin-bottom: 0;padding-top: 0;padding-bottom: 0;color: #777777;border-collapse: collapse;padding-left: 0;padding-right: 0;margin-left: 0;margin-right: 0;font-family: Tahoma,Helvetica,Arial,Verdana,sans-serif;font-size: 14px;line-height: 32px;letter-spacing: 0;font-weight: bold;">
 					
@@ -158,7 +158,7 @@
 		<!------- END TEXT-03b MODULE ------->
 	
 		<!------- START FEATURED-05 MODULE ------->
-		<table align="center" cellpadding="0" cellspacing="0" border="0"><tr><td width="600" class="featured05MC" style="margin-top: 0;margin-bottom: 0;padding-top: 0;padding-bottom: 20px;color: #555555;border-collapse: collapse;padding-left: 0;padding-right: 0;margin-left: 0;margin-right: 0;">
+		<table align="center" cellpadding="0" cellspacing="0" border="0"><tr><td width="100%" class="featured05MC" style="margin-top: 0;margin-bottom: 0;padding-top: 0;padding-bottom: 20px;color: #555555;border-collapse: collapse;padding-left: 0;padding-right: 0;margin-left: 0;margin-right: 0;">
 			<table class="featured05imageTable" cellpadding="0" cellspacing="0" border="0"><tr><td class="featured05image" width="600" style="margin-top: 0;margin-bottom: 0;padding-top: 0;padding-bottom: 0;color: #555555;border-collapse: collapse;padding-left: 0;padding-right: 0;margin-left: 0;margin-right: 0;">
 				<a href="#" target="_blank" style="color: #ad77bb;text-decoration: none;">
 				<img hspace="0" vspace="0" src="images/happy_02.jpg" width="600" height="150" alt="" title="" style="border: 0;display: block;outline: none;"></a>
