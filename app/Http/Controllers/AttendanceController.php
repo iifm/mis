@@ -13,13 +13,8 @@ use Mail;
 use URL;
 
 class AttendanceController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-      public function __construct()
+{     
+  public function __construct()
     {
         $this->middleware('auth');
     }
@@ -204,7 +199,7 @@ class AttendanceController extends Controller
 
 
                   if ($attendances==null) {
-                    $user_name=User::find($employee); //where('id',$employee)->pluck('name');
+                    $user_name=User::find($employee); 
 
                     $datas[] = array(
                         'date'=>$start,
@@ -429,21 +424,27 @@ class AttendanceController extends Controller
       $sip=\Request::ip();
       $att_in=AttendanceUpdate::create(['user_id'=>$user_id,'date'=>$date,'name'=>$name,'type'=>$type,'time'=>$time,'reason'=>$reason,'approvalfrom'=>$approvalfroms,'sip'=>$sip]);
 
-     // $to_email = ['sarita.sharma@iifm.co.in'];
-        //  $subject = "Test Mail". date('d-m-Y h:m:s');
+        
            $data = ['name'=>$username,'date'=>$date,'time'=>$time,'type'=>$type,'reason'=>$reason];
+
       $to_email=User::whereIn('id',$approvalfrom)->pluck('email')->toArray();
+
+      array_push($to_email, Auth::user()->email);
+
+
       $approval_ids=User::whereIn('id',$approvalfrom)->pluck('id')->toArray();
 
      // dd($to_email);
 
-        $subject = "Attendance Approval Request From ".$username. "  on ". date("l jS \of F Y h:i:s A");
+        $subject = "Attendance Approval Request From ".$username. "  on ". date("l jS \of F Y ");
+
+        $store_mail_subject=AttendanceUpdate::where('id',$att_in->id)->update(['mail_subject'=>$subject]);
 
           foreach ($to_email as  $to) {
            foreach ($approval_ids as  $approval_id) {
              # code...
           
-           Mail::send('mail.attendance_approve',  ['data' => $data,'link'=>URL::route('attendanceApprove',['id'=>$att_in->id,'from'=>$approval_id,'user_id'=>$user_id])], function ($message)use($to,$subject) {
+           Mail::send('mail.attendanceRequestMailer',  ['data' => $data,'link'=>URL::route('attendanceApprove',['id'=>$att_in->id,'from'=>$approval_id,'user_id'=>$user_id])], function ($message)use($to,$subject) {
                   $message->from('info@prathamonline.in', 'MIS Alert');
                  $message->to($to);
                  $message->subject($subject);
@@ -484,19 +485,22 @@ class AttendanceController extends Controller
       $to_email=User::whereIn('id',$approvalfrom)->pluck('email')->toArray();
       $approval_ids=User::whereIn('id',$approvalfrom)->pluck('id')->toArray();
 
-
+ array_push($to_email, Auth::user()->email);
 
      // dd($to_email);
 
-        $subject = "Attendance Approval Request From ".$username. "  on ". date("l jS \of F Y h:i:s A");
+        $subject = "Attendance Approval Request From ".$username. "  on ". date("l jS \of F Y ");
+
+           $store_mail_subject=AttendanceUpdate::where('id',$att_in->id)->update(['mail_subject'=>$subject]);
 
           foreach ($to_email as  $to) {
            foreach ($approval_ids as  $approval_id) {
              # code...
           
-           Mail::send('mail.attendance_approve',  ['data' => $data,'link'=>URL::route('attendanceApprove',['id'=>$att_in->id,'from'=>$approval_id,'user_id'=>$user_id])], function ($message)use($to,$subject) {
+           Mail::send('mail.attendanceRequestMailer',  ['data' => $data,'link'=>URL::route('attendanceApprove',['id'=>$att_in->id,'from'=>$approval_id,'user_id'=>$user_id])], function ($message)use($to,$subject) {
                  $message->from('info@prathamonline.in', 'MIS Alert');
                  $message->to($to);
+                 //$message->cc([]);
                  $message->subject($subject);
             });
           }
@@ -530,18 +534,38 @@ class AttendanceController extends Controller
         $type=$request->type;
 
         $sip=\Request::ip();
-        $data=AttendanceUpdate::where('id',$from)->update(['status'=>$actionstatus,'approvalfrom'=>$id,'comment'=>$comment]);
+        $data=AttendanceUpdate::where('id',$from)->update(['status'=>$actionstatus,'approvedby'=>$id,'comment'=>$comment]);
 
         $match=Attendance::where('member_id',$user_id)
                             ->where('date',$date)
                             ->where('time',$time)
                             ->where('type',$type)
                             ->get();
-          //dd($match);                
-        //dd($actionstatus);
+         
+
         if ($actionstatus=='approved' && count($match)==0) {
            $attendance_update=Attendance::insert(['member_id'=>$user_id,'date'=>$date,'time'=>$time,'type'=>$type,'sip'=>$sip]);
         }
+       $attendanceDetails=AttendanceUpdate::where('attendance_updates.id',$from)
+                        ->join('users','users.id','=','attendance_updates.user_id')
+                        ->select('attendance_updates.*','users.name as username')->first();
+                       // dd($attendanceDetails);
+     $subject ="Re: " . $attendanceDetails->mail_subject;
+
+      $approvedby=User::where('id',$attendanceDetails->approvedby)->first();
+
+            $email=User::where('id',$attendanceDetails->user_id)->first();
+
+            $to_email=['sarita.sharma@iifm.co.in',$email->email];
+
+       $data=['username'=>$attendanceDetails->username,'type'=>$attendanceDetails->type,'date'=>$attendanceDetails->date,'time'=>$attendanceDetails->time,'reason'=>$attendanceDetails->reason,'status'=>$attendanceDetails->status,'approvedby'=>$approvedby->name];
+
+
+         Mail::send('mail.attendanceRequestApproved',  ['data' => $data], function ($message)use($to_email,$subject) {
+             $message->from('info@prathamonline.in', 'PRATHAM Education');
+                 $message->to($to_email);
+                 $message->subject($subject);
+            });
       
        Session::flash('message','Attendance Status Updated Successfully!!');
        return redirect()->route('dashboard');

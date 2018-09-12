@@ -154,6 +154,9 @@ class ResetPasswordController extends Controller
     }  */
     public function test()
     {
-      return view('leaveRequestEmailer');
+     
+      $data=['name'=>'','type'=>'','date'=>'','time'=>'','reason'=>''];
+      $link='';
+      return view('mail.attendanceRequestMailer',compact(['data','link']));
     }
 }

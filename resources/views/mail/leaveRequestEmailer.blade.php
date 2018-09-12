@@ -11,16 +11,14 @@
                         <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
                             
                             <tbody><tr>
-                                <td align="center" valign="top" bgcolor="#009688" style="background-color:#009688">
+                                <td align="center" valign="top" bgcolor="#009688" style="background-color:#009688; padding-top: 25px;">
                                     
                                     <table align="center" border="0" cellpadding="0" cellspacing="0" style="max-width:640px" width="100%" class="m_4029179099876117027emailContainer">
                                         <tbody><tr>
-                                            <td align="center" valign="top" style="padding:40px">
-                                                <img alt="MailChimp" src="{{URL::To('public/images/mis-logo.png')}}" height="80" width="200" style="padding: 10px;">
-                                            </td>
+                                           
                                         </tr>
                                         <tr>
-                                            <td style="background-color:#ffffff;padding-top:40px">&nbsp;</td>
+                                            <td style="background-color:#ffffff; height: 25px;">&nbsp;</td>
                                         </tr>
                                     </tbody></table>
                                     
@@ -33,37 +31,70 @@
                                     
                                     <table align="center" bgcolor="#FFFFFF" border="0" cellpadding="0" cellspacing="0" style="background-color:#ffffff;max-width:640px" width="100%" class="m_4029179099876117027emailContainer">
                                         <tbody><tr>
-                                            <td align="center" valign="top" bgcolor="#FFFFFF" style="padding-right:40px;padding-left:40px;padding-bottom: 20px;">
+                                            <td align="center" valign="top" bgcolor="#FFFFFF" style="padding-right:40px;padding-left:40px; margin-top: 0px;">
                                                 <h1 style="color:#606060; text-align:center;font-family: 'Anton', sans-serif;font-family: 'Luckiest Guy', cursive;font-family: 'Oleo Script', cursive;" ><span class="fa fa-calendar"></span> Leave Request<br>
                                             </td>
                                         </tr>
                                          <tr>
                                             <td align="center" valign="top" style="padding-right:40px;padding-left:40px">
-                                                <p style="text-align:center">  Applicant Name  &nbsp;&nbsp;&nbsp;&nbsp;<strong>Sarita Sharma</strong></p> 
+                                                <p style="text-align:center;margin: 20px;">  Applicant Name  &nbsp;&nbsp;<strong style="font-size: 25px;">{{$data['name']}}</strong></p> 
                                             </td>
                                         </tr>
-                                        <tr>
-                                          <td colspan="4" style="padding: 30px;"><strong><span class="" style="font-size: 20px;color: grey">Leave Details</span></strong>
-                                        <table width="100%" border="1" style="margin-top: 20px;">
-                                        
-                                          <tbody><tr><td align="center"><u><span class="m_-8155437158409970603il">Leaves</span>(Days)</u><br><strong>0.5</strong></td>
-                                          
-                                          <td align="center"><u>Date(From)</u><br><strong>2018-09-07</strong></td>
-                                          
-                                          <td align="center"><u>Date(To)</u><br><strong>2018-09-07</strong></td>
-                                          
-                                          <td align="center"><u><span class="m_-8155437158409970603il">Leave</span> Type</u><br><strong>Half day Leave</strong></td>
-                                          </tr>
+                                        <tr> 
+                                            <td>
+                                                <table width="60%" style="margin-top:15px; max-width:80%;border-collapse: collapse; border:1px solid #e1e1e1;" id="leave_details" align="center">
+                                                <thead>
+                                                    <tr>
+                                                        <td colspan="2" style="font-size: 20px; color: #606060; text-align:center; font-weight:600;padding: 5px;">
+                                                            Leave Details
+                                                        </td>
+                                                    </tr>
 
-                                        </tbody></table>
-                                        <div style="margin-top: 20px"><p><strong>Reason : &nbsp;&nbsp;&nbsp;&nbsp;</strong>Official Reason </p> </div> 
-                                      </td>
+                                                    <tr>
+                                                        <td style="min-width:120px; padding: 10px 15px;">
+                                                            <strong>Leave Type</strong>
+                                                        </td>
+                                                        <td style=" padding: 10px 15px;"> 
+                                                           {{$data['leavetype']}}
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td style="padding: 10px 15px; background-color: #f2f2f2">
+                                                            <strong> Start Date </strong>
+                                                        </td>
+                                                        <td style="padding: 10px 15px; background-color: #f2f2f2">
+                                                           {{$data['leavefrom']}}
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td style=" padding: 10px 15px;">
+                                                            <strong>End Date </strong>
+                                                        </td>
+                                                        <td style=" padding: 10px 15px;">
+                                                            {{$data['leaveto']}}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                    <td style=" padding: 10px 15px; background-color: #f2f2f2"><strong> Total Days</strong></td>
+                                                    <td style=" padding: 10px 15px; background-color: #f2f2f2">{{$data['totdays']}}</td>
+                                                    </tr>
+                                                     <tr>
+                                                    <td style=" padding: 10px 15px;"><strong>Reason </strong> </td>
+                                                    <td style=" padding: 10px 15px;">{{$data['reason']}}</td>
+                                                    </tr>
+                                                   
+                                                </thead>
+                                                </table>
+                                        
+                                            </td>
                                         </tr>
                                 
                                         <tr>
                                             <td align="center" valign="middle" style="padding-right:40px;padding-bottom:20px;padding-left:40px">
                                                 
-                                                <a href="#" style="background-color:#009688;border-collapse:separate;border-top:20px solid #009688;border-right:20px solid #009688;border-bottom:20px solid #009688;border-left:20px solid #009688;border-radius:3px;color:#ffffff;display:inline-block;font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:600;letter-spacing:.3px;text-decoration:none; margin-top: 30px" target="_blank" ">Click Here For Action</a>
+                                                <a href="{{$link}}" style="background-color:#009688;border-collapse:separate;border-top:20px solid #009688;border-right:20px solid #009688;border-bottom:20px solid #009688;border-left:20px solid #009688;border-radius:3px;color:#ffffff;display:inline-block;font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:600;letter-spacing:.3px;text-decoration:none; margin-top: 30px" target="_blank" ">Click Here For Action</a>
                                                 
                                             </td>
                                         </tr>

@@ -80,7 +80,7 @@
                     <select class="form-control" name="user_id" required="" id="category" required="">
                       <option value="">Select Employee</option>
                       @foreach($users as $user)
-                      <option value="{{$user->id}}">{{$user->name}}</option>
+                      <option value="{{$user->user_id}}">{{strtoupper($user->username)}}</option>
                       @endforeach
                      
                     </select>

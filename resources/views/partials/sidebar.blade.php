@@ -134,7 +134,8 @@ use App\NewsUpload;
         </li>
           <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-product-hunt"></i><span class="app-menu__label">Inventory Management</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item" href="{{route('product.index')}}"><i class="icon fa fa-list"></i>  Product</a></li>
+            <li><a class="treeview-item" href="{{url('/product-categories/index')}}"><i class="icon fa fa-list"></i>  Product Category</a></li>
+            <li><a class="treeview-item" href="{{route('product.index')}}"><i class="icon fa fa-list"></i>  Product Management</a></li>
              <li><a class="treeview-item" href="{{route('assign.index')}}"><i class="icon fa fa-tasks"></i>Allocate Product</a></li>
             
           </ul>

@@ -121,22 +121,20 @@ class OnDutyController extends Controller
          $odfromname=User::find($datas->empid);
            
             $to_email=User::whereIn('id',$manager)->pluck('email')->toArray();
+
+            array_push($to_email, Auth::user()->email);
              $uids=User::whereIn('id',$manager)->pluck('id')->toArray();
            
-          
-             $default_to=['manish.ram@iifm.co.in'];
-
-             $email_array=array_merge($to_email,$default_to);
-          //dd($email_array);
-              
-          $subject = "On-Duty Request From " .$odfromname->name ."  on ". date("l jS \of F Y h:i:s A");
+             
+          $subject = "On-Duty Request From " .$odfromname->name ."  on ". date("l jS \of F Y ");
           $replyto=['manish.ram@iifm.co.in','sarita.sharma@iifm.co.in','hr@iifm.co.in','ankit.kapoor@iifm.co.in'];
           $data= array('name' => $name, 'od_date' => $od_date,'intime'=>$intime,'odtype'=>$odtype, 'outtime'=>$outtime,'reason'=>$reason);
     
-         Mail::send('mail.od_mail',  ['data' => $data], function ($message)use($replyto,$email_array,$subject) {
+         Mail::send('mail.onDutyRequestMailer',  ['data' => $data], function ($message)use($replyto,$email_array,$subject) {
                      $message->from('info@prathamonline.in', 'MIS Alert');
-                        $message->to($email_array);
+                        $message->to($to_email);
                         $message->subject($subject);
+                        $message->cc(['manish.ram@iifm.co.in']);
                         $message->replyTo($replyto);
                     });
 

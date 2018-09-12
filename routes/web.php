@@ -191,6 +191,13 @@ Route::get('/upload/category/delete/{id}','UploadCategoryController@destroy');
 Route::get('/download/{id}','DownloadController@index');
 Route::get('/post/view/{id}','HomeController@postView');
 
-/*Route::get('image/editing','ResetPasswordController@getImage');
-Route::post('image/editing/store','ResetPasswordController@makeimage');*/
-Route::get('email-template/test','ResetPasswordController@test');
+//product category
+Route::get('/product-categories/index','ProductCategoryController@index')->name('product.category');
+Route::get('/product-categories/create','ProductCategoryController@create');
+Route::post('/product-categories/store','ProductCategoryController@store');
+Route::get('/product-categories/edit/{id}','ProductCategoryController@edit');
+Route::get('/product-categories/delete/{id}','ProductCategoryController@destroy');
+Route::post('/product-categories/update/{id}','ProductCategoryController@update');
+
+
+Route::get('/leave-mailer','ResetPasswordController@test');

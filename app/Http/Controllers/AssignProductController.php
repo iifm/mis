@@ -42,9 +42,15 @@ class AssignProductController extends Controller
     public function create()
     {
         
-        $users=User::orderBy('name')->get();
+        $users=User::join('user_details','user_details.user_id','=','users.id')
+                                ->where('user_details.status','Active')
+                                ->select('users.id as user_id','users.name as username')
+                                ->orderBy('users.name')
+                                ->get();
+                               // dd($users);
 
         $product=DB::table('products')->get();
+
       
         $category=DB::table('product_categories')->get();
         return view('inventory_management.product_allocated.create',compact(['users','category','products']));

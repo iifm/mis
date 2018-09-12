@@ -82,7 +82,7 @@ class LeaveController extends Controller
                // dd($appfromnamesarr);
                 $appfrom=array_filter($appfromnamesarr);
                 //dd($appfrom);
-                $appfromname=User::whereIn('id',[$appfrom])->pluck('name')->toArray();   
+                $appfromname=User::whereIn('id',[$appfrom])->pluck('name')->toArray( );   
               //  dd($appfromname);
                 $names = implode(',',$appfromname); 
 
@@ -140,15 +140,7 @@ class LeaveController extends Controller
 
       // dd($totdays);
         $leaveoff = $request->Input('leaveoff');
-     // dd($leaveoff);
-   /*    $half_day = array_search('Half day Leave',[$leaveoff]);
-
-           //dd($half_day);
-           if ($half_day!='false') {
-            $totdays=$totdays - 0.5;
-           }
-*/
-           //dd($totdays);
+    
         $leavetype=implode(',', $leaveoff);
 
         $reason = $request->Input('reason');  
@@ -162,27 +154,30 @@ class LeaveController extends Controller
         $query=Leave::create(['empid'=> $id,'leavefrom'=>$leavefrom,'leaveto'=>$leaveto,'totalleave'=>$totdays,'leavetype'=>$leavetype,'agcompoffdate'=>$agdcompoff,'reason'=>$reason,'approvalfrom'=>$approvalfrom_array,'status'=>'Pending','sip'=>$ip]);
        // $to_email[]='';
             $leavefromname=User::find($query->empid);
-           
+           //$to_email=[];
             $to_email=User::whereIn('id',$approvalfrom)->pluck('email')->toArray();
-             $uids=User::whereIn('id',$approvalfrom)->pluck('id')->toArray();
-           
-          
-             $default_to=['manish.ram@iifm.co.in'];
+          // dd($to_email);
 
-             $email_array=array_merge($to_email,$default_to);
-          //dd($email_array);
+
+            //dd($to_email);
+             $uids=User::whereIn('id',$approvalfrom)->pluck('id');
+           array_push($to_email, Auth::user()->email);
+
               
-          $subject = "Leave Request From " .$leavefromname->name ."  on ". date("l jS \of F Y h:i:s A");
+          $subject = "Leave Request From " .$leavefromname->name ."  on ". date("l jS \of F Y");
+
+          $subject_store=Leave::where('id',$query->id)->update(['mail_subject'=>$subject]);
           $replyto=['manish.ram@iifm.co.in','sarita.sharma@iifm.co.in','hr@iifm.co.in','ankit.kapoor@iifm.co.in'];
-          $data= array('name' => $name, 'leavefrom' => $leavefrom,'reason'=>$reason,'leavetype'=>$leavetype, 'leaveto'=>$leaveto,'totdays'=>$totdays);
-    
+         $data= array('name' => $name, 'leavefrom' => $leavefrom,'reason'=>$reason,'leavetype'=>$leavetype, 'leaveto'=>$leaveto,'totdays'=>$totdays);
+        
        
-             foreach ($email_array as $to) {
+             foreach ($to_email as $to) {
                 foreach ($uids as  $uid) {
                 
-                  Mail::send('mail.leaveapprove',  ['data' => $data,'link'=>URL::route('leave-approval',['id'=>$query->id,'uid'=>$uid])], function ($message)use($replyto,$to,$subject,$approvalfrom) {
-                     $message->from('sharmasarita505@gmail.com', 'MIS Alert');
+                  Mail::send('mail.leaveRequestEmailer',  ['data' => $data,'link'=>URL::route('leave-approval',['id'=>$query->id,'uid'=>$uid])], function ($message)use($replyto,$to,$subject,$approvalfrom) {
+                     $message->from('info@prathamonline.in', 'MIS Alert');
                         $message->to($to);
+                        $message->cc(['manish.ram@iifm.co.in']);
                         $message->subject($subject);
                         $message->replyTo($replyto);
                     });
@@ -239,23 +234,32 @@ class LeaveController extends Controller
         $comment= $request->comment;
        
        $data=Leave::where('id',$id)->update(['status'=>$actionstatus,'comment'=>$comment,'approvedby'=>$uid]);
+
+       $leave_datas=Leave::where('id',$id)->first();
+
+      $leaveDetails=Leave::where('leaves.id',$id)
+                        ->join('users','users.id','=','leaves.empid')
+                        ->select('leaves.*','users.name as username')->first();
+            $approvedby=User::where('id',$leaveDetails->approvedby)->first();
+
+            $email=User::where('id',$leaveDetails->empid)->first();
+
+     $subject ="Re: " . $leave_datas->mail_subject;
+
+       $data=['username'=>$leaveDetails->username,'type'=>$leaveDetails->leavetype,'from'=>$leaveDetails->leavefrom,'to'=>$leaveDetails->leaveto,'days'=>$leaveDetails->totalleave,'reason'=>$leaveDetails->reason,'status'=>$leaveDetails->status,'approvedby'=>$approvedby->name];
+
+       $to_email=[$email->email,'sarita.sharma@iifm.co.in'];
+      
+           Mail::send('mail.leaveRequestApproved',  ['data' => $data], function ($message)use($to_email,$subject) {
+             $message->from('info@prathamonline.in', 'PRATHAM Education');
+                 $message->to($to_email);
+                 $message->subject($subject);
+            });
+      
        Session::flash('message','Leave Status Updated Successfully!!');
        return redirect()->route('dashboard');
     }
 
 
-    public function sendMail(){
-         $to_email = ['manish.ram@iifm.co.in','sarita.sharma@iifm.co.in'];
-          $subject = "Test Mail". date('d-m-Y h:m:s');
-           $data = [];
-
-
-           Mail::send('mail.leaveapprove',  ['data' => $data], function ($message)use($to_email,$subject) {
-             $message->from('hr@iifm.co.in', 'PRATHAM Education');
-                 $message->to($to_email);
-            });
-
-            echo "Mail Sent.... Check Your Email Please... :)";
-
-        }
+   
 }
