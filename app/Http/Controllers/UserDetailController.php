@@ -39,7 +39,8 @@ class UserDetailController extends Controller
          $user_detail=User::where('users.id',$user_id)
                     ->join('user_details','user_details.user_id','=','users.id')
                     ->join('departments','departments.id','=','user_details.department')
-                    ->select('users.*','user_details.*','users.id as user_id','departments.name as department')
+                    ->join('locations','locations.id','=','user_details.locationcentre')
+                    ->select('users.*','user_details.*','users.id as user_id','departments.name as department','locations.name as locationcentre')
                     ->get();
 
            //dd($user_detail);
@@ -291,14 +292,15 @@ class UserDetailController extends Controller
      public function official($id)
     {
        //$id=Auth::user()->id;
-        $departments=Department::all();
-        $locations=DB::table('locations')->where('parent_id','>',0)->get();
+        $departments=Department::get();
+        $locations=DB::table('locations')->where('parent_id','>',0)->orderBy('name')->get();
         //dd($locations);
         $user_detail =UserDetails::join('users','users.id','=','user_details.user_id')
                                 ->join('departments','departments.id','=','user_details.department')
                                 ->where('users.id',$id)
                                 ->select('users.*','user_details.*','users.id as userid','departments.id as department_id','departments.name as department_name')
                                 ->get();
+                                //dd($user_detail);
        return view('mis.user_detail.official',compact(['user_detail','id','departments','locations']));
     }
 
@@ -311,6 +313,8 @@ class UserDetailController extends Controller
         $mobile=$request->input('mobile');
         $designation=$request->input('designation');
         $department=$request->input('department');
+
+        //dd($department);
         $locationcentre=$request->input('locationcentre');
         $sip=\Request::ip();
        

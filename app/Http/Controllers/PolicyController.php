@@ -35,8 +35,13 @@ class PolicyController extends Controller
      */
     public function create($id)
     {
+       // dd($id);
+
          $policydata=UploadCategory::where('id',$id)->get();
+         //dd($policydata);
+
          $content=NewsUpload::where('category',$id)->get();
+        //s dd($content);
 
         return view('policy.policyCreate',compact(['policydata','id','content']));
 

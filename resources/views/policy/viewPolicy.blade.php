@@ -23,7 +23,9 @@
         <div>
           <h1 class="heading_title"><i class="fa fa-file"></i> {{$content->policyType}}</h1>
         </div>
+          @if(Auth::user()->role==1 || Auth::user()->role==2)
         <a href="{{url('/policy/edit')}}/{{$id}}" class="fa fa-edit btn btn-primary"> Edit {{$content->policyType}}</a>
+        @endif
       </div>
           <?php $i=1;?>
                <?php if(Session::has('message')) {?>
@@ -47,7 +49,9 @@
         <div>
           <h1 class="heading_title"><i class="fa fa-file"></i> {{$data->name}} Policy </h1>
         </div>
+          @if(Auth::user()->role==1 || Auth::user()->role==2)
         <a href="{{url('/policy/edit')}}/{{$id}}" class="fa fa-edit btn btn-primary"> Edit {{$data->name}}</a>
+        @endif
       </div>
         
       <div class="row">

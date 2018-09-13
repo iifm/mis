@@ -153,11 +153,11 @@
             </tr>
              <tr>
               <th>Date Of Joining</th>
-              <td>{{$user->doj}}</td>
+              <td>{{date('j F  Y',strtotime($user->doj))}}</td>
             </tr>
             <tr>
               <th>Date Of Birth</th>
-              <td>{{$user->dob}}</td>
+              <td>{{date('j F  Y',strtotime($user->dob))}}</td>
             </tr>
             </table>
        

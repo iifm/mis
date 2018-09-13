@@ -199,5 +199,6 @@ Route::get('/product-categories/edit/{id}','ProductCategoryController@edit');
 Route::get('/product-categories/delete/{id}','ProductCategoryController@destroy');
 Route::post('/product-categories/update/{id}','ProductCategoryController@update');
 
-
-Route::get('/leave-mailer','ResetPasswordController@test');
+//feedback 
+Route::get('/feedback/index','FeedbackController@index')->name('feedback.index');
+Route::post('/feedback/store','FeedbackController@store');

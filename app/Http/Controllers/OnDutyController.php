@@ -130,7 +130,7 @@ class OnDutyController extends Controller
           $replyto=['manish.ram@iifm.co.in','sarita.sharma@iifm.co.in','hr@iifm.co.in','ankit.kapoor@iifm.co.in'];
           $data= array('name' => $name, 'od_date' => $od_date,'intime'=>$intime,'odtype'=>$odtype, 'outtime'=>$outtime,'reason'=>$reason);
     
-         Mail::send('mail.onDutyRequestMailer',  ['data' => $data], function ($message)use($replyto,$email_array,$subject) {
+         Mail::send('mail.onDutyRequestMailer',  ['data' => $data], function ($message)use($replyto,$subject,$to_email) {
                      $message->from('info@prathamonline.in', 'MIS Alert');
                         $message->to($to_email);
                         $message->subject($subject);

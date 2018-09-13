@@ -5,7 +5,7 @@
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
   
-    <title>NEWS UPLOADS/UPDATES</title>
+    <title>Edit Policy</title>
  
     <!-- Main CSS-->
     {!!View('partials.include_css')!!}

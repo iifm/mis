@@ -9,7 +9,6 @@
     <!-- Main CSS-->
     {!!View('partials.include_css')!!}
  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
- <link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
     <link href="{{ URL::To('public/css/common_css/thumbnail-gallery.css') }}" rel="stylesheet">
 
@@ -52,7 +51,9 @@
                     </a>
                     <div class="caption">
                         <h3>{{$photo->category}} 
-                       <a href="{{url('/photo-album-delete')}}/{{$photo->id}}" class="fa fa-trash" style="margin-top: 10px; color: red" title="Delete This Image"></a> </h3>
+                      @if(Auth::user()->role==1 || Auth::user()->role==2)
+                       <a href="{{url('/photo-album-delete')}}/{{$photo->id}}" class="fa fa-trash" style="margin-top: 10px; color: red" title="Delete This Image"></a>
+                       @endif </h3>
                     </div>
                 </div>
             </div>

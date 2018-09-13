@@ -34,6 +34,8 @@ use App\NewsUpload;
                     ->join('departments','departments.id','=','user_details.department')
                     ->select('users.*','user_details.*','users.id as user_id','departments.name as department')
                     ->get();
+            $profile=null;
+            $department=null;
         foreach ($user_detail as  $value) {    
             $profile=$value->profile; 
             //dd($profile);
@@ -50,22 +52,23 @@ use App\NewsUpload;
         Session::put('downloadType', $downloadType);
     ?>
     <aside class="app-sidebar" style="overflow: scroll">
-      @if(Session::has('profile'))
-        @if(Session::has('department'))
+      @if(Session::has('profile')!=null && Session::has('department')!=null )
+      
       <div class="app-sidebar__user"><a href="{{url('/user-details')}}"><img class="app-sidebar__user-avatar" height="60px" width="60px;" src="{{ URL::To('storage/app/profile/'.Session::get('profile')) }}" alt="User Image"></a>
         <div>
           <p class="app-sidebar__user-name">{{Auth::user()->name}}</p>
           <p class="app-sidebar__user-designation">{{Session::get('department')}}</p>
         </div>
       </div>
+    
       @else
-      <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" height="60px" width="60px;" src="{{ URL::To('public/images/usser.png') }}" alt="User Image">
+      <div class="app-sidebar__user"><a href="{{url('/user-details')}}"><img class="app-sidebar__user-avatar" height="60px" width="60px;" src="{{ URL::To('public/images/usser.png') }}" alt="User Image"></a>
         <div>
           <p class="app-sidebar__user-name">{{Auth::user()->name}}</p>
           <p class="app-sidebar__user-designation">{{Session::get('department')}}</p>
         </div>
       </div>
-      @endif
+     
       @endif
       <ul class="app-menu">
          <li><a class="app-menu__item" href="{{url('/dashboard')}}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
@@ -85,7 +88,7 @@ use App\NewsUpload;
                <li><a class="treeview-item" href="{{url('/user-details')}}"><i class="icon fa fa-user"></i>User Profile</a></li>    
           </ul>
         </li>
-
+        @if(Auth::user()->role==1 || Auth::user()->role==2)
          <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-user-secret"></i><span class="app-menu__label">Admin Zone</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="{{url('/user-management/index')}}"><i class="icon fa fa-users"></i>User Management</a></li>
@@ -95,6 +98,7 @@ use App\NewsUpload;
              <li><a class="treeview-item" href="{{url('admin/news-upload')}}"><i class="icon fa fa-upload"></i>News Update/Upload</a></li>    
           </ul>
         </li>
+        @endif
 
 
          <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-download"></i><span class="app-menu__label">Downloads</span><i class="treeview-indicator fa fa-angle-right"></i></a>
@@ -111,7 +115,9 @@ use App\NewsUpload;
       
             <li><a class="app-menu__item" href="{{url('/hall-of-fame')}}"><i class="app-menu__icon fa fa-trophy"></i><span class="app-menu__label">Hall of Fame</span></a></li>
              <li><a class="app-menu__item" href="{{url('/photo-album')}}"><i class="app-menu__icon fa fa-file-image-o"></i><span class="app-menu__label">Photo Album</span></a></li>
-             <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-file"></i><span class="app-menu__label">Report</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+
+          @if(Auth::user()->role==1 || Auth::user()->role==2)
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-file"></i><span class="app-menu__label">Report</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="{{url('/conveyance-report')}}"><i class="icon fa fa-inr"></i>Conveyance </a></li>
             <li><a class="treeview-item" href="{{url('/attendance-report')}}"><i class="icon fa fa-calendar"></i> Attendance </a></li>
@@ -119,6 +125,7 @@ use App\NewsUpload;
             
           </ul>
         </li>
+         @endif
          <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-user-secret"></i><span class="app-menu__label">Policy</span><i class="treeview-indicator fa fa-angle-right"></i></a>
        
           <ul class="treeview-menu">
@@ -132,6 +139,7 @@ use App\NewsUpload;
             
           </ul>
         </li>
+          @if(Auth::user()->role==1 || Auth::user()->role==2)
           <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-product-hunt"></i><span class="app-menu__label">Inventory Management</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="{{url('/product-categories/index')}}"><i class="icon fa fa-list"></i>  Product Category</a></li>
@@ -140,6 +148,8 @@ use App\NewsUpload;
             
           </ul>
         </li>
+        @endif
+       <!--   <li><a class="app-menu__item" href="{{url('/feedback/index')}}"><i class="app-menu__icon fa fa-commenting"></i><span class="app-menu__label">Feedback</span></a></li> -->
           <li><a class="app-menu__item" href="{{url('/change-password')}}"><i class="app-menu__icon fa fa-key"></i><span class="app-menu__label">Change Password</span></a></li>
       </ul>
     </aside>

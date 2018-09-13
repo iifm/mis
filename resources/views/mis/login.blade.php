@@ -1,9 +1,6 @@
 
 <!DOCTYPE html>
 <html>
-  
-<!-- Mirrored from pratikborsadiya.in/vali-admin/page-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 05 Jul 2018 06:07:29 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
   
     <title>Login - MIS IIFM</title>
@@ -12,10 +9,13 @@
 
   </head>
   <body>
+
     <section class="material-half-bg">
+
       <div class="cover"></div>
     </section>
     <section class="login-content">
+       <h3 class="pull pull-right" ><a href="{{url('/feedback/index')}}" style="color: black;text-decoration: none;">Give Your Feedback </a> </h3>
       <div >
         <h1 style="color: white; font-family: sans-serif;"> </h1>
       </div>
@@ -46,9 +46,9 @@
             <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"" name="password" type="password" placeholder="Password">
          
              @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
+                <span class="invalid-feedback" role="alert">
+                          <strong>{{ $errors->first('password') }}</strong>
+                </span>
            @endif
           </div>
      
@@ -56,7 +56,8 @@
             <button class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>Sign In</button>
             <a href="{{url('/reset-password')}}"  class="pull-right" style="font-weight: bold; margin-top: 25px;"> Forgot Password</a>
           </div>
-          <div> <p class="semibold-text mb-2 fa fa-user" style="margin-top: 30px;"><a href="#" data-toggle="flip"> Sign Up</a></p></div>
+          <div> <p class="semibold-text mb-2 " style="margin-top: 27px;"><a href="#" data-toggle="flip"> Sign Up</a></p></div>
+          <!-- <div> <p class="semibold-text mb-2 " style="margin-top: 50px;"><a href="#" data-toggle="flip"> Give Your Feedback</a></p></div> -->
         </form>
 
                 <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}"
