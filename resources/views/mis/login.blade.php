@@ -15,7 +15,7 @@
       <div class="cover"></div>
     </section>
     <section class="login-content">
-       <h3 class="pull pull-right" ><a href="{{url('/feedback/index')}}" style="color: black;text-decoration: none;">Give Your Feedback </a> </h3>
+
       <div >
         <h1 style="color: white; font-family: sans-serif;"> </h1>
       </div>
@@ -115,7 +115,7 @@
            <p class="semibold-text mb-2" style="text-align:center; padding:20px;"><a href="#" data-toggle="flip">Login Here</a></p>
         </form>
       </div>
- 
+  <h6 class="pull pull-right" style="margin-top: 20px"><a href="{{url('/feedback/index')}}" style="color: #333;text-decoration: none;">Submit Your Feedback </a> </h6>
 
     </section>
     <img src="{{URL::To('public/images/mis-logo.png')}}" class="pull-left" height="60" style="position: fixed;left: 20px;bottom: 20px;">   

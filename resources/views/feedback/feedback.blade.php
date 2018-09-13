@@ -21,11 +21,10 @@
         <div id="alert" class="alert alert-success">{{ Session::get('message') }}
 
         </div><?php } ?>
-      <div class="">
-        <h1 class="" style="color: #fff">IIFM MIS</h1>
-      </div>
+     
       <div class="lock-box" style="width: 70%">
-        <h4 class="text-center user-name"></h4>
+
+        <h4 class="text-center user-name">Feedback Form</h4>
         <p class="text-center text-muted"></p>
         <form class="unlock-form" action="{{url('/feedback/store')}}" method="post">
           {{csrf_field()}}
@@ -39,10 +38,12 @@
                    
                 </div>
           <div class="form-group btn-container">
-            <button class="btn btn-primary btn-block" type="submit"><i class="fa fa-unlock fa-lg"></i>SUBMIT </button>
+            <button class="btn btn-primary " type="submit"><i class=""></i>Submit Your Feedback </button>
+              <a href="{{url('/')}}" class="btn btn-info pull pull-right" style="font-weight: bold;"> Login Here</a>
           </div>
+          <h6 class="text-center user-name" style="color: red">Note:-This form does not capture any data/id of the sender it is completely anonymous.</h6>
         </form>
-        <p><a href="{{url('/')}}" style="font-weight: bold;"> Login Here</a></p>
+      
       </div>
     </section>
     <!-- Essential javascripts for application to work-->
