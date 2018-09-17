@@ -166,7 +166,6 @@ class LeaveController extends Controller
               
           $subject = "Leave Request From " .$leavefromname->name ."  on ". date("l jS \of F Y");
 
-          $subject_store=Leave::where('id',$query->id)->update(['mail_subject'=>$subject]);
           $replyto=['manish.ram@iifm.co.in','sarita.sharma@iifm.co.in','hr@iifm.co.in','ankit.kapoor@iifm.co.in'];
          $data= array('name' => $name, 'leavefrom' => $leavefrom,'reason'=>$reason,'leavetype'=>$leavetype, 'leaveto'=>$leaveto,'totdays'=>$totdays);
         
@@ -244,8 +243,10 @@ class LeaveController extends Controller
 
             $email=User::where('id',$leaveDetails->empid)->first();
 
-     $subject ="Re: " . $leave_datas->mail_subject;
+    // $subject ="Re: " . $leave_datas->created_at;
+    $subject = "Re: " ."Leave Request From " .$leaveDetails->username ."  on ". date("l jS \of F Y",strtotime($leaveDetails->created_at));
 
+     // return $subject;
        $data=['username'=>$leaveDetails->username,'type'=>$leaveDetails->leavetype,'from'=>$leaveDetails->leavefrom,'to'=>$leaveDetails->leaveto,'days'=>$leaveDetails->totalleave,'reason'=>$leaveDetails->reason,'status'=>$leaveDetails->status,'approvedby'=>$approvedby->name];
 
        $to_email=[$email->email,'sarita.sharma@iifm.co.in'];

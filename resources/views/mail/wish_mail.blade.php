@@ -140,7 +140,7 @@
 					{{date("l jS \of F Y")}}
 				</td></tr>	
 				<tr><td class="text03aGreeting" style="margin-top: 0;margin-bottom: 0;padding-top: 0;padding-bottom: 10px;color: #555555;border-collapse: collapse;padding-left: 0;padding-right: 0;margin-left: 0;margin-right: 0;font-family: 'Lucida Sans Unicode','Lucida Grande','Lucida Sans',Tahoma,Helvetica,Arial,Verdana,sans-serif;font-size: 24px;line-height: 21px;letter-spacing: 1px;font-weight: normal;">
-					 <span style="font-weight: bold;color: #FF0000;">Dear  {{$data['name']}}</span>,
+					 <span style="font-weight: bold;color: #FF0000;">Dear  {{ucwords(strtolower($data['name']))}}</span>,
 				</td></tr>	
 			</table>
 		</td></tr></table>

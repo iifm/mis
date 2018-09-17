@@ -438,8 +438,6 @@ class AttendanceController extends Controller
 
         $subject = "Attendance Approval Request From ".$username. "  on ". date("l jS \of F Y ");
 
-        $store_mail_subject=AttendanceUpdate::where('id',$att_in->id)->update(['mail_subject'=>$subject]);
-
           foreach ($to_email as  $to) {
            foreach ($approval_ids as  $approval_id) {
              # code...
@@ -491,8 +489,7 @@ class AttendanceController extends Controller
 
         $subject = "Attendance Approval Request From ".$username. "  on ". date("l jS \of F Y ");
 
-           $store_mail_subject=AttendanceUpdate::where('id',$att_in->id)->update(['mail_subject'=>$subject]);
-
+         
           foreach ($to_email as  $to) {
            foreach ($approval_ids as  $approval_id) {
              # code...
@@ -550,7 +547,7 @@ class AttendanceController extends Controller
                         ->join('users','users.id','=','attendance_updates.user_id')
                         ->select('attendance_updates.*','users.name as username')->first();
                        // dd($attendanceDetails);
-     $subject ="Re: " . $attendanceDetails->mail_subject;
+     $subject ="Re: "." Attendance Approval Request From ".$attendanceDetails->username. "  on ". date("l jS \of F Y ",strtotime($attendanceDetails->created_at));
 
       $approvedby=User::where('id',$attendanceDetails->approvedby)->first();
 
