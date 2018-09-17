@@ -12,14 +12,16 @@
         function GetAddress() {
              //alert('g');
             var lat = parseFloat(document.getElementById("latitude").value);
+            //alert(lat);
             var lng = parseFloat(document.getElementById("longitude").value);
             var latlng = new google.maps.LatLng(lat, lng);
             var geocoder = geocoder = new google.maps.Geocoder();
             geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+              //alert(results);
                 if (status == google.maps.GeocoderStatus.OK) {
                     if (results[1]) {
-                       // alert("Location: " + results[1].formatted_address);
-                        document.getElementById("address").value=results[1].formatted_address;
+                        //alert("Location: " + results[1].formatted_address);
+                        document.getElementById("location").value=results[1].formatted_address;
                     }
                 }
             });
@@ -67,9 +69,9 @@
                   <center> 
                     <h3 class="fa fa-calendar"> Date: {{date('Y-m-d H:i:s')}}</h3>
                   </center>  
-             <!--  <center> <label>Latitude </label> --> <input type="hidden"  name="latitude" id="latitude" >
-               <!--  <label>Longitude </label>   --><input type="hidden" name="longitude" id="longitude">
-                  <input type="hidden" name="address" id="address">
+              <center> <label>Latitude </label> <input type="text"  name="latitude" id="latitude" ><br>
+                <label>Longitude </label>  <input type="text" name="longitude" id="longitude"><br>
+                 <!--  <label>Address </label>  --><input type="hidden" name="location" id="location">
               </center>
                  @if(Session::has('attendType'))
                    <input type="hidden" name="type" id="type" value="{{Session::get('attendType')}}">
