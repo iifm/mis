@@ -61,6 +61,7 @@ class HomeController extends Controller
         $pressReases=NewsUpload::join('upload_categories','upload_categories.id','=','news_uploads.category')
                                 ->where('upload_categories.type','press')
                                 ->select('news_uploads.*')->get();
+                           // dd($pressReases);
 
         $announcements=NewsUpload::join('upload_categories','upload_categories.id','=','news_uploads.category')
                                 ->where('upload_categories.type','announcement')
@@ -144,6 +145,7 @@ class HomeController extends Controller
                                 'user_id' => $value->user_id
                             );
                 }
+               // dd($birthdays);
 
           $anniversary=UserDetails::whereDay('anniversary',$cdate)
                     ->whereMonth('anniversary',$cmonth)
@@ -176,7 +178,7 @@ class HomeController extends Controller
                             'user_id' => $value->user_id
                             );
                     }
-
+                   // dd($workanniversary);
         $monthBirthday_days_sorted=UserDetails::whereMonth('dob',$cmonth)
                      ->where('status','Active')
                       ->whereday('dob','>=',$cdate)
@@ -247,7 +249,8 @@ class HomeController extends Controller
                      }
                 
              }   
-              //dd($month_anniversary_data); 
+              //dd($monthWorkAniversary); 
+                $monthAniversary =[];
                     $monthAniversary_days=[];
           $monthAniversary_days=UserDetails::whereMonth('anniversary',$cmonth)
                       ->whereday('anniversary','>=',$cdate)
@@ -260,7 +263,7 @@ class HomeController extends Controller
                      $anniversary_days=[];
                       foreach ($monthWork_day_sorted as  $value) {
                       $anniversary_days[]= date('d',strtotime($value));
-                        //dd($value);
+                        dd($value);
                     }
                      sort($anniversary_days);
 
@@ -272,7 +275,8 @@ class HomeController extends Controller
                      ->select('user_details.*','users.name as username','users.id as user_id')
                      ->orderBy('user_details.anniversary','ASC')
                      ->get();
-                            $monthAniversary=[];
+                           // $monthAniversary=[];
+                           // dd($monthAniversary);
                         foreach ($monthAniversaryUser_days as  $monthAniversaryUser_day) {
                             $monthAniversary[]=[
                                                 'username'=>$monthAniversaryUser_day->username,

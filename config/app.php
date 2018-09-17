@@ -167,6 +167,8 @@ return [
         App\Providers\AgentServiceProvider::class,
         Stevebauman\Location\LocationServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+
 
 
        
@@ -244,6 +246,7 @@ return [
         'Agent' => Jenssegers\Agent\Facades\Agent::class,
         'Location' => Stevebauman\Location\Facades\Location::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'Excel' => 'Maatwebsite\Excel\Facades\Excel',
 
 
 

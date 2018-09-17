@@ -52,8 +52,9 @@
                           <th>Image</th>
                           <th>Distance</th>
                           <th>Amount</th>
+                        @if(Auth::user()->role==1 || Auth::user()->role==2)
                           <th>Manager's Action</th>
-                         
+                         @endif
                         </tr>
                     </thead>
                      
@@ -62,7 +63,7 @@
                        @foreach($conveyance as $con)
                       <tr role="row" class="odd">
                         <td><?= $i++;?></td>
-                        <td>{{$con->con_date}}</td>
+                        <td>{{date('j F Y',strtotime($con->con_date))}}</td>
                         <td>{{$con->disfrom}}</td>
                         <td>{{$con->disto}}</td>
                         @if($con->mode=="3.5")
@@ -72,9 +73,16 @@
                          @else
                          <td>{{$con->mode}}</td>
                          @endif
-                         <td><a href="{{URL::To('storage/app/conveyance')}}/{{$con->uploadcimg}}" target="_blank"><img src="{{URL::To('storage/app/conveyance')}}/{{$con->uploadcimg}}" height="50px" width="50px"></a></td>
+                       
+                         <td>  @if($con->uploadcimgch)
+                          <a href="{{URL::To('storage/app/conveyance')}}/{{$con->uploadcimg}}" target="_blank">
+                            <img src="{{URL::To('storage/app/conveyance')}}/{{$con->uploadcimg}}" height="50px" width="50px">
+                          </a> @endif
+                        </td>
+
                         <td>{{$con->distance}}</td>
                         <td>{{$con->amount}}</td>
+                        @if(Auth::user()->role==1 || Auth::user()->role==2)
                         @if($con->status=='PENDING')
                         <td align="right">
                            <input type="hidden" name="approver" id="approver" value="{{Auth::user()->id}}">
@@ -84,6 +92,7 @@
                         </td>
                        @else
                            <td align="right"><b>{{$con->approved_amount}}  {{$con->status}}</b> <button value="{{$con->id}}" class="btn btn-danger fa fa-close action_again"></button> </td>
+                       @endif
                        @endif
                    </tr>
                      @endforeach

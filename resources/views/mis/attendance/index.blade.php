@@ -67,9 +67,9 @@
                   <center> 
                     <h3 class="fa fa-calendar"> Date: {{date('Y-m-d H:i:s')}}</h3>
                   </center>  
-              <center> <label>Latitude </label> <input type="text"  name="latitude" id="latitude" ><br>
-                <label>Longitude </label>  <input type="text" name="longitude" id="longitude"><br>
-                  <input type="hidden" name="address" id="address"><br>
+             <!--  <center> <label>Latitude </label> --> <input type="hidden"  name="latitude" id="latitude" >
+               <!--  <label>Longitude </label>   --><input type="hidden" name="longitude" id="longitude">
+                  <input type="hidden" name="address" id="address">
               </center>
                  @if(Session::has('attendType'))
                    <input type="hidden" name="type" id="type" value="{{Session::get('attendType')}}">

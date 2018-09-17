@@ -492,7 +492,6 @@ class ComposerStaticInit2a3c06958736a0fb37be47e7f822fa50
         'CreateFeedbackTable' => __DIR__ . '/../..' . '/database/migrations/2018_09_13_122815_create_feedback_table.php',
         'CreateNewsUploadsTable' => __DIR__ . '/../..' . '/database/migrations/2018_08_29_121007_create_news_uploads_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
-        'CreateProductCategoriesTable' => __DIR__ . '/../..' . '/database/migrations/2018_09_08_172423_create_product_categories_table.php',
         'CreateUploadCategoriesTable' => __DIR__ . '/../..' . '/database/migrations/2018_08_30_170326_create_upload_categories_table.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',
         'CreateWishesTable' => __DIR__ . '/../..' . '/database/migrations/2018_08_16_131728_create_wishes_table.php',

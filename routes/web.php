@@ -202,3 +202,12 @@ Route::post('/product-categories/update/{id}','ProductCategoryController@update'
 //feedback 
 Route::get('/feedback/index','FeedbackController@index')->name('feedback.index');
 Route::post('/feedback/store','FeedbackController@store');
+
+//import export
+
+// Route for view/blade file.
+Route::get('importExport', 'ImportExportController@importExport');
+// Route for export/download tabledata to .csv, .xls or .xlsx
+Route::get('downloadExcel/{type}', 'ImportExportController@downloadExcel');
+// Route for import excel data to database.
+Route::post('importExcel', 'ImportExportController@importExcel');

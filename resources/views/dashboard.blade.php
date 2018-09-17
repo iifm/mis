@@ -159,7 +159,7 @@ a {
                           @foreach($todays_event as $event)
                           <tr>
                           <td>{{$i++}}</td>
-                          <td>{{$event['name']}}</td>
+                          <td>{{ucwords(strtolower($event['name']))}}</td>
                           <td>{{$event['event']}}</td>
                           <td><a href="{{url('/send-wish')}}/{{$event['user_id']}}/{{$event['event']}}" class="btn btn-primary fa fa-envelope" title="Send Wish"></a></td>
                           </tr>
@@ -187,7 +187,6 @@ a {
                 </li>
                 @endforeach
             </div>
-          
           </ul>
         </li>
          <li style="list-style-type: none; margin-top: 10px;" class="dropdown"><a class="app-nav__item btn btn-info" href="#" data-toggle="dropdown" aria-label="Show notifications"><i class="fa fa-gift"> ANNIVERSARIES</i></a>
