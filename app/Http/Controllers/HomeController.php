@@ -98,7 +98,9 @@ class HomeController extends Controller
                     ->orderBy('id','DESC')->count();
                     //dd($onduty);
 
-        $eoms=HallOfFame::orderBy('id','desc')->get();
+        $eoms= HallOfFame::join('users','users.id','=','hall_of_fames.empname')
+                        ->select('hall_of_fames.*','users.name as empname','users.id as user_id')->orderBy('id','DESC')
+                        ->get();
        
          $totleaves=Leave::whereBetween('leavefrom',[$strtYear,$currenDate])
                         ->where('empid',$id)
@@ -263,7 +265,7 @@ class HomeController extends Controller
                      $anniversary_days=[];
                       foreach ($monthWork_day_sorted as  $value) {
                       $anniversary_days[]= date('d',strtotime($value));
-                        dd($value);
+                       // dd($value);
                     }
                      sort($anniversary_days);
 
@@ -373,8 +375,11 @@ $anniversary_image=array_rand($anniversary_images);
             $image_path=$anniversary_images[$anniversary_image];
             //dd($image_path);
         }
-        else{
+        elseif($sub=="Wedding Anniversary"){
             $image_path=$anniversary_images[$anniversary_image];
+        }
+        else{
+             $image_path="http://www.prathamedu.com/Files_Upload/birthday1_file.jpg";
         }
 
            $query=Wishes::create(['sender_id'=> $sender_id,'message'=>$message,'receiver_id'=>$receiver_id,'sip'=>$sip]);

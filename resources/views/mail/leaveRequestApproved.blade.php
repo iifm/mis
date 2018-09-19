@@ -31,8 +31,8 @@
                                     
                                     <table align="center" bgcolor="#FFFFFF" border="0" cellpadding="0" cellspacing="0" style="background-color:#ffffff;max-width:640px" width="100%" class="m_4029179099876117027emailContainer">
                                         <tbody><tr>
-                                            <td align="center" valign="top" bgcolor="#FFFFFF" style="padding-right:40px;padding-left:40px; font-size: 50px; margin-top: 0px;">
-                                                <h1 style="color:#606060; text-align:center;font-family: 'Anton', sans-serif;font-family: 'Luckiest Guy', cursive;font-family: 'Oleo Script', cursive;" ><span class="fa fa-calendar"></span> Leave Request<br>
+                                            <td align="center" valign="top" bgcolor="#FFFFFF" style="padding-right:40px;padding-left:40px; margin-top: 0px;">
+                                                <h1 style="color:#606060; text-align:center;font-family: 'Anton', sans-serif;font-family: 'Luckiest Guy', cursive;font-family: 'Oleo Script', cursive;" ><span class="fa fa-calendar"></span> Leave Request</h1><br>
                                             </td>
                                         </tr>
                                          <tr>

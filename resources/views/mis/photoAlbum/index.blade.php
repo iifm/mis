@@ -8,7 +8,7 @@
 
     <!-- Main CSS-->
     {!!View('partials.include_css')!!}
- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+ <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
     <link href="{{ URL::To('public/css/common_css/thumbnail-gallery.css') }}" rel="stylesheet">
 

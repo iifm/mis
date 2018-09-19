@@ -24,13 +24,18 @@ class EOFController extends Controller
 
     public function index()
     {
-      $eom=  HallOfFame::orderBy('id','DESC')->get();
+      $eom=  HallOfFame::join('users','users.id','=','hall_of_fames.empname')
+                        ->select('hall_of_fames.*','users.name as empname')->orderBy('id','DESC')
+                        ->get();
+                        //dd($eom);
       return view('mis.eof.index',compact('eom'));
 
     }
     public function getDepartment($id)
     {
-        $department=UserDetails::where('user_id',$id)->pluck('department');
+        $department=UserDetails::where('user_id',$id)
+                    ->join('departments','departments.id','=','user_details.department')
+                    ->select('departments.name as department')->pluck('department');
         return $department;
     }
 

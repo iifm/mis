@@ -108,22 +108,20 @@ a {
           <div class="tile" style="min-height: 400px">
             <h5 class="heading_title">Employee of the Month</h5>
             <div class="">
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">  
                 <div class="carousel-inner">
                    @foreach( $eoms as $eom )
                   <div class="carousel-item {{ $loop->first ? 'active' : '' }}"">
                      <img   src="{{ URL::To('storage/app/public/images/'.$eom->image) }}"" alt="First slide" height="350px" width="100%">
                        <div style="width: 100%; padding:20px">
-                         <h5 style="text-align: center;">{{$eom->empname}}</h5>
+                         <h5 style="text-align: center;">{{ucwords(strtolower($eom->empname))}}</h5>
                           <p style="text-align: center;">{{$eom->month}} {{$eom->created_at->year}} <br>
                           {{$eom->department}}</p>
+                       <center><a href="{{url('/send-wish')}}/{{$eom->user_id}}/{{'Employee of Month'}}" class="btn btn-primary fa fa-envelope"> Send Wish</a></center>   
 
                       </div>
                   </div>
                  @endforeach
-                
-                 
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>

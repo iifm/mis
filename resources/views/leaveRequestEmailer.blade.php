@@ -1,4 +1,4 @@
-
+<link href="https://fonts.googleapis.com/css?family=Archivo+Black" rel="stylesheet">
 
     <div bgcolor="#F2F2F2">
         <center>
@@ -22,7 +22,7 @@
                                     <table align="center" bgcolor="#FFFFFF" border="0" cellpadding="0" cellspacing="0" style="background-color:#ffffff;max-width:640px" width="100%" class="">
                                         <tbody><tr>
                                             <td align="center" valign="top" bgcolor="#FFFFFF" style="padding-right:40px;padding-left:40px;padding-bottom: 20px;">
-                                                <h1 style="color:#606060; text-align:center;font-family: 'Anton', sans-serif;font-family: 'Luckiest Guy', cursive;font-family: 'Oleo Script', cursive;" ><span class="fa fa-calendar"></span> Leave Request<br>
+                                                <h1 style="color:#606060; text-align:center;font-family: 'Archivo Black', sans-serif;" ><span class="fa fa-calendar"></span> Leave Request<br></h1>
                                             </td>
                                         </tr>
                                          <tr>

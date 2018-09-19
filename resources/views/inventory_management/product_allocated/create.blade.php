@@ -8,13 +8,8 @@
     <!-- Main CSS-->
     {!!View('partials.include_css')!!}
  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-   
-
    </head>
     
-
-  </head>
-  
   <body class="app sidebar-mini rtl">
     <!-- Navbar-->
     
@@ -27,7 +22,7 @@
   <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-tasks "></i> Product Assignment Management </h1>
+          <h1><i class="fa fa-tasks "> Product Assignment Management </i></h1>
         </div>
           <a href="{{URL::previous()}}" class="fa fa-arrow-circle-left btn btn-danger" style="background: #009688; border:none"> Back</a>
       </div>
