@@ -38,7 +38,7 @@
         <div class="col-md-6 col-lg-3">
           <div class="widget-small primary coloured-icon"><i class="icon fa fa-calendar fa-3x"></i>
             <div class="info">
-              <h6 style="text-align: center;  padding:5px 0">Total Leaves</h5">
+              <h6 style="text-align: center;  padding:5px 0">Total Leave(s)</h5">
               <h3 style="text-align: center;"><b>{{$total_leaves}}</b></h3>
             </div>
           </div>
@@ -47,7 +47,7 @@
         <div class="col-md-6 col-lg-3">
           <div class="widget-small warning coloured-icon"><i class="icon fa fa-calendar-o fa-3x"></i>
             <div class="info">
-              <h6 style="text-align: center; padding:5px 0;">Leave Applied</h5">
+              <h6 style="text-align: center; padding:5px 0;">Leave(s) Applied</h5">
                 @if($leave_applied!='')
               <h3 style="text-align: center;"><b>{{$leave_applied}}</b></h3>
               @else
@@ -59,7 +59,7 @@
         <div class="col-md-6 col-lg-3">
           <div class="widget-small danger coloured-icon"><i class="icon fa fa-calendar-check-o fa-3x"></i>
             <div class="info">
-              <h6 style="text-align: center; padding:5px 0;">Leave Approved</h5">
+              <h6 style="text-align: center; padding:5px 0;">Leave(s) Approved</h5">
                 @if($leave_approved!='')
               <h3 style="text-align: center;"><b>{{$leave_approved}}</b></h3>
               @else
@@ -71,7 +71,7 @@
         <div class="col-md-6 col-lg-3">
           <div class="widget-small info coloured-icon"><i class="icon fa fa-clock-o fa-3x"></i>
             <div class="info">
-              <h6 style="text-align: center; padding:5px 0">Leave Balance</h5">
+              <h6 style="text-align: center; padding:5px 0">Leave(s) Balance</h5">
               <h3 style="text-align: center;"><b>{{$total_leaves-$leave_applied}}</b></h3>
             </div>
           </div> 

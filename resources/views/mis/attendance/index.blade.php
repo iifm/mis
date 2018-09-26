@@ -17,7 +17,7 @@
             var latlng = new google.maps.LatLng(lat, lng);
             var geocoder = geocoder = new google.maps.Geocoder();
             geocoder.geocode({ 'latLng': latlng }, function (results, status) {
-              alert(results);
+              
                 if (status == google.maps.GeocoderStatus.OK) {
                     if (results[1]) {
                         //alert("Location: " + results[1].formatted_address);
@@ -71,7 +71,7 @@
                   </center>  
               <center> <label>Latitude </label> <input type="text"  name="latitude" id="latitude" ><br>
                 <label>Longitude </label>  <input type="text" name="longitude" id="longitude"><br>
-                  <label>Address </label> <input type="text" name="location" id="location">
+                <!--   <label>Address </label>  --><input type="hidden" name="location" id="location">
               </center>
                  @if(Session::has('attendType'))
                    <input type="hidden" name="type" id="type" value="{{Session::get('attendType')}}">

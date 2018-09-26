@@ -7,6 +7,8 @@ use Auth;
 use App\NewsUpload;
 use Session;
 use App\UploadCategory;
+use App\Role;
+use DB;
 
 class AdminController extends Controller
 {
@@ -17,6 +19,7 @@ class AdminController extends Controller
       public function index()
     {
        
+
         $policyEditType=UploadCategory::where('type','text')->get();    
          Session::put('policyType', $policyEditType);
    
@@ -29,18 +32,18 @@ class AdminController extends Controller
 
     public function uploadNews()
     {
-       $categories=UploadCategory::where('type','file')
-                                ->orWhere('type','press')
-                                 ->orWhere('type','announcement')
-                                ->get();
+        $user_roles=[];
+        $userRole=Role::where('roles.id',Auth::user()->role)->pluck('upload_category_option');
+
+        foreach ($userRole as  $role) {
+        $user_roles=explode(",", $role);
+        }
+      
+        $categories=UploadCategory::whereIn('id',$user_roles)->get();
+       
         return view('admin.upload',compact('categories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function uploadstore(Request $request)
     {
        //dd($request->all());

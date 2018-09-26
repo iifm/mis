@@ -24,10 +24,10 @@
    <main class="app-content">
       <div class="app-title">
         <div>
-        <h1 class="heading_title"><i class="fa fa-building-o "></i> Department Management </h1>
+        <h1 class="heading_title"><i class="fa fa-tasks "></i> Role Management </h1>
         </div>
-       <a href="{{url('/department/create')}}" class="fa fa-plus btn btn-primary" style="background: #009688; border:none; margin-left: 450px"> Add Department</a> 
-       <!--   <a href="{{url('/department-head/create')}}" class="fa fa-plus btn btn-info" style="background: #009688; border:none;"> Add Department Head</a>   -->
+       <a href="{{url('role/create')}}" class="fa fa-plus btn btn-primary" style="background: #009688; border:none; margin-left: 450px"> Add Role</a> 
+     
       </div>
      
       <div class="row">
@@ -51,22 +51,22 @@
               
                   <tr role="row">
                     <th>#</th>
-                    <th style="text-align: left;">Department Name</th>
+                    <th style="text-align: left;">Role Name</th>
                     <th style="text-align: left;">Modified By</th>
 
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                     @foreach($departments as $department)
+                   @foreach($roles as $role)
                 <tr style="max-height: 100px;">
-                    <td><?= $i++;?></td>
-                     <td style="text-align: left;">{{$department->name}}</td>
-                    <td style="text-align: left;">{{$department->username}}</td>
+                    <td>{{ $i++ }}</td>
+                     <td style="text-align: left;">{{$role->name}}</td>
+                    <td style="text-align: left;">{{$role->username}}</td>
 
                     <td style="text-align: left;">
-                      <a href="{{url('/department/edit')}}/{{$department->id}}" class="btn btn-primary btn-sm fa fa-edit"></a>
-                        <a onclick="return confirm('Are you sure you want to delete this item?')" href="{{url('/department/delete')}}/{{$department->id}}" class="btn btn-danger btn-sm fa fa-trash"></a>
+                      <a href="{{url('role/edit')}}/{{$role->id}}" class="btn btn-primary btn-sm fa fa-edit"></a>
+                        <a onclick="return confirm('Are you sure you want to delete this item?')" href="{{url('role/delete')}}/{{$role->id}}" class="btn btn-danger btn-sm fa fa-trash"></a>
                      </td>
                   </tr>
                     @endforeach

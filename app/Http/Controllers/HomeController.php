@@ -194,6 +194,8 @@ class HomeController extends Controller
                          $dob_days[]= date('d',strtotime($monthBirthday_day_sorted));
                      }
 
+                    $dob_days= array_unique($dob_days);
+                   
                      sort($dob_days);
 
                      $monthBirthday=[];
@@ -217,6 +219,8 @@ class HomeController extends Controller
                         }
                      }
 
+                    // dd($monthBirthday);
+
           $monthWork_day_sorted=UserDetails::whereMonth('doj',$cmonth)
                     ->whereYear('doj','<',$cyear)
                       ->whereday('doj','>=',$cdate)
@@ -231,6 +235,8 @@ class HomeController extends Controller
                       $doj_day[]= date('d',strtotime($value));
                         //dd($value);
                     }
+                    $doj_day=array_unique($doj_day);
+
                     sort($doj_day);
                     $monthWorkAniversary=[];
             foreach($doj_day as $doj_month_day){
@@ -267,6 +273,7 @@ class HomeController extends Controller
                       $anniversary_days[]= date('d',strtotime($value));
                        // dd($value);
                     }
+                    $anniversary_days=array_unique($anniversary_days);
                      sort($anniversary_days);
 
                      foreach ($anniversary_days as  $anniversary_day) {

@@ -28,7 +28,7 @@
         <div>
           <h4><i class="fa fa-th-list"></i> Leave Management </h4>
         </div>
-        <a href="{{url('/leave-view')}}" class="btn btn-primary fa fa-eye">View Your Leaves</a>
+        <a href="{{url('/leave-view')}}/{{Auth::id()}}" class="btn btn-primary fa fa-eye">View Your Leaves</a>
       </div>
       <div class="row">
         

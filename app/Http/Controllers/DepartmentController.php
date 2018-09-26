@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Department;
 use Session;
+use App\User;
 
 class DepartmentController extends Controller
 {
@@ -96,4 +97,26 @@ class DepartmentController extends Controller
         Session::flash('message','Department Deleted Successfully!!');
        return redirect()->route('department.index');
     }
+
+   /* public function departmentHeadCreate($value='')
+    {
+       $departments= Department::all();
+       $users=User::join('user_details','user_details.user_id','=','users.id')
+                        ->where('user_details.status','Active')
+                        ->select('users.name as username','users.id as user_id')
+                        ->orderBy('users.name','ASC')
+                        ->get();
+
+        return view('admin.department_head_assign',compact(['departments','users']));
+    }
+
+    public function departmentHeadStore(Request $request)
+    {
+       
+       $dept_heads=implode(",", $request->dept_head);
+       $store=Department::where('id',$request->department)->update(['dept_head'=>$dept_heads]);
+       Session::flash('message','Department Head Added Successfully!!');
+       return redirect()->route('department.index');
+
+    }*/
 }

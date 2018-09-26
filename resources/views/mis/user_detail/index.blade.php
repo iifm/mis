@@ -121,7 +121,7 @@
      <div class="col-md-9 tile">
         
        <h3 class="tile-title heading_title">OFFICIAL INFORMATION 
-        @if($view_details=='SHOW')
+        @if($view_details=='SHOW' && $edit_option=='1')
 
         <a class="btn btn-success fa fa-pencil" href="{{url('/user-official')}}/{{$user_id}}" style="background: #009688;border: none;"></a>
         @endif
@@ -172,7 +172,11 @@
   <div class="col-md-12 tile">
 
      
-     <h3 class="tile-title heading_title">EDUCATIONAL INFORMATION <a href="{{url('/user-education/add')}}/{{$user_id}}" class="btn btn-success fa fa-plus" style="background: #009688;border: none;"></a> </h3>
+     <h3 class="tile-title heading_title">EDUCATIONAL INFORMATION 
+      @if($edit_option=='1' && $view_details=='SHOW')
+      <a href="{{url('/user-education/add')}}/{{$user_id}}" class="btn btn-success fa fa-plus" style="background: #009688;border: none;"></a> 
+      @endif
+    </h3>
 
 
       <table class="table-responsive table" >     
@@ -226,8 +230,12 @@
 <div class="row">
   <div class="col-md-12 tile">
     
-     <h3 class="tile-title heading_title">WORK EXPERIENCE(S) <a href="{{url('/user-professional')}}/{{$user_id}}" class="btn btn-success fa fa-plus" style="background: #009688;border: none;"></a></h3>
-    
+     <h3 class="tile-title heading_title">WORK EXPERIENCE(S)
+       @if($edit_option=='1' && $view_details=='SHOW')
+      <a href="{{url('/user-professional')}}/{{$user_id}}" class="btn btn-success fa fa-plus" style="background: #009688;border: none;"></a>
+       @endif
+    </h3>
+     
        <table class="table-responsive table" >
            <thead>
             <tr>
@@ -282,7 +290,11 @@
 <div class="row">
   <div class="col-md-12 tile">
     
-     <h3 class="tile-title heading_title">PERSONAL INFORMATION <a href="{{url('/user-personal')}}/{{$user_id}}" class="btn btn-success fa fa-pencil" style="background: #009688;border: none;"></a></h3>
+     <h3 class="tile-title heading_title">PERSONAL INFORMATION 
+        @if($edit_option=='1' && $view_details=='SHOW')
+      <a href="{{url('/user-personal')}}/{{$user_id}}" class="btn btn-success fa fa-pencil" style="background: #009688;border: none;"></a>
+      @endif
+    </h3>
     
      @foreach($user_detail as $detail)
       <table class="table" width="100%">
@@ -318,7 +330,11 @@
 <div class="row">
   <div class="col-md-12 tile">
     
-     <h3 class="tile-title heading_title">FAMILY INFORMATION  <a href="{{url('/user-family')}}/{{$user_id}}" class="btn btn-success fa fa-pencil" style="background: #009688;border: none;"></a></h3>
+     <h3 class="tile-title heading_title">FAMILY INFORMATION 
+        @if($edit_option=='1' && $view_details=='SHOW')
+      <a href="{{url('/user-family')}}/{{$user_id}}" class="btn btn-success fa fa-pencil" style="background: #009688;border: none;"></a>
+      @endif
+    </h3>
     
      @foreach($user_detail as $family)
       <table class="table">

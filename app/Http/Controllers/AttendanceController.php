@@ -19,10 +19,10 @@ class AttendanceController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index($id)
     {   
        $date=date("Y-m-d");
-       $id=Auth::user()->id;
+      
        $typecheck='';
 
        $inTime=Attendance::where('member_id','=',$id)
@@ -84,6 +84,7 @@ class AttendanceController extends Controller
     {
           
        if ($request->has('strtDate') && $request->has('endDate') && $request->has('employee')) {
+      
             $users=User::all();
              $start= $request->strtDate;
              $end =$request->endDate;
@@ -162,8 +163,9 @@ class AttendanceController extends Controller
                 
             /*  }*/
           }
+          $message='';
             //return $datas;
-            return view('mis.attendance.view',compact(['datas','users']));
+            return view('mis.attendance.view',compact(['datas','users','message']));
           } 
 
            if ($request->has('strtDate') && $request->has('endDate') && $request->has('employee') && Auth::user()->role==3) {
@@ -248,7 +250,8 @@ class AttendanceController extends Controller
             /*  }*/
           }
             //return $datas;
-            return view('mis.attendance.view',compact(['datas','users']));
+          $message='';
+            return view('mis.attendance.view',compact(['datas','users','message']));
           } 
 
         else  if ($request->has('strtDate') && $request->has('endDate') && Auth::user()->role==1) {
@@ -314,7 +317,8 @@ class AttendanceController extends Controller
             }
             //dd($user_ids);
            // return $datas;
-            return view('mis.attendance.view',compact(['datas','users']));
+            $message='';
+            return view('mis.attendance.view',compact(['datas','users','message']));
               
           }
 
@@ -373,16 +377,93 @@ class AttendanceController extends Controller
                 
             }
             // return $datas;
-            return view('mis.attendance.view',compact(['datas','users']));
+            $message='';
+            return view('mis.attendance.view',compact(['datas','users','message']));
           } 
           
           else{
-            $start='';
-            $end='';
-            $datas=[];
+            $message="Your Last Seven Days Attendance";
+
+             $users=User::all();
+            $last_seven_day=date('Y-m-d', strtotime('-6 days'));
+            $now=date('Y-m-d');
+            $member_id=Auth::id();
+
+          $datas = [];
+            while (strtotime($last_seven_day) <= strtotime($now)) {
              
-            $users=User::all();
-             return view('mis.attendance.view',compact(['datas','users']));
+             /* foreach($attendance_dates as $attendance_date){*/
+                $attendances = DB::table('attendances')
+                               ->where('date',$last_seven_day)
+                               ->where('member_id',$member_id)
+                               ->where('type','IN')
+                               ->whereBetween('date',[$last_seven_day,$now])
+                               ->join('users','users.id','=','attendances.member_id')
+                               ->select('attendances.*','users.name as username','users.id as uid')
+                               ->orderBy('id', 'ASC')->first();
+                               //dd($attendances);
+                $user_ids = DB::table('attendances')
+                              ->where('member_id',$member_id)
+                               ->where('date',$last_seven_day)
+                               ->where('type','IN')
+                                ->whereBetween('date',[$last_seven_day,$now])
+                               ->orderBy('id', 'ASC')->pluck('member_id'); 
+                              // dd($user_ids);              
+
+               // dd($user_ids);
+
+
+                  if ($attendances==null) {
+                    $user_name=User::find($member_id); //where('id',$employee)->pluck('name');
+                     // dd($employee);
+                    $datas[] = array(
+                        'date'=>$last_seven_day,
+                        'inTime'=>'NA',
+                        'outTime'=>'NA',
+                        'username'=>$user_name->name,
+                        'user_id'=>$member_id
+
+                    );   
+                   // dd($datas);    
+                  }
+                  else{
+
+                    foreach ($user_ids as $user_id) {
+
+                        $count = DB::table('attendances')
+                                    ->where('member_id',$member_id)
+                                   ->where('date',$last_seven_day)
+                                   ->where('type','OUT')
+                                   ->where('member_id',$user_id)
+                                   ->orderBy('id', 'ASC')->count();              
+                    
+                        if($count==1){
+                            $attendance_out = DB::table('attendances')
+                                       ->where('date',$last_seven_day)
+                                       ->where('member_id',$member_id)
+                                       ->where('type','OUT')
+                                        ->where('member_id',$attendances->uid)
+                                        ->orderBy('id', 'ASC')->first();
+
+                            $outtime = $attendance_out->time;
+                        }else $outtime = 'NA';
+
+                        $datas[] = array(
+                            'date'=>$attendances->date,
+                            'inTime'=>$attendances->time,
+                            'outTime'=>$outtime,
+                            'username'=>$attendances->username,
+                            'user_id'=>$member_id
+                        );       
+                    }
+                  }
+                
+                     $last_seven_day = date ("Y-m-d", strtotime("+1 days", strtotime($last_seven_day)));
+                
+            /*  }*/
+          }
+         
+             return view('mis.attendance.view',compact(['datas','users','message']));
           }
          
         

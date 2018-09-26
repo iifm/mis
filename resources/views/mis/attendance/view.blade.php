@@ -98,7 +98,12 @@
                   </tbody>
                 </table>
               </form>
-               <div class="row" style="margin-top: 50px;"></div>
+             
+               <div class="row" style="margin-top: 50px;">
+                  @if($message!='')
+              <h5 style="margin-left: 10px;">{{$message}}</h5>
+              @endif
+               </div>
                 <table class="table table-hover table-stripped" id="table" role="grid"  style="margin-top: 100px;">
                     <thead>
                       <tr role="row">

@@ -61,6 +61,7 @@
                     <th style="text-align: left;">Designation</th>
                     <th style="text-align: left;">Location/Center</th>
                     <th style="text-align: left;">Active/Deactive</th>
+                    <th style="text-align: left;">Details Editable</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -84,6 +85,21 @@
                  <div class="toggle-flip">
                   <label>
                     <input type="checkbox" name="status" class="status" id="{{$user->user_id}}" value="{{$user->user_id}},{{$user->status}}"><span class="flip-indecator" data-toggle-off="Deactive" data-toggle-on="Active" ></span>
+                  </label>
+                </div>
+                 @endif
+                    </td>
+                  <td>
+                       @if($user->edit_option=='1')
+                 <div class="toggle-flip">
+                  <label>
+                    <input type="checkbox" name="status" class="edit_option" checked="true" id="{{$user->user_id}}" value="{{$user->user_id}},{{$user->edit_option}}"><span class="flip-indecator" data-toggle-off="Disable" data-toggle-on="Enable" ></span>
+                  </label>
+                </div>
+                @else
+                 <div class="toggle-flip">
+                  <label>
+                    <input type="checkbox" name="status" class="edit_option" id="{{$user->user_id}}" value="{{$user->user_id}},{{$user->edit_option}}"><span class="flip-indecator" data-toggle-off="Disable" data-toggle-on="Enable" ></span>
                   </label>
                 </div>
                  @endif
@@ -120,19 +136,30 @@
     {!!View('partials.include_js')!!}
 <script type="text/javascript">
   $(document).ready(function(){
-    $('.status').change(function(){
-       var value = $(this).val();    
+   $(document).on('change','.status',function(){
+        var value = $(this).val();    
        $.get("{{url('/update-user-status')}}/"+value,function(data){
          // console.log(data);
           if (data) {
             $('#successMsg').show();
              $('#successMsg').html(data);
-          }
-          
-           
-       });
-        
+          }   
+       });  
     });
+
+
+    // $('.edit_option').change(function(){
+     $(document).on('change','.edit_option',function(){ 
+       var value = $(this).val();    
+       $.get("{{url('/edit-user-details/option')}}/"+value,function(data){
+
+          if (data) {
+           $('#successMsg').show();
+             $('#successMsg').html(data);
+          }   
+       });  
+    });
+
   });
 </script>
     

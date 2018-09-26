@@ -47,7 +47,7 @@ Route::post('/user-family/add/{id}', 'UserDetailController@familyAdd');
 //leave routes
 Route::get('/leave', 'LeaveController@create');
 Route::get('/leave-add', 'LeaveController@create')->name('leave.create');
-Route::get('/leave-view', 'LeaveController@index')->name('leave.index');
+Route::get('/leave-view/{id}', 'LeaveController@index')->name('leave.index');
 Route::post('/leave-store', 'LeaveController@store');
 Route::post('/leave-edit/{id}', 'LeaveController@store');
 Route::get('/leave-delete/{id}', 'LeaveController@destroy');
@@ -58,7 +58,7 @@ Route::post('leave-approved/{id}/{uid}','LeaveController@leaveApproved')->name('
 //attendance routes
 Route::get('/attendance', 'AttendanceController@index')->name('attendance.index');
 Route::post('/attendance/store', 'AttendanceController@store');
-Route::get('/attendance-view','AttendanceController@viewAttendance');
+Route::get('/attendance-view/{id}','AttendanceController@viewAttendance');
 Route::get('/self-attendace-detail','AttendanceController@attendanceDetails');
 Route::get('/update-user-attendance/{id}/{date}/{type}','AttendanceController@updateInAttendance');
 Route::post('/updated-user-attendance','AttendanceController@updateIn');
@@ -77,7 +77,7 @@ Route::get('/photo-album-delete/{id}','PhotoAlbumController@destroy');
 
 //conveyance routes
 Route::get('/conveyance', 'ConveyanceController@create');
-Route::get('/conveyance/index', 'ConveyanceController@index')->name('conveyance.index');
+Route::get('/conveyance/index/{id}', 'ConveyanceController@index')->name('conveyance.index');
 Route::post('/conveyance/store', 'ConveyanceController@store');
 Route::get('/conveyance/policy', 'ConveyanceController@show');
 Route::get('/conveyance-approve/{id}/{amount}/{approver}','ConveyanceController@approveConveyance');
@@ -100,7 +100,7 @@ Route::get('/reimbursement', 'LeaveController@index')->name('reimbursement.index
 //on-duty routes
 Route::get('/on-duty', 'OnDutyController@create');
 Route::get('/on-duty/create', 'OnDutyController@create');
-Route::get('/on-duty/index', 'OnDutyController@index')->name('od.index');
+Route::get('/on-duty/index/{id}', 'OnDutyController@index')->name('od.index');
 Route::get('/on-duty/edit/{id}', 'OnDutyController@edit');
 Route::get('/on-duty/delete/{id}', 'OnDutyController@destroy');
 Route::post('/on-duty/store', 'OnDutyController@store');
@@ -120,11 +120,6 @@ Route::get('/leave-report','ReportController@leaveReport')->name('leaveReport');
 Route::get('/leave-report/data','ReportController@leaveDate');
 
 
-
-
-/*Route::get('/backup-database','DatabaseBackupController@backup');*/
-
-
 //Inventory Management Routes
 Route::resource('/product','ProductController');
 
@@ -142,7 +137,6 @@ Route::get('/search-employee','SearchController@index');
 Route::get('/search/user/action/{search}','SearchController@Search');
 Route::get('/search/user/{id}','SearchController@searchResult')->name('search_result');
 Route::get('/search-by-department/{department}','SearchController@searchByDepartment');
-//Route::get('/search-by-department/result/{id}','SearchController@searchByDepartment');
 
 
 //user management routes
@@ -150,6 +144,7 @@ Route::get('/user-management/index','UserManagementController@index')->name('use
 Route::get('user-management/view/{id}','UserManagementController@show');
 Route::get('/user-management/edit/{id}','UserManagementController@edit');
 Route::get('/update-user-status/{id}','UserManagementController@statusEdit');
+Route::get('/edit-user-details/option/{id}','UserManagementController@editOption');
 
 //admin zone
 Route::get('admin/news-index','AdminController@index')->name('news.index');
@@ -203,11 +198,13 @@ Route::post('/product-categories/update/{id}','ProductCategoryController@update'
 Route::get('/feedback/index','FeedbackController@index')->name('feedback.index');
 Route::post('/feedback/store','FeedbackController@store');
 
-//import export
+//role management
+Route::get('/role/index','RoleController@index')->name('role.index');
+Route::get('/role/create','RoleController@create');
+Route::post('/role/store','RoleController@store');
+Route::get('/role/edit/{id}','RoleController@edit');
+Route::post('/role/update/{id}','RoleController@update');
+Route::get('/role/delete/{id}','RoleController@destroy');
 
-// Route for view/blade file.
-Route::get('importExport', 'ImportExportController@importExport');
-// Route for export/download tabledata to .csv, .xls or .xlsx
-Route::get('downloadExcel/{type}', 'ImportExportController@downloadExcel');
-// Route for import excel data to database.
-Route::post('importExcel', 'ImportExportController@importExcel');
+//manager zone
+Route::get('/manager/index','ManagerController@index')->name('manager.index');

@@ -20,10 +20,10 @@ class LeaveController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index($id)
     {
         $cyear=date('Y');
-        $id=Auth::user()->id;
+       
        $strtYear=date('Y').'-04-01';
        //dd($strtYear);
        $endYear=date('Y',strtotime('+1 year')).'-03-31';

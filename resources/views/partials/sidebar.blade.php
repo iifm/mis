@@ -79,26 +79,34 @@ use App\NewsUpload;
 
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Employee Zone</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-             <li><a class="treeview-item" href="{{url('/leave')}}"><i class="icon fa fa-calendar"></i>Leave</a></li>
+             <li><a class="treeview-item" href="{{url('/leave')}}"><i class="icon fa fa-calendar"></i>Apply/View Leave</a></li>
           
-              <li><a class="treeview-item" href="{{url('/attendance-view')}}"><i class="icon fa fa-eye"></i>View Attendance</a></li>
+              <li><a class="treeview-item" href="{{url('/attendance-view')}}/{{Auth::id()}}"><i class="icon fa fa-eye"></i>View Attendance</a></li>
              
              <li><a class="treeview-item " href="{{url('/on-duty')}}"><i class="icon fa fa-tag "></i>On-Duty</a></li>
               <li><a class="treeview-item" href="{{url('/conveyance')}}"><i class="icon fa fa-inr"></i>Conveyance</a></li>
                <li><a class="treeview-item" href="{{url('/user-details')}}"><i class="icon fa fa-user"></i>User Profile</a></li>    
           </ul>
         </li>
-        @if(Auth::user()->role==1 || Auth::user()->role==2)
+          <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Manager Zone</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+          <ul class="treeview-menu">
+            
+              <li><a class="treeview-item" href="{{url('/manager/index')}}"><i class="icon fa fa-eye"></i>View Team Details</a></li>
+              <li><a class="treeview-item" href="{{url('admin/news-upload')}}"><i class="icon fa fa-upload"></i>News Upload/Update</a></li>    
+          </ul>
+        </li>
+       
          <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-user-secret"></i><span class="app-menu__label">Admin Zone</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="{{url('/user-management/index')}}"><i class="icon fa fa-users"></i>User Management</a></li>
+            <li><a class="treeview-item" href="{{url('/role/index')}}"><i class="icon fa fa-tasks"></i>Role Management</a></li>
              <li><a class="treeview-item" href="{{url('/hall-of-fame/create')}}"><i class="icon fa fa-trophy"></i>Add Employee of the Month</a></li>
                <li><a class="treeview-item" href="{{url('/department/index')}}"><i class="icon fa fa-building-o"></i>Department</a></li> 
                 <li><a class="treeview-item" href="{{url('/upload/category/index')}}"><i class="icon fa fa-list"></i>Add Category</a></li>
-             <li><a class="treeview-item" href="{{url('admin/news-upload')}}"><i class="icon fa fa-upload"></i>News Update/Upload</a></li>    
+           <!--   <li><a class="treeview-item" href="{{url('admin/news-upload')}}"><i class="icon fa fa-upload"></i>News Update/Upload</a></li>  -->   
           </ul>
         </li>
-        @endif
+      
 
 
          <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-download"></i><span class="app-menu__label">Downloads</span><i class="treeview-indicator fa fa-angle-right"></i></a>

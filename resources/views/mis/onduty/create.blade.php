@@ -32,7 +32,7 @@
            <h4><i class="fa fa-th-list"></i> On-Duty Management  </h4>
  
         </div>
-      <a href="{{url('/on-duty/index')}}" class="btn btn-primary fa fa-eye">View Your OD</a>
+      <a href="{{url('/on-duty/index')}}/{{Auth::id()}}" class="btn btn-primary fa fa-eye">View Your OD</a>
       </div>
       <div class="row">
       

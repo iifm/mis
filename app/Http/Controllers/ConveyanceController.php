@@ -20,9 +20,9 @@ class ConveyanceController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index($id)
     {
-      $id=Auth::user()->id;
+     
           $strtYear=date('Y').'-04-01';
 
        $endYear=date('Y-m-d',strtotime("+1 day"));
@@ -31,12 +31,7 @@ class ConveyanceController extends Controller
                     ->whereBetween('con_date',[$strtYear, $endYear])
                     ->orderBy('id','DESC')
                     ->get();
-            // $conveyance=DB::table('conveyances')
-            //             ->where('user_id',$id)
-            //            ->where('con_date','<=',$strtYear)
-            //            ->where('con_date','>=',$endYear)
-            //            ->get();
-          //dd($conveyance);
+           
         return view('mis.conveyance.index',compact('conveyance'));
 
     }

@@ -22,14 +22,14 @@ class OnDutyController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index($id)
     {
     // $onduty=OnDuty::all()->orderBy('id','');
         $cyear=date('Y');
          $strtYear=date('Y').'-04-01';
        $endYear=date('Y-m-d');
        //dd($endYear);
-      $id=Auth::user()->id;
+    
         $onduty=OnDuty::where('empid',$id)
                     ->whereBetween('od_date',[$strtYear,$endYear])
                     ->orderBy('id','DESC')->get();

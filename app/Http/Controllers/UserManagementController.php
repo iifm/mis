@@ -50,6 +50,21 @@ class UserManagementController extends Controller
         
     }
 
+    public function editOption($id)
+    {
+       $data=explode(",", $id);
+       $user_id=$data[0];
+       $edit_option=$data[1];
+       if ($edit_option=='0') {
+           $changeEditOption=UserDetails::where('user_id',$user_id)->update(['edit_option'=>'1']);
+              $response="Employee Editable Enabled Successfully";
+       }
+       else{
+             $changeEditOption=UserDetails::where('user_id',$user_id)->update(['edit_option'=>'0']);
+              $response="Employee Editable Disabled Successfully";
+       }
+    }
+
     /**
      * Store a newly created resource in storage.
      *

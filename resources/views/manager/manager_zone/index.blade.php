@@ -2,7 +2,7 @@
 <html lang="en">
   
 <head>
-    <title> Department Management</title>
+    <title> Manager Zone</title>
 
     <!-- Main CSS-->
     {!!View('partials.include_css')!!}
@@ -24,10 +24,10 @@
    <main class="app-content">
       <div class="app-title">
         <div>
-        <h1 class="heading_title"><i class="fa fa-building-o "></i> Department Management </h1>
+        <h1 class="heading_title"><i class="fa fa-users "></i> Team Members Details </h1>
         </div>
-       <a href="{{url('/department/create')}}" class="fa fa-plus btn btn-primary" style="background: #009688; border:none; margin-left: 450px"> Add Department</a> 
-       <!--   <a href="{{url('/department-head/create')}}" class="fa fa-plus btn btn-info" style="background: #009688; border:none;"> Add Department Head</a>   -->
+      <!--  <a href="{{url('/department/create')}}" class="fa fa-plus btn btn-primary" style="background: #009688; border:none; margin-left: 450px"> Add Department</a>  -->
+     
       </div>
      
       <div class="row">
@@ -46,30 +46,33 @@
         <div id="alert" class="alert alert-success">{{ Session::get('message') }}
 
         </div><?php } ?>
-              <table id="sampleTable"  width="100%">
+              <table id="sampleTable"  width="100%"  class="table">
                 <thead>
               
                   <tr role="row">
                     <th>#</th>
-                    <th style="text-align: left;">Department Name</th>
-                    <th style="text-align: left;">Modified By</th>
-
-                    <th>Action</th>
+                    <th>User Name</th>
+                    <th> Leave(s)</th>
+                    <th> On-Duty(s)</th>
+                    <th> Conveyance(s)</th>
+                    <th> Attendance(s)</th>
+                       
                   </tr>
                 </thead>
                 <tbody>
-                     @foreach($departments as $department)
+                   @foreach($totalTeamMemberDetails as $totalTeamMemberDetail)
                 <tr style="max-height: 100px;">
                     <td><?= $i++;?></td>
-                     <td style="text-align: left;">{{$department->name}}</td>
-                    <td style="text-align: left;">{{$department->username}}</td>
-
-                    <td style="text-align: left;">
-                      <a href="{{url('/department/edit')}}/{{$department->id}}" class="btn btn-primary btn-sm fa fa-edit"></a>
-                        <a onclick="return confirm('Are you sure you want to delete this item?')" href="{{url('/department/delete')}}/{{$department->id}}" class="btn btn-danger btn-sm fa fa-trash"></a>
-                     </td>
+                     <td><h6>{{$totalTeamMemberDetail['username']}} </h6></td>
+                    <td><!-- {{$totalTeamMemberDetail['total_leaves']}} --> <a href="{{url('/leave-view')}}/{{$totalTeamMemberDetail['user_id']}}" class="fa fa-eye btn btn-primary form-control"> View</a></td>
+                     <td><!-- {{$totalTeamMemberDetail['total_ods']}}  --><a href="{{url('/on-duty/index')}}/{{$totalTeamMemberDetail['user_id']}}" class="fa fa-eye btn btn-sm btn-info form-control"> View</a></td>
+                    <td><!-- {{$totalTeamMemberDetail['total_conveyance']}} --> <a href="{{url('/conveyance/index')}}/{{$totalTeamMemberDetail['user_id']}}" class="fa fa-eye btn btn-sm btn-warning form-control" style="color: white"> View</a></td>
+                    <td><a href="{{url('/attendance-view')}}/{{$totalTeamMemberDetail['user_id']}}" class="fa fa-eye btn btn-sm btn-danger form-control"> View</a></td>
+                       
+                  
                   </tr>
-                    @endforeach
+                  @endforeach
+                   
         </tbody>
  
           </table>

@@ -60,10 +60,14 @@ class UserDetailController extends Controller
 
         $user_work = UserWorkExperience::where('user_id',$user_id)->get();
         // dd($user_work);
-
-        
+        $edit_option="";
+        $editable_option=UserDetails::where('user_id',$user_id)->pluck('edit_option');
+        foreach ($editable_option as $key => $edit_option) {
+           $edit_option=$edit_option;
+        }
+      
           
-        return view('mis.user_detail.index',compact(['user_detail','user_work','user_education','designation','mobile','locationcentre','department','doj','useredu','view_details','user_id']));
+        return view('mis.user_detail.index',compact(['user_detail','user_work','user_education','designation','mobile','locationcentre','department','doj','useredu','view_details','user_id','edit_option']));
        
     }
 
