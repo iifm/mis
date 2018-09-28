@@ -46,7 +46,7 @@
         <i class="fa fa-th-list"></i> Attendance Management 
       </h1>
     </div>
-    <a href="{{url('/attendance-view')}}" class="btn btn-primary fa fa-eye">View Attendance</a>
+    <a href="{{url('/attendance-view')}}/{{Auth::id()}}" class="btn btn-primary fa fa-eye">View Attendance</a>
   </div>
   <div class="row">
     <div class="col-md-12">   

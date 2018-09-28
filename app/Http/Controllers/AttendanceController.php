@@ -82,9 +82,10 @@ class AttendanceController extends Controller
     }
 
   
-    public function viewAttendance(Request $request)
+    public function viewAttendance(Request $request,$user_id)
     {
-          
+       
+      // dd($user_id); 
        if ($request->has('strtDate') && $request->has('endDate') && $request->has('employee')) {
       
             $users=User::all();
@@ -389,7 +390,7 @@ class AttendanceController extends Controller
              $users=User::all();
             $last_seven_day=date('Y-m-d', strtotime('-6 days'));
             $now=date('Y-m-d');
-            $member_id=Auth::id();
+            $member_id=$user_id;
 
           $datas = [];
             while (strtotime($last_seven_day) <= strtotime($now)) {
