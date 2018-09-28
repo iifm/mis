@@ -11,6 +11,7 @@ use App\User;
 use Session;
 use DB;
 use App\Department;
+use App\Role;
 
 
 class UserDetailController extends Controller
@@ -35,6 +36,8 @@ class UserDetailController extends Controller
             $user_id=Auth::user()->id; 
             $view_details='SHOW';
          }
+
+         
         
          $user_detail=User::where('users.id',$user_id)
                     ->join('user_details','user_details.user_id','=','users.id')

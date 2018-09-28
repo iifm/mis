@@ -90,7 +90,7 @@
                  @endif
                     </td>
                   <td>
-                       @if($user->edit_option=='1')
+                       @if($user->edit_option=='True')
                  <div class="toggle-flip">
                   <label>
                     <input type="checkbox" name="status" class="edit_option" checked="true" id="{{$user->user_id}}" value="{{$user->user_id}},{{$user->edit_option}}"><span class="flip-indecator" data-toggle-off="Disable" data-toggle-on="Enable" ></span>

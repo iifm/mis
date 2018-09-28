@@ -54,7 +54,7 @@ a {
         </div><?php } ?>
       <div class="row">
         <div class="col-md-6 col-lg-4">
-          <a href="{{url('/leave-view')}}">
+          <a href="{{url('/leave-view')}}/{{Auth::id()}}">
           <div class="widget-small primary coloured-icon"><i class="icon fa fa-calendar fa-3x"></i>
             <div class="" style="width: 100%; padding:14px 0 5px 0">
              <center><h6 class="heading_title">Total Applied Leaves</h6></center> 
@@ -68,7 +68,7 @@ a {
           </a>
         </div>
         <div class="col-md-6 col-lg-4">
-          <a href="{{url('/on-duty/index')}}">
+          <a href="{{url('/on-duty/index')}}/{{Auth::id()}}">
           <div class="widget-small info coloured-icon"><i class="icon fa fa-tag fa-3x"></i>
             <div class="" style="width: 100%; padding:14px 0 5px 0">
             <center><h6 class="heading_title">Total Applied On-Duties</h6></center> 

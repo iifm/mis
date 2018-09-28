@@ -139,7 +139,7 @@
         $('#amt_'+scount).prop( "disabled", true );
         
         var dis = $('#distance_'+scount).val();
-        var disc = dis*3.5;
+        var disc = dis*5;
          //$('#mode1 > option:selected').val(disc);
          var datastr = '&Rate'+scount+'=' + disc + '&varid='+scount;
 
@@ -166,7 +166,7 @@
         $('#amt_'+scount).prop( "disabled", true );
          $('.amtf'+scount).show();
         var dis = $('#distance_'+scount).val();
-        var disc = dis*2.5;
+        var disc = dis*3;
          //$('#mode1 > option:selected').val(disc);
          var datastr = '&Rate'+scount+'=' + disc + '&varid='+scount;
 

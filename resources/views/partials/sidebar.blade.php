@@ -13,6 +13,7 @@ use App\User;
 use App\Wishes;
 use Mail;
 use DB;
+use App\Role;
 use Session;
 use URL;
 use App\NewsUpload;
@@ -50,6 +51,21 @@ use App\NewsUpload;
         
         $downloadType=UploadCategory::where('type','file')->get();     
         Session::put('downloadType', $downloadType);
+
+      
+        $userRole=Auth::user()->role;
+        $roleDetails=Role::where('id',$userRole)->first();
+       
+          $access_zones=$roleDetails->access_zone;
+
+          if ($access_zones=='All') {
+             Session::put('access_zones', $access_zones);
+          }
+          else{
+            Session::put('access_zones', $access_zones);
+          }
+
+          
     ?>
     <aside class="app-sidebar" style="overflow: scroll">
       @if(Session::has('profile')!=null && Session::has('department')!=null )
@@ -88,6 +104,7 @@ use App\NewsUpload;
                <li><a class="treeview-item" href="{{url('/user-details')}}"><i class="icon fa fa-user"></i>User Profile</a></li>    
           </ul>
         </li>
+         @if(Session::get('access_zones')=='All')
           <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Manager Zone</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             
@@ -95,7 +112,8 @@ use App\NewsUpload;
               <li><a class="treeview-item" href="{{url('admin/news-upload')}}"><i class="icon fa fa-upload"></i>News Upload/Update</a></li>    
           </ul>
         </li>
-       
+      @endif
+       @if(Session::get('access_zones')=='All')
          <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-user-secret"></i><span class="app-menu__label">Admin Zone</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="{{url('/user-management/index')}}"><i class="icon fa fa-users"></i>User Management</a></li>
@@ -106,7 +124,7 @@ use App\NewsUpload;
            <!--   <li><a class="treeview-item" href="{{url('admin/news-upload')}}"><i class="icon fa fa-upload"></i>News Update/Upload</a></li>  -->   
           </ul>
         </li>
-      
+      @endif      
 
 
          <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-download"></i><span class="app-menu__label">Downloads</span><i class="treeview-indicator fa fa-angle-right"></i></a>
@@ -124,7 +142,7 @@ use App\NewsUpload;
             <li><a class="app-menu__item" href="{{url('/hall-of-fame')}}"><i class="app-menu__icon fa fa-trophy"></i><span class="app-menu__label">Hall of Fame</span></a></li>
              <li><a class="app-menu__item" href="{{url('/photo-album')}}"><i class="app-menu__icon fa fa-file-image-o"></i><span class="app-menu__label">Photo Album</span></a></li>
 
-          @if(Auth::user()->role==1 || Auth::user()->role==2)
+         @if(Session::get('access_zones')=='All')
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-file"></i><span class="app-menu__label">Report</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="{{url('/conveyance-report')}}"><i class="icon fa fa-inr"></i>Conveyance </a></li>
@@ -133,7 +151,7 @@ use App\NewsUpload;
             
           </ul>
         </li>
-         @endif
+      @endif
          <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-user-secret"></i><span class="app-menu__label">Policy</span><i class="treeview-indicator fa fa-angle-right"></i></a>
        
           <ul class="treeview-menu">
@@ -147,7 +165,7 @@ use App\NewsUpload;
             
           </ul>
         </li>
-          @if(Auth::user()->role==1 || Auth::user()->role==2)
+      
           <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-product-hunt"></i><span class="app-menu__label">Inventory Management</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="{{url('/product-categories/index')}}"><i class="icon fa fa-list"></i>  Product Category</a></li>
@@ -156,8 +174,8 @@ use App\NewsUpload;
             
           </ul>
         </li>
-        @endif
-       <!--   <li><a class="app-menu__item" href="{{url('/feedback/index')}}"><i class="app-menu__icon fa fa-commenting"></i><span class="app-menu__label">Feedback</span></a></li> -->
+      
+      
           <li><a class="app-menu__item" href="{{url('/change-password')}}"><i class="app-menu__icon fa fa-key"></i><span class="app-menu__label">Change Password</span></a></li>
       </ul>
     </aside>

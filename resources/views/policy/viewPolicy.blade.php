@@ -3,7 +3,7 @@
   
 <head>
   
-    <title>HR Policies</title> 
+    <title>Policies</title> 
     <!-- Main CSS-->
     {!!View('partials.include_css')!!}
 </head>
@@ -23,7 +23,7 @@
         <div>
           <h1 class="heading_title"><i class="fa fa-file"></i> {{$content->policyType}}</h1>
         </div>
-          @if(Auth::user()->role==1 || Auth::user()->role==2)
+           @if(Session::get('access_zones')=='All')
         <a href="{{url('/policy/edit')}}/{{$id}}" class="fa fa-edit btn btn-primary"> Edit {{$content->policyType}}</a>
         @endif
       </div>

@@ -55,12 +55,12 @@ class UserManagementController extends Controller
        $data=explode(",", $id);
        $user_id=$data[0];
        $edit_option=$data[1];
-       if ($edit_option=='0') {
-           $changeEditOption=UserDetails::where('user_id',$user_id)->update(['edit_option'=>'1']);
+       if ($edit_option=='False') {
+           $changeEditOption=UserDetails::where('user_id',$user_id)->update(['edit_option'=>'True']);
               $response="Employee Editable Enabled Successfully";
        }
        else{
-             $changeEditOption=UserDetails::where('user_id',$user_id)->update(['edit_option'=>'0']);
+             $changeEditOption=UserDetails::where('user_id',$user_id)->update(['edit_option'=>'False']);
               $response="Employee Editable Disabled Successfully";
        }
     }

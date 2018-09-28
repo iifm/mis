@@ -208,3 +208,6 @@ Route::get('/role/delete/{id}','RoleController@destroy');
 
 //manager zone
 Route::get('/manager/index','ManagerController@index')->name('manager.index');
+
+//database migration
+Route::get('/database/migration','DataBaseMigrationController@index');

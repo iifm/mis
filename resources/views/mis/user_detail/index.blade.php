@@ -121,7 +121,7 @@
      <div class="col-md-9 tile">
         
        <h3 class="tile-title heading_title">OFFICIAL INFORMATION 
-        @if($view_details=='SHOW' && $edit_option=='1')
+        @if($view_details=='SHOW' || $edit_option=='True')
 
         <a class="btn btn-success fa fa-pencil" href="{{url('/user-official')}}/{{$user_id}}" style="background: #009688;border: none;"></a>
         @endif
@@ -173,7 +173,7 @@
 
      
      <h3 class="tile-title heading_title">EDUCATIONAL INFORMATION 
-      @if($edit_option=='1' && $view_details=='SHOW')
+      @if($edit_option=='True' || $view_details=='SHOW')
       <a href="{{url('/user-education/add')}}/{{$user_id}}" class="btn btn-success fa fa-plus" style="background: #009688;border: none;"></a> 
       @endif
     </h3>
@@ -192,7 +192,7 @@
               <th>Percentage/Grades</th>
               <th>Certificate</th>
               
-              <th>Action</th>
+              <th width="10%">Action</th>
            
               <!-- <th>Action</th> -->
               
@@ -231,7 +231,7 @@
   <div class="col-md-12 tile">
     
      <h3 class="tile-title heading_title">WORK EXPERIENCE(S)
-       @if($edit_option=='1' && $view_details=='SHOW')
+       @if($edit_option=='True' || $view_details=='SHOW')
       <a href="{{url('/user-professional')}}/{{$user_id}}" class="btn btn-success fa fa-plus" style="background: #009688;border: none;"></a>
        @endif
     </h3>
@@ -291,7 +291,7 @@
   <div class="col-md-12 tile">
     
      <h3 class="tile-title heading_title">PERSONAL INFORMATION 
-        @if($edit_option=='1' && $view_details=='SHOW')
+        @if($edit_option=='True' || $view_details=='SHOW')
       <a href="{{url('/user-personal')}}/{{$user_id}}" class="btn btn-success fa fa-pencil" style="background: #009688;border: none;"></a>
       @endif
     </h3>
@@ -331,7 +331,7 @@
   <div class="col-md-12 tile">
     
      <h3 class="tile-title heading_title">FAMILY INFORMATION 
-        @if($edit_option=='1' && $view_details=='SHOW')
+        @if($edit_option=='True' || $view_details=='SHOW')
       <a href="{{url('/user-family')}}/{{$user_id}}" class="btn btn-success fa fa-pencil" style="background: #009688;border: none;"></a>
       @endif
     </h3>

@@ -45,7 +45,7 @@
                            @if($data->filetype=='pdf')
                           <a href="{{URL::To('storage/app/newUploads')}}/{{$data->uploadfile}}" download="">
                       <center> <img class="img-responsive" src="{{URL::To('/public/images/pdf.png')}}" height="150px" width="150px"></center> </a>
-                          @elseif($data->filetype=='xls' || $data->filetype=='xlsx')
+                          @elseif($data->filetype=='xls' || $data->filetype=='xlsx' || $data->filetype=='csv')
                            <a href="{{URL::To('storage/app/newUploads')}}/{{$data->uploadfile}}" download="">
                       <center> <img class="img-responsive" src="{{URL::To('/public/images/xls.png')}}" height="150px" width="150px"></center> </a>
                           @elseif($data->filetype=='doc' || $data->filetype=='docx')
