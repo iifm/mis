@@ -224,7 +224,7 @@ a {
            <div class="col-md-4">
              
               <div class="tile">
-                <h5 class="heading_title">Announcements</h5>   
+                <h5 class="heading_title">Announcement(s)</h5>   
                 <ul style="padding-left: 0px; list-style: none;">
                   @foreach($announcements as $announcement)
                <li class="fa fa-bullhorn" style="width: 100%"> {{$announcement->subject}}<a href="{{url('/post/view')}}/{{$announcement->id}}" class="btn btn-info fa fa-eye pull-right" style="color: #fff"></a></li>  

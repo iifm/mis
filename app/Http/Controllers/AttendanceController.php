@@ -19,8 +19,10 @@ class AttendanceController extends Controller
         $this->middleware('auth');
     }
 
-    public function index($id)
+    public function index()
     {   
+       
+        $id=Auth::user()->id;
        $date=date("Y-m-d");
       
        $typecheck='';

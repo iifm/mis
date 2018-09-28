@@ -93,10 +93,13 @@
      @if($user->profile=='')
     <div class="col-md-3" style="padding: 0px;">
    <div class="card tile" style="min-height: 320px; margin-right: 20px; margin-left: -10px; padding: 0px">
+
     <img class="" width="100%" src="{{ URL::To('public/images/usser.png') }}" alt="Profile image">
+
     <div class="card-body">
         <h4 class="card-title" style="font-family: Times New Roman;text-align: center;">{{$user->name}}</h4>
        <h4 class="card-title" style="font-family: Times New Roman;text-align: center;">{{$user->designation}}</h4>
+
       
     </div>
   </div> 
@@ -113,6 +116,7 @@
     <div class="card-body">
       <h4 class="card-title" style="font-family: Times New Roman;text-align: center;">{{$user->name}}</h4>
        <h4 class="card-title" style="font-family: Times New Roman;text-align: center;">{{$user->designation}}</h4>
+       
     </div>
   </div> 
     </div>
