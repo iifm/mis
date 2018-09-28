@@ -24,17 +24,27 @@ class UserDetailController extends Controller
 
     public function index($id=null)
     {
+        $view_details='';
         if($id){
            $user_id = $id;
-            $role=Auth::user()->role;
-            if($role==1 || $role==2){
-                $view_details='SHOW';
-            }else{
-                $view_details='HIDE';
-            }
+           
+
+        $userRole=Auth::user()->role;
+        $roleDetails=Role::where('id',$userRole)->first();
+       
+          $access_zones=$roleDetails->access_zone;
+
+          if ($access_zones=='All') {
+             $view_details='SHOW';
+          }
+          else{
+             $view_details='HIDE';
+          }
+
          }else{
             $user_id=Auth::user()->id; 
-            $view_details='SHOW';
+             $view_details='SHOW';
+           
          }
 
          
