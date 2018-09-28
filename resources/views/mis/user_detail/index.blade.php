@@ -191,9 +191,9 @@
               <th>Specialization</th>
               <th>Percentage/Grades</th>
               <th>Certificate</th>
-              
+              @if($edit_option=='True' && $view_details=='SHOW')
               <th width="10%">Action</th>
-           
+            @endif
               <!-- <th>Action</th> -->
               
             </tr>
@@ -216,10 +216,12 @@
                 <a href="{{ URL::To('storage/app/education/'.$value->certificate) }}" target="_blank"><img src="{{ URL::To('storage/app/education/'.$value->certificate) }}"  height="50px" width="50px"></a>
                 @endif
               </td>
+                @if($edit_option=='True' && $view_details=='SHOW')
               <td>
                 <a href="{{url('/education-edit')}}/{{$value->id}}/{{$user_id}}" class="btn btn-primary fa fa-pencil" style="background: #009688; border:none"></a>
-                <a href="{{url('/education-delete')}}/{{$value->id}}/{{$user_id}}" class="btn btn-danger fa fa-trash" onclick="return confirm('Are you sure you want to delete this item?');"></a>
+               <!--  <a href="{{url('/education-delete')}}/{{$value->id}}/{{$user_id}}" class="btn btn-danger fa fa-trash" onclick="return confirm('Are you sure you want to delete this item?');"></a> -->
               </td>
+              @endif
             </tr>
           @endforeach
           </tbody>
@@ -247,7 +249,9 @@
               <th width="20%">Company Address</th>
               <th width="10%">Offer/Appointment Letter</th>
               <th width="10%" align="center">Relieving/Experience Letter</th>
+                @if($edit_option=='True' && $view_details=='SHOW')
                <th width="10%">Action</th>
+               @endif
              
               
             </tr>
@@ -275,8 +279,10 @@
                   @endif
                 </a>
               </td>
+                @if($edit_option=='True' && $view_details=='SHOW')
                <td><a href="{{url('/user-professional/edit')}}/{{$value->id}}/{{$user_id}}" class="btn btn-primary fa fa-pencil" style="background: #009688; border:none"></a>
-              <a href="{{url('/profession-delete')}}/{{$value->id}}/{{$user_id}}" class="btn btn-danger fa fa-trash" onclick="return confirm('Are you sure you want to delete this item?');"></a></td>
+            <!--   <a href="{{url('/profession-delete')}}/{{$value->id}}/{{$user_id}}" class="btn btn-danger fa fa-trash" onclick="return confirm('Are you sure you want to delete this item?');"></a> --></td>
+            @endif
 
              
             </tr>
