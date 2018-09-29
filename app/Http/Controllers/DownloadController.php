@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\UploadCategory;
 use App\NewsUpload;
+use Session;
 
 class DownloadController extends Controller
 {
@@ -17,6 +18,7 @@ class DownloadController extends Controller
       $downloadType=UploadCategory::where('id',$id)->get();
      
       $downloadDatas=NewsUpload::where('category',$id)->get();
+      //dd($downloadDatas);
        return view('downloads.index',compact(['downloadType','downloadDatas']));
     }
 
@@ -83,6 +85,8 @@ class DownloadController extends Controller
      */
     public function destroy($id)
     {
-        //
+       NewsUpload::where('id',$id)->delete();
+       Session::flash('message','File Deleted Successfully !!');
+       return back();
     }
 }

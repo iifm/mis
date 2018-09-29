@@ -185,6 +185,7 @@ Route::get('/upload/category/delete/{id}','UploadCategoryController@destroy');
 //downloads routes
 Route::get('/download/{id}','DownloadController@index');
 Route::get('/post/view/{id}','HomeController@postView');
+Route::get('/download/delete/{id}','DownloadController@destroy');
 
 //product category
 Route::get('/product-categories/index','ProductCategoryController@index')->name('product.category');
@@ -211,3 +212,7 @@ Route::get('/manager/index','ManagerController@index')->name('manager.index');
 
 //database migration
 Route::get('/database/migration','DataBaseMigrationController@index');
+
+//assign user role
+Route::get('assign-role/index','AssignUserRoleController@index')->name('assign_role.index');
+Route::get('assign-role/edit/{id}','AssignUserRoleController@roleUpdate');

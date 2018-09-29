@@ -45,15 +45,19 @@
                            @if($data->filetype=='pdf')
                           <a href="{{URL::To('storage/app/newUploads')}}/{{$data->uploadfile}}" download="">
                       <center> <img class="img-responsive" src="{{URL::To('/public/images/pdf.png')}}" height="150px" width="150px"></center> </a>
+                        <a href="{{url('/download/delete')}}/{{$data->id}}" class="btn btn-danger fa fa-trash pull-right" onclick="return confirm('Are You Sure You Want To Delete This?')"></a>
                           @elseif($data->filetype=='xls' || $data->filetype=='xlsx' || $data->filetype=='csv')
                            <a href="{{URL::To('storage/app/newUploads')}}/{{$data->uploadfile}}" download="">
                       <center> <img class="img-responsive" src="{{URL::To('/public/images/xls.png')}}" height="150px" width="150px"></center> </a>
+                      <a href="{{url('/download/delete')}}/{{$data->id}}" class="btn btn-danger fa fa-trash pull-right" onclick="return confirm('Are You Sure You Want To Delete This?')"></a>
                           @elseif($data->filetype=='doc' || $data->filetype=='docx')
                            <a href="{{URL::To('storage/app/newUploads')}}/{{$data->uploadfile}}" download="">
                       <center> <img class="img-responsive" src="{{URL::To('/public/images/doc.png')}}" height="150px" width="150px"></center> </a>
+                      <a href="{{url('/download/delete')}}/{{$data->id}}" class="btn btn-danger fa fa-trash pull-right" onclick="return confirm('Are You Sure You Want To Delete This?')"></a>
                        @elseif($data->filetype=='ppt' || $data->filetype=='pptx')
                            <a href="{{URL::To('storage/app/newUploads')}}/{{$data->uploadfile}}" download="">
                       <center> <img class="img-responsive" src="{{URL::To('/public/images/ppt.png')}}" height="150px" width="150px"></center> </a>
+                      <a href="{{url('/download/delete')}}/{{$data->id}}" class="btn btn-danger fa fa-trash pull-right" onclick="return confirm('Are You Sure You Want To Delete This?')"></a>
                            @endif
                     </div>
                   </div>

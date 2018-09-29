@@ -24,11 +24,9 @@
    <main class="app-content">
       <div class="app-title">
         <div>
-        <h1 class="heading_title"><i class="fa fa-tasks "></i> Role Management </h1>
+        <h1 class="heading_title"><i class="fa fa-edit "></i> Edit User Assigned Role  </h1>
         </div>
-       <a href="{{url('role/create')}}" class="fa fa-plus btn btn-primary " style="background: #009688; border:none; margin-left: auto;margin-right: 10px;"> Add Role</a>
-       <a href="{{url('assign-role/index')}}" class="fa fa-handshake-o btn btn-primary" style="background: #009688; border:none;"> View And Edit User(s) Role</a> 
-     
+   
       </div>
      
       <div class="row">
@@ -52,36 +50,36 @@
               
                   <tr role="row">
                     <th>#</th>
-                    <th style="text-align: left;">Role Name</th>
-                    <th style="text-align: left;">Modified By</th>
-
-                    <th>Action</th>
+                    <th style="text-align: left;">Employee Name</th>
+                    <th style="text-align: left;">Assigned Role</th>
                   </tr>
                 </thead>
                 <tbody>
-                   @foreach($roles as $role)
+                @foreach($users_has_role_details as $user_has_role) 
                 <tr style="max-height: 100px;">
-                    <td>{{ $i++ }}</td>
-                     <td style="text-align: left;">{{$role->name}}</td>
-                    <td style="text-align: left;">{{$role->username}}</td>
-
+                    <td><?= $i++;?></td>
+                     <td style="text-align: left;" class="userId">{{ucwords(strtolower($user_has_role->name))}}</td>
+                     
                     <td style="text-align: left;">
-                      <a href="{{url('role/edit')}}/{{$role->id}}" class="btn btn-primary btn-sm fa fa-edit"></a>
-                       <!--  <a onclick="return confirm('Are you sure you want to delete this item?')" href="{{url('role/delete')}}/{{$role->id}}" class="btn btn-danger btn-sm fa fa-trash"></a> -->
-                     </td>
+                      <select class="form-control updated_role" style="width: 50%" id="updated_role">
+
+                        <option value="{{$user_has_role->role_id}}" selected="selected">{{$user_has_role->user_role}}</option>
+                        @foreach($roles as $role)
+                        <option value="{{$role->id}},{{$user_has_role->user_id}}">{{$role->name}}</option>
+                        @endforeach
+
+                      </select>
+                      
+                    </td>
+                  
                   </tr>
-                    @endforeach
+                  @endforeach
         </tbody>
  
           </table>
         </div>
       </div>
-      <div class="row">
-        <div class="col-sm-12 col-md-5">
-          
-        </div>
-       
-        </div>
+     
       </div>
             </div>
           </div>
@@ -94,7 +92,21 @@
 
     <!-- Essential javascripts for application to work-->
     {!!View('partials.include_js')!!}
+    <script type="text/javascript">
+      $(document).ready(function(){
 
+           $(document).on('change','.updated_role',function(){
+          var roleId_userId= $(this).val();
+
+          $.get("{{url('assign-role/edit')}}/"+roleId_userId,function(data){
+              alert(data);
+          });
+        
+
+        });
+   
+      });
+    </script>
     
   </body>
 
