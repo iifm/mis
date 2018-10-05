@@ -79,8 +79,15 @@ class ManagerController extends Controller
         $user_role=Auth::user()->role;
         //dd($user_role);
         $role_detail=Role::where('id',$user_role)->first();
+       
        $member_ids=[];
-       $team_members=User::where('role',$role_detail->access_zone)->get();
+       if ($role_detail->access_zone=='All') {
+          $team_members=User::all();
+       }
+       else{
+          $team_members=User::where('role',$role_detail->access_zone)->get();
+       }
+     
        foreach ($team_members as  $team_member) {
           $member_ids[]=$team_member->id;
        }
@@ -91,6 +98,7 @@ class ManagerController extends Controller
                             ->join('users','users.id','=','leaves.empid')
                             ->whereBetween('leavefrom',[$strtYear,$endYear])
                             ->where('leaves.status','!=','approved')
+                            //->where('leaves.status','!=','')
                             ->select('leaves.*','users.id as user_id','users.name as user_name','leaves.id as leave_id')
                             ->orderBy('leaves.id','DESC')
                             ->get();

@@ -127,7 +127,6 @@ use App\NewsUpload;
         </li>
       @endif      
 
-
          <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-download"></i><span class="app-menu__label">Downloads</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
              @if(Session::has('downloadType'))
