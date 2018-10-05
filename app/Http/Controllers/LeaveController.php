@@ -163,33 +163,26 @@ class LeaveController extends Controller
              $uids=User::whereIn('id',$approvalfrom)->pluck('id');
            array_push($to_email, Auth::user()->email);
 
+           //dd($to_email);
+
               
           $subject = "Leave Request From " .$leavefromname->name ."  on ". date("l jS \of F Y");
 
           $replyto=['manish.ram@iifm.co.in','sarita.sharma@iifm.co.in','hr@iifm.co.in','ankit.kapoor@iifm.co.in'];
          $data= array('name' => $name, 'leavefrom' => $leavefrom,'reason'=>$reason,'leavetype'=>$leavetype, 'leaveto'=>$leaveto,'totdays'=>$totdays);
-        
-       
-             foreach ($to_email as $to) {
-                foreach ($uids as  $uid) {
-                
-                  Mail::send('mail.leaveRequestEmailer',  ['data' => $data,'link'=>URL::route('leave-approval',['id'=>$query->id,'uid'=>$uid])], function ($message)use($replyto,$to,$subject,$approvalfrom) {
+           
+                     
+                  Mail::send('mail.leaveRequestEmailer',  ['data' => $data,'link'=>URL::route('leave-approval',['id'=>$query->id])], function ($message)use($replyto,$to_email,$subject,$approvalfrom) {
                      $message->from('info@prathamonline.in', 'MIS Alert');
-                        $message->to($to);
+                        $message->to($to_email);
                         $message->cc(['manish.ram@iifm.co.in']);
                         $message->subject($subject);
                         $message->replyTo($replyto);
                     });
-            
-                 }
-               }
-      
-
+       
            Session::flash('message','Your Leave Request Sent Successfully !!');
-
-
-            
-        return redirect()->route('leave.index');
+     
+        return redirect()->route('leave.index',['id'=>Auth::user()->id]);
 
     }
 
@@ -212,23 +205,38 @@ class LeaveController extends Controller
         return redirect()->route('leave.index');
     }
 
-    public function leaveApproval(Request $request,$id,$uid)
+    public function leaveApproval(Request $request,$id)
     {
-       //dd($uid);
-        $leave_id=Leave::where('id',$id)->get();
-        foreach ($leave_id as  $value) {
-           $userDetail=User::where('users.id',$value->empid)
+      // dd($id);
+
+      $uid=Auth::user()->id;
+     // dd($uid);
+        $leave_id=Leave::where('id',$id)->first();
+
+        $apper_id=$leave_id->empid;
+
+        if ($uid==$apper_id) {
+         return redirect()->route('leave.index',['id'=>$uid]);
+        }
+        else{
+            $user_details=Leave::where('leaves.id',$id)
+                            ->join('users','users.id','=','leaves.empid')
+                            ->join('user_details','user_details.user_id','=','users.id')
+                            ->select('users.id as user_id','users.*','leaves.*','user_details.*')
+                            ->get();
+           /*  $userDetail=User::where('users.id',$leave_id->empid)
                           ->join('user_details','users.id','=','user_details.user_id')
                           ->select('users.id as user_id','users.email as user_email','user_details.mobile as user_mobile','users.name as user_name','user_details.department as user_deptt')
-                          ->get();
-        }
+                          ->get();*/
        
-       // dd($userDetail);
-        return view('leaveApproval',compact(['leave_id','userDetail','from','uid']));
+        return view('leaveApproval',compact(['user_details','uid','id']));
+        }
+      
+        
     }
 
     public function leaveApproved(Request $request,$id,$uid){
-        //dd($uid);
+       //dd($uid);
         $actionstatus= $request->actionstatus;
         $comment= $request->comment;
        
@@ -239,13 +247,19 @@ class LeaveController extends Controller
       $leaveDetails=Leave::where('leaves.id',$id)
                         ->join('users','users.id','=','leaves.empid')
                         ->select('leaves.*','users.name as username')->first();
+
+                        //dd($leaveDetails->username);
             $approvedby=User::where('id',$leaveDetails->approvedby)->first();
 
             $email=User::where('id',$leaveDetails->empid)->first();
 
     // $subject ="Re: " . $leave_datas->created_at;
-    $subject = "Re: " ."Leave Request From " .$leaveDetails->username ."  on ". date("l jS \of F Y",strtotime($leaveDetails->created_at));
-
+      if($leaveDetails->created_at){
+          $subject = "Re: " ."Leave Request From " .$leaveDetails->username ."  on ". date("l jS \of F Y",strtotime($leaveDetails->created_at));
+      }
+      else{
+         $subject = "Re: " ."Leave Request From " .$leaveDetails->username ."  on ". date("l jS \of F Y",strtotime($leaveDetails->leavefrom));
+      }
      // return $subject;
        $data=['username'=>$leaveDetails->username,'type'=>$leaveDetails->leavetype,'from'=>$leaveDetails->leavefrom,'to'=>$leaveDetails->leaveto,'days'=>$leaveDetails->totalleave,'reason'=>$leaveDetails->reason,'status'=>$leaveDetails->status,'approvedby'=>$approvedby->name];
 

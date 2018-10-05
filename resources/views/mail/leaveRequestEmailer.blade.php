@@ -94,7 +94,7 @@
                                         <tr>
                                             <td align="center" valign="middle" style="padding-right:40px;padding-bottom:20px;padding-left:40px">
                                                 
-                                                <a href="{{$link}}" style="background-color:#009688;border-collapse:separate;border-top:20px solid #009688;border-right:20px solid #009688;border-bottom:20px solid #009688;border-left:20px solid #009688;border-radius:3px;color:#ffffff;display:inline-block;font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:600;letter-spacing:.3px;text-decoration:none; margin-top: 30px" target="_blank" ">Click Here For Action</a>
+                                                <a href="{{$link}}" style="background-color:#009688;border-collapse:separate;border-top:20px solid #009688;border-right:20px solid #009688;border-bottom:20px solid #009688;border-left:20px solid #009688;border-radius:3px;color:#ffffff;display:inline-block;font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:600;letter-spacing:.3px;text-decoration:none; margin-top: 30px" target="_blank" ">Click Here For Action/Response</a>
                                                 
                                             </td>
                                         </tr>

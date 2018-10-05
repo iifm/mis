@@ -51,7 +51,7 @@ Route::get('/leave-view/{id}', 'LeaveController@index')->name('leave.index');
 Route::post('/leave-store', 'LeaveController@store');
 Route::post('/leave-edit/{id}', 'LeaveController@store');
 Route::get('/leave-delete/{id}', 'LeaveController@destroy');
-Route::get('leave-approval/{id}/{uid}','LeaveController@leaveApproval')->name('leave-approval');
+Route::get('leave-approval/{id}','LeaveController@leaveApproval')->name('leave-approval');
 Route::post('leave-approved/{id}/{uid}','LeaveController@leaveApproved')->name('leave-approved');
 
 
@@ -64,7 +64,7 @@ Route::get('/update-user-attendance/{id}/{date}/{type}','AttendanceController@up
 Route::post('/updated-user-attendance','AttendanceController@updateIn');
 Route::get('/update-user-out-attendance/{id}/{date}/{type}','AttendanceController@updateOutAttendance');
 Route::post('/updated-userout-attendance','AttendanceController@updateOut');
-Route::get('/attendance-approval/{id}/{from}/{user_id}','AttendanceController@attendanceApprove')->name('attendanceApprove');
+Route::get('/attendance-approval/{id}/{user_id}','AttendanceController@attendanceApprove')->name('attendanceApprove');
 Route::post('/attendance-approved/{id}/{from}/{user_id}','AttendanceController@attendanceApproved');
 
 //photo-album routes
@@ -209,6 +209,8 @@ Route::get('/role/delete/{id}','RoleController@destroy');
 
 //manager zone
 Route::get('/manager/index','ManagerController@index')->name('manager.index');
+Route::get('/manager/leave/index','ManagerController@managerLeaveIndex')->name('manager.leave.index');
+
 
 //database migration
 Route::get('/database/migration','DataBaseMigrationController@index');

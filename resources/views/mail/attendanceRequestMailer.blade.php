@@ -1,3 +1,4 @@
+
 <link href="https://fonts.googleapis.com/css?family=Anton|Luckiest+Guy|Oleo+Script" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
@@ -35,6 +36,7 @@
                                                 <h1 style="color:#606060; text-align:center;font-family: 'Anton', sans-serif;font-family: 'Luckiest Guy', cursive;font-family: 'Oleo Script', cursive;" ><span class="fa fa-calendar"></span> Attendance Approval Request<br>
                                             </td>
                                         </tr>
+
                                          <tr>
                                             <td align="center" valign="top" style="padding-right:40px;padding-left:40px">
                                                 <p style="text-align:center;margin: 20px;">  Applicant Name  &nbsp;&nbsp;<strong style="font-size: 25px;">{{$data['name']}}</strong></p> 
@@ -91,7 +93,7 @@
                                         <tr>
                                             <td align="center" valign="middle" style="padding-right:40px;padding-bottom:20px;padding-left:40px">
                                                 
-                                                <a href="{{$link}}" style="background-color:#009688;border-collapse:separate;border-top:20px solid #009688;border-right:20px solid #009688;border-bottom:20px solid #009688;border-left:20px solid #009688;border-radius:3px;color:#ffffff;display:inline-block;font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:600;letter-spacing:.3px;text-decoration:none; margin-top: 30px" target="_blank" ">Click Here For Action</a>
+                                                <a href="{{$link}}" style="background-color:#009688;border-collapse:separate;border-top:20px solid #009688;border-right:20px solid #009688;border-bottom:20px solid #009688;border-left:20px solid #009688;border-radius:3px;color:#ffffff;display:inline-block;font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:600;letter-spacing:.3px;text-decoration:none; margin-top: 30px" target="_blank" ">Click Here For Action/Response</a>
                                                 
                                             </td>
                                         </tr>

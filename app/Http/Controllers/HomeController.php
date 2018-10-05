@@ -18,6 +18,7 @@ use Session;
 use App\NewsUpload;
 use App\Attendance;
 
+
 class HomeController extends Controller
 {
     /**
@@ -39,7 +40,7 @@ class HomeController extends Controller
     {
         return view('home');
     }
-    public function dashboard()
+    public function dashboard(Request $request)
     {
         $strtYear=date('Y').'-04-01';
           $profile='';
@@ -54,9 +55,7 @@ class HomeController extends Controller
        // dd($cdate);
         $cmonth= date("m");
 
-       //  dd($cmonth);
-        $id=Auth::id();
-
+     
 
         $pressReases=NewsUpload::join('upload_categories','upload_categories.id','=','news_uploads.category')
                                 ->where('upload_categories.type','press')
@@ -295,9 +294,10 @@ class HomeController extends Controller
                                             ];
                         }
                      }
-                
-                     Session::put('event', $todays_event);
-                    // dd($outtime);
+
+                 
+          /*   $activity_store=DB::table('activity_log')->insert(['user_id'=>Auth::user()->id,'activity_detail'=>'Logged In','activity_time'=>date('Y-m-d H:i:s'),'server_ip'=>\Request::ip()]);*/
+
         return view('dashboard',compact(['totleaves','totod','birthdays','anniversary','workanniversary','monthBirthday','monthWorkAniversary','monthAniversary','eoms','todays_event','intime','outtime','pressReases','announcements']));
     }
 
@@ -373,7 +373,7 @@ $work_image=array_rand($work_images);
 
 $anniversary_images=['http://www.prathamedu.com/Files_Upload/anniversary1_file.jpg','http://www.prathamedu.com/Files_Upload/anniversary2_file.jpg','http://www.prathamedu.com/Files_Upload/anniversary3_file.jpg','http://www.prathamedu.com/Files_Upload/anniversary4_file.jpg'];
 $anniversary_image=array_rand($anniversary_images);
-        $to=['sarita.sharma@iifm.co.in'];
+        $to=[$receiver_email];
 
         if($sub=="Birthday"){
            $image_path=$birthday_images[$birthday_image];
@@ -412,12 +412,11 @@ $anniversary_image=array_rand($anniversary_images);
     {
         $post=NewsUpload::where('id',$id)->first();
 
-
-         
         $otherpostDatas=NewsUpload::join('upload_categories','upload_categories.id','=','news_uploads.category')
                                 ->where('news_uploads.category',$post->category)
                                 ->where('news_uploads.id','!=',$id)
                                 ->select('news_uploads.*')->get();
+
         return view('admin.announcement',compact(['post','otherpostDatas']));
     }
 

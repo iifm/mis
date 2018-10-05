@@ -521,18 +521,13 @@ class AttendanceController extends Controller
      // dd($to_email);
 
         $subject = "Attendance Approval Request From ".$username. "  on ". date("l jS \of F Y ");
-
-          foreach ($to_email as  $to) {
-           foreach ($approval_ids as  $approval_id) {
-             # code...
-          
-           Mail::send('mail.attendanceRequestMailer',  ['data' => $data,'link'=>URL::route('attendanceApprove',['id'=>$att_in->id,'from'=>$approval_id,'user_id'=>$user_id])], function ($message)use($to,$subject) {
+      
+           Mail::send('mail.attendanceRequestMailer',  ['data' => $data,'link'=>URL::route('attendanceApprove',['id'=>$att_in->id,'user_id'=>$user_id])], function ($message)use($to_email,$subject) {
                   $message->from('info@prathamonline.in', 'MIS Alert');
-                 $message->to($to);
+                 $message->to($to_email);
                  $message->subject($subject);
             });
-          }
-         }
+        
       Session::flash('message','Your Attendance Recorded successfully!!');
 
        return redirect()->route('attendance.index');
@@ -565,27 +560,22 @@ class AttendanceController extends Controller
 
      $data = ['name'=>$username,'date'=>$date,'time'=>$time,'type'=>$type,'reason'=>$reason];
       $to_email=User::whereIn('id',$approvalfrom)->pluck('email')->toArray();
-      $approval_ids=User::whereIn('id',$approvalfrom)->pluck('id')->toArray();
+      //$approval_ids=User::whereIn('id',$approvalfrom)->pluck('id')->toArray();
+
 
  array_push($to_email, Auth::user()->email);
 
      // dd($to_email);
 
         $subject = "Attendance Approval Request From ".$username. "  on ". date("l jS \of F Y ");
-
-         
-          foreach ($to_email as  $to) {
-           foreach ($approval_ids as  $approval_id) {
-             # code...
-          
-           Mail::send('mail.attendanceRequestMailer',  ['data' => $data,'link'=>URL::route('attendanceApprove',['id'=>$att_in->id,'from'=>$approval_id,'user_id'=>$user_id])], function ($message)use($to,$subject) {
+      
+           Mail::send('mail.attendanceRequestMailer',  ['data' => $data,'link'=>URL::route('attendanceApprove',['id'=>$att_in->id,'user_id'=>$user_id])], function ($message)use($to,$subject) {
                  $message->from('info@prathamonline.in', 'MIS Alert');
-                 $message->to($to);
+                 $message->to($to_email);
                  //$message->cc([]);
                  $message->subject($subject);
             });
-          }
-         }
+        
 
       Session::flash('message','Your Attendance Recorded successfully!!');
 
@@ -593,16 +583,26 @@ class AttendanceController extends Controller
 
     }
 
-    public function attendanceApprove($id,$from,$user_id)
+    public function attendanceApprove($id,$user_id)
     {
      //dd($user_id);
-      $datas=User::where('users.id',$user_id)
+      $from=Auth::user()->id;
+      $att_detail=AttendanceUpdate::where('id',$id)->first();
+      $applier_id=$att_detail->user_id;
+     // dd($applier_id);
+      if ($applier_id==$from) {
+       return redirect()->route('attendance.index');
+      }
+      else{
+          $datas=User::where('users.id',$user_id)
                     ->where('attendance_updates.id',$id)
                     ->join('user_details','user_details.user_id','=','users.id')
                     ->join('attendance_updates','attendance_updates.user_id','=','users.id')
                     ->select('users.name as user_name','users.email as user_email','user_details.mobile as user_mobile','attendance_updates.date as att_date','attendance_updates.time as att_time', 'attendance_updates.type as att_type','attendance_updates.reason as att_reason')
                     ->get();
       return view('attendanceApprove',compact(['datas','id','from','user_id']));
+      }
+    
     }
     public function attendanceApproved(Request $request,$from,$id,$user_id)
     {

@@ -19,34 +19,34 @@
         <div id="alert" class="alert alert-success">{{ Session::get('message') }}
 
         </div><?php } ?>
-    @foreach($leave_id as $leave)
+    @foreach($user_details as $leave)
       <div class="lock-box" style="min-height: 500px;min-width: 700px;">
         <h4 class="text-center user-name">Leave Approval Form</h4>
       <!--   <p class="text-center text-muted">Account Locked</p> -->
-        <form class="unlock-form" action="{{url('leave-approved')}}/{{$leave->id}}/{{$uid}}" method="post" style="margin-top: 20px;">
+        <form class="unlock-form" action="{{url('leave-approved')}}/{{$id}}/{{$uid}}" method="post" style="margin-top: 20px;">
           {{csrf_field()}}
-          @foreach($userDetail as $user)
+         
          <div class="row">
           <div class="col-md-4">
           	<div class="form-group">
             <label class="control-label">Applicant Name</label>
-            <input class="form-control" type="text" name="name"  value="{{$user->user_name}}"  required="" readonly="">
+            <input class="form-control" type="text" name="name"  value="{{$leave->name}}"  required="" readonly="">
           		</div>
           	</div>
           	<div class="col-md-4">
           	<div class="form-group">
             <label class="control-label">Applicant Email Id</label>
-            <input class="form-control" type="text" name="email" value="{{$user->user_email}}"  required="" readonly="">
+            <input class="form-control" type="text" name="email" value="{{$leave->email}}"  required="" readonly="">
           		</div>
           	</div>
           	<div class="col-md-4">
           	<div class="form-group">
             <label class="control-label">Applicant Mobile Number</label>
-            <input class="form-control" type="text" name="mobile" value="{{$user->user_mobile}}"  required="" readonly="">
+            <input class="form-control" type="text" name="mobile" value="{{$leave->mobile}}"  required="" readonly="">
           		</div>
           	</div>
           </div>
-          @endforeach
+        
          <div class="row">
           <div class="col-md-4">
             <div class="form-group">

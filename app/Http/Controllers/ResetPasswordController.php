@@ -47,7 +47,9 @@ class ResetPasswordController extends Controller
        else{
             //return "success";
              $email=$request->email;
-            $to_email = ['sarita.sharma@iifm.co.in',$email];
+
+            $to_email = [$email];
+           // dd($to_email);
             $subject = "Reset Password  ". date('d-m-Y h:m:s');
             $data=['link'=>URL::route('reset-password-form',['id'=>$user_id]),'name'=>$user_name];
 

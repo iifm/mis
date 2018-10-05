@@ -4,6 +4,7 @@ namespace Illuminate\Foundation\Auth;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use DB;
 
 trait AuthenticatesUsers
 {
@@ -100,7 +101,11 @@ trait AuthenticatesUsers
 
         $this->clearLoginAttempts($request);
 
-        return $this->authenticated($request, $this->guard()->user())
+        $activity_store=DB::table('activity_logs')->insert(['user_id'=>Auth::user()->id,'activity_detail'=>'Logged In','activity_time'=>date('Y-m-d H:i:s'),'server_ip'=>\Request::ip()]);
+
+             
+
+        return  $this->authenticated($request, $this->guard()->user())
                 ?: redirect()->intended($this->redirectPath());
     }
 
@@ -153,6 +158,9 @@ trait AuthenticatesUsers
      */
     public function logout(Request $request)
     {
+       
+         $activity_store=DB::table('activity_logs')->insert(['user_id'=>Auth::id(),'activity_detail'=>'Logged Out','activity_time'=>date('Y-m-d H:i:s'),'server_ip'=>\Request::ip()]);
+
         $this->guard()->logout();
 
         $request->session()->invalidate();

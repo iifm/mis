@@ -113,7 +113,11 @@
                     <td>{{$data['type']}}</td>
                     <td>{{$data['from']}}</td>
                     <td>{{$data['to']}}</td>
+                    @if($data['status']=='approved')
+                    <td>Approved</td>
+                    @else
                     <td>{{$data['status']}}</td>
+                    @endif
                   <td>{{$data['approval']}}</td>
                     
                   

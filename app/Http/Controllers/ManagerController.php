@@ -72,9 +72,45 @@ class ManagerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function managerLeaveIndex()
     {
-        //
+         $strtYear=date('Y').'-04-01';
+       $endYear=date('Y',strtotime('+1 year')).'-03-31';
+        $user_role=Auth::user()->role;
+        //dd($user_role);
+        $role_detail=Role::where('id',$user_role)->first();
+       $member_ids=[];
+       $team_members=User::where('role',$role_detail->access_zone)->get();
+       foreach ($team_members as  $team_member) {
+          $member_ids[]=$team_member->id;
+       }
+
+       $leave_details=[];
+       foreach ($member_ids as  $member_id) {
+           $leaves=Leave::where('empid',$member_id)
+                            ->join('users','users.id','=','leaves.empid')
+                            ->whereBetween('leavefrom',[$strtYear,$endYear])
+                            ->where('leaves.status','!=','approved')
+                            ->select('leaves.*','users.id as user_id','users.name as user_name','leaves.id as leave_id')
+                            ->orderBy('leaves.id','DESC')
+                            ->get();
+
+                    foreach ($leaves as  $leave) {
+                        $leave_details[]=['user_name'=> $leave->user_name,
+                                          'start_date'=>$leave->leavefrom,
+                                            'end_date'=>$leave->leaveto,
+                                            'leave_type'=>$leave->leavetype,
+                                            'total_leaves'=>$leave->totalleave,
+                                            'reason'=>$leave->reason,
+                                            'user_id'=>$leave->user_id,
+                                            'status'=>$leave->status,
+                                            'leave_id'=>$leave->leave_id
+                                        ];
+                    }
+               
+       }
+
+        return view('manager.leave.index',compact('leave_details'));
     }
 
     /**
