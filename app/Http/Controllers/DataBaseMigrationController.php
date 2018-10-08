@@ -26,11 +26,11 @@ class DataBaseMigrationController extends Controller
         $alt_lastname=$member_id.$firstname;
 
         if ($lastname=='' || $lastname=='xxxxx' || $lastname == 'vcvvv' || $lastname=='cccx') {
-           $data=DB::connection('mysql')->insert('insert into users (id, name,email,password,role) values (?, ?, ?, ?,?)', [$member_id, $firstname,$alt_lastname,$password,$role]);
+           $data=DB::connection('mysql3')->insert('insert into users (id, name,email,password,role) values (?, ?, ?, ?,?)', [$member_id, $firstname,$alt_lastname,$password,$role]);
 
         }
         else{
-      $data=DB::connection('mysql')->insert('insert into users (id, name,email,password,role) values (?, ?, ?, ?,?)', [$member_id, $firstname,$lastname,$password,$role]);
+      $data=DB::connection('mysql3')->insert('insert into users (id, name,email,password,role) values (?, ?, ?, ?,?)', [$member_id, $firstname,$lastname,$password,$role]);
         }
 
         echo $data; echo "<br>";
