@@ -54,7 +54,7 @@
         <div class="col-md-12">
           <div class="tile">
             <div class="tile-body">
-              <form action="{{url('/attendance-view')}}" method="get" autocomplete="off">
+              <form action="{{url('/attendance-view')}}/{{Auth::id()}}" method="get" autocomplete="off">
                 {{csrf_field()}}
                 <table width="50%" style="min-width:600px;">
                   <thead>

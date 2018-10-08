@@ -2,7 +2,7 @@
 <html lang="en">
   
 <head>
-    <title>Attendance</title>
+    <title>IIFM MIS - Attendance</title>
     <!-- Main CSS-->
     {!!View('partials.include_css')!!}
 

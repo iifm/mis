@@ -52,10 +52,10 @@
                   <tr role="row">
                     <th>#</th>
                     <th>User Name</th>
-                    <th width="10%"> Start Date </th>
-                    <th width="10%"> End Date</th>
+                    <th width="20%"> Start Date </th>
+                    <th width="20%"> End Date</th>
                     <th> Leave Type</th>
-                    <th>Reason</th>
+                    <th style="padding-left: 100px;padding-right: 100px;">Reason</th>
                     <th> Total Days</th>
                     <th> Status</th>
                     <th width="24%">Action</th>
@@ -67,8 +67,9 @@
                 <tr style="max-height: 100px;">
                     <td><?= $i++;?></td>
                      <td><h6>{{$leave_detail['user_name']}}</h6></td>
-                    <td>{{$leave_detail['start_date']}}</td>
-                    <td>{{$leave_detail['end_date']}}</td>
+                    
+                    <td>{{date('j F Y',strtotime($leave_detail['start_date']))}}</td>
+                    <td>{{date('j F Y',strtotime($leave_detail['end_date']))}}</td>
                     <td>{{$leave_detail['leave_type']}}</td>
                     <td>{{$leave_detail['reason']}}</td>
                     <td>{{$leave_detail['total_leaves']}}</td>

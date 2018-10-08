@@ -77,6 +77,7 @@ class ManagerController extends Controller
          $strtYear=date('Y').'-04-01';
        $endYear=date('Y',strtotime('+1 year')).'-03-31';
         $user_role=Auth::user()->role;
+        $loginId=Auth::user()->id;
         //dd($user_role);
         $role_detail=Role::where('id',$user_role)->first();
        
@@ -98,7 +99,7 @@ class ManagerController extends Controller
                             ->join('users','users.id','=','leaves.empid')
                             ->whereBetween('leavefrom',[$strtYear,$endYear])
                             ->where('leaves.status','!=','approved')
-                            //->where('leaves.status','!=','')
+                            ->where('leaves.empid','!=',$loginId)
                             ->select('leaves.*','users.id as user_id','users.name as user_name','leaves.id as leave_id')
                             ->orderBy('leaves.id','DESC')
                             ->get();
@@ -121,59 +122,5 @@ class ManagerController extends Controller
         return view('manager.leave.index',compact('leave_details'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+  
 }
