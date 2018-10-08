@@ -83,7 +83,7 @@ class DataBaseMigrationController extends Controller
      }
 */
 
-      //leave table migration
+    /*  //leave table migration
        
         $users = DB::connection('mysql2')->select("select member_id from iifm_employees ");
 
@@ -161,11 +161,11 @@ class DataBaseMigrationController extends Controller
               $approval_ids=[];
        // dd($data);
              
-          }
-/*
+          }*/
+
            //on-duty data migration
         $ods = DB::connection('mysql2')->select("select * FROM `onduty_data` where empid != ''");
-dd($ods);
+//dd($ods);
         
         foreach ($ods as  $od) {
           $app_ids=[];
@@ -198,10 +198,10 @@ dd($ods);
             $created_at=$od->time;
             $sip=$od->sip;
            
-              $data=DB::connection('mysql')->insert('insert into `on_duties` (empid, od_date,intime,outtime,odtype,reason,approvalfrom,status,sip,created_at) values (?, ?, ?, ?,?, ?, ?, ?,?, ?)', [$empid, $od_date1,$intime,$outtime,$odtype,$reason,$final_app_ids,$status,$sip,$created_at]);
+              $data=DB::connection('mysql3')->insert('insert into `on_duties` (empid, od_date,intime,outtime,odtype,reason,approvalfrom,status,sip,created_at) values (?, ?, ?, ?,?, ?, ?, ?,?, ?)', [$empid, $od_date1,$intime,$outtime,$odtype,$reason,$final_app_ids,$status,$sip,$created_at]);
        // dd($data);
                 
-         }   */
+         }   
 
 
         /*  //conveyance table migration
