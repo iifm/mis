@@ -167,6 +167,7 @@ class HomeController extends Controller
 
          $workanniversary=UserDetails::whereDay('doj',$cdate)
                       ->whereMonth('doj',$cmonth)
+                      ->whereYear('doj','!=',$cyear)
                      ->where('status','Active')
                      ->join('users','users.id','=','user_details.user_id')
                      ->select('user_details.*','users.name as username','users.id as user_id')
