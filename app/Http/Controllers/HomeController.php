@@ -295,12 +295,9 @@ class HomeController extends Controller
                                                 'anniversary'=>$monthAniversaryUser_day->anniversary,
                                                 'user_id'=>$monthAniversaryUser_day->user_id
 
-                                            ];
+                                         ];
                         }
                      }
-
-                 
-          /*   $activity_store=DB::table('activity_log')->insert(['user_id'=>Auth::user()->id,'activity_detail'=>'Logged In','activity_time'=>date('Y-m-d H:i:s'),'server_ip'=>\Request::ip()]);*/
 
         return view('dashboard',compact(['totleaves','totod','birthdays','anniversary','workanniversary','monthBirthday','monthWorkAniversary','monthAniversary','eoms','todays_event','intime','outtime','pressReases','announcements']));
     }
@@ -383,7 +380,7 @@ $anniversary_image=array_rand($anniversary_images);
            $image_path=$birthday_images[$birthday_image];
         }
         elseif ($sub=="Work Anniversary") {
-            $image_path=$anniversary_images[$anniversary_image];
+            $image_path=$work_images[$work_image];
             //dd($image_path);
         }
         elseif($sub=="Wedding Anniversary"){
