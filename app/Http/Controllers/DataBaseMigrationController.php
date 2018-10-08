@@ -300,7 +300,7 @@ ORDER BY allinfo desc");
              $json = json_decode($info,true);
              $sip=$user->sip;
 
-            $schname= $json['schname'];
+            $schname= $json['12thschname'];
             $year= $json['12thschyear'];
             $percentage= $json['12thschpercent'];
           // $gracoll= $json['postgracoll'];
