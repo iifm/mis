@@ -15,7 +15,7 @@ class DataBaseMigrationController extends Controller
     public function index()
     {
        //user table migration
-       $users = DB::connection('mysql2')->select("select * from iifm_employees");
+/*       $users = DB::connection('mysql2')->select("select * from iifm_employees");
         //dd($users);
        foreach ($users as  $user) {
             $member_id=$user->member_id;
@@ -34,9 +34,9 @@ class DataBaseMigrationController extends Controller
         }
 
         echo $data; echo "<br>";
-     }
+     }*/
 
-/*
+
      //user detail table migrtion
 
       $users = DB::connection('mysql2')->select("select * from iifm_employees");
@@ -74,12 +74,13 @@ class DataBaseMigrationController extends Controller
         $sip=$user->sip;
         $locationcentre=$user->locationcentre;
         $anniversary=$user->anniversary;
+          $anniversary1= date("Y-m-d", strtotime($anniversary));
         $status=$user->status;
         $time=$user->time;
 
 
-      $data=DB::connection('mysql')->insert('insert into user_details (user_id, doj,designation,department,gender,dob,cstreet,ccity,cstate,pstreet,pcity,pstate,mobile,altno,fname,  foccup,fcontact,mname,moccup,mcontact,maritalstatus,spname,spoccup,sip,locationcentre,anniversary,status,created_at) values (?, ?, ?, ?,?,?, ?, ?, ?,?,?, ?, ?, ?,?,?, ?, ?, ?,?,?, ?, ?, ?,?,?,?,?)', [$member_id, $doj1,$designation,$department,$gender,$dob1,$cstreet,$ccity,$cstate,$pstreet,$pcity,$pstate,$mobile,$altno,$fname,$foccup,$fcontact,$mname,$moccup,$mcontact,$maritalstatus,$spname,$spoccup,$sip,$locationcentre,$anniversary,$status,$time]);
-     }*/
+      $data=DB::connection('mysql3')->insert('insert into user_details (user_id, doj,designation,department,gender,dob,cstreet,ccity,cstate,pstreet,pcity,pstate,mobile,altno,fname,  foccup,fcontact,mname,moccup,mcontact,maritalstatus,spname,spoccup,sip,locationcentre,anniversary,status,created_at) values (?, ?, ?, ?,?,?, ?, ?, ?,?,?, ?, ?, ?,?,?, ?, ?, ?,?,?, ?, ?, ?,?,?,?,?)', [$member_id, $doj1,$designation,$department,$gender,$dob1,$cstreet,$ccity,$cstate,$pstreet,$pcity,$pstate,$mobile,$altno,$fname,$foccup,$fcontact,$mname,$moccup,$mcontact,$maritalstatus,$spname,$spoccup,$sip,$locationcentre,$anniversary1,$status,$time]);
+     }
 
 /*
       //leave table migration
