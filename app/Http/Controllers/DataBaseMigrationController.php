@@ -296,7 +296,7 @@ ORDER BY allinfo desc");
         foreach ($users as  $user) {
             $user_id=$user->member_id;
             $info=$user->allinfo;
-             return $info;
+            // return $info;
              $json = json_decode($info,true);
              $sip=$user->sip;
 
