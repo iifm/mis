@@ -569,7 +569,7 @@ class AttendanceController extends Controller
 
         $subject = "Attendance Approval Request From ".$username. "  on ". date("l jS \of F Y ");
       
-           Mail::send('mail.attendanceRequestMailer',  ['data' => $data,'link'=>URL::route('attendanceApprove',['id'=>$att_in->id,'user_id'=>$user_id])], function ($message)use($to,$subject) {
+           Mail::send('mail.attendanceRequestMailer',  ['data' => $data,'link'=>URL::route('attendanceApprove',['id'=>$att_in->id,'user_id'=>$user_id])], function ($message)use($to_email,$subject) {
                  $message->from('info@prathamonline.in', 'MIS Alert');
                  $message->to($to_email);
                  //$message->cc([]);
