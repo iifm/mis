@@ -204,7 +204,7 @@ class DataBaseMigrationController extends Controller
          }  */ 
 
 
-        /*  //conveyance table migration
+          //conveyance table migration
       $conveyances = DB::connection('mysql2')->select("select * FROM `convyance_iifm_2016` ");
 //dd(count($conveyances));
       foreach ($conveyances as  $value) {
@@ -227,9 +227,9 @@ class DataBaseMigrationController extends Controller
         $edit_time=$value->edit_time;
         $sip=$value->sip;
        
-        $data=DB::connection('mysql')->insert('insert into `conveyances` (reason, user_id,disfrom,disto,mode,distance,amount,con_date,status,paid,uploadcimg,comments,conpid,sip,created_at) values (?, ?, ?, ?,?, ?, ?, ?,?, ?,?, ?, ?,?, ?)', [$reason,$user_id,$disfrom,$disto,$mode,$distance,$amount,$con_date1,$status,$paid,$uploadcimg,$comments,$conpid,$sip,$edit_time]);
+        $data=DB::connection('mysq3')->insert('insert into `conveyances` (reason, user_id,disfrom,disto,mode,distance,amount,con_date,status,paid,uploadcimg,comments,conpid,sip,created_at) values (?, ?, ?, ?,?, ?, ?, ?,?, ?,?, ?, ?,?, ?)', [$reason,$user_id,$disfrom,$disto,$mode,$distance,$amount,$con_date1,$status,$paid,$uploadcimg,$comments,$conpid,$sip,$edit_time]);
 
-      }*/
+      }
 
       //attendance table migration
 
@@ -259,7 +259,7 @@ class DataBaseMigrationController extends Controller
 
 
       //user work-experience migration
-
+/*
         $users = DB::connection('mysql2')->select("select * from iifm_employees
 ORDER BY allinfo desc");
       //  dd($users);
@@ -286,7 +286,7 @@ ORDER BY allinfo desc");
             }
                
             }
-    }
+    }*/
 
 
     //user education migration
