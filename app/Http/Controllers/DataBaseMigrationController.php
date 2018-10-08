@@ -227,7 +227,7 @@ class DataBaseMigrationController extends Controller
         $edit_time=$value->edit_time;
         $sip=$value->sip;
        
-        $data=DB::connection('mysq3')->insert('insert into `conveyances` (reason, user_id,disfrom,disto,mode,distance,amount,con_date,status,paid,uploadcimg,comments,conpid,sip,created_at) values (?, ?, ?, ?,?, ?, ?, ?,?, ?,?, ?, ?,?, ?)', [$reason,$user_id,$disfrom,$disto,$mode,$distance,$amount,$con_date1,$status,$paid,$uploadcimg,$comments,$conpid,$sip,$edit_time]);
+        $data=DB::connection('mysql3')->insert('insert into `conveyances` (reason, user_id,disfrom,disto,mode,distance,amount,con_date,status,paid,uploadcimg,comments,conpid,sip,created_at) values (?, ?, ?, ?,?, ?, ?, ?,?, ?,?, ?, ?,?, ?)', [$reason,$user_id,$disfrom,$disto,$mode,$distance,$amount,$con_date1,$status,$paid,$uploadcimg,$comments,$conpid,$sip,$edit_time]);
 
       }
 
