@@ -14,10 +14,10 @@ class DataBaseMigrationController extends Controller
      */
     public function index()
     {
-       /*//user table migration
+       //user table migration
        $users = DB::connection('mysql2')->select("select * from iifm_employees");
-       // dd($users);
-       foreach ($users as  $user) {
+        dd($users);
+       /*foreach ($users as  $user) {
             $member_id=$user->member_id;
             $firstname=$user->firstname;
             $lastname=$user->lastname;
@@ -31,8 +31,8 @@ class DataBaseMigrationController extends Controller
         else{
       $data=DB::connection('mysql')->insert('insert into users (id, name,email,password,role) values (?, ?, ?, ?,?)', [$member_id, $firstname,$lastname,$password,$role]);
         }
-     }
-*/
+     }*/
+
 /*
      //user detail table migrtion
 
