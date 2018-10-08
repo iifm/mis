@@ -163,7 +163,7 @@ class DataBaseMigrationController extends Controller
              
           }*/
 
-           //on-duty data migration
+ /*          //on-duty data migration
         $ods = DB::connection('mysql2')->select("select * FROM `onduty_data` where empid != ''");
 //dd($ods);
         
@@ -201,7 +201,7 @@ class DataBaseMigrationController extends Controller
               $data=DB::connection('mysql3')->insert('insert into `on_duties` (empid, od_date,intime,outtime,odtype,reason,approvalfrom,status,sip,created_at) values (?, ?, ?, ?,?, ?, ?, ?,?, ?)', [$empid, $od_date1,$intime,$outtime,$odtype,$reason,$final_app_ids,$status,$sip,$created_at]);
        // dd($data);
                 
-         }   
+         }  */ 
 
 
         /*  //conveyance table migration
@@ -259,7 +259,7 @@ class DataBaseMigrationController extends Controller
 
 
       //user work-experience migration
-/*
+
         $users = DB::connection('mysql2')->select("select * from iifm_employees
 ORDER BY allinfo desc");
       //  dd($users);
@@ -282,11 +282,11 @@ ORDER BY allinfo desc");
             $todate= date("Y-m-d", strtotime($todate));
 
             if ($company!='' && $designation!='' && $fromdate!='' && $todate!='') {
-               $data=DB::connection('mysql')->insert("insert into `user-work-experience`(user_id,    company,designation1,fromdate,todate,sip) values (?,?,?,?,?,?)", [$user_id,$company,$designation,$fromdate,$todate,$sip]);
+               $data=DB::connection('mysql3')->insert("insert into `user-work-experience`(user_id,    company,designation1,fromdate,todate,sip) values (?,?,?,?,?,?)", [$user_id,$company,$designation,$fromdate,$todate,$sip]);
             }
                
             }
-    }*/
+    }
 
 
     //user education migration
