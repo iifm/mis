@@ -233,7 +233,7 @@ class DataBaseMigrationController extends Controller
 */
       //attendance table migration
 
-          $attendance = DB::connection('mysql2')->select("select * FROM `attendance` ");
+      /*    $attendance = DB::connection('mysql2')->select("select * FROM `attendance` ");
 //dd($attendance);
       foreach ($attendance as  $value) {
         $member_id=$value->member_id;
@@ -255,7 +255,7 @@ class DataBaseMigrationController extends Controller
        
        
 
-      }
+      }*/
 
 
       //user work-experience migration
@@ -290,13 +290,13 @@ ORDER BY allinfo desc");
 
 
     //user education migration
-   /* $users = DB::connection('mysql2')->select("select * from iifm_employees
+    $users = DB::connection('mysql2')->select("select * from iifm_employees
 ORDER BY allinfo desc");
         //dd($users);
         foreach ($users as  $user) {
             $user_id=$user->member_id;
             $info=$user->allinfo;
-             // return $info;
+             return $info;
              $json = json_decode($info,true);
              $sip=$user->sip;
 
@@ -310,7 +310,7 @@ ORDER BY allinfo desc");
             } 
           
         }
-           */
+           
 
 }
 
