@@ -37,7 +37,7 @@ class DataBaseMigrationController extends Controller
      }*/
 
 
-     //user detail table migrtion
+    /* //user detail table migrtion
 
       $users = DB::connection('mysql2')->select("select * from iifm_employees");
     // dd($users);
@@ -81,8 +81,8 @@ class DataBaseMigrationController extends Controller
 
       $data=DB::connection('mysql3')->insert('insert into user_details (user_id, doj,designation,department,gender,dob,cstreet,ccity,cstate,pstreet,pcity,pstate,mobile,altno,fname,  foccup,fcontact,mname,moccup,mcontact,maritalstatus,spname,spoccup,sip,locationcentre,anniversary,status,created_at) values (?, ?, ?, ?,?,?, ?, ?, ?,?,?, ?, ?, ?,?,?, ?, ?, ?,?,?, ?, ?, ?,?,?,?,?)', [$member_id, $doj1,$designation,$department,$gender,$dob1,$cstreet,$ccity,$cstate,$pstreet,$pcity,$pstate,$mobile,$altno,$fname,$foccup,$fcontact,$mname,$moccup,$mcontact,$maritalstatus,$spname,$spoccup,$sip,$locationcentre,$anniversary1,$status,$time]);
      }
+*/
 
-/*
       //leave table migration
        
         $users = DB::connection('mysql2')->select("select member_id from iifm_employees ");
@@ -151,10 +151,8 @@ class DataBaseMigrationController extends Controller
                  $empid=$value->member_id;
                 // dd($empid);
               }
-             // dd($member_id);
-              //echo $member_id[0]->member_id;exit;
-
-              $data=DB::connection('mysql')->insert('insert into `leaves` (leaveid, empid,leavefrom,leaveto,totalleave,leavetype,agcompoffdate,reason,approvalfrom,approvedby,disapprovedby,pendingby,status,sip,created_at) values (?,?, ?, ?, ?,?, ?, ?, ?,?, ?, ?, ?,?,?)', [$leaveid, $empid,$leavefrom1,$leaveto1,$totalleave,$leavetype,$agcompoffdate,$reason,$final_app_ids,$approvedby,$disapprovedby,$pendingby,$status,$sip,`$date1`]);
+           
+              $data=DB::connection('mysql3')->insert('insert into `leaves` (leaveid, empid,leavefrom,leaveto,totalleave,leavetype,agcompoffdate,reason,approvalfrom,approvedby,disapprovedby,pendingby,status,sip,created_at) values (?,?, ?, ?, ?,?, ?, ?, ?,?, ?, ?, ?,?,?)', [$leaveid, $empid,$leavefrom1,$leaveto1,$totalleave,$leavetype,$agcompoffdate,$reason,$final_app_ids,$approvedby,$disapprovedby,$pendingby,$status,$sip,`$date1`]);
 
               $final_app_ids='';
              // dd($final_app_ids);
@@ -163,7 +161,7 @@ class DataBaseMigrationController extends Controller
               $approval_ids=[];
        // dd($data);
              
-          }*/
+          }
 /*
            //on-duty data migration
         $ods = DB::connection('mysql2')->select("select * FROM `onduty_data` where empid != ''");
