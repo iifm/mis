@@ -5,7 +5,7 @@
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
     
-    <title>Attendance</title>
+    <title>IIFM MIS - Attendance</title>
     
 
     <!-- Main CSS-->
@@ -137,7 +137,12 @@
                         </td>
                          <td>
                             <?php
-                              if($data['outTime']=='NA'){  $type='OUT'?>
+                              if($data['outTime']=='NA' && $data['inTime']=='NA'){  $type='OUT'; ?>
+                                NA
+                               
+                              <?php } 
+                              elseif($data['outTime']=='NA'){  $type='OUT'?>
+                               
                                 <a href="{{url('/update-user-out-attendance')}}/{{$data['user_id']}}/{{$data['date']}}/{{$type}}" class="btn btn-danger fa fa-edit btn-small" id="outTime"></a>
 
                               <?php }
