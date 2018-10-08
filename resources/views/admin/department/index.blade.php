@@ -66,7 +66,7 @@
 
                     <td style="text-align: left;">
                       <a href="{{url('/department/edit')}}/{{$department->id}}" class="btn btn-primary btn-sm fa fa-edit"></a>
-                        <a onclick="return confirm('Are you sure you want to delete this item?')" href="{{url('/department/delete')}}/{{$department->id}}" class="btn btn-danger btn-sm fa fa-trash"></a>
+                        <!-- <a onclick="return confirm('Are you sure you want to delete this item?')" href="{{url('/department/delete')}}/{{$department->id}}" class="btn btn-danger btn-sm fa fa-trash"></a> -->
                      </td>
                   </tr>
                     @endforeach
