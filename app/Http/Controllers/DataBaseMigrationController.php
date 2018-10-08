@@ -300,13 +300,13 @@ ORDER BY allinfo desc");
              $json = json_decode($info,true);
              $sip=$user->sip;
 
-            $gradegree= $json['postgradegree'];
-            $grayear= $json['postgrayear'];
-            $grapercentage= $json['postgrapercentage'];
-           $gracoll= $json['postgracoll'];
+            $schname= $json['10thschname'];
+            $year= $json['10thschyear'];
+            $percentage= $json['10thschpercent'];
+          // $gracoll= $json['postgracoll'];
 
-            if ($gradegree!='' && $grayear!='' && $grapercentage!='' && $gracoll!='') {
-               $data=DB::connection('mysql')->insert("insert into user_educations (user_id,    edu_option,specialization,percentage,endyear,sip,schoolname) values (?,?,?,?,?,?,?)", [$user_id,4,$gradegree,$grapercentage,$grayear,$sip,$gracoll]);
+            if ($schname!='' && $year!='' && $percentage!='') {
+               $data=DB::connection('mysql3')->insert("insert into user_educations (user_id,    edu_option,schoolname,endyear,sip,percentage) values (?,?,?,?,?,?)", [$user_id,1,$schname,$year,$sip,$percentage]);
             } 
           
         }
