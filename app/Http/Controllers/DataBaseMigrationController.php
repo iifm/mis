@@ -250,7 +250,7 @@ class DataBaseMigrationController extends Controller
         $remark=$value->remark;
 
          if ($member_id!=0) {
-           $data=DB::connection('mysql')->insert('insert into `attendances` (member_id, date,time,type,location,longitude,latitude,sip,session_id,remark) values (?, ?, ?, ?,?, ?, ?, ?,?, ?)', [$member_id,$date1,$time,$type,$location,$longitude,$latitude,$sip,$session_id,$remark]);
+           $data=DB::connection('mysql3')->insert('insert into `attendances` (member_id, date,time,type,location,longitude,latitude,sip,session_id,remark) values (?, ?, ?, ?,?, ?, ?, ?,?, ?)', [$member_id,$date1,$time,$type,$location,$longitude,$latitude,$sip,$session_id,$remark]);
         }
        
        
