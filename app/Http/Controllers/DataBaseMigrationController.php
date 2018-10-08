@@ -16,8 +16,8 @@ class DataBaseMigrationController extends Controller
     {
        //user table migration
        $users = DB::connection('mysql2')->select("select * from iifm_employees");
-        dd($users);
-       /*foreach ($users as  $user) {
+        //dd($users);
+       foreach ($users as  $user) {
             $member_id=$user->member_id;
             $firstname=$user->firstname;
             $lastname=$user->lastname;
@@ -27,11 +27,14 @@ class DataBaseMigrationController extends Controller
 
         if ($lastname=='' || $lastname=='xxxxx' || $lastname == 'vcvvv' || $lastname=='cccx') {
            $data=DB::connection('mysql')->insert('insert into users (id, name,email,password,role) values (?, ?, ?, ?,?)', [$member_id, $firstname,$alt_lastname,$password,$role]);
+
         }
         else{
       $data=DB::connection('mysql')->insert('insert into users (id, name,email,password,role) values (?, ?, ?, ?,?)', [$member_id, $firstname,$lastname,$password,$role]);
         }
-     }*/
+
+        echo $data; echo "<br>";
+     }
 
 /*
      //user detail table migrtion
