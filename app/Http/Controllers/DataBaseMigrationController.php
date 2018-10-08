@@ -203,7 +203,7 @@ class DataBaseMigrationController extends Controller
                 
          }  */ 
 
-
+/*
           //conveyance table migration
       $conveyances = DB::connection('mysql2')->select("select * FROM `convyance_iifm_2016` ");
 //dd(count($conveyances));
@@ -230,10 +230,10 @@ class DataBaseMigrationController extends Controller
         $data=DB::connection('mysql3')->insert('insert into `conveyances` (reason, user_id,disfrom,disto,mode,distance,amount,con_date,status,paid,uploadcimg,comments,conpid,sip,created_at) values (?, ?, ?, ?,?, ?, ?, ?,?, ?,?, ?, ?,?, ?)', [$reason,$user_id,$disfrom,$disto,$mode,$distance,$amount,$con_date1,$status,$paid,$uploadcimg,$comments,$conpid,$sip,$edit_time]);
 
       }
-
+*/
       //attendance table migration
 
-      /*    $attendance = DB::connection('mysql2')->select("select * FROM `attendance` ");
+          $attendance = DB::connection('mysql2')->select("select * FROM `attendance` ");
 //dd($attendance);
       foreach ($attendance as  $value) {
         $member_id=$value->member_id;
@@ -255,7 +255,7 @@ class DataBaseMigrationController extends Controller
        
        
 
-      }*/
+      }
 
 
       //user work-experience migration
