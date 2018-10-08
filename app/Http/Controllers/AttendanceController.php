@@ -87,7 +87,7 @@ class AttendanceController extends Controller
        
       // dd($user_id); 
        if ($request->has('strtDate') && $request->has('endDate') && $request->has('employee')) {
-      
+       // return "hii";
             $users=User::all();
              $start= $request->strtDate;
              $end =$request->endDate;
@@ -606,7 +606,7 @@ class AttendanceController extends Controller
     }
     public function attendanceApproved(Request $request,$from,$id,$user_id)
     {
-    // dd($user_id);
+//dd($user_id);
        $actionstatus= $request->actionstatus;
         $comment= $request->comment;
         $date=$request->date;
@@ -622,7 +622,7 @@ class AttendanceController extends Controller
                             ->where('time',$time)
                             ->where('type',$type)
                             ->get();
-         
+         //dd($match);
 
         if ($actionstatus=='approved' && count($match)==0) {
            $attendance_update=Attendance::insert(['member_id'=>$user_id,'date'=>$date,'time'=>$time,'type'=>$type,'sip'=>$sip]);

@@ -228,7 +228,7 @@ class HomeController extends Controller
                      ->select('user_details.*','users.name as username')
                      ->orderBy('doj','ASC')
                      ->pluck('doj')->toArray();
-                    //dd($monthWorkAniversary);
+                   // dd($monthWork_day_sorted);
                      $doj_day=[];
                     foreach ($monthWork_day_sorted as  $value) {
                       $doj_day[]= date('d',strtotime($value));
@@ -237,8 +237,11 @@ class HomeController extends Controller
                     $doj_day=array_unique($doj_day);
 
                     sort($doj_day);
+
                     $monthWorkAniversary=[];
+
             foreach($doj_day as $doj_month_day){
+
             $monthWorkAniversary_user=UserDetails::whereMonth('doj',$cmonth)
                     ->whereYear('doj','<',$cyear)
                       ->whereday('doj',$doj_month_day)
@@ -247,6 +250,7 @@ class HomeController extends Controller
                      ->select('user_details.*','users.name as username','users.id as user_id')
                      ->orderBy('doj','ASC')
                      ->get();
+
                      foreach ($monthWorkAniversary_user as  $data) {
                          $monthWorkAniversary[]=[
                              'doj'=>$data->doj,

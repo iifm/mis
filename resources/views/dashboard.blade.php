@@ -195,7 +195,7 @@ a {
               <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-gift fa-stack-1x fa-inverse"></i></span></span>
                   <div>
                     <p class="app-notification__message">{{strtoupper($value['username'])}}</p>
-                    <p class="app-notification__meta">{{ date('F j',strtotime($value['doj']))}}</p>
+                    <p class="app-notification__meta">{{ date('F j',strtotime($value['anniversary']))}}</p>
                   </div></a>
                 </li>
               @endforeach
