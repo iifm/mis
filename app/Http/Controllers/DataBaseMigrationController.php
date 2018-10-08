@@ -300,16 +300,94 @@ ORDER BY allinfo desc");
              $json = json_decode($info,true);
              $sip=$user->sip;
 
+            $schoolname= $json['10thschname'];
+            $year= $json['10thschyear'];
+            $percentage= $json['10thschpercent'];
+           //$gracoll= $json['gracoll'];
+
+            if ($schoolname!='' && $year!='' && $percentage!='') {
+               $data=DB::connection('mysql3')->insert("insert into user_educations (user_id,    edu_option,schoolname,endyear,sip,percentage) values (?,?,?,?,?,?)", [$user_id,1,$schoolname,$year,$sip,$percentage]);
+            } 
+          
+        }
+
+        foreach ($users as  $user) {
+            $user_id=$user->member_id;
+            $info=$user->allinfo;
+            // return $info;
+             $json = json_decode($info,true);
+             $sip=$user->sip;
+
+            $schoolname= $json['12thschname'];
+            $year= $json['12thschyear'];
+            $percentage= $json['12thschpercent'];
+           //$gracoll= $json['gracoll'];
+
+            if ($schoolname!='' && $year!='' && $percentage!='') {
+               $data=DB::connection('mysql3')->insert("insert into user_educations (user_id,    edu_option,schoolname,endyear,sip,percentage) values (?,?,?,?,?,?)", [$user_id,2,$schoolname,$year,$sip,$percentage]);
+            } 
+          
+        }
+
+          foreach ($users as  $user) {
+            $user_id=$user->member_id;
+            $info=$user->allinfo;
+            // return $info;
+             $json = json_decode($info,true);
+             $sip=$user->sip;
+
             $gradegree= $json['gradegree'];
             $grayear= $json['grayear'];
             $grapercentage= $json['grapercentage'];
            $gracoll= $json['gracoll'];
 
             if ($gradegree!='' && $grayear!='' && $grapercentage!='' && $gracoll!='') {
-               $data=DB::connection('mysql3')->insert("insert into user_educations (user_id,    edu_option,schoolname,endyear,sip,percentage,specialization) values (?,?,?,?,?,?,?)", [$user_id,2,$gracoll,$grayear,$sip,$grapercentage,$gradegree]);
+               $data=DB::connection('mysql3')->insert("insert into user_educations (user_id,    edu_option,schoolname,endyear,sip,percentage,specialization) values (?,?,?,?,?,?,?)", [$user_id,3,$gracoll,$grayear,$sip,$grapercentage,$gradegree]);
             } 
           
         }
+
+          foreach ($users as  $user) {
+            $user_id=$user->member_id;
+            $info=$user->allinfo;
+            // return $info;
+             $json = json_decode($info,true);
+             $sip=$user->sip;
+
+            $gradegree= $json['postgradegree'];
+            $grayear= $json['postgrayear'];
+            $grapercentage= $json['postgrapercentage'];
+           $gracoll= $json['postgracoll'];
+
+            if ($gradegree!='' && $grayear!='' && $grapercentage!='' && $gracoll!='') {
+               $data=DB::connection('mysql3')->insert("insert into user_educations (user_id,    edu_option,schoolname,endyear,sip,percentage,specialization) values (?,?,?,?,?,?,?)", [$user_id,4,$gracoll,$grayear,$sip,$grapercentage,$gradegree]);
+            } 
+          
+        }
+
+
+       /*  //user education migration
+    $users = DB::connection('mysql2')->select("select * from iifm_employees
+ORDER BY allinfo desc");
+        //dd($users);
+        foreach ($users as  $user) {
+            $user_id=$user->member_id;
+            $info=$user->allinfo;
+            // return $info;
+             $json = json_decode($info,true);
+             $sip=$user->sip;
+
+            $gradegree= $json['gradegree'];
+            $grayear= $json['grayear'];
+            $grapercentage= $json['grapercentage'];
+           $gracoll= $json['gracoll'];
+
+            if ($gradegree!='' && $grayear!='' && $grapercentage!='' && $gracoll!='') {
+               $data=DB::connection('mysql3')->insert("insert into user_educations (user_id,    edu_option,schoolname,endyear,sip,percentage,specialization) values (?,?,?,?,?,?,?)", [$user_id,3,$gracoll,$grayear,$sip,$grapercentage,$gradegree]);
+            } 
+          
+        }*/
+
            
 
 }
