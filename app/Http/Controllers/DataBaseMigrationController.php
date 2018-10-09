@@ -234,7 +234,7 @@ dd($ods);
       //attendance table migration
 
           $attendance = DB::connection('mysql2')->select("select * FROM `attendance` ");
-dd($attendance);
+//dd($attendance);
         
       foreach ($attendance as  $value) {
         $member_id=$value->member_id;
