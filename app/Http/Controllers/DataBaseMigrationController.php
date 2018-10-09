@@ -163,7 +163,7 @@ class DataBaseMigrationController extends Controller
              
           }*/
 
-           //on-duty data migration
+       /*    //on-duty data migration
         $ods = DB::connection('mysql2')->select("select * FROM `onduty_data` where empid != ''");
 dd($ods);
         
@@ -202,8 +202,8 @@ dd($ods);
        // dd($data);
                 
          }   
+*/
 
-/*
           //conveyance table migration
       $conveyances = DB::connection('mysql2')->select("select * FROM `convyance_iifm_2016` ");
 //dd(count($conveyances));
@@ -230,7 +230,7 @@ dd($ods);
         $data=DB::connection('mysql3')->insert('insert into `conveyances` (reason, user_id,disfrom,disto,mode,distance,amount,con_date,status,paid,uploadcimg,comments,conpid,sip,created_at) values (?, ?, ?, ?,?, ?, ?, ?,?, ?,?, ?, ?,?, ?)', [$reason,$user_id,$disfrom,$disto,$mode,$distance,$amount,$con_date1,$status,$paid,$uploadcimg,$comments,$conpid,$sip,$edit_time]);
 
       }
-*/
+
       //attendance table migration
 
       /*    $attendance = DB::connection('mysql2')->select("select * FROM `attendance` ");
