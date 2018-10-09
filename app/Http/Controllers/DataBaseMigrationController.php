@@ -234,8 +234,8 @@ dd($ods);
       //attendance table migration
 
           $attendance = DB::connection('mysql2')->select("select * FROM `attendance` ");
-//dd($attendance);
-          $i=0;
+dd($attendance);
+        
       foreach ($attendance as  $value) {
         $member_id=$value->member_id;
 
@@ -254,7 +254,7 @@ dd($ods);
            $data=DB::connection('mysql3')->insert('insert into `attendances` (member_id, date,time,type,location,longitude,latitude,sip,session_id,remark) values (?, ?, ?, ?,?, ?, ?, ?,?, ?)', [$member_id,$date1,$time,$type,$location,$longitude,$latitude,$sip,$session_id,$remark]);
         }
        
-       $i++;
+      
 
       }
 
