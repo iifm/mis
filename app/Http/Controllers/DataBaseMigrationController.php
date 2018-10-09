@@ -15,7 +15,7 @@ class DataBaseMigrationController extends Controller
     public function index()
     {
        //user table migration
-       $users = DB::connection('mysql2')->select("select * from iifm_employees");
+/*       $users = DB::connection('mysql2')->select("select * from iifm_employees");
         //dd($users);
        foreach ($users as  $user) {
             $member_id=$user->member_id;
@@ -35,7 +35,7 @@ class DataBaseMigrationController extends Controller
 
         echo $member_id; echo "<br>";
      }
-
+*/
 
     /* //user detail table migrtion
 
@@ -83,7 +83,7 @@ class DataBaseMigrationController extends Controller
      }
 */
 
-    /*  //leave table migration
+      //leave table migration
        
         $users = DB::connection('mysql2')->select("select member_id from iifm_employees ");
 
@@ -161,7 +161,7 @@ class DataBaseMigrationController extends Controller
               $approval_ids=[];
        // dd($data);
              
-          }*/
+          }
 
  /*          //on-duty data migration
         $ods = DB::connection('mysql2')->select("select * FROM `onduty_data` where empid != ''");
