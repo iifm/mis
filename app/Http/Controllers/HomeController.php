@@ -17,7 +17,6 @@ use DB;
 use Session;
 use App\NewsUpload;
 use App\Attendance;
-use Location;
 
 
 class HomeController extends Controller
@@ -43,10 +42,6 @@ class HomeController extends Controller
     }
     public function dashboard(Request $request)
     {
-       
-        $position = Location::get(\Request::ip());
-        dd($position);
-
         $strtYear=date('Y').'-04-01';
           $profile='';
           $department='';
