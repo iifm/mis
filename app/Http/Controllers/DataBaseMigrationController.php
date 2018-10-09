@@ -165,7 +165,7 @@ class DataBaseMigrationController extends Controller
 
            //on-duty data migration
         $ods = DB::connection('mysql2')->select("select * FROM `onduty_data` where empid != ''");
-//dd($ods);
+dd($ods);
         
         foreach ($ods as  $od) {
           $app_ids=[];
