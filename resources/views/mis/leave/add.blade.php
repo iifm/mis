@@ -77,7 +77,7 @@
 
              <div class="col-md-6 compoff"> 
               <h5 style="font-weight:bold;color: red!important; margin-bottom: 10px;  font-family: Times New Roman">Select Sunday Date against Comp off (In case of comp off only)</h5>
-              <input type="text" class="form-control" name="agdcompoff" id="agdcompoff" placeholder="Pic a date" >
+              <input type="text" class="form-control" name="agdcompoff" id="agdcompoff" placeholder="Pic a date" required="">
              </div>
              <div class="col-md-6"> 
              </div>
@@ -217,10 +217,7 @@
  <script type="text/javascript">
    $(document).ready(function(){
     $("#leave_form").submit(function(){
-      if ( $('#leave_compoff').attr("checked", "checked") && $('#agdcompoff').val()=='') {
-        alert('Please Select Comp-off Date');
-         return false;
-      }
+
      
     if ($('.messageCheckbox').filter(':checked').length < 1){
         alert("Select Atleast Two ApprovalFrom");
@@ -240,11 +237,13 @@
   $(document).ready(function(){
      $('.compoff').hide();
 
-   $('#leave_compoff').click(function(){     
+   $('#leave_compoff').click(function(){   
+    $('#agdcompoff').prop('required',true);  
         $('.compoff').show();
    });
 
-   $('.radio_hc').click(function(){     
+   $('.radio_hc').click(function(){   
+    $('#agdcompoff').prop('required',false);    
         $('.compoff').hide();
    });
 
