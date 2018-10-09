@@ -67,13 +67,15 @@
               <div class="form-group">
                   <strong>  <label for="">OD Type</label></strong><br>
                    <select class="form-control" name="od_type" id="od_type" required="">
-                    <option value="">Please Select OD-Type</option>
-                     <option value="Session at School">Session at School</option>
-                      <option value="School Visit">School Visit</option>
-                       <option value="Feeders Tie up"> Feeders Tie up</option>
+                        <option value="">Please Select OD-Type</option>
+                        <option value="Session at School">Session at School</option>
+                        <option value="School Visit">School Visit</option>
+                        <option value="Feeders Tie up"> Feeders Tie up</option>
                         <option value="Counseling">Counseling</option>
-                         <option value="Enrollment">Enrollment </option>
-                          <option value="Meeting with Client">Meeting with Client </option>
+                        <option value="Enrollment">Enrollment </option>
+                        <option value="Meeting with Client">Meeting with Client </option>
+                        <option value="Visit to Another Center">Visit to Another Center </option>
+                        <option value="other">Other</option>
                    </select>
 
                 </div>
