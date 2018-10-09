@@ -4,7 +4,7 @@
 
 <head>
     
-    <title>User Profile</title> 
+    <title>IIFM MIS - User Profile</title> 
     <!-- Main CSS-->
     {!!View('partials.include_css')!!}
      <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">

@@ -5,13 +5,14 @@
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
   
-    <title>User Family Information</title>
+    <title>IIFM MIS - User Family Information</title>
     
     
 
     <!-- Main CSS-->
     {!!View('partials.include_css')!!}
- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
    </head>
   
   
@@ -48,20 +49,20 @@
              <hr>
               <div class="col-md-4"> 
               <div class="form-group">
-                    <label for="exampleInputEmail1">Father Name</label>
+                    <label >Father Name</label>
                     <input class="form-control capitalize char-only" value="{{$data->fname}}" id="fname" name="fname" type="text" aria-describedby="emailHelp" placeholder="Father Name" required="">
                 </div>
              </div>
 
               <div class="col-md-4"> 
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Father's Occuption</label>
+                    <label >Father's Occuption</label>
                     <input class="form-control capitalize char-only" value="{{$data->foccup}}" id="foccup" name="foccup" type="text" aria-describedby="emailHelp" placeholder="Father's Occuption" required="">
                 </div>
              </div>
               <div class="col-md-4"> 
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Father's Contact Number</label>
+                    <label >Father's Contact Number</label>
                     <input class="form-control numbers-only" maxlength="10"value="{{$data->fcontact}}" id="fcontact" name="fcontact" type="text" aria-describedby="emailHelp" placeholder="Father's Contact Number" required="">
              </div>
             </div>
@@ -78,20 +79,20 @@
              <hr>
               <div class="col-md-4"> 
               <div class="form-group">
-                    <label for="exampleInputEmail1">Mother Name</label>
+                    <label >Mother Name</label>
                     <input class="form-control capitalize char-only" value="{{$data->mname}}" id="mname" name="mname" type="text" aria-describedby="emailHelp" placeholder="Mother Name" required="">
                 </div>
              </div>
 
               <div class="col-md-4"> 
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Mother's Occuption</label>
+                    <label >Mother's Occuption</label>
                     <input class="form-control capitalize char-only" value="{{$data->moccup}}" id="moccup" name="moccup" type="text" aria-describedby="emailHelp" placeholder="Mother's Occuption" required="">
                 </div>
              </div>
               <div class="col-md-4"> 
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Mother's Contact Number</label>
+                    <label >Mother's Contact Number</label>
                     <input class="form-control numbers-only" id="mcontact" value="{{$data->mcontact}}" name="mcontact" type="text" aria-describedby="emailHelp" placeholder="Mother's Contact Number" required="">
              </div>
           </div>
@@ -106,7 +107,7 @@
              <hr>
               <div class="col-md-6"> 
               <div class="form-group">
-                    <label for="exampleInputEmail1">Marital Status</label>
+                    <label >Marital Status</label>
                     <select class="form-control" name="maritalstatus" id="maritalstatus" required="">
                       <option value="{{$data->maritalstatus}}">{{$data->maritalstatus}}</option>
                       <option value="Single">Single</option>
@@ -117,20 +118,20 @@
 
               <div class="col-md-6"> 
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Spouse Name</label>
+                    <label >Spouse Name</label>
                     <input class="form-control" id="spname" name="spname" value="{{$data->spname}}" type="text" aria-describedby="emailHelp" placeholder="Spouse Name"  >
                 </div>
              </div>
               <div class="col-md-6"> 
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Spouse Occuption</label>
+                    <label >Spouse Occuption</label>
                     <input class="form-control" id="spoccup" name="spoccup" value="{{$data->spoccup}}" type="text" aria-describedby="emailHelp" placeholder="Spouse Occuption">
              </div>
           </div>
            <div class="col-md-6"> 
                 <div class="form-group">
-                    <label for="exampleInputEmail1 demoDate">Marriage Anniversery Date</label>
-                    <input class="form-control demoDate" id="anniversary" value="{{$data->anniversary}}" name="anniversary" type="text" aria-describedby="emailHelp" placeholder="Marriage Anniversery Date">
+                    <label >Marriage Anniversery Date</label>
+                    <input class="form-control " id="anniversary" value="{{$data->anniversary}}" name="anniversary" type="text" aria-describedby="emailHelp" placeholder="Marriage Anniversery Date">
              </div>
           </div>
           @endforeach
@@ -151,13 +152,18 @@
 
 
     <!-- Essential javascripts for application to work-->
-    {!!View('partials.include_js')!!}
+<script src="{{ asset('js/main.js') }}" ></script>
 
-
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#anniversary" ).datepicker({ dateFormat:'yy-mm-dd'});
+  } );
+  </script>
 
 
   </body>
 
-<!-- Mirrored from pratikborsadiya.in/vali-admin/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 05 Jul 2018 06:07:27 GMT -->
 </html>
 
