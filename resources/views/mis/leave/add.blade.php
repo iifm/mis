@@ -89,6 +89,7 @@
                   <tbody><tr><td>
 
                   @foreach($managers as $manager)
+                  
                     <p style="margin-right:20px; min-width:180px; float:left;"><input class="messageCheckbox"   type="checkbox" name="approvalfrom[]" id="approvalfrom" value="{{$manager->id}}"> {{$manager->name}}</p>
                     @endforeach
               
