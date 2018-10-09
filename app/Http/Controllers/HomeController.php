@@ -44,7 +44,7 @@ class HomeController extends Controller
     public function dashboard(Request $request)
     {
        
-        $position = Location::get('49.207.107.30');
+        $position = Location::get(\Request::ip());
         dd($position);
 
         $strtYear=date('Y').'-04-01';
