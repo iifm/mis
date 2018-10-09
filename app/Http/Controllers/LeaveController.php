@@ -118,7 +118,7 @@ class LeaveController extends Controller
      */
     public function create()
     {
-        $managers=User::where('role',1)->get();
+        $managers=User::where('role',26)->get();
       //  dd($managers);
         return view('mis.leave.add',compact('managers'));
     }
