@@ -62,9 +62,9 @@
              <div class="col-md-3"> 
               <div class="form-group ">
                   <strong>  <label for="">Leave Type</label></strong><br>
-                    <input class="leaveSelect"  type="checkbox" value="Comp Off" name="leaveoff[]" id="leave_compoff"> Compensatory Off<br><br>
-                    <input class="leaveSelect" type="checkbox" value="Casual Leave" name="leaveoff[]"> Casual Leave <br><br>
-                    <input class="leaveSelect" type="checkbox" value="Half day Leave" id="halfday" name="leaveoff[]"> Half day Leave
+                    <input class="leaveSelect"  type="radio" value="Comp Off" name="leaveoff[]" id="leave_compoff"> Compensatory Off<br><br>
+                    <input class="leaveSelect radio_hc" type="radio" value="Casual Leave" name="leaveoff[]"> Casual Leave <br><br>
+                    <input class="leaveSelect radio_hc" type="radio" value="Half day Leave" id="halfday" name="leaveoff[]"> Half day Leave
 
                 </div>
              </div>
@@ -217,7 +217,11 @@
  <script type="text/javascript">
    $(document).ready(function(){
     $("#leave_form").submit(function(){
-      // alert("jhg");
+      if ( $('#leave_compoff').attr("checked", "checked") && $('#agdcompoff').val()=='') {
+        alert('Please Select Comp-off Date');
+         return false;
+      }
+     
     if ($('.messageCheckbox').filter(':checked').length < 1){
         alert("Select Atleast Two ApprovalFrom");
     return false;
@@ -230,20 +234,20 @@
 
 });
  </script>
+
+
 <script type="text/javascript">
   $(document).ready(function(){
      $('.compoff').hide();
-   $('#leave_compoff').click(function(){
-     if($(this).prop("checked") == true){
-                //alert("Checkbox is checked.");
+
+   $('#leave_compoff').click(function(){     
         $('.compoff').show();
-      }
-       else if($(this).prop("checked") == false){
-                $('.compoff').hide();
-            }
-
-
    });
+
+   $('.radio_hc').click(function(){     
+        $('.compoff').hide();
+   });
+
   });
 </script>
   </body>

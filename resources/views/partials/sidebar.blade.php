@@ -102,20 +102,26 @@ use App\NewsUpload;
              
              <li><a class="treeview-item " href="{{url('/on-duty')}}"><i class="icon fa fa-tag "></i>Apply On-Duty</a></li>
               <li><a class="treeview-item" href="{{url('/conveyance')}}"><i class="icon fa fa-inr"></i>Submit Conveyance</a></li>
-               <li><a class="treeview-item" href="{{url('/user-details')}}"><i class="icon fa fa-user"></i>User Profile</a></li>    
+               <li><a class="treeview-item" href="{{url('/user-details')}}"><i class="icon fa fa-user"></i>User Profile</a></li> 
+
           </ul>
         </li>
-        @if(Session::get('access_zones')=='All')
+
+        
+        
 
           <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Manager Zone</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            
+            @if(Session::get('access_zones')=='All')
               <li><a class="treeview-item" href="{{url('/manager/index')}}"><i class="icon fa fa-eye"></i>View Team Details</a></li>
               <li><a class="treeview-item" href="{{url('admin/news-upload')}}"><i class="icon fa fa-upload"></i>News Upload/Update</a></li>  
-               <li><a class="treeview-item" href="{{url('/manager/leave/index')}}"><i class="icon fa fa-paper-plane"></i>Leave Request(s)</a></li>    
+               @endif
+               <li><a class="treeview-item" href="{{url('/manager/leave/index')}}"><i class="icon fa fa-paper-plane"></i>Leave Request(s)</a></li> 
+
+               <li><a class="treeview-item" href="#"><i class="icon fa fa-paper-plane"></i>Request</a></li>    
           </ul>
         </li>
-    @endif
+   
        @if(Session::get('access_zones')=='All')
          <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-user-secret"></i><span class="app-menu__label">Admin Zone</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
@@ -142,10 +148,10 @@ use App\NewsUpload;
         </li>
       
             <li><a class="app-menu__item" href="{{url('/hall-of-fame')}}"><i class="app-menu__icon fa fa-trophy"></i><span class="app-menu__label">Hall of Fame</span></a></li>
-             <li><a class="app-menu__item" href="{{url('/photo-album')}}"><i class="app-menu__icon fa fa-file-image-o"></i><span class="app-menu__label">Photo Album</span></a></li>
+           <!--   <li><a class="app-menu__item" href="{{url('/photo-album')}}"><i class="app-menu__icon fa fa-file-image-o"></i><span class="app-menu__label">Photo Album</span></a></li> -->
 
          @if(Session::get('access_zones')=='All')
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-file"></i><span class="app-menu__label">Report</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-file"></i><span class="app-menu__label">Report Zone</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="{{url('/conveyance-report')}}"><i class="icon fa fa-inr"></i>Conveyance </a></li>
             <li><a class="treeview-item" href="{{url('/attendance-report')}}"><i class="icon fa fa-calendar"></i> Attendance </a></li>

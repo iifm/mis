@@ -76,7 +76,7 @@ class AttendanceController extends Controller
        
      // dd($request->all());
        Attendance::create($request->all());
-       Session::flash('message','Your Attendance Recorded successfully!!');
+       Session::flash('message','Your Attendance has been Recorded Successfully!!');
 
        return redirect()->route('attendance.index');
     }
@@ -168,7 +168,8 @@ class AttendanceController extends Controller
           }
           $message='';
             //return $datas;
-            return view('mis.attendance.view',compact(['datas','users','message']));
+            $last_four_days=null;
+            return view('mis.attendance.view',compact(['datas','users','message','last_four_days']));
           } 
 
            if ($request->has('strtDate') && $request->has('endDate') && $request->has('employee') && Auth::user()->role==3) {
@@ -254,10 +255,11 @@ class AttendanceController extends Controller
           }
             //return $datas;
           $message='';
-            return view('mis.attendance.view',compact(['datas','users','message']));
+          $last_four_days=null;
+            return view('mis.attendance.view',compact(['datas','users','message','last_four_days']));
           } 
 
-        else  if ($request->has('strtDate') && $request->has('endDate') && Auth::user()->role==1) {
+        else if ($request->has('strtDate') && $request->has('endDate') && Auth::user()->role==1) {
              
             $users=User::all();
              $start= $request->strtDate;
@@ -321,7 +323,8 @@ class AttendanceController extends Controller
             //dd($user_ids);
            // return $datas;
             $message='';
-            return view('mis.attendance.view',compact(['datas','users','message']));
+            $last_four_days=null;
+            return view('mis.attendance.view',compact(['datas','users','message','last_four_days']));
               
           }
 
@@ -381,7 +384,8 @@ class AttendanceController extends Controller
             }
             // return $datas;
             $message='';
-            return view('mis.attendance.view',compact(['datas','users','message']));
+            $last_four_days=null;
+            return view('mis.attendance.view',compact(['datas','users','message','last_four_days']));
           } 
           
           else{
@@ -465,6 +469,8 @@ class AttendanceController extends Controller
                 
             /*  }*/
           }
+           $last_four_days=date('Y-m-d', strtotime('-4 days'));
+           //dd($last_four_days);
          
              return view('mis.attendance.view',compact(['datas','users','message']));
           }
@@ -530,7 +536,7 @@ class AttendanceController extends Controller
         
       Session::flash('message','Your Attendance Recorded successfully!!');
 
-       return redirect()->route('attendance.index');
+       return back();
 
     }
 
@@ -577,9 +583,9 @@ class AttendanceController extends Controller
             });
         
 
-      Session::flash('message','Your Attendance Recorded successfully!!');
+      Session::flash('message','Your Attendance has been Recorded successfully!!');
 
-       return redirect()->route('attendance.index');
+       return back();
 
     }
 

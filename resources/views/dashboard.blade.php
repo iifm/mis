@@ -82,7 +82,7 @@ a {
           </a>
         </div>
         <div class="col-md-6 col-lg-4">
-          <a href="#">
+          <a href="#" title="To Mark Attendance Please Login Through Mobile">
           <div class="widget-small warning coloured-icon"><i class="icon fa fa-map-marker fa-3x"></i>
             <div class="" style="width: 100%; padding:14px 0 5px 0">
             <center>
@@ -90,11 +90,12 @@ a {
               <h6 class="heading_title">Today's Attendance</h6>
               <table style="height:auto; width:80%"><tr><td align="center"><b>IN</b> : {{$intime}}</td><td align="center"><b>OUT</b>: {{$outtime}}</td></tr></table>
               @elseif($intime)
-                <table style="height:auto; width:80%"><tr><td align="center"><b>IN-TIME</b> : {{$intime}}</td></tr><tr><td align="center"> <a href="{{url('/attendance')}}" class="btn btn-warning btn-sm" style="color:#fff; margin-top: 5px;">Mark Out Attendance</a></td></tr></table>
+               <h6 class="heading_title">Today's Attendance</h6>
+                <table style="height:auto; width:80%"><tr><td align="center"><b>IN-TIME</b> : {{$intime}}</td></tr></table>
                
               @else
                <h6 class="heading_title" style="color: black;">Today's Attendance</h6>
-              <a href="{{url('/attendance')}}" class="btn btn-warning btn-sm" style="color:#fff; margin-top:5px;">Mark Attendance</a>
+                <p>Mark Through Mobile</p>
               @endif
             </center>
             </div>
@@ -174,7 +175,7 @@ a {
                 <h5 class="heading_title">Upcoming Events</h5> 
                  <li style="list-style-type: none;" class="dropdown"><a class="app-nav__item btn btn-success" href="#" data-toggle="dropdown" aria-label="Show notifications"><i class="fa fa-birthday-cake  fa-lg"> BIRTHDAYS</i></a>
           <ul style="list-style-type: none;" class="app-notification dropdown-menu dropdown-menu-right">
-            <li class="app-notification__title">This month have {{count($monthBirthday)}} Birthdays.</li>
+            <li class="app-notification__title">This month has {{count($monthBirthday)}} Birthdays.</li>
             <div class="app-notification__content">
               @foreach($monthBirthday as $value)
               <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-birthday-cake fa-stack-1x fa-inverse"></i></span></span>
@@ -189,7 +190,7 @@ a {
         </li>
          <li style="list-style-type: none; margin-top: 10px;" class="dropdown"><a class="app-nav__item btn btn-info" href="#" data-toggle="dropdown" aria-label="Show notifications"><i class="fa fa-gift"> ANNIVERSARIES</i></a>
           <ul style="list-style-type: none;" class="app-notification dropdown-menu dropdown-menu-right">
-            <li class="app-notification__title">This Month have {{count($monthAniversary)}}  Anniveraries  .</li>
+            <li class="app-notification__title">This Month has {{count($monthAniversary)}}  Anniveraries  .</li>
             <div class="app-notification__content">
               @foreach($monthAniversary as $value)
               <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-gift fa-stack-1x fa-inverse"></i></span></span>
@@ -205,7 +206,7 @@ a {
         </li>
            <li style="list-style-type: none; margin-top: 10px;" class="dropdown"><a class="app-nav__item btn btn-danger" href="#" data-toggle="dropdown" aria-label="Show notifications"><i class="fa fa-trophy">  WORK ANNIVERSARIES</i></a>
           <ul style="list-style-type: none;" class="app-notification dropdown-menu dropdown-menu-right">
-            <li class="app-notification__title">This Month have {{count($monthWorkAniversary)}} Work Aniversaries.</li>
+            <li class="app-notification__title">This Month has {{count($monthWorkAniversary)}} Work Aniversaries.</li>
             <div class="app-notification__content">
               @foreach($monthWorkAniversary as $mwa)
               <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-trophy fa-stack-1x fa-inverse"></i></span></span>
@@ -234,7 +235,7 @@ a {
               </div>
 
                  <div class="tile">
-                <h5 class="heading_title ">Press Release</h5>   
+                <h5 class="heading_title ">Press Release(s)</h5>   
                 <ul style="padding-left: 0px; list-style: none;">
                 @foreach($pressReases as $pressRease)
                <li class=" fa fa-newspaper-o " style="width: 100%"> {{$pressRease->subject}} <a href="{{url('/post/view')}}/{{$pressRease->id}}" class="btn btn-warning fa fa-eye pull-right" style="color: #fff"></a></li>  
