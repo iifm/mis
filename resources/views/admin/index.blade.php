@@ -2,7 +2,7 @@
 <html lang="en">
   
 <head>
-    <title> News Upload/Update</title>
+    <title>IIFM MIS - News Upload/Update</title>
 
     <!-- Main CSS-->
     {!!View('partials.include_css')!!}

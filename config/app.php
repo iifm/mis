@@ -168,11 +168,7 @@ return [
         Stevebauman\Location\LocationServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
-
-
-
-       
-
+        Stevebauman\Location\LocationServiceProvider::class,
 
 
         
@@ -247,6 +243,8 @@ return [
         'Location' => Stevebauman\Location\Facades\Location::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Excel' => 'Maatwebsite\Excel\Facades\Excel',
+        'Location' => Stevebauman\Location\Facades\Location::class,
+
 
 
 
