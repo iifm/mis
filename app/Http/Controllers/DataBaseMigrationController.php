@@ -235,6 +235,7 @@ dd($ods);
 
           $attendance = DB::connection('mysql2')->select("select * FROM `attendance` ");
 //dd($attendance);
+          $i=0;
       foreach ($attendance as  $value) {
         $member_id=$value->member_id;
 
@@ -253,7 +254,7 @@ dd($ods);
            $data=DB::connection('mysql3')->insert('insert into `attendances` (member_id, date,time,type,location,longitude,latitude,sip,session_id,remark) values (?, ?, ?, ?,?, ?, ?, ?,?, ?)', [$member_id,$date1,$time,$type,$location,$longitude,$latitude,$sip,$session_id,$remark]);
         }
        
-       
+       $i++;
 
       }
 
@@ -290,7 +291,7 @@ ORDER BY allinfo desc");
 
 
     //user education migration
-    $users = DB::connection('mysql2')->select("select * from iifm_employees
+   /* $users = DB::connection('mysql2')->select("select * from iifm_employees
 ORDER BY allinfo desc");
         //dd($users);
         foreach ($users as  $user) {
@@ -364,7 +365,7 @@ ORDER BY allinfo desc");
             } 
           
         }
-
+*/
 
        /*  //user education migration
     $users = DB::connection('mysql2')->select("select * from iifm_employees
