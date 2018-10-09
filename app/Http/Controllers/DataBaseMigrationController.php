@@ -16,7 +16,7 @@ class DataBaseMigrationController extends Controller
     {
        //user table migration
        $users = DB::connection('mysql2')->select("select * from iifm_employees");
-        dd($users);
+        //dd($users);
        foreach ($users as  $user) {
             $member_id=$user->member_id;
             $firstname=$user->firstname;
@@ -33,7 +33,7 @@ class DataBaseMigrationController extends Controller
       $data=DB::connection('mysql3')->insert('insert into users (id, name,email,password,role) values (?, ?, ?, ?,?)', [$member_id, $firstname,$lastname,$password,$role]);
         }
 
-        echo $data; echo "<br>";
+        echo $member_id; echo "<br>";
      }
 
 
