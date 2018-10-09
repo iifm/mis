@@ -138,21 +138,6 @@ class OnDutyController extends Controller
                         $message->replyTo($replyto);
                     });
 
-
-
-            /* foreach ($email_array as $to) {
-                foreach ($uids as  $uid) {
-                
-                  Mail::send('mail.od_mail',  ['data' => $data,'link'=>URL::route('leave-approval',['id'=>$datas->id,'uid'=>$uid])], function ($message)use($replyto,$to,$subject) {
-                     $message->from('sharmasarita505@gmail.com', 'PRATHAM Education');
-                        $message->to($to);
-                        $message->subject($subject);
-                        $message->replyTo($replyto);
-                    });
-            
-                 }
-               }*/
-
          Session::flash('message','On-Duty Request Sent Successfully !!');
 
         return redirect()->route('od.index',['id'=>Auth::id()]);
