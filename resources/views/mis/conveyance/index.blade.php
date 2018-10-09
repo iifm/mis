@@ -82,7 +82,7 @@
 
                         <td>{{$con->distance}}</td>
                         <td>{{$con->amount}}</td>
-                        @if(Auth::user()->role==1 || Auth::user()->role==2)
+                       @if(Session::get('access_zones')=='All')
                         @if($con->status=='PENDING')
                         <td align="right">
                            <input type="hidden" name="approver" id="approver" value="{{Auth::user()->id}}">
