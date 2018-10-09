@@ -95,12 +95,13 @@ use App\NewsUpload;
 
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Employee Zone</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-             <li><a class="treeview-item" href="{{url('/leave')}}"><i class="icon fa fa-calendar"></i>Apply/View Leave</a></li>
+             <li><a class="treeview-item" href="{{url('/leave')}}"><i class="icon fa fa-calendar"></i>Apply Leave</a></li>
+              <li><a class="treeview-item" href="{{url('leave-view')}}/{{Auth::id()}}"><i class="icon fa fa-eye"></i>View Leave</a></li>
           
               <li><a class="treeview-item" href="{{url('/attendance-view')}}/{{Auth::id()}}"><i class="icon fa fa-eye"></i>View Attendance</a></li>
              
-             <li><a class="treeview-item " href="{{url('/on-duty')}}"><i class="icon fa fa-tag "></i>On-Duty</a></li>
-              <li><a class="treeview-item" href="{{url('/conveyance')}}"><i class="icon fa fa-inr"></i>Conveyance</a></li>
+             <li><a class="treeview-item " href="{{url('/on-duty')}}"><i class="icon fa fa-tag "></i>Apply On-Duty</a></li>
+              <li><a class="treeview-item" href="{{url('/conveyance')}}"><i class="icon fa fa-inr"></i>Submit Conveyance</a></li>
                <li><a class="treeview-item" href="{{url('/user-details')}}"><i class="icon fa fa-user"></i>User Profile</a></li>    
           </ul>
         </li>

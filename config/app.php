@@ -165,14 +165,10 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Unisharp\Ckeditor\ServiceProvider::class,
         App\Providers\AgentServiceProvider::class,
-        Stevebauman\Location\LocationServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
-        Stevebauman\Location\LocationServiceProvider::class,
 
 
-        
-       
+
 
         /*
          * Package Service Providers...
@@ -240,10 +236,7 @@ return [
         'Form' => 'Collective\Html\FormFacade',
         'Html' => 'Collective\Html\HtmlFacade',
         'Agent' => Jenssegers\Agent\Facades\Agent::class,
-        'Location' => Stevebauman\Location\Facades\Location::class,
-        'Image' => Intervention\Image\Facades\Image::class,
         'Excel' => 'Maatwebsite\Excel\Facades\Excel',
-        'Location' => Stevebauman\Location\Facades\Location::class,
 
 
 

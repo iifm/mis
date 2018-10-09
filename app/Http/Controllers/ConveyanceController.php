@@ -97,7 +97,7 @@ class ConveyanceController extends Controller
       }
         
         Session::flash('message','Your Conveyance Added Successfully !!');
-        return redirect()->route('conveyance.index');
+        return redirect()->route('conveyance.index',['id'=>Auth::id()]);
        
     }
 
