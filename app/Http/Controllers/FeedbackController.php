@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Session;
 use App\Feedback;
+use Mail;
 
 class FeedbackController extends Controller
 {
@@ -37,6 +38,17 @@ class FeedbackController extends Controller
     public function store(Request $request)
     {
         $storeFeedback=Feedback::create($request->all());
+       /* $to_email=['hr@iifm.co.in','sarita.sharma@iifm.co.in'];
+        $subject="New Anonymous Feedback Received";
+
+         Mail::send('mail.leaveRequestEmailer', function ($message)use($to_email,$subject) {
+                     $message->from('info@prathamonline.in', 'MIS Alert');
+                        $message->to($to_email);
+                        $message->subject([$subject]);
+                        
+                    });
+       */
+
         Session::flash('message','Your Feedback Sent Successfully!!');
         return redirect()->route('feedback.index');
     }

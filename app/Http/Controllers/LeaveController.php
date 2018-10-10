@@ -179,7 +179,7 @@ class LeaveController extends Controller
          $data= array('name' => $name, 'leavefrom' => $leavefrom,'reason'=>$reason,'leavetype'=>$leavetype, 'leaveto'=>$leaveto,'totdays'=>$totdays);
            
                      
-                  Mail::send('mail.leaveRequestEmailer',  ['data' => $data,'link'=>URL::route('leave-approval',['id'=>$query->id])], function ($message)use($replyto,$to_email,$subject,$approvalfrom) {
+                  Mail::send('mail.leaveRequestEmailer',  ['data' => $data,'link'=>URL::route('leave-approval',['id'=>$query->id])], function ($message)use($default,$replyto,$to_email,$subject,$approvalfrom) {
                      $message->from('info@prathamonline.in', 'MIS Alert');
                         $message->to($to_email);
                         $message->cc($default);
