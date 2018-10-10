@@ -86,16 +86,30 @@ a {
           <div class="widget-small warning coloured-icon"><i class="icon fa fa-map-marker fa-3x"></i>
             <div class="" style="width: 100%; padding:14px 0 5px 0">
             <center>
+               @if($agent->isMobile())
               @if($intime!='' && $outtime!='')
               <h6 class="heading_title">Today's Attendance</h6>
               <table style="height:auto; width:80%"><tr><td align="center"><b>IN</b> : {{$intime}}</td><td align="center"><b>OUT</b>: {{$outtime}}</td></tr></table>
               @elseif($intime)
-               <h6 class="heading_title">Today's Attendance</h6>
-                <table style="height:auto; width:80%"><tr><td align="center"><b>IN-TIME</b> : {{$intime}}</td></tr></table>
+              
+                <table style="height:auto; width:80%"><tr><td align="center"><b>IN-TIME</b> : {{$intime}}</td></tr><tr><td><center><a href="{{url('/attendance')}}" class="btn btn-sm btn-warning" style="color: white">Mark Attendance</a></center> </td></tr></table>
+               
+              @else
+                 <h6 class="heading_title" style="color: black">Today's Attendance</h6>
+                <a href="{{url('/attendance')}}" class="btn btn-warning" style="color: white">Mark Attendance</a>
+              @endif
+              @else
+                @if($intime!='' && $outtime!='')
+              <h6 class="heading_title">Today's Attendance</h6>
+              <table style="height:auto; width:80%"><tr><td align="center"><b>IN</b> : {{$intime}}</td><td align="center"><b>OUT</b>: {{$outtime}}</td></tr></table>
+              @elseif($intime)
+               
+                <table style="height:auto; width:80%"><tr><td align="center"><b>IN-TIME</b> : {{$intime}}</td></tr><tr><td align="center">Mark <b>OUT-TIME</b>  Via Mobile</td></tr></table>
                
               @else
                <h6 class="heading_title" style="color: black;">Today's Attendance</h6>
                 <p>Mark Through Mobile</p>
+              @endif
               @endif
             </center>
             </div>

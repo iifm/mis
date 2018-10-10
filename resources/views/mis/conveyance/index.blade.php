@@ -32,7 +32,7 @@
         <div class="tile-body">
           <div id="table" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
             <div class="row">
-              <div class="col-sm-12 pre-scrollable">
+              <div class="col-sm-12 ">
               <?php $i=1;?>
                <?php if(Session::has('message')) {?>
                 <div id="alert" class="alert alert-success">{{ Session::get('message') }}

@@ -78,7 +78,7 @@ class AttendanceController extends Controller
        Attendance::create($request->all());
        Session::flash('message','Your Attendance has been Recorded Successfully!!');
 
-       return redirect()->route('attendance.index');
+       return redirect()->route('dashboard');
     }
 
   
@@ -167,9 +167,10 @@ class AttendanceController extends Controller
             /*  }*/
           }
           $message='';
+         /// $edit_option='false';
             //return $datas;
-            $last_four_days=null;
-            return view('mis.attendance.view',compact(['datas','users','message','last_four_days']));
+            $edit_option=null;
+            return view('mis.attendance.view',compact(['datas','users','message','edit_option']));
           } 
 
            if ($request->has('strtDate') && $request->has('endDate') && $request->has('employee') && Auth::user()->role==3) {
@@ -255,8 +256,8 @@ class AttendanceController extends Controller
           }
             //return $datas;
           $message='';
-          $last_four_days=null;
-            return view('mis.attendance.view',compact(['datas','users','message','last_four_days']));
+          $edit_option=null;
+            return view('mis.attendance.view',compact(['datas','users','message','edit_option']));
           } 
 
         else if ($request->has('strtDate') && $request->has('endDate') && Auth::user()->role==1) {
@@ -323,8 +324,8 @@ class AttendanceController extends Controller
             //dd($user_ids);
            // return $datas;
             $message='';
-            $last_four_days=null;
-            return view('mis.attendance.view',compact(['datas','users','message','last_four_days']));
+            $edit_option=null;
+            return view('mis.attendance.view',compact(['datas','users','message','edit_option']));
               
           }
 
@@ -384,8 +385,8 @@ class AttendanceController extends Controller
             }
             // return $datas;
             $message='';
-            $last_four_days=null;
-            return view('mis.attendance.view',compact(['datas','users','message','last_four_days']));
+            $edit_option=null;
+            return view('mis.attendance.view',compact(['datas','users','message','edit_option']));
           } 
           
           else{
@@ -469,10 +470,10 @@ class AttendanceController extends Controller
                 
             /*  }*/
           }
-           $last_four_days=date('Y-m-d', strtotime('-4 days'));
-           //dd($last_four_days);
+           $edit_option='true';
+           //dd($edit_option);
          
-             return view('mis.attendance.view',compact(['datas','users','message']));
+             return view('mis.attendance.view',compact(['datas','users','message','edit_option']));
           }
          
         
@@ -494,7 +495,8 @@ class AttendanceController extends Controller
     {
       $username=User::find($id);
       $name=$username->name;
-      $managers=User::where('role',1)->get();
+      $managers=User::whereIn('id',[1,272,271,125,122,105,39,68,66,29,225,149,264])->get();
+
       return view('mis.attendance.update_attendance',compact(['date','name','type','managers']));
     }
     public function updateIn(Request $request)

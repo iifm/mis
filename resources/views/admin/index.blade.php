@@ -36,7 +36,7 @@
             <div class="tile-body">
               <div id="table" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
              
-            <div class="row"><div class="col-sm-12 pre-scrollable">
+            <div class="row"><div class="col-sm-12 ">
               <div id="successMsg" class="alert alert-success" style="display: none;">
                 
               </div>

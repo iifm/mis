@@ -126,7 +126,9 @@
                         <td>
                             <?php
                               if($data['inTime']=='NA'){  $type='IN'?>
+                                @if($edit_option=='true')
                                 <a href="{{url('/update-user-attendance')}}/{{$data['user_id']}}/{{$data['date']}}/{{$type}}" class="btn btn-primary fa fa-edit btn-small" id="{{$data['user_id']}}"></a>
+                                @endif
 
                               <?php }
                               else{ ?>
@@ -142,8 +144,9 @@
                                
                               <?php } 
                               elseif($data['outTime']=='NA'){  $type='OUT'?>
-                               
+                               @if($edit_option=='true')
                                 <a href="{{url('/update-user-out-attendance')}}/{{$data['user_id']}}/{{$data['date']}}/{{$type}}" class="btn btn-danger fa fa-edit btn-small" id="outTime"></a>
+                                @endif
 
                               <?php }
                               else{ ?>

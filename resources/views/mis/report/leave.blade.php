@@ -85,7 +85,7 @@
             </div>
 
             <div class="row" style="margin-top: 50px;">
-              <div class="col-sm-12 pre-scrollable">
+              <div class="col-sm-12 ">
               <?php $i=1;?>
                <?php if(Session::has('message')) {?>
                 <div id="alert" class="alert alert-success">{{ Session::get('message') }}

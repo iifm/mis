@@ -2,7 +2,7 @@
 <html lang="en">
   
 <head>
-    <title>IIFM MIS User Management</title>
+    <title>IIFM MIS - User Management</title>
 
     <!-- Main CSS-->
     {!!View('partials.include_css')!!}
@@ -34,16 +34,9 @@
           
           <div class="tile">
             <div class="tile-body">
-              <div id="table" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
-                <div class="row">
-                  <div class="col-sm-12 col-md-6">
-                    <div class="dataTables_length" id="sampleTable_length">
-                   
-                </div>
-              </div>
-              
-            </div>
-            <div class="row"><div class="col-sm-12 pre-scrollable">
+              <div id="table" class="">
+               
+            <div class="row"><div>
               <div id="successMsg" class="alert alert-success" style="display: none;">
                 
               </div>
@@ -70,7 +63,7 @@
                 @foreach($users as $user)
                 <tr role="row" class="odd">
                     <td><?= $i++;?></td>
-                     <td style="text-align: left;">{{$user->name}}</td>
+                     <td style="text-align: left;">{{ucwords(strtolower($user->name))}}</td>
                     <td style="text-align: left;">{{$user->dept_name}}</td>
                     <td style="text-align: left;">{{$user->designation}}</td>
                     <td style="text-align: left;">{{$user->locationcentre}}</td>

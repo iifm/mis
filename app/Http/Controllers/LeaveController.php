@@ -118,7 +118,7 @@ class LeaveController extends Controller
      */
     public function create()
     {
-        $managers=User::whereIn('id',[272,271,125,122,105,39,68,66,29,225,149])->get();
+        $managers=User::whereIn('id',[1,272,271,125,122,105,39,68,66,29,225,149,264])->get();
        // dd($managers);
       //  dd($managers);
         return view('mis.leave.add',compact('managers'));
@@ -169,14 +169,20 @@ class LeaveController extends Controller
               
           $subject = "Leave Request From " .$leavefromname->name ."  on ". date("l jS \of F Y");
 
-          $replyto=['manish.ram@iifm.co.in','sarita.sharma@iifm.co.in','hr@iifm.co.in'];
+          $default=['ankit.kapoor@iifm.co.in','hr@iifm.co.in'];
+
+          $replyto = $default;
+
+          //array_push($replyto, $to_email);
+         $replyto= array_merge($default,$replyto);
+          //dd($merge);
          $data= array('name' => $name, 'leavefrom' => $leavefrom,'reason'=>$reason,'leavetype'=>$leavetype, 'leaveto'=>$leaveto,'totdays'=>$totdays);
            
                      
                   Mail::send('mail.leaveRequestEmailer',  ['data' => $data,'link'=>URL::route('leave-approval',['id'=>$query->id])], function ($message)use($replyto,$to_email,$subject,$approvalfrom) {
                      $message->from('info@prathamonline.in', 'MIS Alert');
                         $message->to($to_email);
-                        $message->cc($replyto);
+                        $message->cc($default);
                         $message->subject($subject);
                         $message->replyTo($replyto);
                     });
@@ -266,6 +272,7 @@ class LeaveController extends Controller
              $message->from('info@prathamonline.in', 'MIS Alert');
                  $message->to($to_email);
                  $message->subject($subject);
+
             });
       
        Session::flash('message','Leave Status Updated Successfully!!');

@@ -37,7 +37,7 @@
                                         </tr>
                                          <tr>
                                             <td align="center" valign="top" style="padding-right:40px;padding-left:40px">
-                                                <p style="text-align:center;margin: 20px;">  Applicant Name  &nbsp;&nbsp;<strong style="font-size: 25px;">{{$data['name']}}</strong></p> 
+                                                <p style="text-align:center;margin: 20px;">  Applicant Name  &nbsp;&nbsp;<strong style="font-size: 25px;">{{ucwords(strtolower($data['name']))}}</strong></p> 
                                             </td>
                                         </tr>
                                         <tr> 

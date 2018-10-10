@@ -86,7 +86,7 @@ class OnDutyController extends Controller
      */
     public function create()
     {
-        $managers=User::whereIn('id',[272,271,125,122,105,39,68,66,29,225,149])->get();
+        $managers=User::whereIn('id',[272,271,125,122,105,39,68,66,29,225,149,264])->get();
          return view('mis.onduty.create',compact('managers'));
     }
 
@@ -127,14 +127,14 @@ class OnDutyController extends Controller
            
              
           $subject = "On-Duty Request From " .$odfromname->name ."  on ". date("l jS \of F Y ");
-          $replyto=['manish.ram@iifm.co.in','sarita.sharma@iifm.co.in','hr@iifm.co.in','ankit.kapoor@iifm.co.in'];
+          $replyto=['hr@iifm.co.in','ankit.kapoor@iifm.co.in'];
           $data= array('name' => $name, 'od_date' => $od_date,'intime'=>$intime,'odtype'=>$odtype, 'outtime'=>$outtime,'reason'=>$reason);
     
          Mail::send('mail.onDutyRequestMailer',  ['data' => $data], function ($message)use($replyto,$subject,$to_email) {
                      $message->from('info@prathamonline.in', 'MIS Alert');
                         $message->to($to_email);
                         $message->subject($subject);
-                        $message->cc(['manish.ram@iifm.co.in']);
+                        $message->cc($replyto);
                         $message->replyTo($replyto);
                     });
 
