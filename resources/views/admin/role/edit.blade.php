@@ -78,7 +78,7 @@
               <div class="col-md-10"> 
               <div class="form-group">
                     <label >Upload Category </label>
-                    <select class="form-control demoSelect" name="upload_category_option[]"  multiple="" required="">
+                    <select class="form-control demoSelect" name="upload_category_option[]"  multiple="" >
                         @foreach($upload_categories_details as $upload_categories_detail)
                         @foreach($upload_categories_detail as $upload)
                       <option value="{{$upload['id']}}" selected="selected">{{$upload['name']}}

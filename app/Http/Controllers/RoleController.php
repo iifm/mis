@@ -16,13 +16,41 @@ class RoleController extends Controller
     }
     public function index()
     {
+      $roleDetails=[];
+      $access_zone_names='';
        $roles=Role::join('users','users.id','=','roles.addedby')
                         ->select('users.name as username','roles.*')
                         ->get();
-     
+                        
+     foreach ($roles as $value) {
+      $access_zone=$value->access_zone;
+      $upload_categories_option=$value->upload_category_option;
 
+      $upload_categories_array=explode(",", $upload_categories_option);
+
+      $upload_categories_name=UploadCategory::whereIn('id',$upload_categories_array)->pluck('name')->toArray();
+      $upload_categories_names=implode(",", $upload_categories_name);
+     // $role_id=$value->id;
+        if ($access_zone!='All') {
+         $access_zone_arry=explode(",", $access_zone);
+         $access_zone_name=Role::whereIn('id',$access_zone_arry)->pluck('name')->toArray();
+       
+        $access_zone_names=implode(",", $access_zone_name);  
+         $roleDetails[]=['role_name'=>$value->name,'access_users'=>$access_zone_names,'upload_category'=>$upload_categories_names,'role_id'=>$value->id]; 
+        }
+
+        else{
+           $roleDetails[]=['role_name'=>$value->name,'access_users'=>'All','upload_category'=>$upload_categories_names,'role_id'=>$value->id]; 
+        }
+
+
+       
+     
+     }
+//dd($roleDetails);
+    
                        // dd($roles);
-        return view('admin.role.index',compact(['roles']));
+        return view('admin.role.index',compact(['roleDetails']));
     }
 
     public function create()
@@ -90,9 +118,17 @@ class RoleController extends Controller
       $access_zone=$request->access_zone;
       $upload_category_option=$request->upload_category_option;
       $access_zones=implode(",", $access_zone);
-      $upload_category_options=implode(",", $upload_category_option);
      
+     if ($upload_category_option!='') {
+
+       $upload_category_options=implode(",", $upload_category_option);
+      
         Role::where('id',$id)->update(['name'=>$request->name,'updatedby'=>$request->updatedby,'access_zone'=>$access_zones,'upload_category_option'=>$upload_category_options]);
+     }
+     else{
+       Role::where('id',$id)->update(['name'=>$request->name,'updatedby'=>$request->updatedby,'access_zone'=>$access_zones]);
+     }
+      
          Session::flash('message','Role Updated Successfully!!');
        return redirect()->route('role.index');
     }

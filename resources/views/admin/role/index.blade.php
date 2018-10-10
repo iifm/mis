@@ -53,21 +53,31 @@
                   <tr role="row">
                     <th>#</th>
                     <th style="text-align: left;">Role Name</th>
-                    <th style="text-align: left;">Modified By</th>
+                    <th>User's Access</th>
+                     <th>Upload(s) Category </th>
 
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                   @foreach($roles as $role)
+                   @foreach($roleDetails as $role)
+                  
                 <tr style="max-height: 100px;">
                     <td>{{ $i++ }}</td>
-                     <td style="text-align: left;">{{$role->name}}</td>
-                    <td style="text-align: left;">{{$role->username}}</td>
-
+                     <td style="text-align: left;">{{$role['role_name']}}</td>
+                    @if($role['access_users']=='')
+                    <td>End User</td>
+                    @else
+                    <td style="text-align: left;">{{$role['access_users']}}</td>
+                    @endif
+                    @if($role['upload_category']=='')
+                    <td>NA</td>
+                    @else
+                    <td style="text-align: left;">{{$role['upload_category']}}</td>
+                    @endif
                     <td style="text-align: left;">
-                      <a href="{{url('role/edit')}}/{{$role->id}}" class="btn btn-primary btn-sm fa fa-edit"></a>
-                       <!--  <a onclick="return confirm('Are you sure you want to delete this item?')" href="{{url('role/delete')}}/{{$role->id}}" class="btn btn-danger btn-sm fa fa-trash"></a> -->
+                      <a href="{{url('role/edit')}}/{{$role['role_id']}}" class="btn btn-primary btn-sm fa fa-edit"></a>
+                     
                      </td>
                   </tr>
                     @endforeach
