@@ -161,7 +161,7 @@
             </tr>
             <tr>
               <th>Date Of Birth</th>
-              <td>{{date('j F  Y',strtotime($user->dob))}}</td>
+              <td>{{date('j F',strtotime($user->dob))}}</td>
             </tr>
             </table>
        

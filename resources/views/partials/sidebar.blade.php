@@ -108,20 +108,20 @@ use App\NewsUpload;
         </li>
 
         
-        
+          @if(Session::get('access_zones')=='All')
 
           <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Manager Zone</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            @if(Session::get('access_zones')=='All')
+          
               <li><a class="treeview-item" href="{{url('/manager/index')}}"><i class="icon fa fa-eye"></i>View Team Details</a></li>
               <li><a class="treeview-item" href="{{url('admin/news-upload')}}"><i class="icon fa fa-upload"></i>News Upload/Update</a></li>  
-               @endif
+              
                <li><a class="treeview-item" href="{{url('/manager/leave/index')}}"><i class="icon fa fa-paper-plane"></i>Leave Request(s)</a></li> 
 
                <li><a class="treeview-item" href="#"><i class="icon fa fa-paper-plane"></i>Request</a></li>    
           </ul>
         </li>
-   
+    @endif
        @if(Session::get('access_zones')=='All')
          <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-user-secret"></i><span class="app-menu__label">Admin Zone</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
