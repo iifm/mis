@@ -11,11 +11,8 @@
 
     <!-- Main CSS-->
     {!!View('partials.include_css')!!}
- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
    </head>
     
@@ -88,13 +85,13 @@
                <div class="col-md-3"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">Start Year</label>
-                    <input class="form-control date-own" id="strtyear" name="strtyear" type="text" aria-describedby="emailHelp" placeholder="Start Year" required="">
+                    <input class="form-control datepicker" id="strtyear" name="strtyear" type="text" aria-describedby="emailHelp" placeholder="Start Year" required="">
                 </div>
              </div>
               <div class="col-md-3"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">End Year</label>
-                    <input class="form-control date-own" id="endyear" name="endyear" type="text" aria-describedby="emailHelp" placeholder="End Year" required="">
+                    <input class="form-control datepicker" id="endyear" name="endyear" type="text" aria-describedby="emailHelp" placeholder="End Year" required="">
                 </div>
              </div>
               
@@ -131,17 +128,16 @@
 
 
     <!-- Essential javascripts for application to work-->
-    {!!View('partials.include_js')!!}
+ 
 
+  <script src="{{ asset('js/main.js') }}" ></script>
 
-
-
-     <script type="text/javascript">
-      $('.date-own').datepicker({
-         minViewMode: 2,
-         format: 'yyyy',
-         autoclose: true,
-       });
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( ".datepicker" ).datepicker({ dateFormat:'yy-mm-dd'});
+  } );
   </script>
 
   <script>

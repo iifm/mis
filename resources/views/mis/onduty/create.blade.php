@@ -83,7 +83,7 @@
              <div class="col-md-7"> 
               <div class="form-group">
                     <strong><label for="">Reason</label></strong>
-                    <textarea class="form-control capitalize char-only" name="reason" id="reason" rows="5" placeholder="Explain your reason for OD" required=""></textarea>
+                    <textarea class="form-control " name="reason" id="reason" rows="5" placeholder="Explain your reason for OD" required=""></textarea>
                 </div>
              </div>
 
