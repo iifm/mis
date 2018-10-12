@@ -93,8 +93,10 @@ class LeaveController extends Controller
                                     'type'=> $value->leavetype,
                                     'from'=> $value->leavefrom,
                                     'to'=> $value->leaveto,
+                                    'total_leaves'=>$value->totalleave,
                                     'approval'=> $usernames,
                                     'status'=> $value->status,
+                                    'approvedby'=>$value->approvedby,
                                     'user_id' => $value->empid
                   );            
                   $usernames='';  //dd($value);

@@ -37,18 +37,19 @@ class FeedbackController extends Controller
      */
     public function store(Request $request)
     {
+       
         $storeFeedback=Feedback::create($request->all());
-       /* $to_email=['hr@iifm.co.in','sarita.sharma@iifm.co.in'];
-        $subject="New Anonymous Feedback Received";
+        $to_email=['sarita.sharma@iifm.co.in','hr@iifm.co.in'];
+        $subject="New Anonymous Feedback Received  on ". date("l jS \of F Y",strtotime($storeFeedback->created_at));
+       $data=['title'=>$request->subject,'message'=>$request->description];
 
-         Mail::send('mail.leaveRequestEmailer', function ($message)use($to_email,$subject) {
+         Mail::send('mail.feedbackMailer',['data'=>$data], function ($message)use($to_email,$subject) {
                      $message->from('info@prathamonline.in', 'MIS Alert');
                         $message->to($to_email);
-                        $message->subject([$subject]);
+                        $message->subject($subject);
                         
                     });
-       */
-
+       
         Session::flash('message','Your Feedback Sent Successfully!!');
         return redirect()->route('feedback.index');
     }

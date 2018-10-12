@@ -218,3 +218,8 @@ Route::get('/database/migration','DataBaseMigrationController@index');
 //assign user role
 Route::get('assign-role/index','AssignUserRoleController@index')->name('assign_role.index');
 Route::get('assign-role/edit/{id}','AssignUserRoleController@roleUpdate');
+
+//request
+Route::get('manager-zone/request','RequestController@index');
+Route::post('manager-zone/request/store','RequestController@store');
+Route::get('manager-zone/request/show-all','RequestController@show');

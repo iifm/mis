@@ -65,6 +65,23 @@ use App\NewsUpload;
             Session::put('access_zones', $access_zones);
           }
 
+         
+         $active_user_role=Auth::user()->role;
+
+            $manager_zone_access=Role::where('id',$active_user_role)->get();
+
+            foreach ($manager_zone_access as  $access) {
+               $access_zone=$access->access_zone;
+               if ($access_zone!=0) {
+              $manager_zone='show';
+               Session::put('manager_zone', $manager_zone);
+                }
+            else{
+              $manager_zone='hide';
+               Session::put('manager_zone', $manager_zone);
+                }
+            }
+
           
     ?>
     <aside class="app-sidebar" style="overflow: scroll">
@@ -103,12 +120,12 @@ use App\NewsUpload;
              <li><a class="treeview-item " href="{{url('/on-duty')}}"><i class="icon fa fa-tag "></i>Apply On-Duty</a></li>
               <li><a class="treeview-item" href="{{url('/conveyance')}}"><i class="icon fa fa-inr"></i>Submit Conveyance</a></li>
                <li><a class="treeview-item" href="{{url('/user-details')}}"><i class="icon fa fa-user"></i>User Profile</a></li> 
-
+                <li><a class="treeview-item" href="{{url('/photo-album')}}"><i class="icon fa fa-file-image-o"></i>Photo Album</a></li> 
+               
           </ul>
         </li>
-
         
-          @if(Session::get('access_zones')=='All')
+         @if(Session::get('manager_zone')=='show' || Session::get('access_zones')=='All')
 
           <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Manager Zone</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
@@ -118,10 +135,11 @@ use App\NewsUpload;
               
                <li><a class="treeview-item" href="{{url('/manager/leave/index')}}"><i class="icon fa fa-paper-plane"></i>Leave Request(s)</a></li> 
 
-               <li><a class="treeview-item" href="#"><i class="icon fa fa-paper-plane"></i>Request</a></li>    
+              <!--  <li><a class="treeview-item" href="{{url('manager-zone/request')}}"><i class="icon fa fa-user-plus"></i>Request</a></li>     -->
           </ul>
         </li>
     @endif
+
        @if(Session::get('access_zones')=='All')
          <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-user-secret"></i><span class="app-menu__label">Admin Zone</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
@@ -148,9 +166,9 @@ use App\NewsUpload;
         </li>
       
             <li><a class="app-menu__item" href="{{url('/hall-of-fame')}}"><i class="app-menu__icon fa fa-trophy"></i><span class="app-menu__label">Hall of Fame</span></a></li>
-           <!--   <li><a class="app-menu__item" href="{{url('/photo-album')}}"><i class="app-menu__icon fa fa-file-image-o"></i><span class="app-menu__label">Photo Album</span></a></li> -->
+           
 
-         @if(Session::get('access_zones')=='All')
+          @if(Session::get('manager_zone')=='show' || Session::get('access_zones')=='All')
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-file"></i><span class="app-menu__label">Report Zone</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="{{url('/conveyance-report')}}"><i class="icon fa fa-inr"></i>Conveyance </a></li>
@@ -173,7 +191,7 @@ use App\NewsUpload;
             
           </ul>
         </li>
-       @if(Session::get('access_zones')=='All')
+        @if(Session::get('manager_zone')=='show' || Session::get('access_zones')=='All')
           <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-product-hunt"></i><span class="app-menu__label">Inventory Management</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="{{url('/product-categories/index')}}"><i class="icon fa fa-list"></i>  Product Category</a></li>

@@ -99,8 +99,10 @@
                     <th>Leave Type</th>
                     <th>Start Date</th>
                     <th >End Date </th>
+                    <th>Total Leaves</th>
                     <th >Status</th>
                     <th >Approval From</th>
+                    <th>Approved By</th>
                    <!--  <th style="padding-left: 50px; padding-right: 50px;">Action</th> -->
                   </tr>
                 </thead>
@@ -113,12 +115,14 @@
                     <td>{{$data['type']}}</td>
                     <td>{{$data['from']}}</td>
                     <td>{{$data['to']}}</td>
+                    <td>{{$data['total_leaves']}}</td>
                     @if($data['status']=='approved')
                     <td>Approved</td>
                     @else
                     <td>{{$data['status']}}</td>
                     @endif
                   <td>{{$data['approval']}}</td>
+                  <td></td>
                     
                   
                   </tr>

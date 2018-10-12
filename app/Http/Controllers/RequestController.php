@@ -3,17 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Department;
+use Session;
+use App\Requirement;
 
-class ReimbursementController extends Controller
+class RequestController extends Controller
 {
-     public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-         return view('mis.reimbursement.index');
-
+       $departments=Department::all();
+        return view('manager.request.create',compact('departments'));
     }
 
     /**
@@ -34,7 +38,10 @@ class ReimbursementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      
+       $data=Requirement::create($request->all());
+       Session::flash('message','Request Sent Successfully !!');
+       return back();
     }
 
     /**
@@ -43,9 +50,15 @@ class ReimbursementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+       $requirements=Requirement::join('users','users.id','=','requirements.user_id')
+                                ->join('departments','departments.id','=','requirements.department')
+                                ->select('users.name as username','requirements.*','requirements.id as req_id','departments.name as dept_name')->get();
+                               
+                               // dd($requirements);
+        return view('manager.request.index',compact('requirements'));
+
     }
 
     /**

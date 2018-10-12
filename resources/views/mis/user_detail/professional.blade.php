@@ -11,7 +11,8 @@
 
     <!-- Main CSS-->
     {!!View('partials.include_css')!!}
- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
    </head>
   
   
@@ -53,13 +54,13 @@
               <div class="col-md-3"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">From</label>
-                    <input class="form-control demoDate" id="fromdate" name="fromdate" type="text" aria-describedby="emailHelp" placeholder="From" required="">
+                    <input class="form-control datepicker " id="fromdate" name="fromdate" type="text" aria-describedby="emailHelp" placeholder="From" required="">
                 </div>
              </div>
               <div class="col-md-3"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">To</label>
-                    <input class="form-control demoDate" id="todate" name="todate" type="text" aria-describedby="emailHelp" placeholder="To" required="">
+                    <input class="form-control datepicker" id="todate" name="todate" type="text" aria-describedby="emailHelp" placeholder="To" required="">
                 </div>
              </div>
 
@@ -103,27 +104,18 @@
 
    
     <!-- Essential javascripts for application to work-->
-    {!!View('partials.include_js')!!}
+ 
 
-<script type="text/javascript">
-            // When the document is ready
-            $(document).ready(function () {
-                
-                $('.example1').datepicker({
-                    minViewMode: 'years',
-                    autoclose: true,
-                     format: 'yyyy'
-                });  
-            
-            });
-        </script>
-    
-     <script type="text/javascript">
-      $('.date-own').datepicker({
-         minViewMode: 2,
-         format: 'yyyy'
-       });
+ <script src="{{ asset('js/main.js') }}" ></script>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( ".datepicker" ).datepicker({ dateFormat:'yy-mm-dd'});
+  } );
   </script>
+
   
 <script>
  function fileValidation(){
