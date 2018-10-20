@@ -405,6 +405,7 @@ $anniversary_image=array_rand($anniversary_images);
            Mail::send('mail.wish_mail',  ['data' => $data], function ($message)use($receiver_email,$subject,$sender_mail,$to) {
                 $message->from('info@prathamonline.in', 'MIS Alert');
                  $message->to($to);
+                 $message->replyTo($sender_mail);
                 $message->subject($subject);
             });
 

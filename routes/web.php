@@ -210,6 +210,7 @@ Route::get('/role/delete/{id}','RoleController@destroy');
 //manager zone
 Route::get('/manager/index','ManagerController@index')->name('manager.index');
 Route::get('/manager/leave/index','ManagerController@managerLeaveIndex')->name('manager.leave.index');
+Route::get('/manager/attendance/index','ManagerController@managerAttendanceIndex')->name('manager.attendance.index');
 
 
 //database migration

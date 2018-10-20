@@ -125,7 +125,7 @@ use App\NewsUpload;
           </ul>
         </li>
         
-         @if(Session::get('manager_zone')=='show' || Session::get('access_zones')=='All')
+       @if(Session::get('manager_zone')=='show' || Session::get('access_zones')=='All')
 
           <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Manager Zone</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
@@ -134,12 +134,19 @@ use App\NewsUpload;
               <li><a class="treeview-item" href="{{url('admin/news-upload')}}"><i class="icon fa fa-upload"></i>News Upload/Update</a></li>  
               
                <li><a class="treeview-item" href="{{url('/manager/leave/index')}}"><i class="icon fa fa-paper-plane"></i>Leave Request(s)</a></li> 
-
-              <!--  <li><a class="treeview-item" href="{{url('manager-zone/request')}}"><i class="icon fa fa-user-plus"></i>Request</a></li>     -->
+               <!--  <li><a class="treeview-item" href="{{url('/manager/attendance/index')}}"><i class="icon fa fa-calendar-o"></i>Attendance Request(s)</a></li> 
+ -->  
           </ul>
         </li>
-    @endif
+       @endif
 
+       <!--  <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-user-plus"></i><span class="app-menu__label">Request Zone</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+          <ul class="treeview-menu">
+            <li><a class="treeview-item" href="{{url('manager-zone/request')}}"><i class="icon fa fa-users"></i>New Hiring</a></li>
+           
+          </ul>
+        </li>
+ -->
        @if(Session::get('access_zones')=='All')
          <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-user-secret"></i><span class="app-menu__label">Admin Zone</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">

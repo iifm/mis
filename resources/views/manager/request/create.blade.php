@@ -29,7 +29,7 @@
  <main class="app-content">
       <div class="app-title">
         <div>
-        <h1 class="heading_title"><i class="fa fa-user-plus"></i> Request Management </h1>
+        <h1 class="heading_title"><i class="fa fa-user-plus"></i> New Hiring </h1>
         </div>
          <a href="{{url('manager-zone/request/show-all')}}" class="fa fa-eye btn btn-primary" style="background: #009688; border:none"> View All Requests</a>   
       </div>
@@ -39,10 +39,10 @@
 
             {{ csrf_field() }}
         
-          <center><h4 style="color: red"><b>Want to get some work done from Inhouse team ?</b></h4>  </center>    
+            
         <div class="row">
              
-                <div class="col-md-6"> 
+                <div class="col-md-4"> 
               <div class="form-group">
                   <strong><label for="">Department</label></strong>  
                     <select class="form-control" name="department" required="">
@@ -53,24 +53,110 @@
                     </select>
                 </div>
              </div>
-             <div class="col-md-6"> 
+             <div class="col-md-4"> 
               <div class="form-group">
-                   <strong> <label for="">Subject</label></strong>
-                    <input class="form-control" id="subject" name="subject" type="text" aria-describedby="emailHelp" placeholder="Subject of your Request/Work" title="Ex:- I want to hire a team member." required>
+                   <strong> <label for=""> Job Title</label></strong>
+                    <input class="form-control" id="subject" name="subject" type="text" aria-describedby="emailHelp" placeholder="Title of your Request/Work" title="Ex:- I want to hire a team member." required>
+                </div>
+             </div>
+               <div class="col-md-4"> 
+              <div class="form-group">
+                   <strong> <label for="">Number of Opening(s)</label></strong>
+                    <input class="form-control" id="subject" name="opening" type="text" aria-describedby="emailHelp" placeholder="Number of Opening(s)" title="Ex:- I want to hire a team member." required>
                 </div>
              </div>
              </div>
              <div class="row">
-           <div class="col-md-12"> 
+               
+               <div class="col-md-4"> 
               <div class="form-group">
-                   <strong> <label for="">Description</label></strong>
-                   <textarea class="form-control" name="description" id="description" required=""></textarea>
+                   <strong> <label for=""> Location</label></strong>
+                   <select class="form-control" name="location">
+                     <option value="">Select Location</option>
+                     <option></option>
+                   </select>
+                </div>
+             </div>
+              <div class="col-md-4"> 
+              <div class="form-group">
+                   <strong> <label for=""> Type of Appointment</label></strong>
+                   <select class="form-control" name="location">
+                     <option value="">Select Type</option>
+                     <option value="permanent">Permanent</option>
+                     <option value="temporary">Temporary</option>
+                     <option value="intern">Intern</option>
+                   </select>
+                </div>
+             </div>
+             <div class="col-md-4"> 
+              <div class="form-group">
+                   <strong> <label for=""> Existing Staff at present in this category</label></strong>
+                   <select class="form-control" name="existing_staff">
+                     <option value="">Select Employee</option>
+                     <option value=""></option>
+                    
+                   </select>
+                </div>
+             </div>
+             </div>
+             <div class="row">
+           <div class="col-md-6"> 
+              <div class="form-group">
+                   <strong> <label for="">Educational/Professional Qualification Required</label></strong>
+                   <textarea class="form-control" placeholder="Educational/Professional Qualification Required" name="description" id="description" required=""></textarea>
+                </div>
+             </div>
+             <div class="col-md-6"> 
+              <div class="form-group">
+                   <strong> <label for="">Skills Required</label></strong>
+                   <textarea class="form-control" placeholder="Skills Required" name="description" id="description" required=""></textarea>
                 </div>
              </div>
              <input type="hidden" name="sip" value="{{\Request::ip()}}">
              <input type="hidden" name="user_id" value="{{Auth::id()}}">
          
             
+           </div>
+           <div class="row">
+             
+             <div class="col-md-6"> 
+              <div class="form-group">
+                   <strong> <label for="">Job Description</label></strong>
+                   <textarea class="form-control" name="jd" placeholder="Job Description" id="description" required=""></textarea>
+                </div>
+             </div>
+              <div class="col-md-6"> 
+              <div class="form-group">
+                   <strong> <label for="">Reason for Requirement</label></strong>
+        <textarea class="form-control" name="reason" placeholder="Ex: Resignation / Work Load / Additional
+Assignments" id="description" required=""></textarea>
+                </div>
+             </div>
+              <div class="col-md-6"> 
+              <div class="form-group">
+                   <strong> <label for="">Date by which Resource is Required</label></strong>
+                   <input type="date" name="experience" class="form-control">
+                </div>
+             </div>
+             <div class="col-md-6"> 
+              <div class="form-group">
+                   <strong> <label for="">Experience Required</label></strong>
+                   <input type="text" name="experience" class="form-control">
+                </div>
+             </div>
+              <div class="col-md-6"> 
+              <div class="form-group">
+                   <strong> <label for="">Can vacancy be filled through internal transfers/promotion</label></strong>
+                   <textarea class="form-control" name="reason" placeholder="Can vacancy be filled through internal transfers/promotion" id="description" required=""></textarea>
+                </div>
+             </div>
+              <div class="col-md-6"> 
+              <div class="form-group">
+                   <strong> <label for="">Benefits/Purpose for Additional Appointment</label></strong>
+                   <textarea class="form-control" name="reason" placeholder="Benefits/Purpose for Additional Appointment" id="description" required=""></textarea>
+                </div>
+             </div>
+
            </div>
           
         
@@ -89,7 +175,12 @@
                 <h4 class="modal-title"></h4>
             </div>
             <div class="modal-body">
-    
+          <p>All <b>Recruitment Requisition</b>  procedure detailed below must be completed prior to the commencement on any recruitment procedure.<br><br>
+
+a) Prior to the employment of any employee the Employee Requisition Form must be completed by the department Head.<br><br>
+
+b) Requisition Form will be submitted to HR Department with a copy to the Director.  Upon receiving approval from the Director, 
+HR Department will finally start processing the same.</p><br>
                
             </div>
         </div>
@@ -103,6 +194,7 @@
     <!-- Essential javascripts for application to work-->
 
    <!--  {!!View('partials.include_js')!!} -->
+<script src="{{ asset('js/main.js') }}" ></script>
 
 <script type="text/javascript">
   $(document).ready(function(){
@@ -110,7 +202,7 @@
   });
 </script>
 <script>
-      CKEDITOR.replace( 'description' , {
+      CKEDITOR.replace( '' , {
     toolbar: [
     { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates' ] },
     { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },

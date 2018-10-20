@@ -22,17 +22,15 @@ class ReportController extends Controller
 
     public function conveyanceReport()
     {
+
+    
       $users=User::join('user_details','user_details.user_id','=','users.id')
                       ->where('user_details.status','Active')
                       ->select('user_details.status','users.*')
                       ->orderBy('users.name')
                       ->get();
        $cyear=date('Y');
-        $conveyance=DB::table('conveyances')
-            ->whereYear('con_date',$cyear)
-            ->join('users', 'users.id', '=', 'conveyances.user_id')
-            ->select('conveyances.*', 'users.name')
-            ->get();
+        $conveyance='';
         return view('mis.report.conveyance',compact(['conveyance','users']));
     }
 
@@ -50,6 +48,11 @@ class ReportController extends Controller
                       ->orderBy('users.name')
                       ->get();
                $cyear=date('Y');
+
+      $pre_month = Date("Y-m-d", strtotime(date('Y-m-01') . " last month"));
+      $c_month=date('Y-m-10');
+
+     // dd($pre_month,$c_month);
 
       $start= \Carbon\Carbon::parse($request->strtDate)->format('Y-m-d');
       $end =\Carbon\Carbon::parse($request->endDate)->format('Y-m-d');
@@ -71,6 +74,17 @@ class ReportController extends Controller
       
        ->get();
       }
+       elseif($request->has('employee') && $request->has('month')){
+      
+         $conveyance = DB::table('conveyances')
+              ->join('users', 'users.id', '=', 'conveyances.user_id')
+              ->where('user_id',$request->employee)
+              ->whereYear('con_date',$cyear)
+               ->whereMonth('con_date',$request->month)
+                ->select('conveyances.*', 'users.name')
+              ->get();
+          //dd($conveyance);
+      }
 
       elseif ($request->has('employee')) {
           $conveyance = DB::table('conveyances')
@@ -80,9 +94,46 @@ class ReportController extends Controller
        ->whereYear('con_date',$cyear)
        ->get();
       }
-
      
-       return view('mis.report.conveyance',compact(['conveyance','users']));
+      else{
+          $conveyance = DB::table('conveyances')
+              ->join('users', 'users.id', '=', 'conveyances.user_id')
+              ->whereYear('con_date',$cyear)
+               ->whereMonth('con_date',$request->month)
+                ->select('conveyances.*', 'users.name')
+              ->get();
+      }
+//dd($pre_month,$c_month);
+    /* $conveyance_datas=[];
+      foreach ($conveyance as  $value) {
+        $conveyance_date=$value->con_date;
+       while (strtotime($pre_month) <= strtotime($c_month)) {
+          if ($conveyance_date>=$pre_month) {
+           $admin_action='true';
+          }
+          else{
+            $admin_action='false';
+          }
+     $conveyance_datas[]=['username'=>$value->name,
+                                'con_date'=>$value->con_date,
+                                'from'=>$value->disfrom,
+                                'to'=>$value->disto,
+                                'mode'=>$value->mode,
+                                'distance'=>$value->distance,
+                                'amount'=>$value->amount,
+                                'status'=>$value->status,
+                                'action'=>$admin_action
+                              ];
+       $pre_month = date ("Y-m-d", strtotime("+1 days", strtotime($pre_month)));
+
+        }
+
+
+      }
+
+      dd($conveyance_datas);*/
+     
+       return view('mis.report.conveyance',compact(['conveyance','users','pre_month','c_month']));
     }
 
     public function attendanceReport(Request $request)

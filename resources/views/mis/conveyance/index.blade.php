@@ -52,9 +52,9 @@
                           <th>Image</th>
                           <th>Distance</th>
                           <th>Amount</th>
-                        @if(Auth::user()->role==1 || Auth::user()->role==2)
+                       <!--  @if(Auth::user()->role==1 || Auth::user()->role==2)
                           <th>Manager's Action</th>
-                         @endif
+                         @endif -->
                         </tr>
                     </thead>
                      
@@ -82,7 +82,7 @@
 
                         <td>{{$con->distance}}</td>
                         <td>{{$con->amount}}</td>
-                       @if(Session::get('access_zones')=='All')
+                     <!--   @if(Session::get('access_zones')=='All')
                         @if($con->status=='PENDING')
                         <td align="right">
                            <input type="hidden" name="approver" id="approver" value="{{Auth::user()->id}}">
@@ -93,7 +93,7 @@
                        @else
                            <td align="right"><b>{{$con->approved_amount}}  {{$con->status}}</b> <button value="{{$con->id}}" class="btn btn-danger fa fa-close action_again"></button> </td>
                        @endif
-                       @endif
+                       @endif -->
                    </tr>
                      @endforeach
                 </tbody>

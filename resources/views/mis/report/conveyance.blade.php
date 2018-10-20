@@ -58,7 +58,8 @@
                     <tr>
                   <th width="20%"><label class="form-group">TO</label></th>
                   <th width="20%"><label class="form-group">FROM</label></th>
-                    <th width="40%"><label class="form-group">SELECT EMPLOYEE</label></th>
+                    <th width="30%"><label class="form-group">SELECT EMPLOYEE</label></th>
+                     <th width="30%"><label class="form-group">SELECT MONTH</label></th>
                   <th width="20%"><label class="form-group"></label></th>
                   </tr>
                   
@@ -74,6 +75,21 @@
                       @endforeach
                     </select>
                   </td>
+                  <td><select class="form-control" name="month" required="">
+                    <option>Select Month</option>
+                    <option value="01">January</option>
+                    <option value="02">February</option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                  </select></td>
                      <td align=""><input type="submit" name="" class="btn btn-primary" style="margin-left: 25px; width: 100px;"> </td>
                     </tr>
                     <tr>
@@ -104,16 +120,17 @@
                         <th>Distance</th>
                         <th>Amount</th>
                         <th>Status</th>
-                     
+                        <th width="30%">Admin's Action</th>
                       </tr>
                     </thead>
                 
                     <tbody>
+                      @if($conveyance!='')
                       @foreach($conveyance as $value)
                       <tr role="row" class="odd">
                         <td><?= $i++;?></td>
                         <td>{{strtoupper($value->name)}}</td>
-                        <td>{{$value->con_date}}</td>
+                        <td>{{date('j F Y',strtotime($value->con_date))}}</td>
                         <td>{{$value->disfrom}}</td>
                         <td>{{$value->disto}}</td>
                        @if($value->mode=="3.5")
@@ -125,9 +142,32 @@
                          @endif
                         <td>{{$value->distance}}</td>
                         <td>{{$value->amount}}</td>
-                        <td>{{$value->status}}</td>                     
+                        <td>{{$value->status}}</td> 
+                               @if($value->status=='PENDING')
+                        <td align="right">
+                           <input type="hidden" name="approver" id="approver" value="{{Auth::id()}}">
+                          <input type="text" class="approved_amount" name="" value="{{$value->amount}}" id="approved_amount_{{$value->id}}" style="width:60px;">
+                          <button type="button" value="{{$value->id}},approve," class="btn btn-primary fa fa-thumbs-up approve" id="{{$value->id}}"></button>
+                          <button type="button" value="{{$value->id}},disapprove" class="btn btn-danger fa fa-thumbs-down disapprove" id="{{$value->id}}"></button>
+                        </td>
+                       @else
+                           <td align="right"><b>{{$value->approved_amount}}  {{$value->status}}</b> <button value="{{$value->id}}" class="btn btn-danger fa fa-close action_again"></button> </td>
+                       @endif                  
                      </tr>
                      @endforeach
+                     @else
+                     <tr>
+                       <td></td>
+                       <td></td>
+                       <td></td>
+                       <td></td>
+                       <td></td>
+                       <td></td>
+                       <td></td>
+                       <td></td>
+                       <td></td>
+                     </tr>
+                     @endif
                     </tbody>
                   </table>
           
@@ -152,7 +192,40 @@
     });
   } );
   </script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.approve').on('click',function(){
+      var id_action=$(this).val();
+     // alert(id_action);
+      var con_id = $(this).attr('id');
 
+      var approver=$('#approver').val();
+      var appr_amount = $('#approved_amount_'+con_id).val();
+        $.get("{{url('/conveyance-approve')}}/"+id_action+"/"+appr_amount+"/"+approver,function(data){
+            alert(data);
+            location.reload();
+          
+        });
+    });
+     $('.disapprove').on('click',function(){
+       var id_action=$(this).val();
+      var con_id = $(this).attr('id');
+      var approver=$('#approver').val();
+      var appr_amount = $('#approved_amount_'+con_id).val();
+        $.get("{{url('/conveyance-approve')}}/"+id_action+"/"+appr_amount+"/"+approver,function(data){
+             alert(data);
+              location.reload();   
+        });
+    });
+    $('.action_again').on('click',function(){
+      var action_again=$(this).val();
+      $.get("{{url('/conveyance/re-action')}}/"+action_again,function(data){
+            alert(data);
+             location.reload();  
+      });
+    })
+  });
+</script>
   <script type="text/javascript">
         $('#table').DataTable( {
         dom: 'lBfrtip',
@@ -163,7 +236,6 @@
                 text:      '<i class="fa fa-file-excel-o">  Export To Excel</i>',
                 titleAttr: 'Excel'
             },
-      
            
             {
                 extend: 'copyHtml5',
