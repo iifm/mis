@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Department;
 use Session;
 use App\Requirement;
+use DB;
 
 class RequestController extends Controller
 {
@@ -17,7 +18,15 @@ class RequestController extends Controller
     public function index()
     {
        $departments=Department::all();
-        return view('manager.request.create',compact('departments'));
+       $locations=DB::table('locations')
+                        ->where('parent_id','!=','0')
+                        ->where('parent_id','!=','')
+                        ->get();
+       $users=DB::table('users')->join('user_details','user_details.user_id','=','users.id')
+                                ->where('user_details.status','=','Active')
+                                ->select('users.id as user_id','users.*')
+                                ->get();
+        return view('manager.request.create',compact(['departments','locations','users']));
     }
 
     /**
@@ -39,22 +48,20 @@ class RequestController extends Controller
     public function store(Request $request)
     {
       
+    //  dd($request->all());
        $data=Requirement::create($request->all());
        Session::flash('message','Request Sent Successfully !!');
        return back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function show()
     {
        $requirements=Requirement::join('users','users.id','=','requirements.user_id')
                                 ->join('departments','departments.id','=','requirements.department')
-                                ->select('users.name as username','requirements.*','requirements.id as req_id','departments.name as dept_name')->get();
+                                ->join('locations','locations.id','=','requirements.location')
+                                ->select('users.name as username','requirements.*','requirements.id as req_id','departments.name as dept_name','locations.name as loc_name','requirements.id as req_id')
+                                ->get();
                                
                                // dd($requirements);
         return view('manager.request.index',compact('requirements'));
@@ -67,9 +74,15 @@ class RequestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function viewDetail($id)
     {
-        //
+        $requirements=Requirement::join('users','users.id','=','requirements.user_id')
+                                ->join('departments','departments.id','=','requirements.department')
+                                ->join('locations','locations.id','=','requirements.location')
+                                ->where('requirements.id',$id)
+                                ->select('users.name as username','requirements.*','requirements.id as req_id','departments.name as dept_name','locations.name as loc_name','requirements.id as req_id')
+                                ->get();
+        return view('manager.request.view',compact('requirements'));
     }
 
     /**

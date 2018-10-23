@@ -65,7 +65,7 @@
           <?php foreach ($finaldatas as  $value) {  ?>
                 <tr role="row" class="odd">
                     <td><?= $i++;?></td>
-                     <td><?= $value['od_date']; ?></td>
+                     <td><?= date('j F Y',strtotime($value['od_date'])); ?></td>
                     <td><?= $value['intime'];?></td>
                     <td><?= $value['outtime'];?></td>
                     <td><?= $value['odtype'];?></td>

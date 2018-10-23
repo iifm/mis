@@ -80,17 +80,26 @@ class ManagerController extends Controller
         $loginId=Auth::user()->id;
         //dd($user_role);
         $role_detail=Role::where('id',$user_role)->first();
-       
+
+        //dd($role_detail);
+       $manager_access_zone =explode(",",$role_detail->access_zone);
+      // dd($manager_access_zone);
        $member_ids=[];
        if ($role_detail->access_zone=='All') {
           $team_members=User::all();
        }
        else{
-          $team_members=User::where('role',$role_detail->access_zone)->get();
+          $team_members=User::whereIn('role',$manager_access_zone)
+                                ->join('user_details','user_details.user_id','=','users.id')
+                                ->where('user_details.status','Active')
+                                ->select('users.*','users.id as user_id')
+                                ->get();
        }
+
+      //dd($team_members);
      
        foreach ($team_members as  $team_member) {
-          $member_ids[]=$team_member->id;
+          $member_ids[]=$team_member->user_id;
        }
 
        $leave_details=[];

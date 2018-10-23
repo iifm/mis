@@ -113,16 +113,16 @@
                 <tr role="row" class="odd">
                     <td>{{$i++}}</td>
                     <td>{{$data['type']}}</td>
-                    <td>{{$data['from']}}</td>
-                    <td>{{$data['to']}}</td>
+                    <td>{{date('j F Y',strtotime($data['from']))}}</td>
+                    <td>{{date('j F Y',strtotime($data['to']))}}</td>
                     <td>{{$data['total_leaves']}}</td>
                     @if($data['status']=='approved')
                     <td>Approved</td>
                     @else
                     <td>{{$data['status']}}</td>
                     @endif
-                  <td>{{$data['approval']}}</td>
-                  <td></td>
+                  <td>{{$data['approvalfrom']}}</td>
+                  <td>{{$data['approvedby']}}</td>
                     
                   
                   </tr>

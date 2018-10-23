@@ -62,41 +62,49 @@ class LeaveController extends Controller
                         ->where('leavetype','!=','Comp Off')
                         ->orderBy('id','DESC')
                         ->get();
-                     //   dd($leave);
+                      //dd($leave);
                 //$managersname[]="";
               $leave_datas[] = '';  
               
                 $names='';
                 $usernames='';  
                 $appfrom[]='';
+
              foreach ($leave as  $value) {
                 
 
                 $appfrom = $value->approvalfrom;
                 
-                //dd($appfrom);
+               // dd($appfrom);
 
                 $name[]='';
 
                 $appfromnamesarr = explode(',', $appfrom);
-               // dd($appfromnamesarr);
+              // dd($appfromnamesarr);
                 $appfrom=array_filter($appfromnamesarr);
                 //dd($appfrom);
-                $appfromname=User::whereIn('id',[$appfrom])->pluck('name')->toArray( );   
-              //  dd($appfromname);
+                $appfromname=User::whereIn('id',$appfrom)->pluck('name')->toArray( );   
+               // dd($appfromname);
                 $names = implode(',',$appfromname); 
 
                 $usernames = trim($names,",");
-               // dd($appfromname);
-                    
+               $approvedby=User::find($value->approvedby);
+               if ($value->approvedby!='') {
+                 $approvedby_name=$approvedby->name;
+               }
+               else{
+                 $approvedby_name='';
+               }
+
+                   // dd($approvedby->name);
                   $leave_datas[] =  array(
                                     'type'=> $value->leavetype,
                                     'from'=> $value->leavefrom,
                                     'to'=> $value->leaveto,
                                     'total_leaves'=>$value->totalleave,
-                                    'approval'=> $usernames,
+                                    'approvalfrom'=> $usernames,
                                     'status'=> $value->status,
-                                    'approvedby'=>$value->approvedby,
+                                    'approvedby'=>$approvedby_name,
                                     'user_id' => $value->empid
                   );            
                   $usernames='';  //dd($value);
@@ -106,7 +114,7 @@ class LeaveController extends Controller
                  
              }
            $finaldatas = array_filter($leave_datas); 
-               //return $leave_datas;
+              // return $leave_datas;
 
 
          

@@ -59,6 +59,9 @@ Route::post('leave-approved/{id}/{uid}','LeaveController@leaveApproved')->name('
 Route::get('/attendance', 'AttendanceController@index')->name('attendance.index');
 Route::post('/attendance/store', 'AttendanceController@store');
 Route::get('/attendance-view/{id}','AttendanceController@viewAttendance');
+
+Route::get('/attendance-view','AttendanceController@viewAttendance');
+
 Route::get('/self-attendace-detail','AttendanceController@attendanceDetails');
 Route::get('/update-user-attendance/{id}/{date}/{type}','AttendanceController@updateInAttendance');
 Route::post('/updated-user-attendance','AttendanceController@updateIn');
@@ -66,6 +69,7 @@ Route::get('/update-user-out-attendance/{id}/{date}/{type}','AttendanceControlle
 Route::post('/updated-userout-attendance','AttendanceController@updateOut');
 Route::get('/attendance-approval/{id}/{user_id}','AttendanceController@attendanceApprove')->name('attendanceApprove');
 Route::post('/attendance-approved/{id}/{from}/{user_id}','AttendanceController@attendanceApproved');
+Route::get('/update-attendance/{user_id}/{date}','AttendanceController@updateBothAttendance');
 
 //photo-album routes
 Route::get('/photo-album', 'PhotoAlbumController@index')->name('photo.index');
@@ -224,3 +228,5 @@ Route::get('assign-role/edit/{id}','AssignUserRoleController@roleUpdate');
 Route::get('manager-zone/request','RequestController@index');
 Route::post('manager-zone/request/store','RequestController@store');
 Route::get('manager-zone/request/show-all','RequestController@show');
+Route::get('manager-zone/request/view-detail/{id}','RequestController@viewDetail');
+

@@ -2,7 +2,7 @@
 <html lang="en">
   
 <head>
-    <title> Manager Zone - Leave Management</title>
+    <title> Manager Zone - Request Management</title>
 
     <!-- Main CSS-->
     {!!View('partials.include_css')!!}
@@ -19,7 +19,6 @@
     {!!View('partials.sidebar')!!}
 
 
-    
     <!-- Main Content-->
    <main class="app-content">
       <div class="app-title">
@@ -38,7 +37,7 @@
              
               <div id="table">
              
-            <div class="row"><div >
+            <div class="row">
               <div id="successMsg" class="alert alert-success" style="display: none;">
                 
               </div>
@@ -47,15 +46,16 @@
         <div id="alert" class="alert alert-success">{{ Session::get('message') }}
 
         </div><?php } ?>
-              <table id="sampleTable"  class="table">
+              <table id="sampleTable"  class="table" width="100%">
                 <thead>
               
                   <tr role="row">
                     <th>#</th>
                     <th >User Name</th>
                     <th> Department </th>
-                    <th width="20%">Subject</th>
-                    <th width="60%">Description</th>
+                    <th>Title</th>
+                     <th >Location</th>
+                     <th >Number of Vacancy</th>
                    
                     <th>Action</th>
                        
@@ -68,9 +68,9 @@
                      <td><h6>{{$requirement->username}}</h6></td>
                     <td>{{$requirement->dept_name}}</td>
                     <td>{{$requirement->subject}}</td>
-                    <td><?php echo htmlspecialchars_decode($requirement->description) ?></td>
-                
-                  <td></td>
+                    <td>{{$requirement->loc_name}}</td>
+                  <td>{{$requirement->no_of_opening}}</td>
+                   <td><a href="{{url('manager-zone/request/view-detail')}}/{{$requirement->req_id}}" class="btn btn-primary fa fa-eye"> View Detail</a></td>
                   
                   </tr>
               

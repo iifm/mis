@@ -51,7 +51,7 @@
                     </a>
                     <div class="caption">
                         <h3>{{$photo->category}} 
-                      @if(Auth::user()->role==1 || Auth::user()->role==2)
+                      @if(Session::get('manager_zone')=='show' || Session::get('access_zones')=='All')
                        <a href="{{url('/photo-album-delete')}}/{{$photo->id}}" class="fa fa-trash" style="margin-top: 10px; color: red" title="Delete This Image"></a>
                        @endif </h3>
                     </div>

@@ -62,7 +62,7 @@
                <div class="col-md-4"> 
               <div class="form-group">
                    <strong> <label for="">Number of Opening(s)</label></strong>
-                    <input class="form-control" id="subject" name="opening" type="text" aria-describedby="emailHelp" placeholder="Number of Opening(s)" title="Ex:- I want to hire a team member." required>
+                    <input class="form-control" id="no_of_opening" name="no_of_opening" type="text" aria-describedby="emailHelp" placeholder="Number of Opening(s)" title="Ex:- I want to hire a team member." required>
                 </div>
              </div>
              </div>
@@ -71,16 +71,18 @@
                <div class="col-md-4"> 
               <div class="form-group">
                    <strong> <label for=""> Location</label></strong>
-                   <select class="form-control" name="location">
+                   <select class="form-control" name="location" id="location">
                      <option value="">Select Location</option>
-                     <option></option>
+                     @foreach($locations as $loc)
+                     <option value="{{$loc->id}}">{{$loc->name}}</option>
+                     @endforeach
                    </select>
                 </div>
              </div>
               <div class="col-md-4"> 
               <div class="form-group">
                    <strong> <label for=""> Type of Appointment</label></strong>
-                   <select class="form-control" name="location">
+                   <select class="form-control" name="type_of_appoint" id="type_of_appoint">
                      <option value="">Select Type</option>
                      <option value="permanent">Permanent</option>
                      <option value="temporary">Temporary</option>
@@ -91,10 +93,11 @@
              <div class="col-md-4"> 
               <div class="form-group">
                    <strong> <label for=""> Existing Staff at present in this category</label></strong>
-                   <select class="form-control" name="existing_staff">
+                   <select class="form-control" name="existing_staff" id="existing_staff">
                      <option value="">Select Employee</option>
-                     <option value=""></option>
-                    
+                     @foreach($users as $user)
+                     <option value="{{$user->user_id}}">{{$user->name}}</option>
+                    @endforeach
                    </select>
                 </div>
              </div>
@@ -103,13 +106,13 @@
            <div class="col-md-6"> 
               <div class="form-group">
                    <strong> <label for="">Educational/Professional Qualification Required</label></strong>
-                   <textarea class="form-control" placeholder="Educational/Professional Qualification Required" name="description" id="description" required=""></textarea>
+                   <textarea class="form-control" placeholder="Educational/Professional Qualification Required" name="qualification" id="qualification" required=""></textarea>
                 </div>
              </div>
              <div class="col-md-6"> 
               <div class="form-group">
                    <strong> <label for="">Skills Required</label></strong>
-                   <textarea class="form-control" placeholder="Skills Required" name="description" id="description" required=""></textarea>
+                   <textarea class="form-control" placeholder="Skills Required" name="skills" id="skills" required=""></textarea>
                 </div>
              </div>
              <input type="hidden" name="sip" value="{{\Request::ip()}}">
@@ -122,7 +125,7 @@
              <div class="col-md-6"> 
               <div class="form-group">
                    <strong> <label for="">Job Description</label></strong>
-                   <textarea class="form-control" name="jd" placeholder="Job Description" id="description" required=""></textarea>
+                   <textarea class="form-control" name="jd" placeholder="Job Description" id="jd" required=""></textarea>
                 </div>
              </div>
               <div class="col-md-6"> 
@@ -135,25 +138,25 @@ Assignments" id="description" required=""></textarea>
               <div class="col-md-6"> 
               <div class="form-group">
                    <strong> <label for="">Date by which Resource is Required</label></strong>
-                   <input type="date" name="experience" class="form-control">
+                   <input type="date" name="date" id="date" class="form-control">
                 </div>
              </div>
              <div class="col-md-6"> 
               <div class="form-group">
                    <strong> <label for="">Experience Required</label></strong>
-                   <input type="text" name="experience" class="form-control">
+                   <input type="text" name="experience"  id="experience" class="form-control">
                 </div>
              </div>
               <div class="col-md-6"> 
               <div class="form-group">
                    <strong> <label for="">Can vacancy be filled through internal transfers/promotion</label></strong>
-                   <textarea class="form-control" name="reason" placeholder="Can vacancy be filled through internal transfers/promotion" id="description" required=""></textarea>
+                   <textarea class="form-control" name="internal_transfers_promotion" placeholder="Can vacancy be filled through internal transfers/promotion" id="internal_transfers_promotion" required=""></textarea>
                 </div>
              </div>
               <div class="col-md-6"> 
               <div class="form-group">
                    <strong> <label for="">Benefits/Purpose for Additional Appointment</label></strong>
-                   <textarea class="form-control" name="reason" placeholder="Benefits/Purpose for Additional Appointment" id="description" required=""></textarea>
+                   <textarea class="form-control" name="benefits" placeholder="Benefits/Purpose for Additional Appointment" id="benefits" required=""></textarea>
                 </div>
              </div>
 

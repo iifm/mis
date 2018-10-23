@@ -54,19 +54,14 @@
         <div class="col-md-12">
           <div class="tile">
             <div class="tile-body">
-              <form action="{{url('/attendance-view')}}/{{Auth::id()}}" method="get" autocomplete="off">
+              <form action="{{url('/attendance-view')}}/{{$user_id}}" method="get" autocomplete="off">
                 {{csrf_field()}}
                 <table width="50%" style="min-width:600px;">
                   <thead>
                     <tr>
                   <th width="20%"><label class="form-group">TO</label></th>
                   <th width="20%"><label class="form-group">FROM</label></th>
-                   <!--   @if(Auth::user()->role==1)
-                  <th width="40%"><label class="form-group">SELECT EMPLOYEE</label></th>
-                   @elseif(Auth::user()->role==3)
-                    <th width="40%"><label class="form-group">EMPLOYEE NAME</label></th>
-                  @endif
-                  <th width=""><label class="form-group"></label></th> -->
+                
                   </tr>
                   
                   </thead>
@@ -74,22 +69,8 @@
                     <tr>
                     <td><input type="text" class="form-control datepicker" id="StartDate" placeholder="Start Date" name="strtDate"></td>
                     <td><input type="text" class="form-control datepicker" id="EndDate" placeholder="End Date" name="endDate" readonly=""></td>
-                   <!--  @if(Auth::user()->role==1)
-                    <td><select class="form-control" name="employee">
-                      <option value="">Select Employee</option>
-                      @foreach($users as $user)
-                      <option value="{{$user->id}}">{{$user->name}}</option>
-                      @endforeach
-                    </select>
-                  </td>
-                  @elseif(Auth::user()->role==3)
-                    <td><select class="form-control" name="employee" reaonly>
-                      <option value="{{Auth::user()->id}}">{{Auth::user()->name}}</option>
-                     
-                    </select>
-                  </td>
-                  @endif -->
-                    <input type="hidden" name="employee" value="{{Auth::user()->id}}">
+         
+               
                      <td align=""><input type="submit" name="" class="btn btn-primary" style="margin-left: 25px; width: 100px;"> </td>
                     </tr>
                     <tr>
@@ -112,6 +93,8 @@
                          <th>DATE</th>
                         <th>IN TIME</th>
                         <th>OUT TIME</th>
+                       <!--  <th>EDIT ATTENDANCE</th>  -->
+                        <th>REMARK</th>
                        
                       </tr>
                     </thead>
@@ -122,12 +105,15 @@
                       <tr role="row" class="odd">
                         <td>{{ $i++ }}</td>
                         <td>{{$data['username']}}</td>
-                        <td>{{$data['date']}}</td> 
+                        <td>{{date('j F Y',strtotime($data['date']))}}</td>
                         <td>
                             <?php
                               if($data['inTime']=='NA'){  $type='IN'?>
-                                @if($edit_option=='true')
+
+                                @if($edit_option=='true' && Auth::id()==$user_id)
                                 <a href="{{url('/update-user-attendance')}}/{{$data['user_id']}}/{{$data['date']}}/{{$type}}" class="btn btn-primary fa fa-edit btn-small" id="{{$data['user_id']}}"></a>
+                                @else
+                                NA
                                 @endif
 
                               <?php }
@@ -155,15 +141,19 @@
                             ?>
 
                         </td>
-                        
 
+                     <!--    <td><a href="{{url('update-attendance')}}/{{$data['user_id']}}/{{$data['date']}}" class="btn btn-warning fa fa-edit"></a></td>
+ -->
                        </tr>
                       @endforeach
                         @else
+                        <tr>
                         <td></td>  
                         <td></td>
                         <td></td>
                         <td></td>
+                        <td></td>
+                        </tr>
                         @endif   
                     </tbody>
                   </table>

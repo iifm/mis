@@ -114,6 +114,7 @@
                         <th>#</th>
                         <th>Employee Name</th>
                         <th>Conveyance Date</th>
+                         <th>Reason</th>
                         <th>Travel From</th>
                         <th >Travel To</th>
                         <th>Travel Mode</th>
@@ -131,6 +132,7 @@
                         <td><?= $i++;?></td>
                         <td>{{strtoupper($value->name)}}</td>
                         <td>{{date('j F Y',strtotime($value->con_date))}}</td>
+                        <td>{{$value->reason}}</td>
                         <td>{{$value->disfrom}}</td>
                         <td>{{$value->disto}}</td>
                        @if($value->mode=="3.5")

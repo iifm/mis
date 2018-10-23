@@ -11,6 +11,7 @@ use App\User;
 use App\AttendanceUpdate;
 use Mail;
 use URL;
+use DateTime;
 
 class AttendanceController extends Controller
 {     
@@ -82,24 +83,54 @@ class AttendanceController extends Controller
     }
 
   
-    public function viewAttendance(Request $request,$user_id)
+    public function viewAttendance(Request $request,$id=null)
     {
        
-      // dd($user_id); 
-       if ($request->has('strtDate') && $request->has('endDate') && $request->has('employee')) {
-       // return "hii";
-            $users=User::all();
+    
+
+      if ($id) {
+        $user_id=$id;
+      }
+      else{
+        $user_id=Auth::user()->id;
+      }
+       if ($request->has('strtDate') && $request->has('endDate')) {
+            
+
              $start= $request->strtDate;
              $end =$request->endDate;
-             $employee=$request->employee;
-             // dd($start,$end);
+
+               $startDate = new DateTime($start);
+        $endDate = new DateTime($end);
+
+      $sundays = array();
+
+    while ($startDate <= $endDate) {
+    if ($startDate->format('w') == 0) {
+        $sundays[] = $startDate->format('Y-m-d');
+    }
+
+    $startDate->modify('+1 day');
+}
+
+//dd($sundays);
+           
             $datas = [];
+            $remarks=[];
             while (strtotime($start) <= strtotime($end)) {
              
              /* foreach($attendance_dates as $attendance_date){*/
+             // dd($user_id);
+
+              foreach ($sundays as $sunday) {
+               if (strtotime($start)==strtotime($sunday)) {
+                 
+                 $remarks[]=['date'=>$start,'remark'=>'Sunday'];
+               }
+              }
                 $attendances = DB::table('attendances')
                                ->where('date',$start)
-                               ->where('member_id',$employee)
+                               ->where('member_id',$user_id)
                                ->where('type','IN')
                                ->whereBetween('date',[$start,$end])
                                ->join('users','users.id','=','attendances.member_id')
@@ -107,7 +138,7 @@ class AttendanceController extends Controller
                                ->orderBy('id', 'ASC')->first();
                                //dd($attendances);
                 $user_ids = DB::table('attendances')
-                              ->where('member_id',$employee)
+                              ->where('member_id',$user_id)
                                ->where('date',$start)
                                ->where('type','IN')
                                 ->whereBetween('date',[$start,$end])
@@ -118,14 +149,14 @@ class AttendanceController extends Controller
 
 
                   if ($attendances==null) {
-                    $user_name=User::find($employee); //where('id',$employee)->pluck('name');
-                     // dd($employee);
+                    $user_name=User::find($user_id); //where('id',$user_id)->pluck('name');
+                     // dd($user_id);
                     $datas[] = array(
                         'date'=>$start,
                         'inTime'=>'NA',
                         'outTime'=>'NA',
                         'username'=>$user_name->name,
-                        'user_id'=>$employee
+                        'user_id'=>$user_id
 
                     );   
                    // dd($datas);    
@@ -135,16 +166,15 @@ class AttendanceController extends Controller
                     foreach ($user_ids as $user_id) {
 
                         $count = DB::table('attendances')
-                                    ->where('member_id',$employee)
+                                    ->where('member_id',$user_id)
                                    ->where('date',$start)
                                    ->where('type','OUT')
-                                   ->where('member_id',$user_id)
                                    ->orderBy('id', 'ASC')->count();              
                     
                         if($count==1){
                             $attendance_out = DB::table('attendances')
                                        ->where('date',$start)
-                                       ->where('member_id',$employee)
+                                       ->where('member_id',$user_id)
                                        ->where('type','OUT')
                                         ->where('member_id',$attendances->uid)
                                         ->orderBy('id', 'ASC')->first();
@@ -157,7 +187,7 @@ class AttendanceController extends Controller
                             'inTime'=>$attendances->time,
                             'outTime'=>$outtime,
                             'username'=>$attendances->username,
-                            'user_id'=>$employee
+                            'user_id'=>$user_id
                         );       
                     }
                   }
@@ -168,234 +198,34 @@ class AttendanceController extends Controller
           }
           $message='';
          /// $edit_option='false';
-            //return $datas;
+            return $remarks;
             $edit_option=null;
-            return view('mis.attendance.view',compact(['datas','users','message','edit_option']));
+            return view('mis.attendance.view',compact(['datas','users','message','edit_option','user_id']));
           } 
 
-           if ($request->has('strtDate') && $request->has('endDate') && $request->has('employee') && Auth::user()->role==3) {
-            $users=User::all();
-            $id=Auth::id();
-            //dd($id);
-             $start= $request->strtDate;
-             $end =$request->endDate;
-             $employee=$request->employee;
-             //dd($start,$end);
-            $datas = [];
-            while (strtotime($start) <= strtotime($end)) {
-             
-             /* foreach($attendance_dates as $attendance_date){*/
-                $attendances = DB::table('attendances')
-                               ->where('date',$start)
-                               ->where('member_id',$employee)
-                               ->where('type','IN')
-                               ->whereBetween('date',[$start,$end])
-                               ->join('users','users.id','=','attendances.member_id')
-                               ->select('attendances.*','users.name as username','users.id as uid')
-                               ->orderBy('id', 'ASC')->first();
-                               //dd($attendances);
-                $user_ids = DB::table('attendances')
-                              ->where('member_id',$employee)
-                               ->where('date',$start)
-                               ->where('type','IN')
-                                ->whereBetween('date',[$start,$end])
-                               ->orderBy('id', 'ASC')->pluck('member_id'); 
-                              // dd($user_ids);              
-
-               // dd($user_ids);
-
-
-                  if ($attendances==null) {
-                    $user_name=User::find($employee); 
-
-                    $datas[] = array(
-                        'date'=>$start,
-                        'inTime'=>'NA',
-                        'outTime'=>'NA',
-                        'username'=>$user_name->name,
-                        'user_id'=>$employee
-
-                    );   
-                   // dd($datas);    
-                  }
-                  else{
-
-                    foreach ($user_ids as $user_id) {
-
-                        $count = DB::table('attendances')
-                                    ->where('member_id',$employee)
-                                   ->where('date',$start)
-                                   ->where('type','OUT')
-                                   ->where('member_id',$user_id)
-                                   ->orderBy('id', 'ASC')->count();              
-                    
-                        if($count==1){
-                            $attendance_out = DB::table('attendances')
-                                       ->where('date',$start)
-                                       ->where('member_id',$employee)
-                                       ->where('type','OUT')
-                                        ->where('member_id',$attendances->uid)
-                                        ->orderBy('id', 'ASC')->first();
-
-                            $outtime = $attendance_out->time;
-                        }else $outtime = 'NA';
-
-                        $datas[] = array(
-                            'date'=>$attendances->date,
-                            'inTime'=>$attendances->time,
-                            'outTime'=>$outtime,
-                            'username'=>$attendances->username,
-                            'user_id'=>$employee
-                        );       
-                    }
-                  }
-                
-                     $start = date ("Y-m-d", strtotime("+1 days", strtotime($start)));
-                
-            /*  }*/
-          }
-            //return $datas;
-          $message='';
-          $edit_option=null;
-            return view('mis.attendance.view',compact(['datas','users','message','edit_option']));
-          } 
-
-        else if ($request->has('strtDate') && $request->has('endDate') && Auth::user()->role==1) {
-             
-            $users=User::all();
-             $start= $request->strtDate;
-             $end =$request->endDate;
-              $attendance_dates = DB::table('attendances')
-                               ->whereBetween('date',[$start,$end])
-                               ->distinct()
-                               ->pluck('date');
-                    
-                       // dd($attendance_dates);     
-            $datas = [];
-
-            foreach($attendance_dates as $attendance_date){
-               
-                        //dd($attendances);
-                $user_ids = DB::table('attendances')
-                               ->where('date',$attendance_date)
-                               ->where('type','IN')
-                               ->orderBy('id', 'ASC')->pluck('member_id');               
-
-               // dd($user_ids);
-                foreach ($user_ids as $user_id) {
-
-                   $attendances = DB::table('attendances')
-                               ->where('date',$attendance_date)
-                               ->where('type','IN')
-                               ->join('users','users.id','=','attendances.member_id')->where('users.id',$user_id)
-                               ->select('attendances.*','users.name as username','users.id as uid')
-                               ->orderBy('id', 'ASC')->first();
-//dd($attendances);
-                    $count = DB::table('attendances')
-                               ->where('date',$attendance_date)
-                               ->where('type','OUT')
-                               ->where('member_id',$user_id)
-                               ->orderBy('id', 'ASC')->count();              
-                //dd($count);
-
-
-                    if($count==1){
-                        $attendance_out = DB::table('attendances')
-                                   ->where('date',$attendance_date)
-                                   ->where('type','OUT')
-                                    ->where('member_id',$user_id)
-                                    ->first();
-
-                        $outtime = $attendance_out->time;
-
-                        //dd($outtime);
-                    }else $outtime = 'NA';
-
-                    $datas[] = array(
-                        'date'=>$attendances->date,
-                        'inTime'=>$attendances->time,
-                        'outTime'=>$outtime,
-                        'username'=>$attendances->username
-                    );       
-                }
-                    
-                
-            }
-            //dd($user_ids);
-           // return $datas;
-            $message='';
-            $edit_option=null;
-            return view('mis.attendance.view',compact(['datas','users','message','edit_option']));
-              
-          }
-
-          
-          else if ($request->has('strtDate') && $request->has('endDate')) {
-
-              $users=User::all();
-              // $id=Auth::user()->id;
-         
-           $id=Auth::user()->id;
-             $start= $request->strtDate;
-             $end =$request->endDate;
-         
-                             
-            $datas = [];
-
-            while (strtotime($start) <= strtotime($end)) {
-              # code...
-            }
-
-            foreach($attendance_dates as $attendance_date){
-                $attendances = DB::table('attendances')
-                               ->where('attendances.member_id',$id)
-                               ->where('attendances.date',$attendance_date)
-                               ->where('attendances.type','IN')
-                                ->join('users','users.id','=','attendances.member_id')
-                               ->select('attendances.*','users.name as username','users.id as uid')
-                               ->orderBy('id', 'ASC')->first();
-
-               //dd($attendances);
-
-                $count = DB::table('attendances')
-                               ->where('member_id',$id)
-                               ->where('date',$attendance_date)
-                               ->where('type','OUT')
-                               ->orderBy('id', 'ASC')->count();              
-                
-
-
-                if($count==1){
-                    $attendance_out = DB::table('attendances')
-                               ->where('member_id',$id)
-                               ->where('date',$attendance_date)
-                               ->where('type','OUT')
-                               ->orderBy('id', 'ASC')->first();
-
-                    $outtime = $attendance_out->time;
-                }else $outtime = 'NA';
-
-                $datas[] = array(
-                    'date'=>$attendances->date,
-                    'inTime'=>$attendances->time,
-                    'outTime'=>$outtime,
-                    'username'=>$attendances->username
-                );           
-                
-            }
-            // return $datas;
-            $message='';
-            $edit_option=null;
-            return view('mis.attendance.view',compact(['datas','users','message','edit_option']));
-          } 
           
           else{
             $message="Your Last Seven Days Attendance";
 
-             $users=User::all();
             $last_seven_day=date('Y-m-d', strtotime('-6 days'));
             $now=date('Y-m-d');
-            $member_id=$user_id;
+
+
+            $startDate = new DateTime($last_seven_day);
+        $endDate = new DateTime($now);
+
+      $sundays = array();
+
+    while ($startDate <= $endDate) {
+    if ($startDate->format('w') == 0) {
+        $sundays[] = $startDate->format('Y-m-d');
+    }
+
+    $startDate->modify('+1 day');
+}
+
+//dd($sundays);
+          
 
           $datas = [];
             while (strtotime($last_seven_day) <= strtotime($now)) {
@@ -403,7 +233,7 @@ class AttendanceController extends Controller
              /* foreach($attendance_dates as $attendance_date){*/
                 $attendances = DB::table('attendances')
                                ->where('date',$last_seven_day)
-                               ->where('member_id',$member_id)
+                               ->where('member_id',$user_id)
                                ->where('type','IN')
                                ->whereBetween('date',[$last_seven_day,$now])
                                ->join('users','users.id','=','attendances.member_id')
@@ -411,7 +241,7 @@ class AttendanceController extends Controller
                                ->orderBy('id', 'ASC')->first();
                                //dd($attendances);
                 $user_ids = DB::table('attendances')
-                              ->where('member_id',$member_id)
+                              ->where('member_id',$user_id)
                                ->where('date',$last_seven_day)
                                ->where('type','IN')
                                 ->whereBetween('date',[$last_seven_day,$now])
@@ -422,14 +252,14 @@ class AttendanceController extends Controller
 
 
                   if ($attendances==null) {
-                    $user_name=User::find($member_id); //where('id',$employee)->pluck('name');
+                    $user_name=User::find($user_id); //where('id',$employee)->pluck('name');
                      // dd($employee);
                     $datas[] = array(
                         'date'=>$last_seven_day,
                         'inTime'=>'NA',
                         'outTime'=>'NA',
                         'username'=>$user_name->name,
-                        'user_id'=>$member_id
+                        'user_id'=>$user_id
 
                     );   
                    // dd($datas);    
@@ -439,7 +269,7 @@ class AttendanceController extends Controller
                     foreach ($user_ids as $user_id) {
 
                         $count = DB::table('attendances')
-                                    ->where('member_id',$member_id)
+                                    ->where('member_id',$user_id)
                                    ->where('date',$last_seven_day)
                                    ->where('type','OUT')
                                    ->where('member_id',$user_id)
@@ -448,7 +278,7 @@ class AttendanceController extends Controller
                         if($count==1){
                             $attendance_out = DB::table('attendances')
                                        ->where('date',$last_seven_day)
-                                       ->where('member_id',$member_id)
+                                       ->where('member_id',$user_id)
                                        ->where('type','OUT')
                                         ->where('member_id',$attendances->uid)
                                         ->orderBy('id', 'ASC')->first();
@@ -461,7 +291,7 @@ class AttendanceController extends Controller
                             'inTime'=>$attendances->time,
                             'outTime'=>$outtime,
                             'username'=>$attendances->username,
-                            'user_id'=>$member_id
+                            'user_id'=>$user_id
                         );       
                     }
                   }
@@ -470,10 +300,11 @@ class AttendanceController extends Controller
                 
             /*  }*/
           }
+         
            $edit_option='true';
            //dd($edit_option);
          
-             return view('mis.attendance.view',compact(['datas','users','message','edit_option']));
+             return view('mis.attendance.view',compact(['datas','users','message','edit_option','user_id']));
           }
          
         
@@ -659,5 +490,22 @@ class AttendanceController extends Controller
        Session::flash('message','Attendance Status Updated Successfully!!');
        return redirect()->route('dashboard');
         //dd($actionstatus);
+    }
+
+    public function updateBothAttendance($user_id,$date)
+    {
+     // dd($date);
+      $inAttendance=Attendance::where('member_id',$user_id)
+                                ->where('date',$date)
+                                ->where('type','IN')
+                                ->get();
+       $outAttendance=Attendance::where('member_id',$user_id)
+                                ->where('date',$date)
+                                ->where('type','OUT')
+                                ->get();
+
+                                dd($inAttendance);
+                               
+       return view('mis.attendance.updateInOut',compact('date'));
     }
 }
