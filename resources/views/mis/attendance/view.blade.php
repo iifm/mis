@@ -148,7 +148,10 @@
                         <td>{{$remark['remark']}}</td>
                         @endif
                         @endforeach
+                        @else
+                        <td>Attandance Marked </td>
                         @endif
+
                      <!--    <td><a href="{{url('update-attendance')}}/{{$data['user_id']}}/{{$data['date']}}" class="btn btn-warning fa fa-edit"></a></td>
  -->
                        </tr>
