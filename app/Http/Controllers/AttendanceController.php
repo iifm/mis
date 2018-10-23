@@ -273,7 +273,7 @@ class AttendanceController extends Controller
 
                  $userLeave=Leave::where('leavefrom',$last_seven_day)
                                   ->where('empid',$user_id)
-                                  ->get();
+                                  ->first();
                   
                    if (count($userLeave)!=0) {
 
