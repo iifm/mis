@@ -141,14 +141,14 @@
                             ?>
 
                         </td>
-                        @if(($data['inTime'])=='NA' && ($data['outTime'])=='NA')
-                        @foreach($remarks as $remark)
-                        @if($data['date']==$remark['date'])    
-                        <td>{{$remark['remark']}}</td>
-                        @endif
-                        @endforeach
+                        @if($data['inTime']=='NA' && $data['outTime']=='NA')
+                           @foreach($remarks as $remark)
+                              @if($data['date']==$remark['date'])    
+                                 <td>{{$remark['remark']}}</td>
+                             @endif
+                           @endforeach
                         @else
-                        <td>Present</td>
+                          <td>Present</td>
                         @endif
 
                      <!--    <td><a href="{{url('update-attendance')}}/{{$data['user_id']}}/{{$data['date']}}" class="btn btn-warning fa fa-edit"></a></td>
