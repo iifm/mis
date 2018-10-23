@@ -248,7 +248,14 @@ class AttendanceController extends Controller
 
           $datas = [];
             while (strtotime($last_seven_day) <= strtotime($now)) {
-             
+            
+               foreach ($sundays as $sunday) {
+               if (strtotime($last_seven_day)==strtotime($sunday)) {
+
+                 $remarks[]=['date'=>$last_seven_day,'remark'=>'Sunday'];
+               }
+              }  
+           
              /* foreach($attendance_dates as $attendance_date){*/
                 $attendances = DB::table('attendances')
                                ->where('date',$last_seven_day)
