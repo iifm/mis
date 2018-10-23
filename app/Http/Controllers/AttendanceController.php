@@ -12,6 +12,8 @@ use App\AttendanceUpdate;
 use Mail;
 use URL;
 use DateTime;
+use App\OnDuty;
+use App\Leave;
 
 class AttendanceController extends Controller
 {     
@@ -124,10 +126,27 @@ class AttendanceController extends Controller
 
               foreach ($sundays as $sunday) {
                if (strtotime($start)==strtotime($sunday)) {
-                 
+
                  $remarks[]=['date'=>$start,'remark'=>'Sunday'];
                }
               }
+
+                 $userOnduty=OnDuty::where('od_date',$start)
+                                  ->where('empid',$user_id)
+                                  ->get();
+
+                 $userLeave=Leave::where('leavefrom',$start)
+                                  ->where('empid',$user_id)
+                                  ->get();
+                    if (count($onduty)!=0) {
+                     
+                    }
+
+                    if (count($userLeave)!=0) {
+                      # code...
+                    }
+
+                
                 $attendances = DB::table('attendances')
                                ->where('date',$start)
                                ->where('member_id',$user_id)
@@ -198,7 +217,7 @@ class AttendanceController extends Controller
           }
           $message='';
          /// $edit_option='false';
-            return $remarks;
+            //return $remarks;
             $edit_option=null;
             return view('mis.attendance.view',compact(['datas','users','message','edit_option','user_id']));
           } 
