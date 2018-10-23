@@ -144,11 +144,11 @@ class AttendanceController extends Controller
 
                  $userLeave=Leave::where('leavefrom',$start)
                                   ->where('empid',$user_id)
-                                  ->get();
+                                  ->first();
                   
                     if (count($userLeave)!=0) {
 
-                      $remarks[]=['date'=>$start,'remark'=>'Leave'];
+                      $remarks[]=['date'=>$start,'remark'=>$userLeave->leavetype,'leaveDays'=>$userLeave->totalleave];
                     }
                 
                 $attendances = DB::table('attendances')
@@ -275,9 +275,9 @@ class AttendanceController extends Controller
                                   ->where('empid',$user_id)
                                   ->get();
                   
-                    if (count($userLeave)!=0) {
+                   if (count($userLeave)!=0) {
 
-                      $remarks[]=['date'=>$last_seven_day,'remark'=>'Leave'];
+                      $remarks[]=['date'=>$last_seven_day,'remark'=>$userLeave->leavetype,'leaveDays'=>$userLeave->totalleave];
                     }
            
              /* foreach($attendance_dates as $attendance_date){*/
