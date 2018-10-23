@@ -101,7 +101,7 @@
                     <th >End Date </th>
                     <th>Total Leaves</th>
                     <th >Status</th>
-                    <th >Approval From</th>
+                   <!--  <th >Approval From</th> -->
                     <th>Approved By</th>
                    <!--  <th style="padding-left: 50px; padding-right: 50px;">Action</th> -->
                   </tr>
@@ -121,7 +121,7 @@
                     @else
                     <td>{{$data['status']}}</td>
                     @endif
-                  <td>{{$data['approvalfrom']}}</td>
+                 <!--  <td>{{$data['approvalfrom']}}</td> -->
                   <td>{{$data['approvedby']}}</td>
                     
                   
