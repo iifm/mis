@@ -139,11 +139,11 @@ class AttendanceController extends Controller
                                   ->where('empid',$user_id)
                                   ->get();
                     if (count($userOnduty)!=0) {
-                     
+                      $remarks[]=['date'=>$start,'remark'=>'On duty'];
                     }
 
                     if (count($userLeave)!=0) {
-                      # code...
+                      $remarks[]=['date'=>$start,'remark'=>'Leave Off'];
                     }
 
                 
@@ -217,9 +217,9 @@ class AttendanceController extends Controller
           }
           $message='';
          /// $edit_option='false';
-            //return $remarks;
+           // return $remarks;
             $edit_option=null;
-            return view('mis.attendance.view',compact(['datas','users','message','edit_option','user_id']));
+            return view('mis.attendance.view',compact(['datas','users','message','edit_option','user_id','remarks']));
           } 
 
           
@@ -255,6 +255,21 @@ class AttendanceController extends Controller
                  $remarks[]=['date'=>$last_seven_day,'remark'=>'Sunday'];
                }
               }  
+
+                $userOnduty=OnDuty::where('od_date',$last_seven_day)
+                                  ->where('empid',$user_id)
+                                  ->get();
+
+                 $userLeave=Leave::where('leavefrom',$last_seven_day)
+                                  ->where('empid',$user_id)
+                                  ->get();
+                    if (count($userOnduty)!=0) {
+                      $remarks[]=['date'=>$last_seven_day,'remark'=>'On duty'];
+                    }
+
+                    if (count($userLeave)!=0) {
+                      $remarks[]=['date'=>$last_seven_day,'remark'=>'Leave Off'];
+                    }
            
              /* foreach($attendance_dates as $attendance_date){*/
                 $attendances = DB::table('attendances')
@@ -329,8 +344,9 @@ class AttendanceController extends Controller
          
            $edit_option='true';
            //dd($edit_option);
+           //return $remarks;
          
-             return view('mis.attendance.view',compact(['datas','users','message','edit_option','user_id']));
+             return view('mis.attendance.view',compact(['datas','users','message','edit_option','user_id','remarks']));
           }
          
         
