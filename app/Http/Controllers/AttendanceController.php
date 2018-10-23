@@ -1,3 +1,4 @@
+
 <?php
 
 namespace App\Http\Controllers;
@@ -377,7 +378,9 @@ class AttendanceController extends Controller
     {
       $username=User::find($id);
       $name=$username->name;
-      $managers=User::whereIn('id',[1,272,271,125,122,105,39,68,66,29,225,51,52,201,264])->get();
+      $managers=User::whereIn('id',[1,272,271,125,122,105,39,68,66,29,225,51,52,201,264]) 
+                        ->where('id','!=',Auth::id())
+                        ->get();
 
       return view('mis.attendance.update_attendance',compact(['date','name','type','managers']));
     }

@@ -86,7 +86,9 @@ class OnDutyController extends Controller
      */
     public function create()
     {
-        $managers=User::whereIn('id',[272,271,125,122,105,39,68,66,29,225,52,264,201,51])->get();
+        $managers=User::whereIn('id',[272,271,125,122,105,39,68,66,29,225,52,264,201,51])
+                         ->where('id','!=',Auth::id())
+                        ->get();
          return view('mis.onduty.create',compact('managers'));
     }
 
