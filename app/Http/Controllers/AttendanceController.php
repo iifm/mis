@@ -146,7 +146,7 @@ class AttendanceController extends Controller
                                   ->where('empid',$user_id)
                                   ->first();
                   
-                    if (count($userLeave)!=0) {
+                    if ($userLeave != '') {
 
                       $remarks[]=['date'=>$start,'remark'=>$userLeave->leavetype,'leaveDays'=>$userLeave->totalleave];
                     }
@@ -275,7 +275,7 @@ class AttendanceController extends Controller
                                   ->where('empid',$user_id)
                                   ->first();
                   
-                   if (count($userLeave)!=0) {
+                   if ($userLeave != '') {
 
                       $remarks[]=['date'=>$last_seven_day,'remark'=>$userLeave->leavetype,'leaveDays'=>$userLeave->totalleave];
                     }
