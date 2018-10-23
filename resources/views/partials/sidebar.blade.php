@@ -139,14 +139,14 @@ use App\NewsUpload;
           </ul>
         </li>
        @endif
-
+<!-- 
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-user-plus"></i><span class="app-menu__label">Request Zone</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="{{url('manager-zone/request')}}"><i class="icon fa fa-users"></i>New Hiring</a></li>
            
           </ul>
         </li>
-
+ -->
        @if(Session::get('access_zones')=='All')
          <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-user-secret"></i><span class="app-menu__label">Admin Zone</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">

@@ -11,6 +11,7 @@ use DB;
 use App\User;
 use Mail;
 use URL;
+use App\UserDetails;
 
 class LeaveController extends Controller
 {
@@ -34,6 +35,23 @@ class LeaveController extends Controller
 
          $interval = date_diff($datetime1, $datetime2);
          $diff=$interval->format('%m');
+
+      //   $user_doj=UserDetails::where('user_id',Auth::user()->id)->first();
+                        
+
+/*
+      if ($user_doj) {
+          if (strtotime($strtYear) < strtotime($user_doj->doj)) {
+         return "true";
+        }
+        else{
+          return "false";
+        }
+      }
+
+      
+*/
+      
 
          $total_leaves=$diff*1.75;
 
