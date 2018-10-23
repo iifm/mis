@@ -138,7 +138,7 @@ class AttendanceController extends Controller
                  $userLeave=Leave::where('leavefrom',$start)
                                   ->where('empid',$user_id)
                                   ->get();
-                    if (count($onduty)!=0) {
+                    if (count($userOnduty)!=0) {
                      
                     }
 
