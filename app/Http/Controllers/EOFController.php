@@ -83,7 +83,14 @@ class EOFController extends Controller
         $filename=$id.$image->getClientOriginalName();
       $request->file('image')->storeAs('/public/images', $filename);
 
-        $data=HallOfFame::create(['empname'=>$empname,'month'=>$month,'department'=>$department,'addedby'=>$addedby,'image'=>$filename,'sip'=>$sip,'description'=>$description]);
+      if ($request->description) {
+          $data=HallOfFame::create(['empname'=>$empname,'month'=>$month,'department'=>$department,'addedby'=>$addedby,'image'=>$filename,'sip'=>$sip,'description'=>$description]);
+      }
+      else{
+          $data=HallOfFame::create(['empname'=>$empname,'month'=>$month,'department'=>$department,'addedby'=>$addedby,'image'=>$filename,'sip'=>$sip]);
+      }
+
+      
 
           Session::flash('message','Employee of Month Added Successfully !!');
 

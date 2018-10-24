@@ -10,6 +10,8 @@
     <!-- Main CSS-->
     {!!View('partials.include_css')!!}
  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
   
    </head>
 
@@ -58,21 +60,7 @@
               <div class="col-md-6"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">Month</label>
-                    <select class="form-control" name="month" id="month" required="">
-                      <option value="">Select Month</option>
-                      <option value="January">January</option>
-                      <option value="February">February</option>
-                      <option value="March">March</option>
-                      <option value="April">April</option>
-                      <option value="May">May</option>
-                      <option value="June">June</option>
-                      <option value="July">July</option>
-                      <option value="August">August</option>
-                      <option value="September">September</option>
-                      <option value="October">October</option>
-                      <option value="November">November</option>
-                      <option value="December">December</option>
-                  </select>
+                    <input type="text" class="form-control" name="month" id="month">
                 </div>
              </div>
               <div class="col-md-6"> 
@@ -110,8 +98,16 @@
 
    
     <!-- Essential javascripts for application to work-->
-    {!!View('partials.include_js')!!}
+   <!--  {!!View('partials.include_js')!!} -->
+    <script src="{{ asset('js/main.js') }}" ></script>
+
+  <script src="https://rawgit.com/zorab47/jquery.ui.monthpicker/master/jquery.ui.monthpicker.js"></script>
 <script>
+
+$(function () {
+    $('#month').monthpicker({changeYear:true,dateFormat: 'MM yy'});
+});
+
  function fileValidation(){
     var fileInput = document.getElementById('file');
     var filePath = fileInput.value;

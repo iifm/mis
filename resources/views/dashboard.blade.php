@@ -130,7 +130,7 @@ a {
                      <img   src="{{ URL::To('storage/app/public/images/'.$eom->image) }}"" alt="First slide" height="350px" width="100%">
                        <div style="width: 100%; padding:20px">
                          <h5 style="text-align: center;">{{ucwords(strtolower($eom->empname))}}</h5>
-                          <p style="text-align: center;">{{$eom->month}} {{$eom->created_at->year}} <br>
+                          <p style="text-align: center;">{{$eom->month}} <br>
                           {{$eom->department}}</p>
                        <center><a href="{{url('/send-wish')}}/{{$eom->user_id}}/{{'Employee of Month'}}" class="btn btn-primary fa fa-envelope"> Send Wish</a></center>   
 

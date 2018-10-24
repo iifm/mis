@@ -44,7 +44,7 @@
                <center> <img class="" width="250px;" height="300" src="{{ URL::To('storage/app/public/images/'.$e->image) }}" alt="Card image"></center>
                 <div class="card-body">
                <center><strong>Employee of the Month</strong></center> 
-               <center><strong> <p class="card-text">{{$e->month}}  {{$e->created_at->year}}</p></strong></center> 
+               <center><strong> <p class="card-text">{{$e->month}}</p></strong></center> 
               <center> <strong><p class="card-text">{{$e->empname}}</p></strong></center> 
 
                 <center> <p class="card-text">Department {{$e->department}}</p></center> 
