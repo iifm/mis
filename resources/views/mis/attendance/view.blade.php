@@ -143,13 +143,8 @@
                         </td>
                         @if($data['inTime']=='NA' && $data['outTime']=='NA')
                            @foreach($remarks as $remark)
-                              @if($data['date']==$remark['date'])
-                                @if($remark['remark']!='')    
-                                  <td>Absent</td>
-
-                                @else
-                                   <td>{{$remark['remark']}}</td>
-                                @endif
+                              @if($data['date']==$remark['date'])    
+                                 <td>{{$remark['remark']}}</td>
                              @endif
                            @endforeach
                         @else
