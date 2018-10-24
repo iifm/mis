@@ -51,13 +51,13 @@
               <div class="row">
             <div class="col-md-12">
               
-            <div class="col-md-6"> 
+            <div class="col-md-4"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">Employee Name</label>
                     <input class="form-control capitalize char-only" id="name" name="name" type="text" aria-describedby="emailHelp" value="" readonly="" required="">
                 </div>
              </div>
-              <div class="col-md-6"> 
+              <div class="col-md-4"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">Date</label>
                      <input class="form-control" id="date" name="date" type="text" value="" placeholder="YYYY/MM/DD" readonly="" required="">
@@ -65,13 +65,13 @@
              </div>
          
 
-               <div class="col-md-6"> 
+               <div class="col-md-4"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">In Time</label>
                      <input class="form-control input-a" id="time" name="time" type="text"  placeholder="Attendance Time" required="">
                 </div>
              </div>
-               <div class="col-md-6"> 
+               <div class="col-md-4"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">Out Time</label>
                      <input class="form-control input-a" id="time" name="time" type="text"  placeholder="Attendance Time" required="">

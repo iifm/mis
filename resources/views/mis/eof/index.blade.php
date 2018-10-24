@@ -48,7 +48,7 @@
               <center> <strong><p class="card-text">{{$e->empname}}</p></strong></center> 
 
                 <center> <p class="card-text">Department {{$e->department}}</p></center> 
-                 <center> <p class="card-text">{{$e->description}}</p></center> 
+                 
 
                 </div>
           </div>

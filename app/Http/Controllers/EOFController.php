@@ -68,6 +68,8 @@ class EOFController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
           
+      //  dd($request->all());
+
            $sip=\Request::ip();
         $id=Auth::user()->id;
         $filename=$request->file('image');
@@ -81,7 +83,7 @@ class EOFController extends Controller
         $filename=$id.$image->getClientOriginalName();
       $request->file('image')->storeAs('/public/images', $filename);
 
-        $data=HallOfFame::create(['user_id'=>$id,'empname'=>$empname,'month'=>$month,'department'=>$department,'addedby'=>$addedby,'image'=>$filename,'sip'=>$sip,'description'=>$description]);
+        $data=HallOfFame::create(['empname'=>$empname,'month'=>$month,'department'=>$department,'addedby'=>$addedby,'image'=>$filename,'sip'=>$sip,'description'=>$description]);
 
           Session::flash('message','Employee of Month Added Successfully !!');
 
