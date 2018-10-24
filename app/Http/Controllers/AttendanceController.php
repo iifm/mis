@@ -108,48 +108,22 @@ class AttendanceController extends Controller
       $sundays = array();
 
     while ($startDate <= $endDate) {
-    if ($startDate->format('w') == 0) {
-        $sundays[] = $startDate->format('Y-m-d');
-    }
+        if ($startDate->format('w') == 0) {
+            $sundays[] = $startDate->format('Y-m-d');
+        }
 
-    $startDate->modify('+1 day');
-}
+        $startDate->modify('+1 day');
+    }
 
 //dd($sundays);
            
+           $flag=0;
             $datas = [];
-            $remarks=[];
-            while (strtotime($start) <= strtotime($end)) {
+            $remark_all='Absent';
+            while(strtotime($start) <= strtotime($end)) {
              
-             /* foreach($attendance_dates as $attendance_date){*/
-             // dd($user_id);
-
-                   foreach ($sundays as $sunday) {
-               if (strtotime($start)==strtotime($sunday)) {
-
-                 $userOnduty=OnDuty::where('od_date',$start)
-                                  ->where('empid',$user_id)
-                                  ->get();
-
-                    if (count($userOnduty)!=0) {
-                      $remarks[]=['date'=>$start,'remark'=>'On Duty'];
-                    }
-
-                    else{
-                       $remarks[]=['date'=>$start,'remark'=>'Sunday'];
-                    }
-
-               }
-              }  
-
-                 $userLeave=Leave::where('leavefrom',$start)
-                                  ->where('empid',$user_id)
-                                  ->first();
-                  
-                    if ($userLeave != '') {
-
-                      $remarks[]=['date'=>$start,'remark'=>$userLeave->leavetype,'leaveDays'=>$userLeave->totalleave];
-                    }
+            $flag=0;
+            $remark_all='Absent';
                 
                 $attendances = DB::table('attendances')
                                ->where('date',$start)
@@ -171,18 +145,54 @@ class AttendanceController extends Controller
                // dd($user_ids);
 
 
-                  if ($attendances==null) {
+                  if($attendances==null) {
                     $user_name=User::find($user_id); //where('id',$user_id)->pluck('name');
-                     // dd($user_id);
+
+                     // find OD/Leave/Sunday or Present/Absent
+                        $userOnduty=OnDuty::where('od_date',$start)
+                                  ->where('empid',$user_id)->get();
+
+                         if (count($userOnduty)>0){
+                            $remark_all = 'On Duty';
+                            $flag=1;
+                         }
+                         else{
+                              $userLeave=Leave::where('leavefrom',$start)
+                                ->where('empid',$user_id)->first();                  
+                                if($userLeave!= '') {
+                                  $remark_all = $userLeave->leavetype;
+                                  $flag = 1;
+                                }
+                                else{
+                                  $flag =0;
+                                }
+                          }
+
+                          $sunday_day = array_intersect([$start], $sundays);
+
+                         //dd($sunday_day);
+
+                          if($flag===0) {
+                            //$remark_all = is_null(array_search($start, $sundays))? $remark_all : 'Sunday';
+                            if(!$sunday_day){
+                              $remark_all = 'Absent';
+                            }
+                            else{
+                              $remark_all = 'Sunday';
+                            }
+                          }
+                          
+                          $flag=0;
+
                     $datas[] = array(
                         'date'=>$start,
                         'inTime'=>'NA',
                         'outTime'=>'NA',
                         'username'=>$user_name->name,
-                        'user_id'=>$user_id
-
-                    );   
-                   // dd($datas);    
+                        'user_id'=>$user_id,
+                        'remark_all'=>$remark_all
+                    );  
+                    
                   }
                   else{
 
@@ -210,12 +220,14 @@ class AttendanceController extends Controller
                             'inTime'=>$attendances->time,
                             'outTime'=>$outtime,
                             'username'=>$attendances->username,
-                            'user_id'=>$user_id
+                            'user_id'=>$user_id,
+                            'remark_all'=>'Present'
                         );       
                     }
                   }
                 
-                     $start = date ("Y-m-d", strtotime("+1 days", strtotime($start)));
+                  $start = date ("Y-m-d", strtotime("+1 days", strtotime($start)));
+                  $remark_all='Absent';
                 
             /*  }*/
           }
@@ -247,38 +259,11 @@ class AttendanceController extends Controller
     $startDate->modify('+1 day');
 }
 
-//dd($sundays);
-          
 
           $datas = [];
+           $remark_all='Absent';
             while (strtotime($last_seven_day) <= strtotime($now)) {
             
-               foreach ($sundays as $sunday) {
-               if (strtotime($last_seven_day)==strtotime($sunday)) {
-
-                 $userOnduty=OnDuty::where('od_date',$last_seven_day)
-                                  ->where('empid',$user_id)
-                                  ->get();
-
-                    if (count($userOnduty)!=0) {
-                      $remarks[]=['date'=>$last_seven_day,'remark'=>'On Duty'];
-                    }
-
-                    else{
-                       $remarks[]=['date'=>$last_seven_day,'remark'=>'Sunday'];
-                    }
-
-               }
-              }  
-
-                 $userLeave=Leave::where('leavefrom',$last_seven_day)
-                                  ->where('empid',$user_id)
-                                  ->first();
-                  
-                   if ($userLeave != '') {
-
-                      $remarks[]=['date'=>$last_seven_day,'remark'=>$userLeave->leavetype,'leaveDays'=>$userLeave->totalleave];
-                    }
            
              /* foreach($attendance_dates as $attendance_date){*/
                 $attendances = DB::table('attendances')
@@ -302,14 +287,49 @@ class AttendanceController extends Controller
 
 
                   if ($attendances==null) {
-                    $user_name=User::find($user_id); //where('id',$employee)->pluck('name');
-                     // dd($employee);
+                    $user_name=User::find($user_id); 
+                    
+                      // find OD/Leave/Sunday or Present/Absent
+                        $userOnduty=OnDuty::where('od_date',$last_seven_day)
+                                  ->where('empid',$user_id)
+                                    ->get();
+
+                         if (count($userOnduty)>0){
+                            $remark_all = 'On Duty';
+                           
+                         }
+                         else{
+                              $userLeave=Leave::where('leavefrom',$last_seven_day)
+                                ->where('empid',$user_id)->first();                  
+                                if($userLeave!= '') {
+                                  $remark_all = $userLeave->leavetype;
+                                }
+                                else{
+                                  $remark_all='Absent';
+                                }
+                          }
+
+                          foreach ($sundays as  $sunday) {
+                             if ($remark_all=='Absent' && $sunday==$last_seven_day) {
+                                  $remark_all='Sunday';
+                             }
+                             else{
+                                $remark_all=$remark_all;
+                             }
+                          }
+
+
+
+                         
+
+
                     $datas[] = array(
                         'date'=>$last_seven_day,
                         'inTime'=>'NA',
                         'outTime'=>'NA',
                         'username'=>$user_name->name,
-                        'user_id'=>$user_id
+                        'user_id'=>$user_id,
+                        'remark_all'=>$remark_all
 
                     );   
                    // dd($datas);    
@@ -341,7 +361,8 @@ class AttendanceController extends Controller
                             'inTime'=>$attendances->time,
                             'outTime'=>$outtime,
                             'username'=>$attendances->username,
-                            'user_id'=>$user_id
+                            'user_id'=>$user_id,
+                            'remark_all'=>'Present'
                         );       
                     }
                   }
