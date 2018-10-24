@@ -31,7 +31,7 @@
         <div>
           <h1 class="heading_title"><i class="fa fa-newspaper-o "></i> News Upload/Update </h1>
         </div>
-         <a href="{{url('admin/news-index')}}" class="fa fa-eye btn btn-primary" style="background: #009688; border:none"> View All Uploads</a>   
+        <!--  <a href="{{url('admin/news-index')}}" class="fa fa-eye btn btn-primary" style="background: #009688; border:none"> View All Uploads</a>  -->  
       </div>
       <div class="row  tile">
         <div class="col-md-12">
