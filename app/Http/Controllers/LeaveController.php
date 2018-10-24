@@ -30,30 +30,32 @@ class LeaveController extends Controller
        $endYear=date('Y',strtotime('+1 year')).'-03-31';
         $currenDate = date('Y-m-d');
 
-         $datetime1 = date_create($strtYear);
-         $datetime2 = date_create($currenDate);
+     
 
-         $interval = date_diff($datetime1, $datetime2);
-         $diff=$interval->format('%m');
+        $user_details=UserDetails::where('user_id',Auth::user()->id)->first();
+                
+        $user_doj_year=date('Y',strtotime($user_details->doj));
 
-      //   $user_doj=UserDetails::where('user_id',Auth::user()->id)->first();
-                        
-
-/*
-      if ($user_doj) {
-          if (strtotime($strtYear) < strtotime($user_doj->doj)) {
-         return "true";
+      
+        if ($user_doj_year==date('Y')) {
+             $doj_plus_oneMonth = date("Y-m-d", strtotime(" +1 months",strtotime($user_details->doj)));
+              $datetime1 = date_create($doj_plus_oneMonth);
+              $datetime2 = date_create($currenDate);
+              $interval = date_diff($datetime1, $datetime2);
+              $diff=$interval->format('%m');  
+              $total_leaves=$diff*1.75;
+            
         }
         else{
-          return "false";
+
+          $datetime1 = date_create($strtYear);
+          $datetime2 = date_create($currenDate);
+
+          $interval = date_diff($datetime1, $datetime2);
+          $diff=$interval->format('%m');
+           $total_leaves=$diff*1.75;
         }
-      }
 
-      
-*/
-      
-
-         $total_leaves=$diff*1.75;
 
         $leave_applied=Leave::whereBetween('leavefrom',[$strtYear,$currenDate])
                         ->where('empid',$id)
