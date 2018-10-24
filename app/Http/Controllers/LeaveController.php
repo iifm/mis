@@ -42,7 +42,8 @@ class LeaveController extends Controller
               $datetime1 = date_create($doj_plus_oneMonth);
               $datetime2 = date_create($currenDate);
               $interval = date_diff($datetime1, $datetime2);
-              $diff=$interval->format('%m');  
+              $diff=$interval->format('%m'); 
+              $diff=$diff+1; 
               $total_leaves=$diff*1.75;
             
         }
