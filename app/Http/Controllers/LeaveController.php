@@ -38,13 +38,18 @@ class LeaveController extends Controller
 
       
         if ($user_doj_year==date('Y')) {
+             
              $doj_plus_oneMonth = date("Y-m-d", strtotime(" +1 months",strtotime($user_details->doj)));
-              $datetime1 = date_create($doj_plus_oneMonth);
-              $datetime2 = date_create($currenDate);
-              $interval = date_diff($datetime1, $datetime2);
-              $diff=$interval->format('%m'); 
-              $diff=$diff+1; 
-              $total_leaves=$diff*1.75;
+
+               $user_doj_month=date('m',strtotime($user_details->doj));
+
+               $user_doj_month=$user_doj_month;
+
+               $current_month=date('m');
+
+               $diff_month=$current_month-$user_doj_month;
+              
+              $total_leaves=$diff_month*1.75;
             
         }
         else{
