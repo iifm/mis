@@ -94,7 +94,7 @@
                         <th>IN TIME</th>
                         <th>OUT TIME</th>
                         <th>REMARK</th>
-                     <!--    <th>EDIT ATTENDANCE</th>  -->
+                        <th>EDIT ATTENDANCE</th> 
                        
                       </tr>
                     </thead>
@@ -143,7 +143,7 @@
                         </td>
                        <td>{{$data['remark_all']}}</td>
 
-                       <!--  <td><a href="{{url('update-attendance')}}/{{$data['user_id']}}/{{$data['date']}}" class="btn btn-warning fa fa-edit" title="Edit Your Attendance"></a></td> -->
+                        <td><a href="{{url('update-attendance')}}/{{$data['user_id']}}/{{$data['date']}}" class="btn btn-warning fa fa-edit" title="Edit Your Attendance"></a></td>
 
                        </tr>
                       @endforeach
