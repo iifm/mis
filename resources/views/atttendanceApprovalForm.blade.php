@@ -93,7 +93,7 @@
 								</div> 
 								
 								<div class="col-md-6">
-									<label><h4 style="font-weight:lighter; margin-bottom:0; color:#FF5722;">Commnent for Action(Not Mandatory)</h4></label><br>
+									<label><h4 style="font-weight:lighter; margin-bottom:0; color:#FF5722;">Comment for Action(Not Mandatory)</h4></label><br>
 									<textarea class="form-control" name="comment" id="comment"></textarea>
 								</div>
 							</div>

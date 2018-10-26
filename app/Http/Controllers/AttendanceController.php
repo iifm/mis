@@ -450,7 +450,9 @@ class AttendanceController extends Controller
      public function updateOutAttendance($id,$date,$type)
     {
       $username=User::find($id);
-       $managers=User::where('role',1)->get();
+       $managers=User::whereIn('id',[1,272,271,125,122,105,39,68,66,29,225,51,52,201,264]) 
+                        ->where('id','!=',Auth::id())
+                        ->get();
 
       $name=$username->name;
       return view('mis.attendance.update_attendance',compact(['date','name','type','managers']));
@@ -568,18 +570,120 @@ class AttendanceController extends Controller
 
     public function updateBothAttendance($user_id,$date)
     {
-     // dd($date);
-      $inAttendance=Attendance::where('member_id',$user_id)
-                                ->where('date',$date)
-                                ->where('type','IN')
-                                ->get();
-       $outAttendance=Attendance::where('member_id',$user_id)
-                                ->where('date',$date)
-                                ->where('type','OUT')
-                                ->get();
+     $managers=User::whereIn('id',[1,272,271,125,122,105,39,68,66,29,225,52,264,201,51])
+                           ->where('id','!=',Auth::id())
+                           ->get(); 
+          $user=User::find($user_id);
 
-                                dd($inAttendance);
-                               
-       return view('mis.attendance.updateInOut',compact('date'));
+          $inTime='';
+          $outTime='';
+
+          $userInAttendance=Attendance::where('date',$date)
+                                      ->where('member_id',$user_id)
+                                      ->where('type','IN')
+                                      ->first();
+                        if ($userInAttendance!='') {
+                          $inTime=$userInAttendance->time;
+                        }
+                        else{
+                          $inTime='';
+                        }
+
+          $userOutAttendance=Attendance::where('date',$date)
+                                      ->where('member_id',$user_id)
+                                      ->where('type','OUT')
+                                      ->first();
+                       if ($userOutAttendance!='') {
+                          $outTime=$userOutAttendance->time;
+                        }
+                        else{
+                          $outTime='';
+                        }                  
+
+
+       return view('mis.attendance.updateInOut',compact(['managers','user_id','date','user','date','inTime','outTime']));
+    }
+
+    public function storeUpdatedAttendance(Request $request,$user_id,$date)
+    {
+
+    // dd($request->all());
+
+      $att_detail=AttendanceUpdate::where('user_id',$user_id)
+                                    ->where('date',$date)
+                                    ->get();
+
+                                 //   dd($att_detail);
+  
+      if (count($att_detail)==0) {
+         $approvalfrom=implode(",", $request->approvalfrom);
+
+        // dd($request->inTime);
+
+   if ($request->inTimeCheck=='inTimeEdited' && $request->outTimeCkeck=='outTimeEdited') {
+     $updatedAttendance=AttendanceUpdate::create(['user_id'=>$user_id,'date'=>$date,'update_type'=>'Both','in_time'=>$request->inTime,'out_time'=>$request->outTime,'reason'=>$request->reason,'approvalfrom'=>$approvalfrom,'status'=>'Pending','sip'=>\Request::ip()]);
+     Session::flash('message','Attendance Update Request Sent Successfully !!.');
+   }
+   elseif ($request->inTimeCheck=='inTimeEdited') {
+      $updatedAttendance=AttendanceUpdate::create(['user_id'=>$user_id,'date'=>$date,'update_type'=>'IN','in_time'=>$request->inTime,'out_time'=>$request->outTime,'reason'=>$request->reason,'approvalfrom'=>$approvalfrom,'status'=>'Pending','sip'=>\Request::ip()]);
+      Session::flash('message','Attendance Update Request Sent Successfully !!.');
+   }
+   elseif($request->outTimeCkeck=='outTimeEdited'){
+   // return "hi";
+     $updatedAttendance=AttendanceUpdate::create(['user_id'=>$user_id,'date'=>$date,'update_type'=>'OUT','in_time'=>$request->inTime,'out_time'=>$request->outTime,'reason'=>$request->reason,'approvalfrom'=>$approvalfrom,'status'=>'Pending','sip'=>\Request::ip()]);
+     Session::flash('message','Attendance Update Request Sent Successfully !!.');
+   }
+   else{
+     $updatedAttendance=AttendanceUpdate::create(['user_id'=>$user_id,'date'=>$date,'in_time'=>$request->inTime,'out_time'=>$request->outTime,'reason'=>$request->reason,'approvalfrom'=>$approvalfrom,'status'=>'Pending','sip'=>\Request::ip()]);
+     Session::flash('message','Attendance Update Request Sent Successfully !!.');
+   }
+    
+
+      $user_details=User::find($user_id);
+
+        $subject ="Re: "." Attendance Approval Request From ".$user_details->name. "  on ". date("l jS \of F Y ",strtotime($updatedAttendance->created_at));
+
+      $approvedby=Auth::id();
+
+         
+          $approvalfrom_emails=User::whereIn('id',$request->approvalfrom)->pluck('email')->toArray();
+
+          //dd($approvalfrom_emails);
+
+            $to_email=['sarita.sharma@iifm.co.in'/*,$user_details->email*/];
+
+          /*  $to_emails=array_merge($to_email,$approvalfrom_emails);
+
+          $to_emails = array_unique($to_emails);*/
+          // dd($to_emails);
+
+
+
+       $data=['username'=>$user_details->name,'date'=>$date,'in_time'=>$request->inTime,'out_time'=>$request->outTime,'reason'=>$request->reason];
+
+
+         Mail::send('mail.updateInOutMailer', ['data' => $data,'link'=>URL::route('updateBothAttendance',['id'=>$updatedAttendance->id])], function ($message)use($to_email,$subject) {
+             $message->from('info@prathamonline.in', 'PRATHAM Education');
+                 $message->to($to_email);
+                 $message->subject($subject);
+            });
+
+      }
+      else{
+
+          Session::flash('message','Your attendance update request already exists. Please wait for approval.');
+      
+      }
+   
+
+     return back();
+
+    }
+
+    public function UpdateBothAttendanceApprove($id,Request $request)
+    {
+      
+        $attendance_details=AttendanceUpdate::find($id);
+          return view('updateBothAttendanceApprove');
     }
 }

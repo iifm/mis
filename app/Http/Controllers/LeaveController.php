@@ -33,23 +33,19 @@ class LeaveController extends Controller
      
 
         $user_details=UserDetails::where('user_id',Auth::user()->id)->first();
-                
-        $user_doj_year=date('Y',strtotime($user_details->doj));
+
 
       
-        if ($user_doj_year==date('Y')) {
+ if (strtotime($user_details->doj)> strtotime($strtYear)) {
              
-             $doj_plus_oneMonth = date("Y-m-d", strtotime(" +1 months",strtotime($user_details->doj)));
+         $datetime1 = date_create($user_details->doj);
+          $datetime2 = date_create(date('Y-m-d'));
 
-               $user_doj_month=date('m',strtotime($user_details->doj));
+          $interval = date_diff($datetime1, $datetime2);
+          $diff=$interval->format('%m'); 
+        
+        $total_leaves=$diff*1.75;
 
-               $user_doj_month=$user_doj_month;
-
-               $current_month=date('m');
-
-               $diff_month=$current_month-$user_doj_month;
-              
-              $total_leaves=$diff_month*1.75;
             
         }
         else{
@@ -59,7 +55,6 @@ class LeaveController extends Controller
 
           $interval = date_diff($datetime1, $datetime2);
            $diff=$interval->format('%m'); 
-           $diff=$diff+1;
            $total_leaves=$diff*1.75;
         }
 
@@ -317,6 +312,8 @@ class LeaveController extends Controller
        return redirect()->route('dashboard');
     }
 
+
+  
 
    
 }

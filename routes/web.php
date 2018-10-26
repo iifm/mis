@@ -68,8 +68,11 @@ Route::post('/updated-user-attendance','AttendanceController@updateIn');
 Route::get('/update-user-out-attendance/{id}/{date}/{type}','AttendanceController@updateOutAttendance');
 Route::post('/updated-userout-attendance','AttendanceController@updateOut');
 Route::get('/attendance-approval/{id}/{user_id}','AttendanceController@attendanceApprove')->name('attendanceApprove');
+Route::get('/update-attendance/both/{id}','AttendanceController@UpdateBothAttendanceApprove')->name('updateBothAttendance');
 Route::post('/attendance-approved/{id}/{from}/{user_id}','AttendanceController@attendanceApproved');
 Route::get('/update-attendance/{user_id}/{date}','AttendanceController@updateBothAttendance');
+Route::post('/update-attendance/store/{user_id}/{date}','AttendanceController@storeUpdatedAttendance');
+
 
 //photo-album routes
 Route::get('/photo-album', 'PhotoAlbumController@index')->name('photo.index');
