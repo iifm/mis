@@ -19,7 +19,7 @@ class UserManagementController extends Controller
     public function index()
     {
         $users=User::join('user_details','user_details.user_id','=','users.id')
-                       // ->where('user_details.status','Active')
+                        ->where('user_details.status','Active')
                         ->join('departments','departments.id','=','user_details.department')
                          ->join('locations','locations.id','=','user_details.locationcentre')
                         ->select('users.*','user_details.*','users.id as user_id','departments.name as dept_name','locations.name as locationcentre')

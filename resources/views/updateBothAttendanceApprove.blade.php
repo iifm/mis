@@ -30,46 +30,60 @@
           <div class="col-md-4">
           	<div class="form-group">
             <label class="control-label">Applicant Name</label>
-            <input class="form-control" type="text" name="efname"  value=""  required="" readonly="">
+            <input class="form-control" type="text" name="efname"  value="{{$attendance_details->username}}"  required="" readonly="">
           		</div>
           	</div>
           	<div class="col-md-4">
           	<div class="form-group">
             <label class="control-label">Applicant Email Id</label>
-            <input class="form-control" type="text" name="elname" value=""  required="" readonly="">
+            <input class="form-control" type="text" name="elname" value="{{$attendance_details->email}}"  required="" readonly="">
           		</div>
           	</div>
           	<div class="col-md-4">
           	<div class="form-group">
             <label class="control-label">Applicant Mobile Number</label>
-            <input class="form-control" type="text" name="emobile" value=""  required="" readonly="">
+            <input class="form-control" type="text" name="emobile" value="{{$attendance_details->mobile}}"  required="" readonly="">
           		</div>
           	</div>
           </div>
         
          <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-4">
             <div class="form-group">
             <label class="control-label">Attendance Date</label>
-            <input class="form-control" type="text" name="date" value="" autofocus required="" readonly="">
+            <input class="form-control" type="text" name="date" value="{{date('j F Y',strtotime($attendance_details->date))}}" autofocus required="" readonly="">
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
             <div class="form-group">
-            <label class="control-label">Attendance Time</label>
-            <input class="form-control" type="text" name="time" value=""  autofocus required="" readonly="">
+            <label class="control-label">IN Time</label>
+            <input class="form-control" type="text" name="in_time" value="{{$attendance_details->in_time}}"  autofocus required="" readonly="">
+              </div>
+            </div>
+             <div class="col-md-4">
+            <div class="form-group">
+            <label class="control-label">OUT Time</label>
+            <input class="form-control" type="text" name="out_time" value="{{$attendance_details->out_time}}"  autofocus required="" readonly="">
               </div>
             </div>
            
           </div>
-            <div class="row">
+           
+             <div class="row">
           <div class="col-md-6">
             <div class="form-group">
-            <label class="control-label">Attendance Type</label>
-            <input class="form-control" type="text" name="type" value="" autofocus required="" readonly="">
+            <label class="control-label">Reason for Leave</label>
+            <textarea class="form-control" name="reason" id="" rows="3" readonly="">{{$attendance_details->reason}}</textarea>
               </div>
             </div>
+         
             <div class="col-md-6">
+            <div class="form-group">
+            <label class="control-label">Comment for Action(Not Mandatory)</label>
+           <textarea class="form-control" name="comment" placeholder="Comment for Action" id="" rows="3"></textarea>
+              </div>
+            </div>
+                  <div class="col-md-4">
             <div class="form-group">
             <label class="control-label">Select Action <span style="color: red">*</span></label>
            <select class="form-control" name="actionstatus" required="">
@@ -81,21 +95,6 @@
            </select>
               </div>
             </div>
-          </div>
-             <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-            <label class="control-label">Reason for Leave</label>
-            <textarea class="form-control" name="reason" id="" rows="3" readonly=""></textarea>
-              </div>
-            </div>
-            <div class="col-md-6">
-            <div class="form-group">
-            <label class="control-label">Comment for Action(Not Mandatory)</label>
-           <textarea class="form-control" name="comment" placeholder="Comment for Action" id="" rows="3"></textarea>
-              </div>
-            </div>
-           
           </div>
          <div class="row">
           <div class="col-md-12">

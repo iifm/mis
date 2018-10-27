@@ -398,7 +398,7 @@ class AttendanceController extends Controller
     {
       $username=User::find($id);
       $name=$username->name;
-      $managers=User::whereIn('id',[1,272,271,125,122,105,39,68,66,29,225,51,52,201,264]) 
+      $managers=User::whereIn('id',[1,272,271,125,122,105,39,68,66,29,225,51,52,201,264,71]) 
                         ->where('id','!=',Auth::id())
                         ->get();
 
@@ -450,7 +450,7 @@ class AttendanceController extends Controller
      public function updateOutAttendance($id,$date,$type)
     {
       $username=User::find($id);
-       $managers=User::whereIn('id',[1,272,271,125,122,105,39,68,66,29,225,51,52,201,264]) 
+       $managers=User::whereIn('id',[1,272,271,125,122,105,39,68,66,29,225,51,52,201,264,71]) 
                         ->where('id','!=',Auth::id())
                         ->get();
 
@@ -570,7 +570,7 @@ class AttendanceController extends Controller
 
     public function updateBothAttendance($user_id,$date)
     {
-     $managers=User::whereIn('id',[1,272,271,125,122,105,39,68,66,29,225,52,264,201,51])
+     $managers=User::whereIn('id',[1,272,271,125,122,105,39,68,66,29,225,52,264,201,51,71])
                            ->where('id','!=',Auth::id())
                            ->get(); 
           $user=User::find($user_id);
@@ -683,7 +683,19 @@ class AttendanceController extends Controller
     public function UpdateBothAttendanceApprove($id,Request $request)
     {
       
-        $attendance_details=AttendanceUpdate::find($id);
-          return view('updateBothAttendanceApprove');
+        $attendance_details=AttendanceUpdate::join('users','users.id','=','attendance_updates.user_id')
+                                            ->join('user_details','user_details.user_id','=','attendance_updates.user_id')
+                                            ->where('attendance_updates.id',$id)
+                                            ->select('attendance_updates.*','users.name as username','user_details.mobile as mobile','users.*')
+                                            ->first();
+
+                                            //dd($attendance_details);
+
+          return view('updateBothAttendanceApprove',compact('attendance_details'));
+    }
+
+    public function StoreUpdateBothAttendanceApprove($id)
+    {
+      # code...
     }
 }
