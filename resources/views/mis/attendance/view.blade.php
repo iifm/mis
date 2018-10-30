@@ -87,6 +87,7 @@
                </div>
                 <table class="table table-hover table-stripped" id="table" role="grid"  style="margin-top: 100px;">
                     <thead>
+                     
                       <tr role="row">
                         <th>#</th>
                         <th>Name</th>
@@ -95,8 +96,8 @@
                         <th>OUT TIME</th>
                         <th>REMARK</th>
                         <th>EDIT ATTENDANCE</th> 
-                       
                       </tr>
+                   
                     </thead>
                 @php $i=1 @endphp
                     <tbody>
@@ -136,9 +137,14 @@
 
                         </td>
                        <td>{{$data['remark_all']}}</td>
-
-                        <td><a href="{{url('update-attendance')}}/{{$data['user_id']}}/{{$data['date']}}" class="btn btn-warning fa fa-edit" title="Edit Your Attendance"></a></td>
-
+                      <td>  
+                        @if($data['user_id']==Auth::id())
+                          <a href="{{url('update-attendance')}}/{{$data['user_id']}}/{{$data['date']}}" class="btn btn-warning fa fa-edit" title="Edit Your Attendance"></a>
+                        @else
+                         Not Available
+                        @endif
+                        </td>
+                        
                        </tr>
                       @endforeach
                         @else

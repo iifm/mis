@@ -58,7 +58,7 @@ Route::post('leave-approved/{id}/{uid}','LeaveController@leaveApproved')->name('
 //attendance routes
 Route::get('/attendance', 'AttendanceController@index')->name('attendance.index');
 Route::post('/attendance/store', 'AttendanceController@store');
-Route::get('/attendance-view/{id}','AttendanceController@viewAttendance');
+Route::get('/attendance-view/{id}','AttendanceController@viewAttendance')->name('attendance-view');
 
 Route::get('/attendance-view','AttendanceController@viewAttendance');
 

@@ -106,7 +106,7 @@ class AttendanceController extends Controller
         $endDate = new DateTime($end);
 
       $sundays = array();
-
+     
     while ($startDate <= $endDate) {
         if ($startDate->format('w') == 0) {
             $sundays[] = $startDate->format('Y-m-d');
@@ -229,43 +229,44 @@ class AttendanceController extends Controller
                   $start = date ("Y-m-d", strtotime("+1 days", strtotime($start)));
                   $remark_all='Absent';
                 
-            /*  }*/
+           
           }
+
           $message='';
-         /// $edit_option='false';
-           // return $remarks;
+
             $edit_option=null;
             return view('mis.attendance.view',compact(['datas','users','message','edit_option','user_id','remarks']));
           } 
 
           
-          else{
+       else{
+           
             $message="Your Last Seven Days Attendance";
 
             $last_seven_day=date('Y-m-d', strtotime('-6 days'));
             $now=date('Y-m-d');
-
-
             $startDate = new DateTime($last_seven_day);
-        $endDate = new DateTime($now);
+            $endDate = new DateTime($now);
+           $sundays = array();
 
-      $sundays = array();
+          while ($startDate <= $endDate) 
+          {
+             if ($startDate->format('w') == 0)
+              {
+                $sundays[] = $startDate->format('Y-m-d');
+              }
 
-    while ($startDate <= $endDate) {
-    if ($startDate->format('w') == 0) {
-        $sundays[] = $startDate->format('Y-m-d');
-    }
-
-    $startDate->modify('+1 day');
-}
+               $startDate->modify('+1 day');
+          }
 
 
           $datas = [];
            $remark_all='Absent';
+
+
             while (strtotime($last_seven_day) <= strtotime($now)) {
             
-           
-             /* foreach($attendance_dates as $attendance_date){*/
+            
                 $attendances = DB::table('attendances')
                                ->where('date',$last_seven_day)
                                ->where('member_id',$user_id)
@@ -283,9 +284,7 @@ class AttendanceController extends Controller
                                ->orderBy('id', 'ASC')->pluck('member_id'); 
                               // dd($user_ids);              
 
-               // dd($user_ids);
-
-
+            
                   if ($attendances==null) {
                     $user_name=User::find($user_id); 
                     
@@ -318,11 +317,6 @@ class AttendanceController extends Controller
                              }
                           }
 
-
-
-                         
-
-
                     $datas[] = array(
                         'date'=>$last_seven_day,
                         'inTime'=>'NA',
@@ -331,8 +325,7 @@ class AttendanceController extends Controller
                         'user_id'=>$user_id,
                         'remark_all'=>$remark_all
 
-                    );   
-                   // dd($datas);    
+                    );    
                   }
                   else{
 
