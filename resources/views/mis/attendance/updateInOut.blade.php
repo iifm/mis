@@ -73,28 +73,30 @@
                  <div class="col-md-12" >
                    <label for="exampleInputEmail1">In Time</label>
                    @if($inTime!='')
-                    <input type="text" id="inTime" name="inTime"  class="form-control" placeholder="IN-TIME" value="{{$inTime}}"  readonly="readonly" />
+                    <input type="text" id="inTime" name="inTime"  class="form-control" placeholder="IN-TIME" value="{{$inTime}}"  readonly="readonly" required />
+                     <input type="checkbox" name="inTimeCheck"  id="inTimeEnable" value="inTimeEdited" />
                     @else
-                     <input type="text" id="inTime" name="inTime"  class="form-control input-a" placeholder="IN-TIME" value="{{$inTime}}"  />
-                     @endif
-                    <input type="checkbox" name="inTimeCheck"  id="inTimeEnable" value="inTimeEdited" />
+                     <input type="text" id="inTime" name="inTime"  class="form-control input-a" placeholder="IN-TIME" value="{{$inTime}}" required  />
 
+                     @endif
+                   
 
                     </div>
              </div>
               <div class="col-md-4"> 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Date</label>
-                     <input class="form-control" id="date" name="date" type="text" value="{{date('j F Y',strtotime($date))}}" placeholder="YYYY/MM/DD" readonly="" required="">
+                     <input class="form-control" id="date" name="date" type="text" value="{{date('j F Y',strtotime($date))}}" placeholder="YYYY/MM/DD" readonly="" required>
                 </div>
                 <div class="col-md-12" >
                    <label for="exampleInputEmail1">Out Time</label>
                     @if($outTime!='')
-                    <input type="text" id="outTime" name="outTime"  class="form-control " placeholder="OUT-TIME" value="{{$outTime}}"  readonly="readonly" />
-                    @else
-                     <input type="text" id="outTime" name="outTime"  class="form-control input-a" placeholder="OUT-TIME" value="{{$outTime}}"   />
-                    @endif
+                    <input type="text" id="outTime" name="outTime"  class="form-control " placeholder="OUT-TIME" value="{{$outTime}}"  readonly="readonly" required />
                     <input type="checkbox" id="outTimeEnable" name="outTimeCkeck"   />
+                    @else
+                     <input type="text" id="outTime" name="outTime"  class="form-control input-a" placeholder="OUT-TIME" value="{{$outTime}}"  required />
+                    @endif
+                    
                     </div>
 
                 
@@ -104,7 +106,7 @@
               <div class="col-md-4"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">Reason</label>
-                    <textarea class="form-control capitalize char-only" rows="5"  name="reason" id="reason" placeholder="Reason For Attendance Updation" required=""></textarea>
+                    <textarea class="form-control" rows="5"  name="reason" id="reason" placeholder="Reason For Attendance Updation" required=""></textarea>
                 </div>
              </div>
 

@@ -52,15 +52,6 @@
                                                     </tr>
 
                                                     <tr>
-                                                        <td style="min-width:120px; padding: 10px 15px;">
-                                                            <strong>Attendance Type</strong>
-                                                        </td>
-                                                        <td style=" padding: 10px 15px;"> 
-                                                          {{$data['type']}}
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
                                                         <td style="padding: 10px 15px; background-color: #f2f2f2">
                                                             <strong> Attendance Date </strong>
                                                         </td>
@@ -71,24 +62,32 @@
 
                                                     <tr>
                                                         <td style=" padding: 10px 15px;">
-                                                            <strong>Attendance Time </strong>
+                                                            <strong>IN Time </strong>
                                                         </td>
                                                         <td style=" padding: 10px 15px;">
-                                                             {{$data['time']}}
+                                                             {{$data['in_time']}}
+                                                        </td>
+                                                    </tr>
+                                                     <tr>
+                                                        <td style=" padding: 10px 15px;background-color: #f2f2f2">
+                                                            <strong>OUT Time </strong>
+                                                        </td>
+                                                        <td style=" padding: 10px 15px;background-color: #f2f2f2">
+                                                             {{$data['out_time']}}
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                    <td style=" padding: 10px 15px; background-color: #f2f2f2"><strong> Reason</strong></td>
-                                                    <td style=" padding: 10px 15px; background-color: #f2f2f2"> {{$data['reason']}} </td>
+                                                        <td style=" padding: 10px 15px; "><strong> Reason</strong></td>
+                                                        <td style=" padding: 10px 15px; "> {{$data['reason']}} </td>
                                                     </tr>
                                                    
                                                      <tr>
-                                                    <td style=" padding: 10px 15px;"><strong>Status </strong> </td>
-                                                    <td style=" padding: 10px 15px;">  {{ucwords($data['status'])}}</td>
+                                                    <td style=" padding: 10px 15px; background-color: #f2f2f2"><strong>Status </strong> </td>
+                                                    <td style=" padding: 10px 15px; background-color: #f2f2f2">  {{ucwords($data['status'])}}</td>
                                                     </tr>
                                                     <tr>
-                                                    <td style=" padding: 10px 15px;background-color: #f2f2f2"><strong>Approved By </strong></td>
-                                                    <td style=" padding: 10px 15px;background-color: #f2f2f2"> {{$data['approvedby']}}  </td>
+                                                    <td style=" padding: 10px 15px;"><strong>Approved By </strong></td>
+                                                    <td style=" padding: 10px 15px;"> {{$data['approvedby']}}  </td>
                                                     </tr>
                                                 </thead>
                                                 </table>

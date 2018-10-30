@@ -23,20 +23,20 @@
       <div class="lock-box" style="min-height: 500px;min-width: 700px;">
         <h4 class="text-center user-name">Attendance Approval Form</h4>
       <!--   <p class="text-center text-muted">Account Locked</p> -->
-        <form class="unlock-form" action="" method="post" style="margin-top: 20px;">
+        <form class="unlock-form" action="{{url('/update-attendance/approved/store')}}/{{$id}}" method="post" style="margin-top: 20px;">
           {{csrf_field()}}
          
          <div class="row">
           <div class="col-md-4">
           	<div class="form-group">
             <label class="control-label">Applicant Name</label>
-            <input class="form-control" type="text" name="efname"  value="{{$attendance_details->username}}"  required="" readonly="">
+            <input class="form-control" type="text" name="name"  value="{{$attendance_details->username}}"  required="" readonly="">
           		</div>
           	</div>
           	<div class="col-md-4">
           	<div class="form-group">
             <label class="control-label">Applicant Email Id</label>
-            <input class="form-control" type="text" name="elname" value="{{$attendance_details->email}}"  required="" readonly="">
+            <input class="form-control" type="text" name="email" value="{{$attendance_details->email}}"  required="" readonly="">
           		</div>
           	</div>
           	<div class="col-md-4">
@@ -83,10 +83,10 @@
            <textarea class="form-control" name="comment" placeholder="Comment for Action" id="" rows="3"></textarea>
               </div>
             </div>
-                  <div class="col-md-4">
+                  <div class="col-md-6">
             <div class="form-group">
             <label class="control-label">Select Action <span style="color: red">*</span></label>
-           <select class="form-control" name="actionstatus" required="">
+           <select class="form-control" name="action" required="">
              <option value="">Select Action</option>
              <option value="approved">Approved</option>
              <option value="disapproved">Disapproved</option>
@@ -95,10 +95,15 @@
            </select>
               </div>
             </div>
+             <div class="col-md-6">
+           
+           <button class="btn btn-primary" type="submit" style="margin-top: 25px; "><i class=""></i>SUBMIT YOUR RESPONSE </button>
+             
+            </div>
           </div>
          <div class="row">
           <div class="col-md-12">
-          <center> <button class="btn btn-primary" type="submit" style="margin-top: 10px;"><i class=""></i>SUBMIT YOUR RESPONSE </button></center> 
+          <center> </center> 
           </div>
           </div>
         </form>

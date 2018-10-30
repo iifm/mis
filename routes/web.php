@@ -72,6 +72,7 @@ Route::get('/update-attendance/both/{id}','AttendanceController@UpdateBothAttend
 Route::post('/attendance-approved/{id}/{from}/{user_id}','AttendanceController@attendanceApproved');
 Route::get('/update-attendance/{user_id}/{date}','AttendanceController@updateBothAttendance');
 Route::post('/update-attendance/store/{user_id}/{date}','AttendanceController@storeUpdatedAttendance');
+Route::post('/update-attendance/approved/store/{id}','AttendanceController@StoreUpdateBothAttendanceApprove');
 
 
 //photo-album routes

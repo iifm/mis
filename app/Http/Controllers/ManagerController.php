@@ -29,12 +29,22 @@ class ManagerController extends Controller
       foreach ($accessZone as $key => $accessZone) {
          $accessZone=$accessZone;
       }
+      if ($accessZone=='All') {
+        $teamMembersUserIds=User::join('user_details','user_details.user_id','=','users.id')
+                                    ->where('user_details.status','Active')
+                                    ->pluck('users.id')->toArray();
+
+      }
+
+      else{
     $accessZones= explode(",", $accessZone);
     $teamMembersUserIds=User::whereIn('role',$accessZones)
                             ->join('user_details','user_details.user_id','=','users.id')
                             ->where('user_details.status','Active')
+                            ->orderBy('users.id','DESC')
                             ->pluck('users.id')
                             ->toArray();
+         }
                             
                           $totalTeamMemberDetails=[];
    foreach ($teamMembersUserIds as $teamMembersUserId) {
@@ -63,6 +73,7 @@ class ManagerController extends Controller
         $totalTeamMemberDetails[]= $teamMembersDetails;                               
                        
    }
+  
   
        return view('manager.manager_zone.index',compact(['totalTeamMemberDetails']));
     }

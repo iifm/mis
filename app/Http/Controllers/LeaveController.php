@@ -198,9 +198,8 @@ class LeaveController extends Controller
            array_push($to_email, Auth::user()->email);
 
            //dd($to_email);
-
               
-          $subject = "Leave Request From " .$leavefromname->name ."  on ". date("l jS \of F Y");
+          $subject = $query->leavetype." Requested By " .$leavefromname->name ."  on ". date("l jS \of F Y");
 
           $default=['ankit.kapoor@iifm.co.in','hr@iifm.co.in'];
 
@@ -291,10 +290,12 @@ class LeaveController extends Controller
             $email=User::where('id',$leaveDetails->empid)->first();
 
       if($leaveDetails->created_at){
-          $subject = "Re: " ."Leave Request From " .$leaveDetails->username ."  on ". date("l jS \of F Y",strtotime($leaveDetails->created_at));
+
+          $subject ="Re: ".$leaveDetails->leavetype." Requested By " .$leaveDetails->username ."  on ". date("l jS \of F Y",strtotime($leaveDetails->created_at));
       }
-      else{
-         $subject = "Re: " ."Leave Request From " .$leaveDetails->username ."  on ". date("l jS \of F Y",strtotime($leaveDetails->leavefrom));
+      else
+      { 
+          $subject ="Re: ".$leaveDetails->leavetype." Requested By " .$leaveDetails->username ."  on ". date("l jS \of F Y",strtotime($leaveDetails->leavefrom));
       }
 
        $data=['username'=>$leaveDetails->username,'type'=>$leaveDetails->leavetype,'from'=>$leaveDetails->leavefrom,'to'=>$leaveDetails->leaveto,'days'=>$leaveDetails->totalleave,'reason'=>$leaveDetails->reason,'status'=>$leaveDetails->status,'approvedby'=>$approvedby->name];
@@ -303,7 +304,7 @@ class LeaveController extends Controller
       
          Mail::send('mail.leaveRequestApproved',  ['data' => $data], function ($message)use($to_email,$subject) {
              $message->from('info@prathamonline.in', 'MIS Alert');
-                 $message->to($to_email);
+                 $message->to([$to_email]);
                  $message->subject($subject);
 
             });

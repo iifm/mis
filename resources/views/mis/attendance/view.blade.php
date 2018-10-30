@@ -94,7 +94,7 @@
                         <th>IN TIME</th>
                         <th>OUT TIME</th>
                         <th>REMARK</th>
-                      <!--   <th>EDIT ATTENDANCE</th>  -->
+                        <th>EDIT ATTENDANCE</th> 
                        
                       </tr>
                     </thead>
@@ -110,11 +110,7 @@
                             <?php
                               if($data['inTime']=='NA'){  $type='IN'?>
 
-                                @if($edit_option=='true' && Auth::id()==$user_id)
-                                <a href="{{url('/update-user-attendance')}}/{{$data['user_id']}}/{{$data['date']}}/{{$type}}" class="btn btn-primary fa fa-edit btn-small" id="{{$data['user_id']}}"></a>
-                                @else
-                                NA
-                                @endif
+                              NA
 
                               <?php }
                               else{ ?>
@@ -130,9 +126,7 @@
                                
                               <?php } 
                               elseif($data['outTime']=='NA'){  $type='OUT'?>
-                               @if($edit_option=='true')
-                                <a href="{{url('/update-user-out-attendance')}}/{{$data['user_id']}}/{{$data['date']}}/{{$type}}" class="btn btn-danger fa fa-edit btn-small" id="outTime"></a>
-                                @endif
+                              NA
 
                               <?php }
                               else{ ?>
@@ -143,7 +137,7 @@
                         </td>
                        <td>{{$data['remark_all']}}</td>
 
-                     <!--    <td><a href="{{url('update-attendance')}}/{{$data['user_id']}}/{{$data['date']}}" class="btn btn-warning fa fa-edit" title="Edit Your Attendance"></a></td> -->
+                        <td><a href="{{url('update-attendance')}}/{{$data['user_id']}}/{{$data['date']}}" class="btn btn-warning fa fa-edit" title="Edit Your Attendance"></a></td>
 
                        </tr>
                       @endforeach
