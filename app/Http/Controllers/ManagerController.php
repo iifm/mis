@@ -69,11 +69,12 @@ class ManagerController extends Controller
                                 'total_conveyance'=>$total_conveyance,
                                 'username'=>$username->name,
                                 'user_id'=>$teamMembersUserId]; 
-                                //dd($teamMembersDetails);
+                                
         $totalTeamMemberDetails[]= $teamMembersDetails;                               
                        
    }
-  
+   sort($totalTeamMemberDetails);
+     //dd($totalTeamMemberDetails);
   
        return view('manager.manager_zone.index',compact(['totalTeamMemberDetails']));
     }

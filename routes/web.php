@@ -234,3 +234,5 @@ Route::post('manager-zone/request/store','RequestController@store');
 Route::get('manager-zone/request/show-all','RequestController@show');
 Route::get('manager-zone/request/view-detail/{id}','RequestController@viewDetail');
 
+//user's Manager
+Route::get('admin/user-manager/index','UserManagerController@index');

@@ -153,8 +153,11 @@ use App\NewsUpload;
             <li><a class="treeview-item" href="{{url('/user-management/index')}}"><i class="icon fa fa-users"></i>User Management</a></li>
             <li><a class="treeview-item" href="{{url('/role/index')}}"><i class="icon fa fa-tasks"></i>Role Management</a></li>
              <li><a class="treeview-item" href="{{url('/hall-of-fame/create')}}"><i class="icon fa fa-trophy"></i>Add Employee of the Month</a></li>
-               <li><a class="treeview-item" href="{{url('/department/index')}}"><i class="icon fa fa-building-o"></i>Department</a></li> 
-                <li><a class="treeview-item" href="{{url('/upload/category/index')}}"><i class="icon fa fa-list"></i>Add Category</a></li>
+              <li><a class="treeview-item" href="{{url('/department/index')}}"><i class="icon fa fa-building-o"></i>Department</a></li> 
+              <li><a class="treeview-item" href="{{url('/upload/category/index')}}"><i class="icon fa fa-list"></i>Add Category</a></li>
+               <li><a class="treeview-item" href="{{url('admin/user-manager/index')}}"><i class="icon fa fa-users"></i>User's Manager</a></li>
+
+
            <!--   <li><a class="treeview-item" href="{{url('admin/news-upload')}}"><i class="icon fa fa-upload"></i>News Update/Upload</a></li>  -->   
           </ul>
         </li>

@@ -455,7 +455,7 @@ class AttendanceController extends Controller
 
       $user_details=User::find($user_id);
 
-        $subject ="Re: "." Attendance Approval Request From ".$user_details->name. "  on ". date("l jS \of F Y ",strtotime($updatedAttendance->created_at));
+        $subject ="Attendance Approval Request From ".$user_details->name. "  on ". date("l jS \of F Y ",strtotime($updatedAttendance->created_at));
 
       $approvedby=Auth::id();
 
@@ -487,10 +487,9 @@ class AttendanceController extends Controller
 
           Session::flash('message','Your attendance update request already exists. Please wait for approval.');
       
-      }
-   
+      }  
 
-     return back();
+     return redirect()->route('attendance-view',['id'=>Auth::id()]);
 
     }
 
