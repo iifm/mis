@@ -476,7 +476,7 @@ class AttendanceController extends Controller
        $data=['username'=>$user_details->name,'date'=>$date,'in_time'=>$request->inTime,'out_time'=>$request->outTime,'reason'=>$request->reason];
 
 
-         Mail::send('mail.updateInOutMailer', ['data' => $data,'link'=>URL::route('updateBothAttendance',['id'=>$updatedAttendance->id])], function ($message)use($to_email,$subject) {
+         Mail::send('mail.updateInOutMailer', ['data' => $data,'link'=>URL::route('updateBothAttendance',['id'=>$updatedAttendance->id])], function ($message)use($to_emails,$subject) {
              $message->from('info@prathamonline.in', 'PRATHAM Education');
                  $message->to($to_emails);
                  $message->subject($subject);
