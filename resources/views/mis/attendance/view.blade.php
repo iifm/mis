@@ -92,7 +92,7 @@
                         <th>#</th>
                         <th>Name</th>
                          <th>DATE</th>
-                         <th>DAY NAME</th>
+                         <th>DAY</th>
                         <th>IN TIME</th>
                         <th>OUT TIME</th>
                         <th>REMARK</th>

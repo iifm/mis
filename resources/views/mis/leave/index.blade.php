@@ -96,14 +96,13 @@
                 <thead>
                   <tr role="row">
                     <th>#</th>
+                    <th>Username</th>
                     <th>Leave Type</th>
                     <th>Start Date</th>
                     <th >End Date </th>
                     <th>Total Leaves</th>
                     <th >Status</th>
-                   <!--  <th >Approval From</th> -->
                     <th>Approved By</th>
-                   <!--  <th style="padding-left: 50px; padding-right: 50px;">Action</th> -->
                   </tr>
                 </thead>
                 <tbody>
@@ -112,6 +111,7 @@
                 @foreach($finaldatas as $data)
                 <tr role="row" class="odd">
                     <td>{{$i++}}</td>
+                    <td>{{$data['username']}}</td>
                     <td>{{$data['type']}}</td>
                     <td>{{date('j F Y',strtotime($data['from']))}}</td>
                     <td>{{date('j F Y',strtotime($data['to']))}}</td>

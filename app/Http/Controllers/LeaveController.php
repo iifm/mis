@@ -83,22 +83,21 @@ class LeaveController extends Controller
                         ->where('leavetype','!=','Comp Off')
                         ->orderBy('id','DESC')
                         ->get();
-                      //dd($leave);
-                //$managersname[]="";
-              $leave_datas[] = '';  
-              
+
+                        //dd($leave);
+                      
+                $leave_datas[] = '';  
                 $names='';
                 $usernames='';  
                 $appfrom[]='';
 
              foreach ($leave as  $value) {
-                
-
+           
                 $appfrom = $value->approvalfrom;
-                
-               // dd($appfrom);
-
+              
                 $name[]='';
+
+                $userData=User::find($value->empid);
 
                 $appfromnamesarr = explode(',', $appfrom);
               // dd($appfromnamesarr);
@@ -119,6 +118,7 @@ class LeaveController extends Controller
 
                    // dd($approvedby->name);
                   $leave_datas[] =  array(
+                                    'username'=>$userData->name,
                                     'type'=> $value->leavetype,
                                     'from'=> $value->leavefrom,
                                     'to'=> $value->leaveto,
