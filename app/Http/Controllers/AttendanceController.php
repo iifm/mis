@@ -386,6 +386,7 @@ class AttendanceController extends Controller
     {
       $managers=User::whereIn('id',[1,272,271,125,122,105,39,68,66,29,225,52,264,201,51,71])
                            ->where('id','!=',Auth::id())
+                           ->orWhere('id',1)
                            ->get(); 
           $user=User::find($user_id);
 
