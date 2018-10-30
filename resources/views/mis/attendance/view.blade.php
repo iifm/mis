@@ -92,6 +92,7 @@
                         <th>#</th>
                         <th>Name</th>
                          <th>DATE</th>
+                         <th>DAY NAME</th>
                         <th>IN TIME</th>
                         <th>OUT TIME</th>
                         <th>REMARK</th>
@@ -107,6 +108,7 @@
                         <td>{{ $i++ }}</td>
                         <td>{{$data['username']}}</td>
                         <td>{{date('j F Y',strtotime($data['date']))}}</td>
+                        <td>{{date('l',strtotime($data['date']))}}</td>
                         <td>
                             <?php
                               if($data['inTime']=='NA'){  $type='IN'?>
