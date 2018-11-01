@@ -86,8 +86,8 @@ class ManagerController extends Controller
      */
     public function managerLeaveIndex()
     {
-         $strtYear=date('Y').'-04-01';
-       $endYear=date('Y',strtotime('+1 year')).'-03-31';
+        $strtYear=date('Y').'-04-01';
+        $endYear=date('Y',strtotime('+1 year')).'-03-31';
         $user_role=Auth::user()->role;
         $loginId=Auth::user()->id;
         //dd($user_role);
@@ -143,5 +143,9 @@ class ManagerController extends Controller
         return view('manager.leave.index',compact('leave_details'));
     }
 
+  public function managerAttendanceIndex()
+  {  
+  
+  }
   
 }

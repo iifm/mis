@@ -100,6 +100,7 @@
                          <th>DATE</th>
                         <th>IN TIME</th>
                         <th>OUT TIME</th>
+                        <th>REMARK</th>
                      
                       </tr>
                     </thead>
@@ -112,6 +113,7 @@
                         <td>{{$data['date']}}</td> 
                         <td> {{$data['inTime']}} </td>
                          <td> {{$data['outTime']}} </td>
+                         <td></td>
                      </tr>
                      @endforeach
                     </tbody>

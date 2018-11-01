@@ -134,8 +134,8 @@ use App\NewsUpload;
               <li><a class="treeview-item" href="{{url('admin/news-upload')}}"><i class="icon fa fa-upload"></i>News Upload/Update</a></li>  
               
                <li><a class="treeview-item" href="{{url('/manager/leave/index')}}"><i class="icon fa fa-paper-plane"></i>Leave Request(s)</a></li> 
-               <!--  <li><a class="treeview-item" href="{{url('/manager/attendance/index')}}"><i class="icon fa fa-calendar-o"></i>Attendance Request(s)</a></li> 
- -->  
+                <li><a class="treeview-item" href="{{url('/manager/attendance/index')}}"><i class="icon fa fa-calendar-o"></i>Attendance Request(s)</a></li> 
+  
           </ul>
         </li>
        @endif

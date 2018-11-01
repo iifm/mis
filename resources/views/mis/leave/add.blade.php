@@ -125,7 +125,6 @@
   var $datepicker3 =  $( "#agdcompoff" );
   
   $datepicker1.datepicker({
-    minDate: 0,
    dateFormat:'yy-mm-dd',
         onClose: function() {     
       var fromDate = $datepicker1.datepicker('getDate');
