@@ -140,7 +140,7 @@
                         </td>
                        <td>{{$data['remark_all']}}</td>
                       <td>  
-                        @if($data['user_id']==Auth::id())
+                        @if($data['user_id']==Auth::id() && $edit_option!=null)
                           <a href="{{url('update-attendance')}}/{{$data['user_id']}}/{{$data['date']}}" class="btn btn-warning fa fa-edit" title="Edit Your Attendance"></a>
                         @else
                          Not Available

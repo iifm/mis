@@ -243,7 +243,11 @@ class AttendanceController extends Controller
            
             $message="Your Last Seven Days Attendance";
 
-            $last_seven_day=date('Y-m-d', strtotime('-6 days'));
+           // $last_seven_day=date('Y-m-d', strtotime('-6 days'));
+
+            $last_seven_day=date('Y-09-23') ;
+            //dd($last_seven_day);
+
             $now=date('Y-m-d');
             $startDate = new DateTime($last_seven_day);
             $endDate = new DateTime($now);
