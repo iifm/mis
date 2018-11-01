@@ -158,7 +158,9 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
   $( function() {
-    $( "#anniversary" ).datepicker({ dateFormat:'yy-mm-dd'});
+    $( "#anniversary" ).datepicker({ dateFormat:'yy-mm-dd',
+                                    changeMonth: true,
+                              changeYear: true});
   } );
   </script>
 

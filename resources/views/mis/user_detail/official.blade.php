@@ -178,7 +178,9 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
   $( function() {
-    $( "#doj" ).datepicker({ dateFormat:'yy-mm-dd'});
+    $( "#doj" ).datepicker({ dateFormat:'yy-mm-dd',
+                              changeMonth: true,
+                              changeYear: true});
   } );
   </script>
 
