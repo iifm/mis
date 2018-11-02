@@ -69,9 +69,13 @@
                     <td><input type="text" class="form-control datepicker" placeholder="End Date" name="endDate"></td>
                     <td><select class="form-control" name="employee">
                       <option value="">Select Employee</option>
+                      @if($users!='')
                       @foreach($users as $user)
                       <option value="{{$user->id}}">{{$user->name}}</option>
                       @endforeach
+                      @else
+                      <option></option>
+                      @endif
                     </select>
                   </td>
                      <td align=""><input type="submit" name="" class="btn btn-primary" style="margin-left: 25px; width: 100px;"> </td>
@@ -106,16 +110,25 @@
                     </thead>
                 
                     <tbody>
+                      @if($datas != '')
                       @foreach($datas as $data)
                       <tr role="row" class="odd">
                        <td>{{ $i++ }}</td>
                         <td>{{strtoupper($data['username'])}}</td>
-                        <td>{{$data['date']}}</td> 
+                        <td>{{date('j F Y',strtotime($data['date']))}}</td> 
                         <td> {{$data['inTime']}} </td>
-                         <td> {{$data['outTime']}} </td>
-                         <td></td>
+                        <td> {{$data['outTime']}} </td>
+                        <td></td>
                      </tr>
                      @endforeach
+                     @else
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                     @endif
                     </tbody>
                   </table>
           

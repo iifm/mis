@@ -145,7 +145,32 @@ class ManagerController extends Controller
 
   public function managerAttendanceIndex()
   {  
-  
+      $strtYear=date('Y').'-04-01';
+      $endYear=date('Y',strtotime('+1 year')).'-03-31';
+      $user_role=Auth::user()->role;
+      $loginId=Auth::user()->id;
+       
+        $role_detail=Role::where('id',$user_role)->first();
+
+        //dd($role_detail);
+       $manager_access_zone =explode(",",$role_detail->access_zone);
+      // dd($manager_access_zone);
+       $member_ids=[];
+       if ($role_detail->access_zone=='All') {
+          $team_members=User::join('user_details','user_details.id','=','users.id')
+                                ->where('user_details.status','Active')
+                                ->pluck('users.id')->toArray();
+                     // dd($team_members);
+       }
+       else{
+        //dd($manager_access_zone);
+          $team_members=User::whereIn('role',$manager_access_zone)
+                                ->join('user_details','user_details.user_id','=','users.id')
+                                ->where('user_details.status','Active')
+                                ->pluck('users.id')->toArray();
+                    //dd($team_members);
+       }
+     return view('manager.attendance.index');
   }
   
 }

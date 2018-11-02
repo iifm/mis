@@ -116,6 +116,9 @@ class AttendanceController extends Controller
     }
 
 //dd($sundays);
+
+      $prathamHolidays=[date('Y-01-01')=>'New Year',date('Y-01-26')=>'Republic Day',date('Y-08-15')=>'Independance Day',date('Y-10-02')=>'Gandhi Jayanti',date('2018-11-07')=>'Diwali'];
+      //dd($prathamHolidays);
            
            $flag=0;
             $datas = [];
@@ -169,6 +172,8 @@ class AttendanceController extends Controller
                           }
 
                           $sunday_day = array_intersect([$start], $sundays);
+
+
 
                          //dd($sunday_day);
 
@@ -428,7 +433,7 @@ class AttendanceController extends Controller
 
                                  //   dd($att_detail);
   
-      if (count($att_detail)==0) {
+      if (count($att_detail)>=0) {
          $approvalfrom=implode(",", $request->approvalfrom);
 
 
