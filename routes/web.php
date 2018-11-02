@@ -116,7 +116,7 @@ Route::post('/on-duty/store', 'OnDutyController@store');
 
 //Change Password
 Route::get('/change-password','HomeController@changePasswordView')->name('changePassword');
-Route::post('/changePassword','HomeController@changePassword');
+Route::post('/changePassword/store','HomeController@changePassword');
 
 
 //Report 

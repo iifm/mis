@@ -52,7 +52,7 @@
                                 {{ session('success') }}
                             </div>
                         @endif
-                    <form class="form-horizontal" method="POST" action="{{ route('changePassword') }}" autocomplete="off">
+                    <form class="form-horizontal" method="POST" action="{{ url('/changePassword/store') }}" autocomplete="off">
                         {{ csrf_field() }}
  
                         <div class="form-group{{ $errors->has('current-password') ? ' has-error' : '' }}">

@@ -295,19 +295,23 @@ class LeaveController extends Controller
       }
       else
       { 
-          $subject ="Re: ".$leaveDetails->leavetype." Requested By " .$leaveDetails->username ."  on ". date("l jS \of F Y",strtotime($leaveDetails->leavefrom));
+          $subject ="Re: ".$leaveDetails->leavetype." Requested By " .$leaveDetails->username ."  on ". date("l jS \of F Y");
       }
 
        $data=['username'=>$leaveDetails->username,'type'=>$leaveDetails->leavetype,'from'=>$leaveDetails->leavefrom,'to'=>$leaveDetails->leaveto,'days'=>$leaveDetails->totalleave,'reason'=>$leaveDetails->reason,'status'=>$leaveDetails->status,'approvedby'=>$approvedby->name];
 
        $to_email=[$email->email];
+
+       //dd($data);
       
          Mail::send('mail.leaveRequestApproved',  ['data' => $data], function ($message)use($to_email,$subject) {
              $message->from('info@prathamonline.in', 'MIS Alert');
-                 $message->to([$to_email]);
+                 $message->to($to_email);
                  $message->subject($subject);
 
             });
+
+
       
        Session::flash('message','Leave Status Updated Successfully!!');
        return redirect()->route('dashboard');

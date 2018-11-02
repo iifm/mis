@@ -381,9 +381,10 @@ class AttendanceController extends Controller
    
     public function updateBothAttendance($user_id,$date)
     {
-      $managers=User::whereIn('id',[1,272,271,125,122,105,39,68,66,29,225,52,264,201,51,71])
+      $managers=User::whereIn('id',[1,272,271,125,122,105,39,68,66,29,225,52,264,201,51,71,377])
                            ->where('id','!=',Auth::id())
                            ->orWhere('id',1)
+                           ->orWhere('id',377)
                            ->get(); 
           $user=User::find($user_id);
 
