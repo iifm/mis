@@ -162,7 +162,7 @@ class ManagerController extends Controller
          $attendances_manager_index= AttendanceUpdate::where('status','Pending')
                                                 ->orWhere('status','')
                                                 ->join('users','users.id','=','attendance_updates.user_id')
-                                                ->select('users.name as username','attendance_updates.*')
+                                                ->select('users.name as username','attendance_updates.*','attendance_updates.id as att_id')
                                                 ->get();
                               
             return view('manager.attendance.index',compact('attendances_manager_index')); 
