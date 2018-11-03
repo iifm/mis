@@ -184,6 +184,7 @@ use App\NewsUpload;
             <li><a class="treeview-item" href="{{url('/conveyance-report')}}"><i class="icon fa fa-inr"></i>Conveyance </a></li>
             <li><a class="treeview-item" href="{{url('/attendance-report')}}"><i class="icon fa fa-calendar"></i> Attendance </a></li>
              <li><a class="treeview-item" href="{{url('/leave-report')}}"><i class="icon fa fa-calendar-o"></i> Leave </a></li>
+              <li><a class="treeview-item" href="{{url('admin/report/leave-summary')}}"><i class="icon fa fa-list"></i> Leave Summary</a></li>
             
           </ul>
         </li>

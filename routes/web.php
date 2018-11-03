@@ -236,3 +236,5 @@ Route::get('manager-zone/request/view-detail/{id}','RequestController@viewDetail
 
 //user's Manager
 Route::get('admin/user-manager/index','UserManagerController@index');
+
+Route::get('admin/report/leave-summary','ReportController@leaveSummaryReport');

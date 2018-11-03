@@ -10,6 +10,7 @@ use DateTime;
 use App\User;
 use App\OnDuty;
 use App\Leave;
+use App\UserDetails;
 
 class ReportController extends Controller
 {
@@ -538,5 +539,62 @@ class ReportController extends Controller
     public function approval()
     {
       return view('approval');
+    }
+
+    public function leaveSummaryReport(Request $request)
+    {
+       
+      $strtYear=date('Y').'-04-01';  
+      $endYear=date('Y',strtotime('+1 year')).'-03-31';
+      $currenDate = date('Y-m-d');
+      $leaveSummaryDetails=[];
+
+        $user_ids=User::join('user_details','user_details.user_id','=','users.id')
+                      ->where('user_details.status','Active')
+                      ->pluck('users.id')
+                      ->toArray();
+       foreach ($user_ids as  $user_id) {
+             $user_details=UserDetails::where('user_id',$user_id)->first();
+             $username=User::find($user_id);
+
+             if (strtotime($user_details->doj)> strtotime($strtYear)) {
+             
+                  $datetime1 = date_create($user_details->doj);
+                  $datetime2 = date_create(date('Y-m-d'));
+
+                  $interval = date_diff($datetime1, $datetime2);
+                  $diff=$interval->format('%m'); 
+                  $total_leaves=$diff*1.75;
+
+           }
+        else{
+
+                $datetime1 = date_create($strtYear);
+                $datetime2 = date_create($currenDate);
+                $interval = date_diff($datetime1, $datetime2);
+                $diff=$interval->format('%m'); 
+                $total_leaves=$diff*1.75;
+         }
+
+           $leave_approved=Leave::whereBetween('leavefrom',[$strtYear,$currenDate])
+                        ->where('empid',$user_id)
+                        ->where('leavetype','!=','Comp Off')
+                        ->where('status','!=','rejected')
+                        ->select(DB::raw('sum(totalleave) as total_leaves'))
+                        ->get();
+          foreach ($leave_approved as $value) {
+               $leave_approved=$value->total_leaves;
+            }
+
+
+         $leaveSummaryDetails[]=['leave_generated'=>$total_leaves,
+                               'leave_taken'=> $leave_approved,
+                                'leave_balance'=>$total_leaves-$leave_approved,
+                                'username'=>$username->name
+                              ];
+
+       }
+       //return $leaveSummaryDetails;
+      return view('mis.report.leaveSummary',compact(['leaveSummaryDetails']));
     }
 }

@@ -23,20 +23,19 @@ class LeaveController extends Controller
 
     public function index($id)
     {
-        $cyear=date('Y');
        
+     // dd($id);
+       $cyear=date('Y'); 
        $strtYear=date('Y').'-04-01';
        //dd($strtYear);
        $endYear=date('Y',strtotime('+1 year')).'-03-31';
         $currenDate = date('Y-m-d');
 
-     
-
-        $user_details=UserDetails::where('user_id',Auth::user()->id)->first();
+        $user_details=UserDetails::where('user_id',$id)->first();
 
 
       
- if (strtotime($user_details->doj)> strtotime($strtYear)) {
+      if (strtotime($user_details->doj)> strtotime($strtYear)) {
              
          $datetime1 = date_create($user_details->doj);
           $datetime2 = date_create(date('Y-m-d'));
@@ -316,9 +315,5 @@ class LeaveController extends Controller
        Session::flash('message','Leave Status Updated Successfully!!');
        return redirect()->route('manager.leave.index');
     }
-
-
   
-
-   
 }
