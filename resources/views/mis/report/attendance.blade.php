@@ -114,13 +114,13 @@
                       @if($datas != '')
                       @foreach($datas as $data)
                       <tr role="row" class="odd">
-                       <td>{{ $i++ }}</td>
+                        <td>{{ $i++ }}</td>
                         <td>{{strtoupper($data['username'])}}</td>
                         <td>{{date('j F Y',strtotime($data['date']))}}</td> 
-                         <td>{{date('l',strtotime($data['date']))}}</td>
+                        <td>{{date('l',strtotime($data['date']))}}</td>
                         <td> {{$data['inTime']}} </td>
                         <td> {{$data['outTime']}} </td>
-                        <td></td>
+                        <td>{{$data['remark_all']}}</td>
                      </tr>
                      @endforeach
                      @else

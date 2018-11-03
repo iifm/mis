@@ -54,26 +54,26 @@
                     <th>Date </th>
                     <th>In-Time</th>
                     <th>Out-Time</th>
-                    <th style="padding-left: 100px;padding-right: 100px;">Reason</th>
+                    <th style="padding-left: 80px;padding-right: 80px;">Reason</th>
                     <th>Status</th>
                     <th>Action</th>        
                   </tr>
                 </thead>
                 <tbody>
-               
+               @foreach($attendances_manager_index as $attendance_manager_index)
                 <tr>
                     <td><?= $i++;?></td>
-                    <td><h6></h6></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td><h6>{{$attendance_manager_index->username}}</h6></td>
+                    <td>{{date('j F Y',strtotime($attendance_manager_index->date))}}</td>
+                    <td>{{$attendance_manager_index->in_time}}</td>
+                    <td>{{$attendance_manager_index->out_time}}</td>
+                    <td>{{$attendance_manager_index->reason}}</td>
+                    <td>{{$attendance_manager_index->status}}</td>
                     <td>
-                      <a href="" class="btn btn-primary fa fa-thumbs-up"> Approve/Disapprove</a>
+                      <a href="{{url('update-attendance/both')}}/{{$attendance_manager_index->att_id}}" class="btn btn-primary fa fa-thumbs-up"> Approve/Disapprove</a>
                     </td>
                 </tr>
-              
+              @endforeach
             
         </tbody>
  

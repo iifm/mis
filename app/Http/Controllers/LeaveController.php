@@ -314,7 +314,7 @@ class LeaveController extends Controller
 
       
        Session::flash('message','Leave Status Updated Successfully!!');
-       return redirect()->route('dashboard');
+       return redirect()->route('manager.leave.index');
     }
 
 

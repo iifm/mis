@@ -630,6 +630,6 @@ class AttendanceController extends Controller
         }   
 
         Session::flash('message','Attendance Status Updated Successfully!!');
-        return redirect()->route('dashboard');
+        return redirect()->route('manager.attendance.index');
     }
 }

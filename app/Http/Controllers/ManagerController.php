@@ -149,43 +149,48 @@ class ManagerController extends Controller
       $strtYear=date('Y').'-04-01';
       $endYear=date('Y',strtotime('+1 year')).'-03-31';
       $user_role=Auth::user()->role;
+
       $loginId=Auth::user()->id;
        
-        $role_detail=Role::where('id',$user_role)->first();
+      $role_detail=Role::where('id',$user_role)->first();
+      $attendances_manager_index=[];
 
         //dd($role_detail);
        $manager_access_zone =explode(",",$role_detail->access_zone);
-   
-       
-       $attendance_ids= AttendanceUpdate::where('status','Pending')
-                                ->orWhere('status','')
-                                ->pluck('id')
-                                ->toArray();
-
-              foreach ($attendance_ids as $attendance_id) {
-                $attendance_details=AttendanceUpdate::find($attendance_id);
-                $approvalfrom_manager_ids=$attendance_details->approvalfrom;
-                $approvalfrom_manager_array=explode(",", $approvalfrom_manager_ids);
-
-
-               
-              }
-
-
-
        if ($role_detail->access_zone=='All') {
-            
-                        //dd($member_ids);
+
+         $attendances_manager_index= AttendanceUpdate::where('status','Pending')
+                                                ->orWhere('status','')
+                                                ->join('users','users.id','=','attendance_updates.user_id')
+                                                ->select('users.name as username','attendance_updates.*')
+                                                ->get();
+                              
+            return view('manager.attendance.index',compact('attendances_manager_index'));
+                                
        }
        else{
-        //dd($manager_access_zone);
-          $team_members=User::whereIn('role',$manager_access_zone)
-                                ->join('user_details','user_details.user_id','=','users.id')
-                                ->where('user_details.status','Active')
-                                ->pluck('users.id')->toArray();
-                    //dd($team_members);
+            $managers_ids=Role::where('access_zone','!=','0')->pluck('id')->toArray();
+            foreach ($managers_ids as  $managers_id) {
+              $manager_access_zone=$role_detail->access_zone;
+              $manager_access_zone_array=explode(",", $manager_access_zone);
+              $manager_team_member_ids=User::whereIn('role',$manager_access_zone_array)->pluck('id')->toArray();
+             
+              $attendances_manager_index= AttendanceUpdate::where('status','Pending')
+                                                ->orWhere('status','')
+                                                ->whereIn('user_id',$manager_team_member_ids)
+                                                ->join('users','users.id','=','attendance_updates.user_id')
+                                                ->select('users.name as username','attendance_updates.*','attendance_updates.id as att_id')
+                                                ->get();
+                   return view('manager.attendance.index',compact('attendances_manager_index'));
+
+            }
+
+
+
+
+              return view('manager.attendance.index',compact('attendances_manager_index'));
        }
-     return view('manager.attendance.index');
+    
   }
   
 }

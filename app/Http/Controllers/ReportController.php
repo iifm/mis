@@ -8,6 +8,8 @@ use App\Attendance;
 use DB;
 use DateTime;
 use App\User;
+use App\OnDuty;
+use App\Leave;
 
 class ReportController extends Controller
 {
@@ -163,10 +165,15 @@ class ReportController extends Controller
 
     if ($request->has('strtDate') && $request->has('endDate')) {
             
-
+           $flag=0;
+            $datas = [];
+            $remark_all='Absent';
           while(strtotime($start) <= strtotime($end)) {
              foreach ($member_ids as $member_id) {
                    
+                $flag=0;
+                $remark_all='Absent';
+
             $attendances = DB::table('attendances')
                                ->where('date',$start)
                                ->where('member_id',$member_id)
@@ -188,13 +195,41 @@ class ReportController extends Controller
 
                     $user_name=User::find($member_id); 
 
+                     $userOnduty=OnDuty::where('od_date',$start)
+                                  ->where('empid',$member_id)->get();
+
+                         if (count($userOnduty)>0){
+                            $remark_all = 'On Duty';
+                            $flag=1;
+                         }
+                         else{
+                              $userLeave=Leave::where('leavefrom',$start)
+                                                 ->where('empid',$member_id)->first();      
+
+                                //dd($user_id);            
+                                if($userLeave != '') {
+                                  $remark_all = $userLeave->leavetype;
+                                  if ($userLeave->leavetype=='Casual Leave' && $userLeave->totalleave > 1) {
+                                    $total_days=$userLeave->totalleave;
+                                        for ($i=$total_days; $i <=1 ; $i--) { 
+                                          
+                                         }
+                                  }
+                                  $flag = 1;
+                                }
+                                else{
+                                  $flag =0;
+                                }
+                          }
+
                        
                     $datas[] = array(
                         'date'=>$start,
                         'inTime'=>'NA',
                         'outTime'=>'NA',
                         'username'=>$user_name->name,
-                        'user_id'=>$member_id
+                        'user_id'=>$member_id,
+                         'remark_all'=>$remark_all
                        
                     );  
                     
@@ -225,7 +260,8 @@ class ReportController extends Controller
                             'inTime'=>$attendances->time,
                             'outTime'=>$outtime,
                             'username'=>$attendances->username,
-                            'user_id'=>$user_id
+                            'user_id'=>$user_id,
+                            'remark_all'=>'Present'
                             
                         );       
                     }
@@ -234,6 +270,7 @@ class ReportController extends Controller
            }
 
             $start = date ("Y-m-d", strtotime("+1 days", strtotime($start)));
+             $remark_all='Absent';
 
           }
 //return $datas;
