@@ -164,14 +164,13 @@ class AttendanceController extends Controller
                                                  ->where('empid',$user_id)->first();      
 
                                 //dd($user_id);            
-                                if($userLeave!= '') {
+                                if($userLeave != '') {
                                   $remark_all = $userLeave->leavetype;
-                                  if ($userLeave->leavetype=='Casual Leave') {
-                                    
+                                  if ($userLeave->leavetype=='Casual Leave' && $userLeave->totalleave > 1) {
                                     $total_days=$userLeave->totalleave;
-                                      while ($total_days <= 1) {
-                                        # code...
-                                      }
+                                        for ($i=$total_days; $i <=1 ; $i--) { 
+                                          
+                                         }
                                   }
                                   $flag = 1;
                                 }

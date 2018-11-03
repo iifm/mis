@@ -102,6 +102,7 @@
                         <th>#</th>
                         <th>NAME</th>
                          <th>DATE</th>
+                         <th>DAY</th>
                         <th>IN TIME</th>
                         <th>OUT TIME</th>
                         <th>REMARK</th>
@@ -116,6 +117,7 @@
                        <td>{{ $i++ }}</td>
                         <td>{{strtoupper($data['username'])}}</td>
                         <td>{{date('j F Y',strtotime($data['date']))}}</td> 
+                         <td>{{date('l',strtotime($data['date']))}}</td>
                         <td> {{$data['inTime']}} </td>
                         <td> {{$data['outTime']}} </td>
                         <td></td>

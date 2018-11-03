@@ -10,6 +10,7 @@ use App\Leave;
 use DB;
 use App\OnDuty;
 use App\Conveyance;
+use App\AttendanceUpdate;
 
 class ManagerController extends Controller
 {
@@ -154,13 +155,27 @@ class ManagerController extends Controller
 
         //dd($role_detail);
        $manager_access_zone =explode(",",$role_detail->access_zone);
-      // dd($manager_access_zone);
-       $member_ids=[];
+   
+       
+       $attendance_ids= AttendanceUpdate::where('status','Pending')
+                                ->orWhere('status','')
+                                ->pluck('id')
+                                ->toArray();
+
+              foreach ($attendance_ids as $attendance_id) {
+                $attendance_details=AttendanceUpdate::find($attendance_id);
+                $approvalfrom_manager_ids=$attendance_details->approvalfrom;
+                $approvalfrom_manager_array=explode(",", $approvalfrom_manager_ids);
+
+
+               
+              }
+
+
+
        if ($role_detail->access_zone=='All') {
-          $team_members=User::join('user_details','user_details.id','=','users.id')
-                                ->where('user_details.status','Active')
-                                ->pluck('users.id')->toArray();
-                     // dd($team_members);
+            
+                        //dd($member_ids);
        }
        else{
         //dd($manager_access_zone);
