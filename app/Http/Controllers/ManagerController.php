@@ -165,7 +165,7 @@ class ManagerController extends Controller
                                                 ->select('users.name as username','attendance_updates.*')
                                                 ->get();
                               
-            
+            return view('manager.attendance.index',compact('attendances_manager_index')); 
                                 
        }
        else{
@@ -181,13 +181,11 @@ class ManagerController extends Controller
                                                 ->join('users','users.id','=','attendance_updates.user_id')
                                                 ->select('users.name as username','attendance_updates.*','attendance_updates.id as att_id')
                                                 ->get();
-              
-              //dd($attendances_manager_index);    
 
             }
 
 
-              return view('manager.attendance.index',compact('attendances_manager_index'));
+           return view('manager.attendance.index',compact('attendances_manager_index'));
        }
     
   }
