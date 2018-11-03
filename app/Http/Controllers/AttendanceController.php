@@ -161,9 +161,18 @@ class AttendanceController extends Controller
                          }
                          else{
                               $userLeave=Leave::where('leavefrom',$start)
-                                ->where('empid',$user_id)->first();                  
+                                                 ->where('empid',$user_id)->first();      
+
+                                //dd($user_id);            
                                 if($userLeave!= '') {
                                   $remark_all = $userLeave->leavetype;
+                                  if ($userLeave->leavetype=='Casual Leave') {
+                                    
+                                    $total_days=$userLeave->totalleave;
+                                      while ($total_days <= 1) {
+                                        # code...
+                                      }
+                                  }
                                   $flag = 1;
                                 }
                                 else{
@@ -248,11 +257,9 @@ class AttendanceController extends Controller
            
             $message="Your Last Seven Days Attendance";
 
-           // $last_seven_day=date('Y-m-d', strtotime('-6 days'));
+           $last_seven_day=date('Y-m-d', strtotime('-6 days'));
 
-            $last_seven_day=date('Y-09-23') ;
-            //dd($last_seven_day);
-
+        
             $now=date('Y-m-d');
             $startDate = new DateTime($last_seven_day);
             $endDate = new DateTime($now);
