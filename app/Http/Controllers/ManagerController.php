@@ -169,21 +169,18 @@ class ManagerController extends Controller
                                 
        }
        else{
-            $managers_ids=Role::where('access_zone','!=','0')->pluck('id')->toArray();
-            foreach ($managers_ids as  $managers_id) {
+          
+           
                 $manager_access_zone=$role_detail->access_zone;
+
                 $manager_access_zone_array=explode(",", $manager_access_zone);
                 $manager_team_member_ids=User::whereIn('role',$manager_access_zone_array)->pluck('id')->toArray();
-             
-              $attendances_manager_index= AttendanceUpdate::where('status','Pending')
-                                                ->orWhere('status','')
-                                                ->whereIn('user_id',$manager_team_member_ids)
+
+              $attendances_manager_index= AttendanceUpdate::Where('status','!=','approved')
+                                                ->whereIn('attendance_updates.user_id',$manager_team_member_ids)
                                                 ->join('users','users.id','=','attendance_updates.user_id')
-                                                ->select('users.name as username','attendance_updates.*','attendance_updates.id as att_id')
+                                               ->select('users.name as username','attendance_updates.*','attendance_updates.id as att_id')
                                                 ->get();
-
-            }
-
 
            return view('manager.attendance.index',compact('attendances_manager_index'));
        }
