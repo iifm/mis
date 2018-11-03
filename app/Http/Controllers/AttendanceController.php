@@ -512,12 +512,24 @@ class AttendanceController extends Controller
                                             ->where('attendance_updates.id',$id)
                                             ->select('attendance_updates.*','users.name as username','user_details.mobile as mobile','users.*','attendance_updates.user_id as empid')
                                             ->first();
+              $approvedbyName='';
+             if ($attendance_details->approvedby!='') {
+                $approvedby= User::find($attendance_details->approvedby);
+                $approvedbyName=$approvedby->name;
+
+                $message = "Note:- This Request has been ".$attendance_details->status. " by ". $approvedbyName;
+
+               // dd($approvedbyName);
+             }
+             else{
+              $message = "Note:- This request is Pending. Please do the needful. ";
+             }
 
               if ($attendance_details->empid==Auth::id()) {
                 return redirect()->route('dashboard');
               }
               else{
-                 return view('updateBothAttendanceApprove',compact(['attendance_details','id']));
+                 return view('updateBothAttendanceApprove',compact(['attendance_details','id','message']));
               }
 
          

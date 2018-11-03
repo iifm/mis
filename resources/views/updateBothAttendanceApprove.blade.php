@@ -27,6 +27,9 @@
           {{csrf_field()}}
          
          <div class="row">
+
+          <div class="col-md-12" style="font-size:16px; color:red; padding-bottom:20px;"><center>{{$message}}</center></div>
+
           <div class="col-md-4">
           	<div class="form-group">
             <label class="control-label">Applicant Name</label>
@@ -98,14 +101,11 @@
              <div class="col-md-6">
            
            <button class="btn btn-primary" type="submit" style="margin-top: 25px; "><i class=""></i>SUBMIT YOUR RESPONSE </button>
-             
+              
             </div>
+            
           </div>
-         <div class="row">
-          <div class="col-md-12">
-          <center> </center> 
-          </div>
-          </div>
+        
         </form>
      
       </div>
