@@ -150,20 +150,6 @@ class ReportController extends Controller
       $end =$request->endDate;
 
       $prathamHolidays=[date('Y-01-01'),date('Y-01-26'),date('Y-08-15'),date('Y-10-02'),date('2018-11-07')];
-       $startDate = new DateTime($start);
-            $endDate = new DateTime($end);
-           $sundays = array();
-
-          while ($startDate <= $endDate) 
-          {
-             if ($startDate->format('w') == 0)
-              {
-                $sundays[] = $startDate->format('Y-m-d');
-              }
-
-               $startDate->modify('+1 day');
-          }
-
 
       if ($request->employee=='') {
         $member_ids= Attendance::whereBetween('date',[$start,$end])
@@ -252,16 +238,6 @@ class ReportController extends Controller
                                 }
                           }
 
-
-
-                           foreach ($sundays as  $sunday) {
-                             if ($remark_all=='Absent' && $sunday==$start) {
-                                  $remark_all='Sunday';
-                             }
-                             else{
-                                $remark_all=$remark_all;
-                             }
-                          }
 
                           foreach ($prathamHolidays as  $prathamHoliday) {
                             if ($remark_all=='Absent' && $prathamHoliday==$start) {
