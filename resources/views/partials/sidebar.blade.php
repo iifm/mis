@@ -117,7 +117,7 @@ use App\NewsUpload;
           
               <li><a class="treeview-item" href="{{url('/attendance-view')}}"><i class="icon fa fa-eye"></i>View Attendance</a></li>
              
-             <li><a class="treeview-item " href="{{url('/on-duty')}}"><i class="icon fa fa-tag "></i>Apply On-Duty</a></li>
+           <!--   <li><a class="treeview-item " href="{{url('/on-duty')}}"><i class="icon fa fa-tag "></i>Apply On-Duty</a></li> -->
               <li><a class="treeview-item" href="{{url('/conveyance')}}"><i class="icon fa fa-inr"></i>Submit Conveyance</a></li>
                <li><a class="treeview-item" href="{{url('/user-details')}}"><i class="icon fa fa-user"></i>User Profile</a></li> 
                 <li><a class="treeview-item" href="{{url('/photo-album')}}"><i class="icon fa fa-file-image-o"></i>Photo Album</a></li> 

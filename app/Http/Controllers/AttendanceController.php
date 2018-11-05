@@ -143,9 +143,7 @@ class AttendanceController extends Controller
                                ->where('type','IN')
                                 ->whereBetween('date',[$start,$end])
                                ->orderBy('id', 'ASC')->pluck('member_id'); 
-                              // dd($user_ids);              
-
-               // dd($user_ids);
+                        
 
 
                   if($attendances==null) {
@@ -161,15 +159,29 @@ class AttendanceController extends Controller
                          }
                          else{
                               $userLeave=Leave::where('leavefrom',$start)
-                                                 ->where('empid',$user_id)->first();      
+                                                 ->where('empid',$user_id)
+                                                 ->first();      
 
                                 //dd($user_id);            
                                 if($userLeave != '') {
                                   $remark_all = $userLeave->leavetype;
                                   if ($userLeave->leavetype=='Casual Leave' && $userLeave->totalleave > 1) {
                                     $total_days=$userLeave->totalleave;
-                                        for ($i=$total_days; $i <=1 ; $i--) { 
-                                          
+                                   
+                                        for($i=1; $i <$total_days; $i++){ 
+                                                $username=User::find($user_id);
+                                                $emp_name=$username->name;
+
+                                            $datas[] = array(
+                                                            'date'=>$start,
+                                                            'inTime'=>'NA',
+                                                            'outTime'=>'NA',
+                                                            'username'=>$emp_name,
+                                                            'user_id'=>$user_id,
+                                                            'remark_all'=>$userLeave->leavetype
+                                                );  
+
+                                           $start = date ("Y-m-d", strtotime("+1 days", strtotime($start)));   
                                          }
                                   }
                                   $flag = 1;
@@ -317,6 +329,25 @@ class AttendanceController extends Controller
                                 ->where('empid',$user_id)->first();                  
                                 if($userLeave!= '') {
                                   $remark_all = $userLeave->leavetype;
+                                       if ($userLeave->leavetype=='Casual Leave' && $userLeave->totalleave > 1) {
+                                    $total_days=$userLeave->totalleave;
+                                   
+                                        for($i=1; $i <$total_days; $i++){ 
+                                                $username=User::find($user_id);
+                                                $emp_name=$username->name;
+                                                
+                                            $datas[] = array(
+                                                            'date'=>$last_seven_day,
+                                                            'inTime'=>'NA',
+                                                            'outTime'=>'NA',
+                                                            'username'=>$emp_name,
+                                                            'user_id'=>$user_id,
+                                                            'remark_all'=>$userLeave->leavetype
+                                                );  
+
+                                           $last_seven_day = date ("Y-m-d", strtotime("+1 days", strtotime($last_seven_day)));   
+                                         }
+                                  }
                                 }
                                 else{
                                   $remark_all='Absent';

@@ -592,9 +592,8 @@ class ReportController extends Controller
                                 'leave_balance'=>$total_leaves-$leave_approved,
                                 'username'=>$username->name
                               ];
-
        }
-       //return $leaveSummaryDetails;
+     
       return view('mis.report.leaveSummary',compact(['leaveSummaryDetails']));
     }
 }
