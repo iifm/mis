@@ -210,10 +210,23 @@ class ReportController extends Controller
                                 //dd($user_id);            
                                 if($userLeave != '') {
                                   $remark_all = $userLeave->leavetype;
-                                  if ($userLeave->leavetype=='Casual Leave' && $userLeave->totalleave > 1) {
+                                           if ($userLeave->leavetype=='Casual Leave' && $userLeave->totalleave > 1) {
                                     $total_days=$userLeave->totalleave;
-                                        for ($i=$total_days; $i <=1 ; $i--) { 
-                                          
+                                   
+                                        for($i=1; $i <$total_days; $i++){ 
+                                                $username=User::find($user_id);
+                                                $emp_name=$username->name;
+                                                
+                                            $datas[] = array(
+                                                            'date'=>$start,
+                                                            'inTime'=>'NA',
+                                                            'outTime'=>'NA',
+                                                            'username'=>$emp_name,
+                                                            'user_id'=>$user_id,
+                                                            'remark_all'=>$userLeave->leavetype
+                                                );  
+
+                                           $start = date ("Y-m-d", strtotime("+1 days", strtotime($start)));   
                                          }
                                   }
                                   $flag = 1;
@@ -274,8 +287,7 @@ class ReportController extends Controller
              $remark_all='Absent';
 
           }
-//return $datas;
-         
+
             return view('mis.report.attendance',compact(['datas','users','message','edit_option','user_id']));
           } 
 
