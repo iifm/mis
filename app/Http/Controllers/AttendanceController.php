@@ -117,7 +117,7 @@ class AttendanceController extends Controller
 
 //dd($sundays);
 
-      $prathamHolidays=[date('Y-01-01')=>'New Year',date('Y-01-26')=>'Republic Day',date('Y-08-15')=>'Independance Day',date('Y-10-02')=>'Gandhi Jayanti',date('2018-11-07')=>'Diwali'];
+      $prathamHolidays=[date('Y-01-01'),date('Y-01-26'),date('Y-08-15'),date('Y-10-02'),date('2018-11-07')];
       //dd($prathamHolidays);
            
            $flag=0;
@@ -191,12 +191,24 @@ class AttendanceController extends Controller
                                 }
                           }
 
-                          $sunday_day = array_intersect([$start], $sundays);
+                         
+                          $prathamHolidays_day = array_intersect([$start], $prathamHolidays);
 
+                           if($flag==0) {
+                            //$remark_all = is_null(array_search($start, $sundays))? $remark_all : 'Sunday';
+                            if(!$prathamHolidays_day){
 
+                              $remark_all = 'Absent';
+                            }
+                            else{
+                              //return $prathamHolidays_day;
+                              $remark_all = 'Pratham Official Holiday';
+                              $flag=1;
+                            }
+                          }
+                         
 
-                         //dd($sunday_day);
-
+                           $sunday_day = array_intersect([$start], $sundays);
                           if($flag===0) {
                             //$remark_all = is_null(array_search($start, $sundays))? $remark_all : 'Sunday';
                             if(!$sunday_day){
@@ -269,6 +281,8 @@ class AttendanceController extends Controller
             $message="Your Last Seven Days Attendance";
 
            $last_seven_day=date('Y-m-d', strtotime('-6 days'));
+
+            $prathamHolidays=[date('Y-01-01'),date('Y-01-26'),date('Y-08-15'),date('Y-10-02'),date('2018-11-07')];
 
         
             $now=date('Y-m-d');
@@ -357,6 +371,15 @@ class AttendanceController extends Controller
                           foreach ($sundays as  $sunday) {
                              if ($remark_all=='Absent' && $sunday==$last_seven_day) {
                                   $remark_all='Sunday';
+                             }
+                             else{
+                                $remark_all=$remark_all;
+                             }
+                          }
+
+                          foreach ($prathamHolidays as  $prathamHoliday) {
+                            if ($remark_all=='Absent' && $prathamHoliday==$last_seven_day) {
+                                  $remark_all='Pratham Official Holiday';
                              }
                              else{
                                 $remark_all=$remark_all;
