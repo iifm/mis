@@ -51,7 +51,31 @@
         <div class="col-md-12">
           <div class="tile">
             <div class="tile-body">
-            
+              <form action="{{url('/leave-report/summary/data')}}" method="get" autocomplete="off">
+                {{csrf_field()}}
+                <table width="50%" style="min-width:600px; ">
+                  <thead>
+                    <tr>
+                  <th width="20%"><label class="form-group">TO</label></th>
+                  <th width="20%"><label class="form-group">FROM</label></th>
+                   
+                  <th width="20%"><label class="form-group"></label></th>
+                  </tr>
+                  
+                  </thead>
+                  <tbody>
+                    <tr>
+                    <td><input type="text" class="form-control " placeholder="{{date('j F Y',strtotime(date('Y-04-01')))}}" name="strtDate" readonly></td>
+                    <td><input type="text" class="form-control datepicker" placeholder="End Date" name="endDate"></td>
+                    
+                     <td align=""><input type="submit" name="" class="btn btn-primary" style="margin-left: 25px; width: 100px;"> </td>
+                    </tr>
+                    <tr>
+                     
+                    </tr>
+                  </tbody>
+                </table>
+              </form>
             </div>
 
             <div class="row" style="margin-top: 50px;">

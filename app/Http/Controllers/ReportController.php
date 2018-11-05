@@ -577,7 +577,53 @@ class ReportController extends Controller
                       ->where('user_details.status','Active')
                       ->pluck('users.id')
                       ->toArray();
-       foreach ($user_ids as  $user_id) {
+          $users=User::join('user_details','user_details.user_id','=','users.id')
+                      ->where('user_details.status','Active')
+                      ->orderBy('users.name')
+                      ->get();
+
+        if ($request->has('endDate')) {
+            foreach ($user_ids as  $user_id) {
+              $endDate=$request->endDate;
+              $user_details=UserDetails::where('user_id',$user_id)->first();
+               $username=User::find($user_id);
+                   if (strtotime($user_details->doj)> strtotime($strtYear)) {
+             
+                  $datetime1 = date_create($user_details->doj);
+                  $datetime2 = date_create($endDate);
+
+                  $interval = date_diff($datetime1, $datetime2);
+                  $diff=$interval->format('%m'); 
+                  $total_leaves=$diff*1.75;
+
+           }
+        else{
+
+                $datetime1 = date_create($strtYear);
+                $datetime2 = date_create($endDate);
+                $interval = date_diff($datetime1, $datetime2);
+                $diff=$interval->format('%m'); 
+                $total_leaves=$diff*1.75;
+             }
+             $leave_approved=Leave::whereBetween('leavefrom',[$strtYear,$endDate])
+                        ->where('empid',$user_id)
+                        ->where('leavetype','!=','Comp Off')
+                        ->where('status','!=','rejected')
+                        ->select(DB::raw('sum(totalleave) as total_leaves'))
+                        ->get();
+          foreach ($leave_approved as $value) {
+               $leave_approved=$value->total_leaves;
+            }
+
+             $leaveSummaryDetails[]=['leave_generated'=>$total_leaves,
+                               'leave_taken'=> $leave_approved,
+                                'leave_balance'=>$total_leaves-$leave_approved,
+                                'username'=>$username->name
+                              ];
+          }
+        }
+        else{
+           foreach ($user_ids as  $user_id) {
              $user_details=UserDetails::where('user_id',$user_id)->first();
              $username=User::find($user_id);
 
@@ -617,7 +663,10 @@ class ReportController extends Controller
                                 'username'=>$username->name
                               ];
        }
+      }
+                      
+      
      
-      return view('mis.report.leaveSummary',compact(['leaveSummaryDetails']));
+      return view('mis.report.leaveSummary',compact(['leaveSummaryDetails','users']));
     }
 }

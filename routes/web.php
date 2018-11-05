@@ -126,6 +126,7 @@ Route::get('/attendance-report','ReportController@attendanceReport')->name('atte
 Route::get('/attendance-report/data','ReportController@attendanceData');
 Route::get('/leave-report','ReportController@leaveReport')->name('leaveReport');
 Route::get('/leave-report/data','ReportController@leaveDate');
+Route::get('/leave-report/summary/data','ReportController@leaveSummaryReport');
 
 
 //Inventory Management Routes
