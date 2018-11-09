@@ -67,7 +67,7 @@
                     <td style="text-align: left;"><a href="{{URL::To('storage/app/newUploads')}}/{{$data->uploadfile}}" target="_blank">{{$data->uploadfile}}</a></td>
                     <td style="text-align: left;">
                       <a href="{{url('admin/news-edit')}}/{{$data->id}}" class="btn btn-primary btn-sm fa fa-edit"></a>
-                        @if(Session::get('access_zones')=='All')
+                        @if(Auth::user()->role==1)
                         <a onclick="return confirm('Are you sure you want to delete this item?')" href="{{url('admin/news-delete')}}/{{$data->id}}" class="btn btn-danger btn-sm fa fa-trash"></a>
                         @endif
                      </td>
