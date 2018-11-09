@@ -62,6 +62,12 @@
                         <a href="{{url('/photo-album-delete')}}/{{$photo->photo_id}}" class="fa fa-trash" style="color: red" title="Delete This Image"></a>
                         @endif  
                       </td>
+
+                    </tr>
+                    <tr>
+                      <td colspan="2">
+                        <p></p>
+                      </td>
                     </tr>
                   </table>
 
