@@ -68,7 +68,7 @@
                <div class="col-md-7 col-md-offset-2"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">Upload Image</label>
-                    <input class="form-control" id="file" name="uploadimage"  type="file" aria-describedby="emailHelp" placeholder="Upload Image" value="" required="">
+                    <input class="form-control" id="file" name="uploadimage[]"  type="file" aria-describedby="emailHelp" placeholder="Upload Image" value="" required="" multiple="">
                 </div>
              </div>
              </div>

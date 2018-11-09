@@ -113,8 +113,8 @@
                       <tr role="row" class="odd">
                         <td>{{$loop->iteration}}</td>
                         <td>{{strtoupper($leave['name'])}}</td>
-                        <td>{{$leave['from']}}</td>
-                        <td>{{$leave['to']}}</td>
+                        <td>{{date('j F Y',strtotime($leave['from']))}}</td>
+                        <td>{{date('j F Y',strtotime($leave['to']))}}</td>
                         <td>{{$leave['days']}}</td>
                          <td>{{$leave['type']}}</td>    
                         <td>{{$leave['approval']}}</td>

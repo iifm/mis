@@ -46,24 +46,39 @@ class AdminController extends Controller
 
     public function uploadstore(Request $request)
     {
-       //dd($request->all());
+    
+        $images=[];
+        if ($request->hasFile('uploadimage')) {
+            $uploadfiles=$request->file('uploadimage');
+            foreach ($uploadfiles as  $uploadfile) {
+                $image_name=$uploadfile->getClientOriginalName();
+
+                $uploadfile->storeAs('public/diwali',$image_name);
+                $images[]=$image_name;
+            }
+        }
+
+        //dd($images);
+
+        $diwali_images=implode(",", $images);
+
         $subject=$request->subject;
         $category=$request->category;
         $description=$request->description;
-        $uploadimage=$request->file('uploadimage');
+       /* $uploadimage=$request->file('uploadimage');*/
         $addedby=Auth::user()->name;
         $id=Auth::id();
         $sip=\Request::ip();
         $filename='';
         $extension='';
-     if ($request->hasFile('uploadimage')) {
+    /* if ($request->hasFile('uploadimage')) {
          $filename=$id."_".$addedby."_".strtotime(date('Y-m-d H:i:s')).$uploadimage->getClientOriginalName();
          $extension=$uploadimage->getClientOriginalExtension();
          $uploadimage->storeAs('/newUploads',$filename);
-         }    
+         }  */  
        
 
-        $store=NewsUpload::create(['subject'=>$subject,'category'=>$category,'description'=>$description,'uploadfile'=>$filename,'addedby'=>$id,'sip'=>$sip,'filetype'=>$extension]);
+        $store=NewsUpload::create(['subject'=>$subject,'category'=>$category,'description'=>$description,'uploadfile'=>$diwali_images,'addedby'=>$id,'sip'=>$sip,'filetype'=>$extension]);
        Session::flash('message','News Uploaded Successfully !!');
        return redirect()->route('news.index');
      

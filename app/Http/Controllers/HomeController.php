@@ -304,7 +304,15 @@ class HomeController extends Controller
                         }
                      }
 
-        return view('dashboard',compact(['totleaves','totod','birthdays','anniversary','workanniversary','monthBirthday','monthWorkAniversary','monthAniversary','eoms','todays_event','intime','outtime','pressReases','announcements']));
+                     $diwali_photos_array=[];
+                     $diwali_celebrations=NewsUpload::where('category','28')->get();
+                     foreach ($diwali_celebrations as $diwali_celebration) {
+                         $diwali_photos=$diwali_celebration->uploadfile;
+                         $diwali_photos_array[]=explode(",", $diwali_photos);
+                     }
+                    
+
+        return view('dashboard',compact(['totleaves','totod','birthdays','anniversary','workanniversary','monthBirthday','monthWorkAniversary','monthAniversary','eoms','todays_event','intime','outtime','pressReases','announcements','diwali_photos_array']));
     }
 
      public function changePasswordView()

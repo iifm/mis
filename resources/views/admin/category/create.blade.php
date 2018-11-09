@@ -59,6 +59,7 @@
                     <option value="text">Policy</option>
                      <option value="press">Press Release</option>
                       <option value="announcement">Announcement</option>
+                      <option value="diwali">Diwali Celebration</option>
                   </select>
                    
                 </div>
