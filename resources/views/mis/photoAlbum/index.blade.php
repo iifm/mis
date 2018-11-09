@@ -30,7 +30,9 @@
           <h3 class="heading_title"><i class="fa fa-file-image-o"></i> Photo Album Management  </h3>
  
         </div>
+         @if(Session::get('manager_zone')=='show' || Session::get('access_zones')=='All')
          <a href="{{url('/photo-album/create')}}" class="btn btn-success fa fa-plus pull-right" style="background: #009688; border:none">Add Photo</a>
+         @endif
       </div>
         @if(Session::has('message'))
         <div class="alert alert-success">{{Session::get('message')}}</div>
