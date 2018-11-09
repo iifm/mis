@@ -58,9 +58,6 @@ class AdminController extends Controller
             }
         }
 
-        //dd($images);
-
-        $diwali_images=implode(",", $images);
 
         $subject=$request->subject;
         $category=$request->category;
@@ -71,14 +68,19 @@ class AdminController extends Controller
         $sip=\Request::ip();
         $filename='';
         $extension='';
+
     /* if ($request->hasFile('uploadimage')) {
          $filename=$id."_".$addedby."_".strtotime(date('Y-m-d H:i:s')).$uploadimage->getClientOriginalName();
          $extension=$uploadimage->getClientOriginalExtension();
          $uploadimage->storeAs('/newUploads',$filename);
          }  */  
        
+       foreach ($images as $image) {
+            //dd($image);
+            $store=NewsUpload::create(['subject'=>$subject,'category'=>$category,'description'=>$description,'uploadfile'=>$image,'addedby'=>$id,'sip'=>$sip,'filetype'=>$extension]);
+       }
 
-        $store=NewsUpload::create(['subject'=>$subject,'category'=>$category,'description'=>$description,'uploadfile'=>$diwali_images,'addedby'=>$id,'sip'=>$sip,'filetype'=>$extension]);
+       
        Session::flash('message','News Uploaded Successfully !!');
        return redirect()->route('news.index');
      

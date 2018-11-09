@@ -92,7 +92,6 @@
            <select class="form-control" name="action" required="">
              <option value="">Select Action</option>
              <option value="approved">Approved</option>
-             <option value="disapproved">Disapproved</option>
               <option value="rejected">Rejected</option>
             
            </select>

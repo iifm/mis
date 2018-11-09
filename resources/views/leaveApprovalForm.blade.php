@@ -80,8 +80,8 @@
 									<select id="laction" class="form-control" name="actionstatus" required="">
 									<option >Please Select Action</option>
 									<option value="approved">Approved</option>
-									<option value="disapproved">Disapproved</option>
-									<option value="pending">Pending</option>
+									<option value="disapproved">Rejected</option>
+									
 									</select>
 							    </div> 
                             </div>

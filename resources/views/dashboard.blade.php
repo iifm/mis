@@ -3,12 +3,13 @@
   
 <head>
    
-  <title>IIFM MIS Dashboard</title>
+  <title>IIFM MIS - Dashboard</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!--   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 
     <!-- Main CSS-->
 {!!View('partials.include_css')!!}
@@ -20,6 +21,7 @@
 a {
     text-decoration: none !important;
 }
+
 </style>
 
   </head>
@@ -95,7 +97,7 @@ a {
                 <table style="height:auto; width:80%"><tr><td align="center"><b>IN-TIME</b> : {{$intime}}</td></tr><tr><td><center><a href="{{url('/attendance')}}" class="btn btn-sm btn-warning" style="color: white">Mark Attendance</a></center> </td></tr></table>
                
               @else
-                 <h6 class="heading_title" style="color: black">Today's Attendance</h6>
+                <h6 class="heading_title" style="color: black">Today's Attendance</h6>
                 <a href="{{url('/attendance')}}" class="btn btn-warning" style="color: white">Mark Attendance</a>
               @endif
               @else
@@ -259,13 +261,34 @@ a {
                 </ul>
               </div>
           </div>
+
+
+
        
         </div>
      
       
     </main>
 
-
+    <div class="modal" style="display: block; background:rgba(1,1,1,0.8);" id="popup_model">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Glimpses of Diwali Celebration</h5>
+                      <button class="close" type="button" data-dismiss="modal" id="close_model" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    </div>
+                    <div class="modal-body">
+                      <a href="{{url('/photo-album')}}">
+                      <img src="https://www.geelongaustralia.com.au/common/public/images/rh/8d5f63627363813-images101.jpg">
+                      </a>
+                     
+                    </div>
+                    <div class="modal-footer">
+                      <a href="{{url('/photo-album')}}" class="btn btn-primary" type="button">View All Images</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
 
     <!-- Essential javascripts for application to work-->
@@ -274,52 +297,25 @@ a {
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script> -->
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#example').DataTable( {
-        "scrollY":        "80px",
-        "scrollCollapse": true,
-        "paging":         false,
-        "searching":  false,
-        "bInfo" : false
-    } );
-} );
 
-
-/*var numShown = 2; // Initial rows shown & index
-var numMore = 5;  // Increment
-
-var $table = $('table').find('tbody');  // tbody containing all the rows
-var numRows = $table.find('tr').length; // Total # rows
-
-$(function () {
-    // Hide rows and add clickable div
-    $table.find('tr:gt(' + (numShown - 1) + ')').hide().end()
-        .after('<tbody id="more"><tr><td colspan="' +
-               $table.find('tr:first td').length + '"><div><a style="cursor: pointer; ">Show <span>' +
-               numMore + '</span> More</a></div</tbody></td></tr>');
-
-    $('#more').click(function() {
-        numShown = numShown + numMore;
-        // no more "show more" if done
-        if (numShown >= numRows) {
-            $('#more').remove();
-        }
-        // change rows remaining if less than increment
-        if (numRows - numShown < numMore) {
-            $('#more span').html(numRows - numShown);
-        }
-        $table.find('tr:lt(' + numShown + ')').show();
-    });
-
-});*/
+  $('#close_model').on('click',function(){
+      $('#popup_model').hide();
+  });
 
  $('.carousel').carousel({
-  interval: 2000,
-})
+  interval: 2000
+});
+
+});
 
 
 </script>
-    
+    <style type="text/css">
+      .modal.and.carousel {
+      //position: fixed;
+}
+    </style>
   </body>
 
-<!-- Mirrored from pratikborsadiya.in/vali-admin/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 05 Jul 2018 06:07:27 GMT -->
+
 </html>

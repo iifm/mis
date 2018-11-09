@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
-use App\PhotoCategory;
+
 use App\PhotoAlbum;
 use Auth;
 use Session;
+use App\PhotoCategory;
 
 
 class PhotoAlbumController extends Controller
@@ -25,9 +26,16 @@ class PhotoAlbumController extends Controller
 
     public function index()
     {
-         
-        $photos=PhotoAlbum::all();
-        return view('mis.photoAlbum.index',compact('photos'));
+        $photo_categories=PhotoCategory::distinct('name')->pluck('name')->toArray();
+       
+        $unique_photo_categories=array_unique($photo_categories);
+        //dd($unique_photo_categories);
+        $photos=PhotoAlbum::where('category','!=',0)
+                            ->join('photo_categories','photo_categories.id','=','photo_albums.category')
+                            ->select('photo_albums.id as photo_id','photo_categories.name as photo_category','photo_albums.*')
+                            ->get();
+                            //dd($photos);
+        return view('mis.photoAlbum.index',compact('photos','unique_photo_categories'));
 
     }
 
@@ -51,16 +59,29 @@ class PhotoAlbumController extends Controller
      */
     public function store(Request $request)
     {
+       
+        $images=[];
+         if ($request->hasFile('photo')) {
+            $uploadfiles=$request->file('photo');
+            foreach ($uploadfiles as  $uploadfile) {
+                $image_name=$uploadfile->getClientOriginalName();
+
+                $uploadfile->storeAs('public/photos',$image_name);
+                $images[]=$image_name;
+            }
+        }
+       
         $addedby=$request->input('addedby');
         $user_id=Auth::user()->id;
         $category=$request->input('category');
         $photo=$request->file('photo');
         $sip=\Request::ip();
-    
-        $photo=$request->file('photo');
-        $filename =$user_id.$photo->getClientOriginalName();
-        $request->file('photo')->storeAs('/public/photos', $filename);
-        PhotoAlbum::create(['user_id'=>$user_id,'category'=>$category,'photo'=>$filename,'addedby'=>$addedby,'sip'=>$sip]);
+        
+        foreach ($images as $image) {
+            PhotoAlbum::create(['title'=>$request->title,'category'=>$category,'photo'=>$image,'addedby'=>$addedby,'sip'=>$sip]);
+        }
+      
+       
         Session::flash('message','Your Photo Added Successfully !!');
         return redirect()->route('photo.index');
     }

@@ -8,10 +8,8 @@
 
     <!-- Main CSS-->
     {!!View('partials.include_css')!!}
- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
-    <link href="{{ URL::To('public/css/common_css/thumbnail-gallery.css') }}" rel="stylesheet">
-
+<link rel="stylesheet" href="{{ URL::To('public/css/common_css/baguetteBox.min.css') }}">
+<link href="{{ URL::To('public/css/common_css/thumbnail-gallery.css') }}" rel="stylesheet">
 
   </head>
   
@@ -44,18 +42,29 @@
 
         <div class="row">
             @foreach($photos as $photo)
-            <div class="col-sm-6 col-md-4">
-                <div class="thumbnail">
-                    <a class="lightbox" href="{{ URL::To('storage/app/public/photos/'.$photo->photo) }}" lightbox-caption="<p>sample text or the footer.</p>" >
-                        <img src="{{ URL::To('storage/app/public/photos/'.$photo->photo) }}" alt="" width="350" style="max-height: 350px">
-                    </a>
-                    <div class="caption">
-                        <h3>{{$photo->category}} 
-                      @if(Session::get('manager_zone')=='show' || Session::get('access_zones')=='All')
-                       <a href="{{url('/photo-album-delete')}}/{{$photo->id}}" class="fa fa-trash" style="margin-top: 10px; color: red" title="Delete This Image"></a>
-                       @endif </h3>
-                    </div>
-                </div>
+            <div class="col-lg-4">
+                
+                  <table style="text-align: center; width:90% !important">
+                    <tr>
+                      <td>
+                        <a class="lightbox" href="{{ URL::To('storage/app/public/photos')}}/{{$photo->photo}}" lightbox-caption="<p>sample text or the footer.</p>" >
+                            <img src="{{ URL::To('storage/app/public/photos')}}/{{$photo->photo}}" alt=""  style="width:100%">
+                        </a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div style="padding:10px; ">{{$photo->title}}</div>
+                        {{$photo->photo_category}}  
+                        @if(Auth::user()->role==1)
+                        <a href="{{url('/photo-album-delete')}}/{{$photo->photo_id}}" class="fa fa-trash" style="color: red" title="Delete This Image"></a>
+                        @endif  
+                      </td>
+                    </tr>
+                  </table>
+
+                 
+                
             </div>
             @endforeach
          

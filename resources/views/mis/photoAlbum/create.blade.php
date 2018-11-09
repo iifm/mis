@@ -50,17 +50,19 @@
             <form action="{{url('/photo-album/store')}}" method="post" enctype="multipart/form-data">          
                  {{ csrf_field() }}
                 
-                        <input  type="hidden" name="addedby" id="addedby" value="{{Auth::user()->name}}">
+                <input  type="hidden" name="addedby" id="addedby" value="{{Auth::user()->id}}">
              
-
-               
-                <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+            
+                 <div class="col-lg-10">
+                     <label>Title</label>
+                      <input type="text" class="form-control" name="title" required placeholder="Enter Title">
+                </div>
                 <div class="col-lg-10">
                      <label>Category</label>
                       <select class="form-control" name="category" id="category" required="">
                        <option value="">Select Category</option>
                         @foreach($category as $cat)
-                       <option value="{{$cat->name}}">{{$cat->name}}</option> 
+                       <option value="{{$cat->id}}">{{$cat->name}}</option> 
                           @endforeach                 
                      </select>
                 </div>
@@ -68,7 +70,7 @@
              
                 <div class="col-lg-10"> 
                         <label>Upload Image</label>
-                        <input class="form-control input-lg" type="file" name="photo" onchange="return fileValidation();" id="photo" placeholder="Upload your Image" required="">
+                        <input class="form-control input-lg" type="file" name="photo[]" onchange="return fileValidation();" id="photo" placeholder="Upload your Image" required="" multiple>
                 </div>   
                 <div class="col-lg-12" ><br>
                     <button class="btn btn-success text-uppercase fa fa-save " type="submit" style="background: #009688; border:none">  Submit</button><br><br>
