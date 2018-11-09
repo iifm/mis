@@ -15,36 +15,30 @@ class UserManagerController extends Controller
 
     public function index()
     {
-        $user_lists=User::join('user_details','user_details.user_id','=','users.id')
-                            ->where('user_details.status','Active')
-                            ->pluck('users.id')
-                            ->toArray();
-            $manager_names=[];
-        foreach ($user_lists as  $user_list) 
-        {
-           $username=User::find($user_list);
-           $user_role=Role::find($username->role);
-
-           $managers=Role::where('access_zone','!=','0')
+        $managers_ids=Role::where('access_zone','!=',0)
                             ->where('access_zone','!=','All')
                             ->pluck('id')
                             ->toArray();
-           foreach ($managers as  $manager) 
-           {
-              $managerAccessZone=Role::find($manager);
-              $access_zone_array=explode(",", $managerAccessZone->access_zone);                        
-             
-              $search_res = array_search($username->role,$access_zone_array);
+        $user_name_and_manager=[];
 
-              $managerName=$access_zone_array[$search_res];
+        foreach ($managers_ids as $managers_id) {
+           
+           $manager_details=User::where('role',$managers_id)->first();
 
-              
-              $user_manager_name=User::where('role',$manager)->first();
-           }
+           $access_zones=Role::find($managers_id);
+
+           $manager_access_zone=explode(",", $access_zones->access_zone);
+            
+
+           $team_members=User::whereIn('role',$manager_access_zone)->get();
           
+
+          
+
+           $team_members='';
         }
 
-
+       
         return view('admin.userManagers.index');
     }
 

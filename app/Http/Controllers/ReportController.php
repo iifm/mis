@@ -149,7 +149,7 @@ class ReportController extends Controller
       $start= $request->strtDate;
       $end =$request->endDate;
 
-      $prathamHolidays=[date('Y-01-01'),date('Y-01-26'),date('Y-08-15'),date('Y-10-02'),date('2018-11-07')];
+      $prathamHolidays=[date('Y-01-01'),date('Y-01-26'),date('Y-08-15'),date('Y-10-02'),date('2018-11-07'),date('2018-11-08')];
 
       if ($request->employee=='') {
         $member_ids= Attendance::whereBetween('date',[$start,$end])

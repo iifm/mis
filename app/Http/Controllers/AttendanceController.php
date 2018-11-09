@@ -117,7 +117,7 @@ class AttendanceController extends Controller
 
 //dd($sundays);
 
-      $prathamHolidays=[date('Y-01-01'),date('Y-01-26'),date('Y-08-15'),date('Y-10-02'),date('2018-11-07')];
+      $prathamHolidays=[date('Y-01-01'),date('Y-01-26'),date('Y-08-15'),date('Y-10-02'),date('2018-11-07'),date('2018-11-08')];
       //dd($prathamHolidays);
            
            $flag=0;
@@ -282,7 +282,7 @@ class AttendanceController extends Controller
 
            $last_seven_day=date('Y-m-d', strtotime('-6 days'));
 
-            $prathamHolidays=[date('Y-01-01'),date('Y-01-26'),date('Y-08-15'),date('Y-10-02'),date('2018-11-07')];
+            $prathamHolidays=[date('Y-01-01'),date('Y-01-26'),date('Y-08-15'),date('Y-10-02'),date('2018-11-07'),date('2018-11-08')];
 
         
             $now=date('Y-m-d');

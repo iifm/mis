@@ -279,7 +279,7 @@ a {
                     </div>
                     <div class="modal-body">
                       <a href="{{url('/photo-album')}}">
-                      <img src="https://www.geelongaustralia.com.au/common/public/images/rh/8d5f63627363813-images101.jpg">
+                      <img src="http://www.prathamedu.com/Files_Upload/collage_popup_mis_file.jpg">
                       </a>
                      
                     </div>
