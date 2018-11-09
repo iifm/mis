@@ -202,7 +202,7 @@ class AttendanceController extends Controller
                             }
                             else{
                               //return $prathamHolidays_day;
-                              $remark_all = 'Pratham Official Holiday';
+                              $remark_all = 'Official Holiday';
                               $flag=1;
                             }
                           }
@@ -379,7 +379,7 @@ class AttendanceController extends Controller
 
                           foreach ($prathamHolidays as  $prathamHoliday) {
                             if ($remark_all=='Absent' && $prathamHoliday==$last_seven_day) {
-                                  $remark_all='Pratham Official Holiday';
+                                  $remark_all='Official Holiday';
                              }
                              else{
                                 $remark_all=$remark_all;

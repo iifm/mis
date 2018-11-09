@@ -241,7 +241,7 @@ class ReportController extends Controller
 
                           foreach ($prathamHolidays as  $prathamHoliday) {
                             if ($remark_all=='Absent' && $prathamHoliday==$start) {
-                                  $remark_all='Pratham Official Holiday';
+                                  $remark_all='Official Holiday';
                              }
                              else{
                                 $remark_all=$remark_all;
