@@ -51,9 +51,10 @@
                     <th>#</th>
                     <th style="text-align: left;">Subject</th>       
                     <th style="text-align: left;">Category</th>
-<!--                     <th style="text-align: left;">Description</th>
- -->                    <th style="text-align: left;">Uploads</th>
+                    <th style="text-align: left;">Uploads</th>
+                     @if(Auth::user()->role==1)
                     <th>Action</th>
+                    @endif
                   </tr>
                 </thead>
                 <tbody>
