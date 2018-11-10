@@ -17,6 +17,7 @@ use DB;
 use Session;
 use App\NewsUpload;
 use App\Attendance;
+use App\Conveyance;
 use App\Role;
 
 
@@ -304,15 +305,13 @@ class HomeController extends Controller
                         }
                      }
 
-                     $diwali_photos_array=[];
-                     $diwali_celebrations=NewsUpload::where('category','28')->get();
-                     foreach ($diwali_celebrations as $diwali_celebration) {
-                         $diwali_photos=$diwali_celebration->uploadfile;
-                         $diwali_photos_array[]=explode(",", $diwali_photos);
-                     }
-                    
+                     $monthConveyance=Conveyance::whereMonth('con_date',date('m'))
+                                                    ->whereYear('con_date',date('Y'))
+                                                    ->where('user_id',Auth::id())
+                                                    ->sum('amount');
 
-        return view('dashboard',compact(['totleaves','totod','birthdays','anniversary','workanniversary','monthBirthday','monthWorkAniversary','monthAniversary','eoms','todays_event','intime','outtime','pressReases','announcements','diwali_photos_array']));
+                      
+        return view('dashboard',compact(['totleaves','totod','birthdays','anniversary','workanniversary','monthBirthday','monthWorkAniversary','monthAniversary','eoms','todays_event','intime','outtime','pressReases','announcements','monthConveyance']));
     }
 
      public function changePasswordView()

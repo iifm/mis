@@ -70,15 +70,12 @@ a {
           </a>
         </div>
         <div class="col-md-6 col-lg-4">
-          <a href="{{url('/on-duty/index')}}/{{Auth::id()}}">
+          <a href="#">
           <div class="widget-small info coloured-icon"><i class="icon fa fa-tag fa-3x"></i>
             <div class="" style="width: 100%; padding:14px 0 5px 0">
-            <center><h6 class="heading_title">Total Applied On-Duties</h6></center> 
-            @if($totod!='')
-             <center><h3><b>{{$totod}}</b></h3></center> 
-            @else
-              <center><h3><b>{{$totod}}</b></h3></center> 
-            @endif
+            <center><h6 class="heading_title">This Month Conveyance(s)</h6></center> 
+             <center><h3><b>{{$monthConveyance}}</b></h3></center> 
+           
             </div>
           </div>
           </a>

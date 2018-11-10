@@ -31,8 +31,14 @@ class ConveyanceController extends Controller
                     ->whereBetween('con_date',[$strtYear, $endYear])
                     ->orderBy('id','DESC')
                     ->get();
+
+        $monthConveyance=Conveyance::whereMonth('con_date',date('m'))
+                                                    ->whereYear('con_date',date('Y'))
+                                                    ->where('user_id',$id)
+                                                    ->sum('amount');
+
            
-        return view('mis.conveyance.index',compact('conveyance'));
+        return view('mis.conveyance.index',compact(['conveyance','monthConveyance']));
 
     }
 
