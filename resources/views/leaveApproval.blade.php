@@ -23,10 +23,12 @@
       <div class="lock-box" >
         <h4 class="text-center user-name">Leave Approval Form</h4>
       <!--   <p class="text-center text-muted">Account Locked</p> -->
+
         <form class="unlock-form" action="{{url('leave-approved')}}/{{$id}}/{{$uid}}" method="post" style="margin-top: 20px;">
           {{csrf_field()}}
          
          <div class="row">
+           <div class="col-md-12" style="font-size:16px; color:red; padding-bottom:20px;"><center>{{$message}}</center></div>
           <div class="col-md-4">
           	<div class="form-group">
             <label class="control-label">Applicant Name</label>

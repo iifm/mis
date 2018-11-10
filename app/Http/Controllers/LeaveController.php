@@ -27,7 +27,6 @@ class LeaveController extends Controller
      // dd($id);
        $cyear=date('Y'); 
        $strtYear=date('Y').'-04-01';
-       //dd($strtYear);
        $endYear=date('Y',strtotime('+1 year')).'-03-31';
         $currenDate = date('Y-m-d');
 
@@ -77,7 +76,7 @@ class LeaveController extends Controller
                $leave_approved=$value->total_leaves;
             }
        // $leave=Leave::where('empid',$id)->orderBy('id','DESC')->get();
-        $leave=Leave::whereBetween('leavefrom',[$strtYear,$currenDate])
+        $leave=Leave::whereBetween('leavefrom',[$strtYear,$endYear])
                         ->where('empid',$id)
                         ->where('leavetype','!=','Comp Off')
                         ->orderBy('id','DESC')
@@ -253,6 +252,20 @@ class LeaveController extends Controller
 
         $apper_id=$leave_id->empid;
 
+
+          $approvedbyName='';
+             if ($leave_id->approvedby!='') {
+                $approvedby= User::find($leave_id->approvedby);
+                $approvedbyName=$approvedby->name;
+
+                $message = "Note:- This Request has been ".$leave_id->status. " by ". $approvedbyName;
+
+               // dd($approvedbyName);
+             }
+             else{
+              $message = "Note:- This request is Pending. Please do the needful. ";
+             }
+
         if ($uid==$apper_id) {
          return redirect()->route('leave.index',['id'=>$uid]);
         }
@@ -262,12 +275,9 @@ class LeaveController extends Controller
                             ->join('user_details','user_details.user_id','=','users.id')
                             ->select('users.id as user_id','users.*','leaves.*','user_details.*')
                             ->get();
-           /*  $userDetail=User::where('users.id',$leave_id->empid)
-                          ->join('user_details','users.id','=','user_details.user_id')
-                          ->select('users.id as user_id','users.email as user_email','user_details.mobile as user_mobile','users.name as user_name','user_details.department as user_deptt')
-                          ->get();*/
+          
        
-        return view('leaveApproval',compact(['user_details','uid','id']));
+        return view('leaveApproval',compact(['user_details','uid','id','message']));
         }
       
         
