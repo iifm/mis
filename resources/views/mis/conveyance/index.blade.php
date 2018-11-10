@@ -41,7 +41,7 @@
                 <div id="success_msg" class="alert alert-success" style="display: none;">
                   
                 </div>
-                <h3 style="margin-bottom: 20px">Total this month Conveyance : {{$monthConveyance}}</h3>
+                <h3 style="margin-bottom: 20px">This month total Conveyance : <span  class="fa fa-rupee">  {{$monthConveyance}} </span></h3>
                   <table class="table table-hover table-stripped" id="sampleTable" role="grid" >
                      <thead>
                         <tr role="row">
