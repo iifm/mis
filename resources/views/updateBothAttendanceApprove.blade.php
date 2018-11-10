@@ -19,8 +19,8 @@
         <div id="alert" class="alert alert-success">{{ Session::get('message') }}
 
         </div><?php } ?>
-   
-      <div class="lock-box" style="min-height: 500px;min-width: 700px;">
+
+      <div class="lock-box" >
         <h4 class="text-center user-name">Attendance Approval Form</h4>
       <!--   <p class="text-center text-muted">Account Locked</p> -->
         <form class="unlock-form" action="{{url('/update-attendance/approved/store')}}/{{$id}}" method="post" style="margin-top: 20px;">
@@ -108,9 +108,9 @@
         </form>
      
       </div>
-     
+    
     </section>
-    <img src="{{URL::To('public/images/mis-logo.png')}}" class="pull-left" height="60" style="position: fixed;left: 20px;bottom: 20px;"> 
+   
     <!-- Essential javascripts for application to work-->
       {!!View('partials.include_js')!!}
 

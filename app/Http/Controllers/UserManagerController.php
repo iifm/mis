@@ -19,27 +19,38 @@ class UserManagerController extends Controller
                             ->where('access_zone','!=','All')
                             ->pluck('id')
                             ->toArray();
+
         $user_name_and_manager=[];
 
         foreach ($managers_ids as $managers_id) {
-           
-           $manager_details=User::where('role',$managers_id)->first();
+            
+           $manager_details=User::where('role',$managers_id)->pluck('name')->toArray();
+
+           $manager_name=implode(",", $manager_details);
 
            $access_zones=Role::find($managers_id);
 
            $manager_access_zone=explode(",", $access_zones->access_zone);
             
+           $team_members=User::join('user_details','user_details.user_id','=','users.id')
+                                    ->where('user_details.status','Active')
+                                    ->whereIn('users.role',$manager_access_zone)
+                                    ->get();
 
-           $team_members=User::whereIn('role',$manager_access_zone)->get();
-          
+      
+           foreach ($team_members as $team_member) {
+         
+               $user_name_and_manager[]=['username'=>$team_member->name,
+                                        'manager_id'=>$managers_id,
+                                        'manager_name'=>$manager_name];     
 
-          
-
-           $team_members='';
+          }       
+           
+         
         }
 
-       
-        return view('admin.userManagers.index');
+
+        return view('admin.userManagers.index',compact('user_name_and_manager'));
     }
 
     /**

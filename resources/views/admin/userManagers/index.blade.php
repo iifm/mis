@@ -52,20 +52,18 @@
                     <th>#</th>
                     <th style="text-align: left;">User Name</th>
                     <th style="text-align: left;">Manager</th>
-                    <th>Action</th>
+                   
                   </tr>
                 </thead>
                 <tbody>
-                    
+                  @foreach($user_name_and_manager as $user_name_and_manager)  
                 <tr style="max-height: 100px;">
                   <td><?= $i++;?></td>
-                  <td style="text-align: left;"></td>
-                  <td style="text-align: left;"></td>
-                  <td style="text-align: left;">
-                    <a href="#" class="btn btn-primary btn-sm fa fa-tasks"></a>
-                 </td>
+                  <td style="text-align: left;">{{$user_name_and_manager['username']}}</td>
+                  <td style="text-align: left;">{{$user_name_and_manager['manager_name']}}</td>
+                
                 </tr>
-                 
+               @endforeach  
         </tbody>
  
           </table>

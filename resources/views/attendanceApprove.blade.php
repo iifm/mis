@@ -20,7 +20,7 @@
 
         </div><?php } ?>
     @foreach($datas as $data)
-      <div class="lock-box" style="min-height: 500px;min-width: 700px;">
+      <div class="lock-box" >
         <h4 class="text-center user-name">Attendance Approval Form</h4>
       <!--   <p class="text-center text-muted">Account Locked</p> -->
         <form class="unlock-form" action="{{url('/attendance-approved')}}/{{$id}}/{{$from}}/{{$user_id}}" method="post" style="margin-top: 20px;">

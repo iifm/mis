@@ -20,7 +20,7 @@
 
         </div><?php } ?>
     @foreach($user_details as $leave)
-      <div class="lock-box" style="min-height: 500px;min-width: 700px;">
+      <div class="lock-box" >
         <h4 class="text-center user-name">Leave Approval Form</h4>
       <!--   <p class="text-center text-muted">Account Locked</p> -->
         <form class="unlock-form" action="{{url('leave-approved')}}/{{$id}}/{{$uid}}" method="post" style="margin-top: 20px;">
@@ -48,19 +48,19 @@
           </div>
         
          <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-4 col-sm-6">
             <div class="form-group">
             <label class="control-label">Leave Start Date</label>
             <input class="form-control" type="text" name="leavefrom" value="{{$leave->leavefrom}}" autofocus required="" readonly="">
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 col-sm-6">
             <div class="form-group">
             <label class="control-label">Leave End Date</label>
             <input class="form-control" type="text" name="leaveto" value="{{$leave->leaveto}}"  autofocus required="" readonly="">
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 col-sm-6">
             <div class="form-group">
             <label class="control-label">Total Leaves (in days)</label>
             <input class="form-control" type="text" name="totdays" value="{{$leave->totalleave}}"  autofocus required="" readonly="">
@@ -80,7 +80,6 @@
            <select class="form-control" name="actionstatus" required="">
              <option value="">Select Action</option>
              <option value="approved">Approved</option>
-             <option value="disapproved">Disapproved</option>
               <option value="rejected">Rejected</option>
             
            </select>
@@ -112,7 +111,7 @@
       </div>
       @endforeach
     </section>
-    <img src="{{URL::To('public/images/mis-logo.png')}}" class="pull-left" height="60" style="position: fixed;left: 20px;bottom: 20px;"> 
+  
     <!-- Essential javascripts for application to work-->
       {!!View('partials.include_js')!!}
 

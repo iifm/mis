@@ -126,6 +126,7 @@
   
   $datepicker1.datepicker({
    dateFormat:'yy-mm-dd',
+    minDate: 0,
         onClose: function() {     
       var fromDate = $datepicker1.datepicker('getDate');
       var currentDate = new Date();  
