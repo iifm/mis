@@ -77,11 +77,11 @@
                    <input type="hidden" name="type" id="type" value="{{Session::get('attendType')}}">
                  @endif
 
-                 @if(Session::has('inTime'))
-                <center><h6 class="fa fa-clock-o">  IN TIME  {{Session::get('inTime')}}</h6></center> 
-                @endif
-                 @if(Session::has('outTime'))
-                <center><h6 class="fa fa-clock-o">  OUT TIME  {{Session::get('outTime')}}</h6></center>
+                 @if($showInTime!='')
+                <center><h6 class="fa fa-clock-o">  IN TIME  {{$showInTime}}</h6></center> 
+                @endif    
+                 @if($showOutTime!='')
+                <center><h6 class="fa fa-clock-o">  OUT TIME  {{$showOutTime}}</h6></center>
                 @endif
                 @if(Session::has('attendType')) 
                   @if(Session::get('attendType')=='ATTENDANCE FOR TODAY HAVE BEEN MARKED!!')

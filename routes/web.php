@@ -239,3 +239,11 @@ Route::get('manager-zone/request/view-detail/{id}','RequestController@viewDetail
 Route::get('admin/user-manager/index','UserManagerController@index');
 
 Route::get('admin/report/leave-summary','ReportController@leaveSummaryReport');
+
+//HR leave Adjustment
+Route::get('hr/leave-adjustment/index','LeaveAdjustmentController@index')->name('hr.leave.index');
+Route::get('hr/leave-adjustment/create','LeaveAdjustmentController@create');
+Route::post('hr/leave-adjustment/store','LeaveAdjustmentController@store');
+Route::get('hr/leave-adjustment/delete/{id}','LeaveAdjustmentController@destroy');
+Route::get('hr/leave-adjustment/edit/{id}','LeaveAdjustmentController@edit');
+Route::post('hr/leave-adjustment/update/{id}','LeaveAdjustmentController@update');

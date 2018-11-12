@@ -311,11 +311,14 @@ class LeaveController extends Controller
 
        $to_email=[$email->email];
 
+        $replyto=['ankit.kapoor@iifm.co.in','hr@iifm.co.in'];
+
        //dd($data);
       
-         Mail::send('mail.leaveRequestApproved',  ['data' => $data], function ($message)use($to_email,$subject) {
+         Mail::send('mail.leaveRequestApproved',  ['data' => $data], function ($message)use($to_email,$replyto,$subject) {
              $message->from('info@prathamonline.in', 'MIS Alert');
                  $message->to($to_email);
+                 $message->replyTo($replyto);
                  $message->subject($subject);
 
             });

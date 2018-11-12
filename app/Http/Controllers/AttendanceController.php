@@ -30,6 +30,9 @@ class AttendanceController extends Controller
       
        $typecheck='';
 
+       $showInTime='';
+       $showOutTime='';
+
        $inTime=Attendance::where('member_id','=',$id)
         ->where('date',$date)
         ->where('type','IN')
@@ -37,7 +40,8 @@ class AttendanceController extends Controller
 
         foreach ($inTime as  $value) {
             $inTime=$value->time;
-            Session::put('inTime',$inTime);
+            $showInTime=$value->time;
+           
         }
 
         $outTime=Attendance::where('member_id','=',$id)
@@ -46,7 +50,8 @@ class AttendanceController extends Controller
         ->get();
          foreach ($outTime as  $value) {
             $inTime=$value->time;
-            Session::put('outTime',$inTime);
+            $showOutTime=$value->time;
+           
         }
         
         $attendanceIn=Attendance::where('member_id','=',$id)
@@ -70,7 +75,7 @@ class AttendanceController extends Controller
       /*  Session::flash('errorMsg','Trun ON your Mobile GPS/Location & RELOAD the page');
         Session::flash('successMsg','Your Attendance Recorded successfully');*/
         
-        return view('mis.attendance.index',compact(['inTime','outTime']));
+        return view('mis.attendance.index',compact(['inTime','outTime','showInTime','showOutTime']));
     }
   
 
