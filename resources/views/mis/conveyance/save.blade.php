@@ -87,7 +87,7 @@
         $('#amt_'+scount).val('');
         $('#amt_'+scount).prop( "disabled", true );  
         var dis = $('#distance_'+scount).val();
-        if(tmode=='CAR'){var rate = 5;} else{var rate = 3.5;}
+        if(tmode=='CAR'){var rate = 5;} else{var rate = 3;}
            var disc = dis*rate;
         $('#Rate_'+scount).val(disc);      
       } 
