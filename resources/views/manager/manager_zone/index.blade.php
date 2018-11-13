@@ -26,8 +26,7 @@
         <div>
         <h1 class="heading_title"><i class="fa fa-users "></i> Team Members Details </h1>
         </div>
-      <!--  <a href="{{url('/department/create')}}" class="fa fa-plus btn btn-primary" style="background: #009688; border:none; margin-left: 450px"> Add Department</a>  -->
-     
+    
       </div>
      
       <div class="row">
@@ -46,7 +45,7 @@
         <div id="alert" class="alert alert-success">{{ Session::get('message') }}
 
         </div><?php } ?>
-              <table id="sampleTable"  width="100%"  class="table">
+              <table id="sampleTable"  width="100%" class="table">
                 <thead>
               
                   <tr role="row">
@@ -63,11 +62,26 @@
                    @foreach($totalTeamMemberDetails as $totalTeamMemberDetail)
                 <tr style="max-height: 100px;">
                     <td><?= $i++;?></td>
-                     <td><h6>{{$totalTeamMemberDetail['username']}} </h6></td>
-                    <td><!-- {{$totalTeamMemberDetail['total_leaves']}} --> <a href="{{url('/leave-view')}}/{{$totalTeamMemberDetail['user_id']}}" class="fa fa-eye btn btn-primary form-control"> View</a></td>
-                     <td><!-- {{$totalTeamMemberDetail['total_ods']}}  --><a href="{{url('/on-duty/index')}}/{{$totalTeamMemberDetail['user_id']}}" class="fa fa-eye btn btn-sm btn-info form-control"> View</a></td>
-                    <td><!-- {{$totalTeamMemberDetail['total_conveyance']}} --> <a href="{{url('/conveyance/index')}}/{{$totalTeamMemberDetail['user_id']}}" class="fa fa-eye btn btn-sm btn-warning form-control" style="color: white"> View</a></td>
-                    <td><a href="{{url('/attendance-view')}}/{{$totalTeamMemberDetail['user_id']}}" class="fa fa-eye btn btn-sm btn-danger form-control"> View</a></td>
+                     <td>
+                      <h6>{{$totalTeamMemberDetail['username']}} 
+                      </h6>
+                    </td>
+                    <td>
+                      <a href="{{url('/leave-view')}}/{{$totalTeamMemberDetail['user_id']}}" class="fa fa-eye btn btn-primary form-control"> View
+                      </a>
+                    </td>
+                    <td>
+                      <a href="{{url('/on-duty/index')}}/{{$totalTeamMemberDetail['user_id']}}" class="fa fa-eye btn btn-sm btn-info form-control"> View
+                      </a>
+                    </td>
+                    <td>
+                      <a href="{{url('/conveyance/index')}}/{{$totalTeamMemberDetail['user_id']}}" class="fa fa-eye btn btn-sm btn-warning form-control" style="color: white"> View
+                      </a>
+                    </td>
+                    <td>
+                      <a href="{{url('/attendance-view')}}/{{$totalTeamMemberDetail['user_id']}}" class="fa fa-eye btn btn-sm btn-danger form-control"> View
+                      </a>
+                    </td>
                        
                   
                   </tr>

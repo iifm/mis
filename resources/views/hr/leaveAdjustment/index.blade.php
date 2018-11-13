@@ -44,7 +44,7 @@
         <div id="alert" class="alert alert-success">{{ Session::get('message') }}
 
         </div><?php } ?>
-              <table id="sampleTable"  width="100%">
+              <table id="sampleTable"  width="100%" class="table table-responsive">
                 <thead>
               
                   <tr role="row">

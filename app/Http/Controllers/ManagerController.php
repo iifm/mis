@@ -99,7 +99,10 @@ class ManagerController extends Controller
       // dd($manager_access_zone);
        $member_ids=[];
        if ($role_detail->access_zone=='All') {
-          $team_members=User::all();
+          $team_members=User::join('user_details','user_details.user_id','=','users.id')
+                                    ->where('user_details.status','Active')
+                                    ->select('users.id as user_id')
+                                    ->get();
        }
        else{
           $team_members=User::whereIn('role',$manager_access_zone)
@@ -119,7 +122,7 @@ class ManagerController extends Controller
        foreach ($member_ids as  $member_id) {
            $leaves=Leave::where('empid',$member_id)
                             ->join('users','users.id','=','leaves.empid')
-                            ->whereBetween('leavefrom',[$strtYear,$endYear])
+                            ->whereBetween('leaves.leavefrom',[$strtYear,$endYear])
                             ->where('leaves.status','!=','approved')
                             ->where('leaves.empid','!=',$loginId)
                             ->select('leaves.*','users.id as user_id','users.name as user_name','leaves.id as leave_id')
@@ -140,7 +143,7 @@ class ManagerController extends Controller
                     }
                
        }
-
+      // return $leave_details;
         return view('manager.leave.index',compact('leave_details'));
     }
 

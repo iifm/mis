@@ -79,17 +79,9 @@ class RegisterController extends Controller
         //dd($user);
         $UserDetails = new UserDetails;
          $UserDetails->user_id = $user->id;
+         $UserDetails->status = 'Active';
          $UserDetails->save();
 
-       /*  $work_experience = new UserWorkExperience;
-        $work_experience->user_id = $user->id;
-        $work_experience->save();
-
-        $UserEducation = new UserEducation;
-        $UserEducation->user_id = $user->id;
-        $UserEducation->save();*/
-
-       // return redirect()->route('dashboard');
         return $user;
 
     }
