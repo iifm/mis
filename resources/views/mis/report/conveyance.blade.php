@@ -108,7 +108,7 @@
 
                 </div><?php } ?>
       
-                  <table class="table table-hover table-stripped" id="table" role="grid" >
+                  <table class="table table-responsive" id="table" role="grid" width="100%" >
                     <thead>
                       <tr role="row">
                         <th>#</th>
@@ -120,8 +120,9 @@
                         <th>Travel Mode</th>
                         <th>Distance</th>
                         <th>Amount</th>
+                        <th>Image</th>
                         <th>Status</th>
-                        <th width="30%">Admin's Action</th>
+                        <th style="padding-right: 80px;padding-left: 80px;">Admin's Action</th>
                       </tr>
                     </thead>
                 
@@ -144,6 +145,14 @@
                          @endif
                         <td>{{$value->distance}}</td>
                         <td>{{$value->amount}}</td>
+                       <td> 
+                          @if($value->uploadcimg)
+                          <a href="{{URL::To('storage/app/conveyance')}}/{{$value->uploadcimg}}" target="_blank">
+                            <img src="{{URL::To('storage/app/conveyance')}}/{{$value->uploadcimg}}" height="50px" width="50px">
+                          </a>
+                           @endif
+                        </td>
+                        
                         <td>{{$value->status}}</td> 
                                @if($value->status=='PENDING')
                         <td align="right">
