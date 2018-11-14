@@ -75,7 +75,8 @@
                          <td>{{$con->mode}}</td>
                          @endif
                        
-                         <td>  @if($con->uploadcimgch)
+                         <td> 
+                          @if($con->uploadcimg)
                           <a href="{{URL::To('storage/app/conveyance')}}/{{$con->uploadcimg}}" target="_blank">
                             <img src="{{URL::To('storage/app/conveyance')}}/{{$con->uploadcimg}}" height="50px" width="50px">
                           </a> @endif
