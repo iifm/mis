@@ -262,7 +262,7 @@ a {
       
     </main>
 
-    <div class="modal" style="display: block; background:rgba(1,1,1,0.8);" id="popup_model">
+   <!--  <div class="modal" style="display: block; background:rgba(1,1,1,0.8);" id="popup_model">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -281,7 +281,7 @@ a {
                   </div>
                 </div>
               </div>
-
+ -->
 
     <!-- Essential javascripts for application to work-->
     {!!View('partials.include_js')!!}
