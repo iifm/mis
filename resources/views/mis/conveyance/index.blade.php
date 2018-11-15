@@ -53,9 +53,9 @@
                           <th>Image</th>
                           <th>Distance</th>
                           <th>Amount</th>
-                       <!--  @if(Auth::user()->role==1 || Auth::user()->role==2)
-                          <th>Manager's Action</th>
-                         @endif -->
+                      
+                          <th>Action</th>
+                        
                         </tr>
                     </thead>
                      
@@ -84,18 +84,7 @@
 
                         <td>{{$con->distance}}</td>
                         <td>{{$con->amount}}</td>
-                     <!--   @if(Session::get('access_zones')=='All')
-                        @if($con->status=='PENDING')
-                        <td align="right">
-                           <input type="hidden" name="approver" id="approver" value="{{Auth::user()->id}}">
-                          <input type="text" class="approved_amount" name="" value="{{$con->amount}}" id="approved_amount_{{$con->id}}" style="width:60px;">
-                          <button type="button" value="{{$con->id}},approve," class="btn btn-primary fa fa-thumbs-up approve" id="{{$con->id}}"></button>
-                          <button type="button" value="{{$con->id}},disapprove" class="btn btn-danger fa fa-thumbs-down disapprove" id="{{$con->id}}"></button>
-                        </td>
-                       @else
-                           <td align="right"><b>{{$con->approved_amount}}  {{$con->status}}</b> <button value="{{$con->id}}" class="btn btn-danger fa fa-close action_again"></button> </td>
-                       @endif
-                       @endif -->
+                        <td align="right"> <a onclick="return confirm('Are you sure you want to delete this item?')" href="{{url('/conveyance/delete')}}/{{$con->id}}" class="btn btn-danger btn-sm fa fa-trash"></a> </td>
                    </tr>
                      @endforeach
                 </tbody>

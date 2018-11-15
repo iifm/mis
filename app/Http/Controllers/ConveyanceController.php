@@ -135,5 +135,11 @@ class ConveyanceController extends Controller
    {
     return view('mis.conveyance.policy');
    }
+   public function destroy($id)
+   {
+     Conveyance::where('id',$id)->delete();
+      Session::flash('message','Your Conveyance Added Successfully !!');
+        return redirect()->route('conveyance.index',['id'=>Auth::id()]);
+   }
 
 }

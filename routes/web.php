@@ -90,6 +90,8 @@ Route::post('/conveyance/store', 'ConveyanceController@store');
 Route::get('/conveyance/policy', 'ConveyanceController@show');
 Route::get('/conveyance-approve/{id}/{amount}/{approver}','ConveyanceController@approveConveyance');
 Route::get('/conveyance/re-action/{id}','ConveyanceController@reAction');
+Route::get('/conveyance/delete/{id}', 'ConveyanceController@destroy');
+
 
 
 
