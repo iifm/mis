@@ -10,12 +10,7 @@ use DB;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
+   
       public function __construct()
     {
         $this->middleware('auth');
@@ -52,7 +47,11 @@ class ProductController extends Controller
     public function store(Request $request)
     {
      //  dd($request->all());
+        $pinvoice='';
+        $pdescription='';
+        $invoice='';
 
+        $pcode=$request->input('pcode');
         $category=$request->input('category');
         $pname=$request->input('pname');
         $pcompany=$request->input('pcompany');
@@ -61,16 +60,24 @@ class ProductController extends Controller
         $pcondition=$request->input('pcondition');
         $pdate=$request->input('pdate');
         $pdescription=$request->input('pdescription');
-        $pinvoice=$request->file('pinvoice');
+       
 
-       $invoice= $pinvoice->getClientOriginalName();
-       $pinvoice->storeAs('public/product',$invoice);
+        if ($request->hasFile('pinvoice')) {
+            $pinvoice=$request->file('pinvoice');
+            $invoice= $pinvoice->getClientOriginalName();
+            $pinvoice->storeAs('public/product',$invoice);
+        }
+        else{
+            $pinvoice='';
+        }
+
+    
       
 
         $sip=\Request::ip();
-        $addedby=Auth::user()->name;
+        $addedby=Auth::user()->id;
         
-        $data=Product::create(['category'=>$category,'pname'=>$pname,'pcompany'=>$pcompany,'pmodel'=>$pmodel,'pserial'=>$pserial,'pcondition'=>$pcondition,'pdate'=>$pdate,'pdescription'=>$pdescription,'pinvoice'=>$invoice,'sip'=>$sip,'addedby'=>$addedby]);
+        $data=Product::create(['pcode'=>$pcode,'category'=>$category,'pname'=>$pname,'pcompany'=>$pcompany,'pmodel'=>$pmodel,'pserial'=>$pserial,'pcondition'=>$pcondition,'pdate'=>$pdate,'pdescription'=>$pdescription,'pinvoice'=>$invoice,'sip'=>$sip,'addedby'=>$addedby]);
 
          Session::flash('message','Product Added Successfully !!');
         return redirect()->route('product.index');

@@ -47,7 +47,7 @@
                <div class="col-md-4"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">Product Code</label>
-                    <input class="form-control" id="pcode" name="pcode" type="text" aria-describedby="emailHelp" placeholder="Product Code" readonly="">
+                    <input class="form-control" id="pcode" name="pcode" type="text" aria-describedby="emailHelp" placeholder="Product Code" >
                 </div>
              </div>
              <div class="col-md-4"> 
@@ -85,7 +85,7 @@
               <div class="col-md-4"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">Product Serial Number</label>
-                    <input class="form-control" id="pserial" name="pserial" type="text" aria-describedby="emailHelp" placeholder="Product Serial Number" required="">
+                    <input class="form-control" id="pserial" name="pserial" type="text" aria-describedby="emailHelp" placeholder="Product Serial Number" >
                 </div>
              </div>
 
@@ -105,13 +105,13 @@
              <div class="col-md-4"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">Description</label>
-                    <textarea class="form-control " rows="3" placeholder="Product Brief Description" name="pdescription" id="pdescription" required=""></textarea>
+                    <textarea class="form-control " rows="3" placeholder="Product Brief Description" name="pdescription" id="pdescription" ></textarea>
                 </div>
              </div>
               <div class="col-md-4"> 
               <div class="form-group">
                     <label for="exampleInputEmail1">Upload Invoice</label>
-                    <input class="form-control" id="pinvoice" onchange="return fileValidation();" name="pinvoice" type="file" aria-describedby="emailHelp" placeholder="Upload Invoice" required="">
+                    <input class="form-control" id="pinvoice" onchange="return fileValidation();" name="pinvoice" type="file" aria-describedby="emailHelp" placeholder="Upload Invoice" >
                 </div>
              </div>
           </div>
