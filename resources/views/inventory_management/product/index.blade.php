@@ -51,12 +51,12 @@
                           <th>Product Category</th>
                           <th>Product Name</th>
                           <th>Product Serial No.</th>
-                          <th>Description</th>
                           <th>Product Model</th>
                           <th>Product Company</th>
                           <th>Condition/Remark</th>
                           <th>Product Invoice</th>
                           <th>Purchase Date</th>
+                           <th>Description</th>
                           <th >Action</th>
                         </tr>
                     </thead>
@@ -65,17 +65,22 @@
                       @foreach($product as $value)
                       <tr role="row" class="odd">
                         <td><?= $i++;?></td>
-                        <td></td>
+                        <td>{{$value->pcode}}</td>
                         <td>{{$value->product_cat_name}}</td>
                         <td>{{$value->pname}}</td>
                         <td>{{$value->pserial}}</td>
-                        <td>{{$value->pdescription}}</td>
                         <td>{{$value->pmodel}}</td>
                         <td>{{$value->pcompany}}</td>
                         <td>{{$value->pcondition}}</td>
+                         <td>
+                          @if($value->pinvoice)
+                          <a href="{{url('storage/product/'.$value->pinvoice)}}" target="_blank"><img src="{{url('storage/product/'.$value->pinvoice)}}" height="50px" width="50px">
+                          </a>
+                        </td>
+                        
                         <td>{{$value->pdate}}</td>
-                        <td><a href="{{url('storage/product/'.$value->pinvoice)}}" target="_blank"><img src="{{url('storage/product/'.$value->pinvoice)}}" height="50px" width="50px"></a></td>
-                        <td>
+                         <td>{{$value->pdescription}}</td>
+                       <td>
                           <a href="{{route('product.edit',$value->id)}}" class="btn btn-primary fa fa-pencil"></a>
                           <form id="delete-form-{{$value->id}}" method="post" action="{{route('product.destroy',$value->id)}}" >
                             {{csrf_field()}}
