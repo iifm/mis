@@ -76,6 +76,7 @@
                           @if($value->pinvoice)
                           <a href="{{url('storage/product/'.$value->pinvoice)}}" target="_blank"><img src="{{url('storage/product/'.$value->pinvoice)}}" height="50px" width="50px">
                           </a>
+                          @endif
                         </td>
                         
                         <td>{{$value->pdate}}</td>

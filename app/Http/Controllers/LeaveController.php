@@ -298,14 +298,10 @@ class LeaveController extends Controller
             $approvedby=User::where('id',$leaveDetails->approvedby)->first();
             $email=User::where('id',$leaveDetails->empid)->first();
 
-      if($leaveDetails->created_at){
+    //dd($leaveDetails->created_at);
 
           $subject ="Re: ".$leaveDetails->leavetype." Requested By " .$leaveDetails->username ."  on ". date("l jS \of F Y",strtotime($leaveDetails->created_at));
-      }
-      else
-      { 
-          $subject ="Re: ".$leaveDetails->leavetype." Requested By " .$leaveDetails->username ."  on ". date("l jS \of F Y");
-      }
+     
 
        $data=['username'=>$leaveDetails->username,'type'=>$leaveDetails->leavetype,'from'=>$leaveDetails->leavefrom,'to'=>$leaveDetails->leaveto,'days'=>$leaveDetails->totalleave,'reason'=>$leaveDetails->reason,'status'=>$leaveDetails->status,'approvedby'=>$approvedby->name];
 
