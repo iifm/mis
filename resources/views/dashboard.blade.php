@@ -257,8 +257,8 @@ a {
                          <h5 style="text-align: center;">{{ucwords(strtolower($new_joining->username))}}</h5>
                           <p style="text-align: center;"><b>Date of Joining</b>  {{date('j F Y',strtotime($new_joining->doj))}} <br>
                           {{$new_joining->dept_name}}</p>
-                       <center><a href="{{url('/send-wish')}}/{{$new_joining->user_id}}/{{'Welcome to IIFM Family'}}" class="btn btn-primary fa fa-envelope"> Send Wish</a></center>   
-
+                    <!--    <center><a href="{{url('/send-wish')}}/{{$new_joining->user_id}}/{{'Welcome to IIFM Family'}}" class="btn btn-primary fa fa-envelope"> Send Wish</a></center>   
+ -->
                       </div>
                   </div>
                  @endforeach

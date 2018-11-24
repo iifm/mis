@@ -110,10 +110,8 @@
                 </div>
             </div>
             <div class="col-md-6"> 
-                <div class="form-group">
-                 
+                <div class="form-group">  
                   <img src="" id="profile-img-tag" width="200px" />
-
                 </div>
             </div>
           </div>
