@@ -110,6 +110,15 @@
                 </div>
             </div>
             <div class="col-md-6"> 
+              <p style="color: red">Note while uploading image: 
+                <ul>
+                    <li>Image should be of good quality and size of the image should not exceed 200kb</li> 
+                    <li>You should be facing the camera such that both the ears are visible</li> 
+                    <li>The image should be colored</li> 
+                    <li>No dark glasses/non-prescription tinted glasses</li>  
+                    <li>Only Decent and professional Image</li> 
+                </ul>
+              </p>
                 <div class="form-group">  
                   <img src="" id="profile-img-tag" width="200px" />
                 </div>
