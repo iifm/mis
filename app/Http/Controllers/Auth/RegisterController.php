@@ -69,7 +69,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
      
-        //dd($data);
+        //dd($data['gender']);
         $user =User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -79,6 +79,7 @@ class RegisterController extends Controller
         //dd($user);
         $UserDetails = new UserDetails;
          $UserDetails->user_id = $user->id;
+         $UserDetails->gender = $data['gender'];
          $UserDetails->status = 'Active';
          $UserDetails->save();
 

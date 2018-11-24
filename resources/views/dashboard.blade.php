@@ -231,30 +231,69 @@ a {
           
           </ul>
         </li>
-              </div>
-       
+       </div>
+        
+
           </div>
            <div class="col-md-4">
-             
-              <div class="tile">
-                <h5 class="heading_title">Announcement(s)</h5>   
-                <ul style="padding-left: 0px; list-style: none;">
+            @if(count($new_joinings)!=0)
+              <div class="tile" style="min-height: 400px">
+            <h5 class="heading_title">New Member(s) of IIFM</h5>
+            <div class="">
+            <div id="newMemberIIFM" class="carousel slide" data-ride="carousel">  
+                <div class="carousel-inner">
+                   @foreach( $new_joinings as $new_joining )
+                  <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                    @if($new_joining->profile!='')
+                     <img   src="{{ URL::To('storage/app/profile/'.$new_joining->profile) }}"" alt="First slide" height="350px" width="100%">
+                     @else
+                      @if($new_joining->gender!='male')
+                      <img   src="{{ URL::To('public/images/Female.jpg') }}"" alt="First slide" height="350px" width="100%">
+                      @else
+                      <img   src="{{ URL::To('public/images/Male.jpg') }}"" alt="First slide" height="350px" width="100%">
+                      @endif
+                     @endif
+                       <div style="width: 100%; padding:20px">
+                         <h5 style="text-align: center;">{{ucwords(strtolower($new_joining->username))}}</h5>
+                          <p style="text-align: center;"><b>Date of Joining</b>  {{date('j F Y',strtotime($new_joining->doj))}} <br>
+                          {{$new_joining->dept_name}}</p>
+                       <center><a href="{{url('/send-wish')}}/{{$new_joining->user_id}}/{{'Welcome to IIFM Family'}}" class="btn btn-primary fa fa-envelope"> Send Wish</a></center>   
+
+                      </div>
+                  </div>
+                 @endforeach
+                </div>
+                <a class="carousel-control-prev" href="#newMemberIIFM" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#newMemberIIFM" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </div>
+            </div>
+            
+          </div>
+          @endif
+          <div class="tile">
+           <h5 class="heading_title">Announcement(s)</h5>   
+               <ul style="padding-left: 0px; list-style: none;">
                   @foreach($announcements as $announcement)
                <li class="fa fa-bullhorn" style="width: 100%"> {{$announcement->subject}}<a href="{{url('/post/view')}}/{{$announcement->id}}" class="btn btn-info fa fa-eye pull-right" style="color: #fff"></a></li>  
                  @endforeach
                    
                 </ul>
-              </div>
-
-                 <div class="tile">
-                <h5 class="heading_title ">Press Release(s)</h5>   
-                <ul style="padding-left: 0px; list-style: none;">
+          </div>
+          <div class="tile">
+            <h5 class="heading_title ">Press Release(s)</h5>   
+              <ul style="padding-left: 0px; list-style: none;">
                 @foreach($pressReases as $pressRease)
                <li class=" fa fa-newspaper-o " style="width: 100%"> {{$pressRease->subject}} <a href="{{url('/post/view')}}/{{$pressRease->id}}" class="btn btn-warning fa fa-eye pull-right" style="color: #fff"></a></li>  
                 @endforeach
                    
-                </ul>
-              </div>
+              </ul>
+          </div>
           </div>
      
         </div>

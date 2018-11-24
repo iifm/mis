@@ -83,10 +83,16 @@
                  </span>
             @endif
           </div>
-          <!--  <div class="form-group">
-            <label class="control-label">MOBILE</label>
-            <input class="form-control" name="email" type="text" name="mobile" placeholder="MOBILE" autofocus required>
-          </div> -->
+
+
+           <div class="form-group">
+            <label class="control-label">Gender</label>     
+            <select class="form-control" name="gender" required>
+              <option>Select Your Gender</option>
+              <option value="male">Male</option>
+               <option value="female">Female</option>
+            </select>
+          </div>
           <div class="form-group">
             <label class="control-label">Password</label>
             <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" type="password" name="password" placeholder="PASSWORD" required>

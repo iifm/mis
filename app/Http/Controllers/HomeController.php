@@ -310,8 +310,16 @@ class HomeController extends Controller
                                                     ->where('user_id',Auth::id())
                                                     ->sum('amount');
 
-                      
-        return view('dashboard',compact(['totleaves','totod','birthdays','anniversary','workanniversary','monthBirthday','monthWorkAniversary','monthAniversary','eoms','todays_event','intime','outtime','pressReases','announcements','monthConveyance']));
+                    $new_joining_start=date('Y-m-d');
+                    $new_joining_end=date('Y-m-d',strtotime('-15 days'));
+                    //dd($new_joining_end);
+                    $new_joinings=UserDetails::whereBetween('user_details.doj',[$new_joining_end,$new_joining_start])
+                                                ->join('users','users.id','=','user_details.user_id')
+                                                ->join('departments','departments.id','=','user_details.department')
+                                                ->select('user_details.*','users.id as user_id','users.name as username','departments.name as dept_name')
+                                                ->get();
+                      //dd($new_joinings);
+        return view('dashboard',compact(['totleaves','totod','birthdays','anniversary','workanniversary','monthBirthday','monthWorkAniversary','monthAniversary','eoms','todays_event','intime','outtime','pressReases','announcements','monthConveyance','new_joinings']));
     }
 
      public function changePasswordView()

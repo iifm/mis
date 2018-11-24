@@ -15004,7 +15004,7 @@ be a descendant of the grid when it is being dragged.
           transform: rotateY(180deg);
 }
 .login-content .login-box.flipped {
-  min-height: 500px;
+  min-height: 600px;
 }
 .register-content .register-box.flipped {
   min-height: 300px;
