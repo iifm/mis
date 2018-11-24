@@ -311,7 +311,7 @@ class HomeController extends Controller
                                                     ->sum('amount');
 
                     $new_joining_start=date('Y-m-d');
-                    $new_joining_end=date('Y-m-d',strtotime('-15 days'));
+                    $new_joining_end=date('Y-m-d',strtotime('-30 days'));
                     //dd($new_joining_end);
                     $new_joinings=UserDetails::whereBetween('user_details.doj',[$new_joining_end,$new_joining_start])
                                                 ->join('users','users.id','=','user_details.user_id')
