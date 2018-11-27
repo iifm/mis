@@ -9,23 +9,22 @@ use App\UploadCategory;
 use Session;
 use Auth;
 
-class PolicyController extends Controller
-{
-      public function __construct()
-    {
+class PolicyController extends Controller {
+
+    public function __construct() {
         $this->middleware('auth');
     }
-    public function index($id)
-    {
-     
-     $policydata=UploadCategory::where('id',$id)->get();
-      $policyContent=NewsUpload::where('category',$id)
-                                ->join('upload_categories','upload_categories.id','=','news_uploads.category')
-                                ->select('upload_categories.name as policyType','news_uploads.*')
-                                ->get();
-                                
-              //dd($policyContent);
-       return view('policy.viewPolicy',compact(['policyContent','id','policydata']));
+
+    public function index($id) {
+
+        $policydata = UploadCategory::where('id', $id)->get();
+        $policyContent = NewsUpload::where('category', $id)
+                ->join('upload_categories', 'upload_categories.id', '=', 'news_uploads.category')
+                ->select('upload_categories.name as policyType', 'news_uploads.*')
+                ->get();
+
+        //dd($policyContent);
+        return view('policy.viewPolicy', compact(['policyContent', 'id', 'policydata']));
     }
 
     /**
@@ -33,18 +32,16 @@ class PolicyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
-    {
-       // dd($id);
+    public function create($id) {
+        // dd($id);
 
-         $policydata=UploadCategory::where('id',$id)->get();
-         //dd($policydata);
+        $policydata = UploadCategory::where('id', $id)->get();
+        //dd($policydata);
 
-         $content=NewsUpload::where('category',$id)->get();
+        $content = NewsUpload::where('category', $id)->get();
         //s dd($content);
 
-        return view('policy.policyCreate',compact(['policydata','id','content']));
-
+        return view('policy.policyCreate', compact(['policydata', 'id', 'content']));
     }
 
     /**
@@ -53,15 +50,14 @@ class PolicyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function policyUpdate(Request $request,$id)
-    {
-       // dd($id);
-      $user_id=Auth::user()->id;
-      $description=$request->description;
-       $data=NewsUpload::where('category',$id)->update(['description'=>$description,'updatedby'=>$user_id]);
-       //dd($data);
-       Session::flash('message','Policy Updated Successfully!!');
-        return redirect()->route('policy.index',['id'=>$id]);
+    public function policyUpdate(Request $request, $id) {
+        // dd($id);
+        $user_id = Auth::user()->id;
+        $description = $request->description;
+        $data = NewsUpload::where('category', $id)->update(['description' => $description, 'updatedby' => $user_id]);
+        //dd($data);
+        Session::flash('message', 'Policy Updated Successfully!!');
+        return redirect()->route('policy.index', ['id' => $id]);
     }
 
     /**
@@ -70,8 +66,7 @@ class PolicyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -81,8 +76,7 @@ class PolicyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
     }
 
@@ -93,8 +87,7 @@ class PolicyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         //
     }
 
@@ -104,8 +97,8 @@ class PolicyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //
     }
+
 }

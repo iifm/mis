@@ -7,19 +7,18 @@ use App\UploadCategory;
 use App\NewsUpload;
 use Session;
 
-class DownloadController extends Controller
-{
-      public function __construct()
-    {
+class DownloadController extends Controller {
+
+    public function __construct() {
         $this->middleware('auth');
     }
-    public function index($id)
-    {
-      $downloadType=UploadCategory::where('id',$id)->get();
-     
-      $downloadDatas=NewsUpload::where('category',$id)->get();
-      //dd($downloadDatas);
-       return view('downloads.index',compact(['downloadType','downloadDatas']));
+
+    public function index($id) {
+        $downloadType = UploadCategory::where('id', $id)->get();
+
+        $downloadDatas = NewsUpload::where('category', $id)->get();
+        //dd($downloadDatas);
+        return view('downloads.index', compact(['downloadType', 'downloadDatas']));
     }
 
     /**
@@ -27,8 +26,7 @@ class DownloadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -38,8 +36,7 @@ class DownloadController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         //
     }
 
@@ -49,8 +46,7 @@ class DownloadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -60,8 +56,7 @@ class DownloadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
     }
 
@@ -72,8 +67,7 @@ class DownloadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         //
     }
 
@@ -83,10 +77,10 @@ class DownloadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-       NewsUpload::where('id',$id)->delete();
-       Session::flash('message','File Deleted Successfully !!');
-       return back();
+    public function destroy($id) {
+        NewsUpload::where('id', $id)->delete();
+        Session::flash('message', 'File Deleted Successfully !!');
+        return back();
     }
+
 }

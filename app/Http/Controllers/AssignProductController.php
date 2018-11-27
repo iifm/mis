@@ -9,29 +9,27 @@ use App\Product;
 use DB;
 use Session;
 
-class AssignProductController extends Controller
-{
+class AssignProductController extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-      public function __construct()
-    {
+    public function __construct() {
         $this->middleware('auth');
     }
 
-    public function index()
-    {
-       // $assign=AssignProduct::all();
-        $assign=DB::table('assign_products')
-        ->join('users','users.id','=','assign_products.user_id')
-        ->join('product_categories','product_categories.id','=','assign_products.product_cat')
-         ->join('products','products.id','=','assign_products.product_id')
-        ->select('assign_products.*','users.name as username','product_categories.name as product_category','products.pdescription as productname')
-        ->get();
+    public function index() {
+        // $assign=AssignProduct::all();
+        $assign = DB::table('assign_products')
+                ->join('users', 'users.id', '=', 'assign_products.assigned_to')
+                ->join('products', 'products.id', '=', 'assign_products.product_code')
+                ->join('locations', 'locations.id', '=', 'assign_products.location')
+                ->select('assign_products.*', 'users.name as username','locations.name as loc_name','products.pcode as pcode')
+                ->get();
         //dd($assign);
-        return view('inventory_management.product_allocated.index',compact('assign'));
+        return view('inventory_management.product_allocated.index', compact('assign'));
     }
 
     /**
@@ -39,43 +37,39 @@ class AssignProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        
-        $users=User::join('user_details','user_details.user_id','=','users.id')
-                                ->where('user_details.status','Active')
-                                ->select('users.id as user_id','users.name as username')
-                                ->orderBy('users.name')
-                                ->get();
-                               // dd($users);
+    public function create() {
 
-        $product=DB::table('products')->get();
+       $products=DB::table('products')->where('status','not_assigned')->get();
 
-      
-        $category=DB::table('product_categories')->get();
-        return view('inventory_management.product_allocated.create',compact(['users','category','products']));
+        $users = User::join('user_details', 'user_details.user_id', '=', 'users.id')
+                ->where('user_details.status', 'Active')
+                ->select('users.id as user_id', 'users.name as username')
+                ->orderBy('users.name')
+                ->get();
+        $locations=DB::table('locations')->where('parent_id','!=','0')->get();
+
+       // $product = DB::table('products')->get();
+
+
+        $category = DB::table('product_categories')->get();
+        return view('inventory_management.product_allocated.create', compact(['users', 'category', 'products','locations']));
     }
 
-    public function getProduct($category)
-    {
-      
-       $product=DB::table('products')->where('category',$category)->get(['pdescription','id']);
-       return response()->json($product);
+    public function getProduct($category) {
+
+        $product = DB::table('products')->where('category', $category)->get(['pdescription', 'id']);
+        return response()->json($product);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //dd($request->all());
-        AssignProduct::create($request->all());
-        Session::flash('message','Product Assigned successfully!!');
+    public function store(Request $request) {
+       // dd($request->all());
+        AssignProduct::create(['product_code'=>$request->pcode,'assigned_to'=>$request->assign_to,'date'=>$request->date,'remark'=>$request->remark,'location'=>$request->location,'assignedby'=>$request->assignedby,'sip'=>\Request::ip()]);
 
-       return redirect()->route('assign.index');
+        $update=DB::table('products')->where('id',$request->pcode)->update(['status'=>'assigned']);
+       
+        Session::flash('message', 'Product Assigned successfully!!');
+
+        return redirect()->route('assign.index');
     }
 
     /**
@@ -84,8 +78,7 @@ class AssignProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -95,20 +88,28 @@ class AssignProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-       //$assign_product= AssignProduct::where('id',$id)->get();
-        $users=User::orderBy('name')->get();
-         $assign_product=DB::table('assign_products')
-         ->where('assign_products.id',$id)
-        ->join('users','users.id','=','assign_products.user_id')
-        ->join('products','products.id','=','assign_products.product_id')
-        ->join('product_categories','product_categories.id','=','assign_products.product_cat')
-        ->select('assign_products.*','users.name as username','product_categories.name as product_category','products.pdescription as product_descption')
-        ->get();
+    public function edit($id) {
+        //$assign_product= AssignProduct::where('id',$id)->get();
+         $products=DB::table('products')->where('status','not_assigned')->get();
 
-        $category=DB::table('product_categories')->get();
-       return view('inventory_management.product_allocated.edit',compact(['assign_product','users','category']));
+        $users = User::join('user_details', 'user_details.user_id', '=', 'users.id')
+                ->where('user_details.status', 'Active')
+                ->select('users.id as user_id', 'users.name as username')
+                ->orderBy('users.name')
+                ->get();
+
+        $locations=DB::table('locations')->where('parent_id','!=','0')->get();
+
+        $assigned_product = DB::table('assign_products')
+                ->where('assign_products.id',$id)
+                ->join('users', 'users.id', '=', 'assign_products.assigned_to')
+                ->join('products', 'products.id', '=', 'assign_products.product_code')
+                ->join('locations', 'locations.id', '=', 'assign_products.location')
+                ->select('assign_products.*', 'users.name as username','users.id as user_id','locations.name as loc_name','products.pdescription as pro_desc','products.pname as pro_name','locations.id as loc_id','products.pcode as pcode')
+                ->get();
+
+     
+        return view('inventory_management.product_allocated.edit', compact(['products', 'users', 'locations','assigned_product']));
     }
 
     /**
@@ -118,20 +119,18 @@ class AssignProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-      //dd($request->all());
-        
-       $assigned_user= $request->input('user_id');
-        $product_cat= $request->input('product_cat');
-        $product_desc= $request->input('product_id');
-        $date= $request->input('date');
-        $remark= $request->input('remark');
-       // $assigned_user= $request->input('assigned_user');
+    public function update(Request $request, $id) {
+        //dd($request->all());
+       $product_detail=AssignProduct::where('assign_products.id',$id)->first();
 
-          $data=AssignProduct::where('id',$id)->update(['user_id'=>$assigned_user,'product_cat'=>$product_cat,'product_id'=>$product_desc,'date'=>$date,'remark'=>$remark]);
+       $update_status=DB::table('products')->where('id',$product_detail->product_code)->update(['status'=>'not_assigned']);
+     
+      $assign_products=  AssignProduct::where('id',$id)
+                            ->update(['product_code'=>$request->pcode,'assigned_to'=>$request->assign_to,'date'=>$request->date,'remark'=>$request->remark,'location'=>$request->location,'assignedby'=>$request->assignedby,'sip'=>\Request::ip()]);
 
-         Session::flash('message','Product Assignment Updated Successfully !!');
+        $update=DB::table('products')->where('id',$request->pcode)->update(['status'=>'assigned']);
+
+        Session::flash('message', 'Product Assignment Updated Successfully !!');
         return redirect()->route('assign.index');
     }
 
@@ -141,11 +140,11 @@ class AssignProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        AssignProduct::where('id',$id)->delete();
-         Session::flash('message','Product Assigned Deleted successfully!!');
+    public function destroy($id) {
+        AssignProduct::where('id', $id)->delete();
+        Session::flash('message', 'Product Assigned Deleted successfully!!');
 
-       return redirect()->route('assign.index');
+        return redirect()->route('assign.index');
     }
+
 }

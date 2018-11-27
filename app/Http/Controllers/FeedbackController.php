@@ -7,16 +7,15 @@ use Session;
 use App\Feedback;
 use Mail;
 
-class FeedbackController extends Controller
-{
+class FeedbackController extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-       return view('feedback.feedback');
+    public function index() {
+        return view('feedback.feedback');
     }
 
     /**
@@ -24,8 +23,7 @@ class FeedbackController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -35,22 +33,20 @@ class FeedbackController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-       
-        $storeFeedback=Feedback::create($request->all());
-        $to_email=['sarita.sharma@iifm.co.in','hr@iifm.co.in'];
-        $subject="New Anonymous Feedback Received  on ". date("l jS \of F Y",strtotime($storeFeedback->created_at));
-       $data=['title'=>$request->subject,'message'=>$request->description];
+    public function store(Request $request) {
 
-         Mail::send('mail.feedbackMailer',['data'=>$data], function ($message)use($to_email,$subject) {
-                     $message->from('info@prathamonline.in', 'MIS Alert');
-                        $message->to($to_email);
-                        $message->subject($subject);
-                        
-                    });
-       
-        Session::flash('message','Your Feedback Sent Successfully!!');
+        $storeFeedback = Feedback::create($request->all());
+        $to_email = ['sarita.sharma@iifm.co.in', 'hr@iifm.co.in'];
+        $subject = "New Anonymous Feedback Received  on " . date("l jS \of F Y", strtotime($storeFeedback->created_at));
+        $data = ['title' => $request->subject, 'message' => $request->description];
+
+        Mail::send('mail.feedbackMailer', ['data' => $data], function ($message)use($to_email, $subject) {
+            $message->from('info@prathamonline.in', 'MIS Alert');
+            $message->to($to_email);
+            $message->subject($subject);
+        });
+
+        Session::flash('message', 'Your Feedback Sent Successfully!!');
         return redirect()->route('feedback.index');
     }
 
@@ -60,8 +56,7 @@ class FeedbackController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -71,8 +66,7 @@ class FeedbackController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
     }
 
@@ -83,8 +77,7 @@ class FeedbackController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         //
     }
 
@@ -94,8 +87,8 @@ class FeedbackController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //
     }
+
 }

@@ -10,22 +10,21 @@ use App\UserDetails;
 use DB;
 use Auth;
 
-class UserManagementController extends Controller
-{
-      public function __construct()
-    {
+class UserManagementController extends Controller {
+
+    public function __construct() {
         $this->middleware('auth');
     }
-    public function index()
-    {
-        $users=User::join('user_details','user_details.user_id','=','users.id')
-                        ->where('user_details.status','Active')
-                        ->join('departments','departments.id','=','user_details.department')
-                         ->join('locations','locations.id','=','user_details.locationcentre')
-                        ->select('users.*','user_details.*','users.id as user_id','departments.name as dept_name','locations.name as locationcentre')
-                        ->get();
 
-        return view('user_management.index',compact('users'));
+    public function index() {
+        $users = User::join('user_details', 'user_details.user_id', '=', 'users.id')
+                ->where('user_details.status', 'Active')
+                ->join('departments', 'departments.id', '=', 'user_details.department')
+                ->join('locations', 'locations.id', '=', 'user_details.locationcentre')
+                ->select('users.*', 'user_details.*', 'users.id as user_id', 'departments.name as dept_name', 'locations.name as locationcentre')
+                ->get();
+
+        return view('user_management.index', compact('users'));
     }
 
     /**
@@ -33,36 +32,31 @@ class UserManagementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function statusEdit($id)
-    {
-       $data=explode(",", $id);
-       $id=$data[0];
-        $status=$data[1];
-        if($status=='Active'){
-             $changeStatus=UserDetails::where('user_id',$id)->update(['status'=>'unactive']);
-              $response="Employee Status De-Activated Successfully";
-        }
-        else{
-             $changeStatus=UserDetails::where('user_id',$id)->update(['status'=>'Active']);
-              $response="Employee Status Activated Successfully";
+    public function statusEdit($id) {
+        $data = explode(",", $id);
+        $id = $data[0];
+        $status = $data[1];
+        if ($status == 'Active') {
+            $changeStatus = UserDetails::where('user_id', $id)->update(['status' => 'unactive']);
+            $response = "Employee Status De-Activated Successfully";
+        } else {
+            $changeStatus = UserDetails::where('user_id', $id)->update(['status' => 'Active']);
+            $response = "Employee Status Activated Successfully";
         }
         return $response;
-        
     }
 
-    public function editOption($id)
-    {
-       $data=explode(",", $id);
-       $user_id=$data[0];
-       $edit_option=$data[1];
-       if ($edit_option=='False') {
-           $changeEditOption=UserDetails::where('user_id',$user_id)->update(['edit_option'=>'True']);
-              $response="Employee Editable Enabled Successfully";
-       }
-       else{
-             $changeEditOption=UserDetails::where('user_id',$user_id)->update(['edit_option'=>'False']);
-              $response="Employee Editable Disabled Successfully";
-       }
+    public function editOption($id) {
+        $data = explode(",", $id);
+        $user_id = $data[0];
+        $edit_option = $data[1];
+        if ($edit_option == 'False') {
+            $changeEditOption = UserDetails::where('user_id', $user_id)->update(['edit_option' => 'True']);
+            $response = "Employee Editable Enabled Successfully";
+        } else {
+            $changeEditOption = UserDetails::where('user_id', $user_id)->update(['edit_option' => 'False']);
+            $response = "Employee Editable Disabled Successfully";
+        }
     }
 
     /**
@@ -71,8 +65,7 @@ class UserManagementController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         //
     }
 
@@ -82,37 +75,36 @@ class UserManagementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id=null)
-    {
-        if($id){
+    public function show($id = null) {
+        if ($id) {
             $id;
-            $role=Auth::user()->role;
-            if($role==3 || $role==2){
-                $view_details='SHOW';
-            }else{
-                $view_details='HIDE';
+            $role = Auth::user()->role;
+            if ($role == 3 || $role == 2) {
+                $view_details = 'SHOW';
+            } else {
+                $view_details = 'HIDE';
             }
-         }else{
-            $id=Auth::user()->id; 
-            $view_details='SHOW';
-         }
-       $user_detail=User::where('users.id',$id)
-                    ->where('user_details.status','Active')
-                    ->join('user_details','user_details.user_id','=','users.id')
-                    ->select('users.*','user_details.*','users.id as user_id')
-                    ->get();
-                  // dd($official_datas);
-         $useredu=  DB::table('user_educations')
-                ->where('user_id',$id)
-                ->join('education_options','user_educations.edu_option','=','education_options.id')
-                ->select('user_educations.*', 'education_options.name as course_type', 'education_options.id as education_id')->get();
-        $user_work = UserWorkExperience::where('user_id',$id)->get();
+        } else {
+            $id = Auth::user()->id;
+            $view_details = 'SHOW';
+        }
+        $user_detail = User::where('users.id', $id)
+                ->where('user_details.status', 'Active')
+                ->join('user_details', 'user_details.user_id', '=', 'users.id')
+                ->select('users.*', 'user_details.*', 'users.id as user_id')
+                ->get();
+        // dd($official_datas);
+        $useredu = DB::table('user_educations')
+                        ->where('user_id', $id)
+                        ->join('education_options', 'user_educations.edu_option', '=', 'education_options.id')
+                        ->select('user_educations.*', 'education_options.name as course_type', 'education_options.id as education_id')->get();
+        $user_work = UserWorkExperience::where('user_id', $id)->get();
 
-        $personal_datas=UserDetails::where('user_id',$id)->get();
-         $family_datas=UserDetails::where('user_id',$id)->get();
+        $personal_datas = UserDetails::where('user_id', $id)->get();
+        $family_datas = UserDetails::where('user_id', $id)->get();
 
 
-       return view('mis.user_detail.index',compact(['user_detail','useredu','user_work','personal_datas','family_datas','view_details']));
+        return view('mis.user_detail.index', compact(['user_detail', 'useredu', 'user_work', 'personal_datas', 'family_datas', 'view_details']));
     }
 
     /**
@@ -121,8 +113,7 @@ class UserManagementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
     }
 
@@ -133,8 +124,7 @@ class UserManagementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         //
     }
 
@@ -144,8 +134,8 @@ class UserManagementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //
     }
+
 }

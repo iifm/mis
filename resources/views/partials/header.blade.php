@@ -1,11 +1,11 @@
 
-    <header class="app-header">
-        <a class="app-header__logo" href="{{url('/dashboard')}}">IIFM MIS</a>
-        <!-- Sidebar toggle button-->
-        <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
-      <!-- Navbar Right Menu-->
-        <ul class="app-nav">
-           
+<header class="app-header">
+    <a class="app-header__logo" href="{{url('/dashboard')}}">IIFM MIS</a>
+    <!-- Sidebar toggle button-->
+    <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
+    <!-- Navbar Right Menu-->
+    <ul class="app-nav">
+
         <!--Notification Menu-->
       <!--   <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Show notifications"><i class="fa fa-bell-o fa-lg"></i></a>
           <ul class="app-notification dropdown-menu dropdown-menu-right">
@@ -66,16 +66,16 @@
             </li>
           </ul>
         </li> -->
-         <li class="">
-                <a class="app-nav__item" href="{{ route('logout') }}" onclick="event.preventDefault();
-              document.getElementById('logout-form').submit();"><i class="fa fa-power-off fa-lg"></i>
-              </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        <li class="">
+            <a class="app-nav__item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();"><i class="fa fa-power-off fa-lg"></i>
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 {{ csrf_field() }}
-          
-          </form>
+
+            </form>
         </li>
-       
-      </ul>
-    </header>
-   
+
+    </ul>
+</header>
+

@@ -1,122 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
-  
-<head>
-    <title>IIFM MIS</title>
 
-    <!-- Main CSS-->
-    {!!View('partials.include_css')!!}
+    <head>
+        <title>IIFM MIS</title>
 
-  </head>
-  
-  <body class="app sidebar-mini rtl">
-    <!-- Navbar-->
-    
-    {!!View('partials.header')!!}
+        <!-- Main CSS-->
+        {!!View('partials.include_css')!!}
 
+    </head>
 
-    <!-- Sidebar menu-->
-    {!!View('partials.sidebar')!!}
+    <body class="app sidebar-mini rtl">
+        <!-- Navbar-->
+
+        {!!View('partials.header')!!}
 
 
-    
-    <!-- Main Content-->
-   <main class="app-content">
-      <div class="app-title">
-        <div>
-          <h4><i class="fa fa-product-hunt"></i>Product Management </h4>
+        <!-- Sidebar menu-->
+        {!!View('partials.sidebar')!!}
 
-        </div>
-         <a href="{{route('product.create')}}" class="btn btn-primary fa fa-plus">ADD Product</a>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-           
 
-          <div class="tile">
-            <div class="tile-body">
-             
-                
-            <div class="row"><div class="col-sm-12 pre-scrollable">
-              <?php $i=1;?>
-               <?php if(Session::has('message')) {?>
-        <div id="alert" class="alert alert-success">{{ Session::get('message') }}
 
-        </div><?php } ?>
-      <table class="table table-hover table-stripped table-responsive"  id="sampleTable" role="grid">
-                     <thead>
-                        <tr role="row">
-                          <th>#</th>
-                          <th>Product Code</th>
-                          <th>Product Category</th>
-                          <th>Product Name</th>
-                          <th>Product Serial No.</th>
-                          <th>Product Model</th>
-                          <th>Product Company</th>
-                          <th>Condition/Remark</th>
-                          <th>Product Invoice</th>
-                          <th>Purchase Date</th>
-                           <th>Description</th>
-                          <th >Action</th>
-                        </tr>
-                    </thead>
-                     
-                    <tbody>
-                      @foreach($product as $value)
-                      <tr role="row" class="odd">
-                        <td><?= $i++;?></td>
-                        <td>{{$value->pcode}}</td>
-                        <td>{{$value->product_cat_name}}</td>
-                        <td>{{$value->pname}}</td>
-                        <td>{{$value->pserial}}</td>
-                        <td>{{$value->pmodel}}</td>
-                        <td>{{$value->pcompany}}</td>
-                        <td>{{$value->pcondition}}</td>
-                         <td>
-                          @if($value->pinvoice)
-                          <a href="{{url('storage/product/'.$value->pinvoice)}}" target="_blank"><img src="{{url('storage/product/'.$value->pinvoice)}}" height="50px" width="50px">
-                          </a>
-                          @endif
-                        </td>
-                        
-                        <td>{{$value->pdate}}</td>
-                         <td>{{$value->pdescription}}</td>
-                       <td>
-                          <a href="{{route('product.edit',$value->id)}}" class="btn btn-primary fa fa-pencil"></a>
-                          <form id="delete-form-{{$value->id}}" method="post" action="{{route('product.destroy',$value->id)}}" >
-                            {{csrf_field()}}
-                            {{method_field('DELETE')}}
-                          <button type="submit" value="" class="fa fa-trash btn btn-danger"></button>  
-                          </form>
-                        </td>
-                   </tr>
-                   @endforeach
-                </tbody>
-                
-           </table>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-12 col-md-5">
-         
-        </div>
-       
-        </div>
-      
+        <!-- Main Content-->
+        <main class="app-content">
+            <div class="app-title">
+                <div>
+                    <h4><i class="fa fa-product-hunt"></i>Product Management </h4>
+
+                </div>
+                <a href="{{route('product.create')}}" class="btn btn-primary fa fa-plus">ADD Product</a>
             </div>
-          </div>
-        </div>
-      </div>
-    </main>
+            <div class="row">
+                <div class="col-md-12">
+
+
+                    <div class="tile">
+                        <div class="tile-body">
+
+
+                            <div class="row">
+                                    <?php $i = 1; ?>
+                                    <?php if (Session::has('message')) { ?>
+                                        <div id="alert" class="alert alert-success">{{ Session::get('message') }}
+
+                                        </div><?php } ?>
+                                    <table class="table table-hover table-stripped table-responsive"  id="sampleTable" role="grid">
+                                        <thead>
+                                            <tr role="row">
+                                                <th>#</th>
+                                                <th>Product Code</th>
+                                                <th>Product Category</th>
+                                                <th>Product Name</th>
+                                                <th>Product Serial No.</th>
+                                                <th>Product Model</th>
+                                                <th>Product Company</th>
+                                                <th>Condition/Remark</th>
+                                                <th>Product Invoice</th>
+                                                <th>Purchase Date</th>
+                                                <th>Description</th>
+                                                <th >Action</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            @foreach($product as $value)
+                                            <tr role="row" class="odd">
+                                                <td><?= $i++; ?></td>
+                                                <td>{{$value->pcode}}</td>
+                                                <td>{{$value->product_cat_name}}</td>
+                                                <td>{{$value->pname}}</td>
+                                                <td>{{$value->pserial}}</td>
+                                                <td>{{$value->pmodel}}</td>
+                                                <td>{{$value->pcompany}}</td>
+                                                <td>{{$value->pcondition}}</td>
+                                                <td>
+                                                    @if($value->pinvoice)
+                                                    <a href="{{url('storage/product/'.$value->pinvoice)}}" target="_blank"><img src="{{url('storage/product/'.$value->pinvoice)}}" height="50px" width="50px">
+                                                    </a>
+                                                    @endif
+                                                </td>
+
+                                                <td>{{$value->pdate}}</td>
+                                                <td>{{$value->pdescription}}</td>
+                                                <td>
+                                                    <a href="{{route('product.edit',$value->id)}}" class="btn btn-primary fa fa-pencil"></a>
+                                                    <form id="delete-form-{{$value->id}}" method="post" action="{{route('product.destroy',$value->id)}}" >
+                                                        {{csrf_field()}}
+                                                        {{method_field('DELETE')}}
+                                                        <button type="submit" value="" class="fa fa-trash btn btn-danger"></button>  
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+
+                                    </table>
+                               
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-5">
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
 
 
 
 
-    <!-- Essential javascripts for application to work-->
-    {!!View('partials.include_js')!!}
+        <!-- Essential javascripts for application to work-->
+        {!!View('partials.include_js')!!}
 
-    
-  </body>
 
-<!-- Mirrored from pratikborsadiya.in/vali-admin/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 05 Jul 2018 06:07:27 GMT -->
+    </body>
+
+    <!-- Mirrored from pratikborsadiya.in/vali-admin/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 05 Jul 2018 06:07:27 GMT -->
 </html>

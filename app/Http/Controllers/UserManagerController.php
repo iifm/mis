@@ -6,51 +6,46 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Role;
 
-class UserManagerController extends Controller
-{
-    public function __construct()
-    {
+class UserManagerController extends Controller {
+
+    public function __construct() {
         $this->middleware('auth');
     }
 
-    public function index()
-    {
-        $managers_ids=Role::where('access_zone','!=',0)
-                            ->where('access_zone','!=','All')
-                            ->pluck('id')
-                            ->toArray();
+    public function index() {
+        $managers_ids = Role::where('access_zone', '!=', 0)
+                ->where('access_zone', '!=', 'All')
+                ->pluck('id')
+                ->toArray();
 
-        $user_name_and_manager=[];
+        $user_name_and_manager = [];
 
         foreach ($managers_ids as $managers_id) {
-            
-           $manager_details=User::where('role',$managers_id)->pluck('name')->toArray();
 
-           $manager_name=implode(",", $manager_details);
+            $manager_details = User::where('role', $managers_id)->pluck('name')->toArray();
 
-           $access_zones=Role::find($managers_id);
+            $manager_name = implode(",", $manager_details);
 
-           $manager_access_zone=explode(",", $access_zones->access_zone);
-            
-           $team_members=User::join('user_details','user_details.user_id','=','users.id')
-                                    ->where('user_details.status','Active')
-                                    ->whereIn('users.role',$manager_access_zone)
-                                    ->get();
+            $access_zones = Role::find($managers_id);
 
-      
-           foreach ($team_members as $team_member) {
-         
-               $user_name_and_manager[]=['username'=>$team_member->name,
-                                        'manager_id'=>$managers_id,
-                                        'manager_name'=>$manager_name];     
+            $manager_access_zone = explode(",", $access_zones->access_zone);
 
-          }       
-           
-         
+            $team_members = User::join('user_details', 'user_details.user_id', '=', 'users.id')
+                    ->where('user_details.status', 'Active')
+                    ->whereIn('users.role', $manager_access_zone)
+                    ->get();
+
+
+            foreach ($team_members as $team_member) {
+
+                $user_name_and_manager[] = ['username' => $team_member->name,
+                    'manager_id' => $managers_id,
+                    'manager_name' => $manager_name];
+            }
         }
 
 
-        return view('admin.userManagers.index',compact('user_name_and_manager'));
+        return view('admin.userManagers.index', compact('user_name_and_manager'));
     }
 
     /**
@@ -58,8 +53,7 @@ class UserManagerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -69,8 +63,7 @@ class UserManagerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         //
     }
 
@@ -80,8 +73,7 @@ class UserManagerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -91,8 +83,7 @@ class UserManagerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
     }
 
@@ -103,8 +94,7 @@ class UserManagerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         //
     }
 
@@ -114,8 +104,8 @@ class UserManagerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //
     }
+
 }

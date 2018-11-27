@@ -7,20 +7,19 @@ use App\UploadCategory;
 use Session;
 use App\NewsUpload;
 
-class UploadCategoryController extends Controller
-{
-     public function __construct()
-    {
+class UploadCategoryController extends Controller {
+
+    public function __construct() {
         $this->middleware('auth');
     }
-    public function index()
-    {
-       $categories=UploadCategory::where('status','Active')
-                                ->join('users','users.id','=','upload_categories.addedby')
-                                ->select('upload_categories.*','users.name as username')
-                                ->get();
-                               // dd($categories);
-       return view('admin.category.index',compact('categories'));
+
+    public function index() {
+        $categories = UploadCategory::where('status', 'Active')
+                ->join('users', 'users.id', '=', 'upload_categories.addedby')
+                ->select('upload_categories.*', 'users.name as username')
+                ->get();
+        // dd($categories);
+        return view('admin.category.index', compact('categories'));
     }
 
     /**
@@ -28,8 +27,7 @@ class UploadCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         return view('admin.category.create');
     }
 
@@ -39,17 +37,16 @@ class UploadCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
 
-        $categories=UploadCategory::create($request->all());
-        $newsupdate= new NewsUpload;
-         if($request->type=='text') {
-          $newsupdate->category=$categories->id;
-          $newsupdate->save();
-       }
-        Session::flash('message','Category added Successfully!!');
-       return redirect()->route('uploadCategory.index');
+        $categories = UploadCategory::create($request->all());
+        $newsupdate = new NewsUpload;
+        if ($request->type == 'text') {
+            $newsupdate->category = $categories->id;
+            $newsupdate->save();
+        }
+        Session::flash('message', 'Category added Successfully!!');
+        return redirect()->route('uploadCategory.index');
     }
 
     /**
@@ -58,8 +55,7 @@ class UploadCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -69,11 +65,9 @@ class UploadCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        $categories=UploadCategory::where('id',$id)->get();
-          return view('admin.category.edit',compact(['categories','id']));
-
+    public function edit($id) {
+        $categories = UploadCategory::where('id', $id)->get();
+        return view('admin.category.edit', compact(['categories', 'id']));
     }
 
     /**
@@ -83,14 +77,13 @@ class UploadCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-       $name=$request->name;
-        $type=$request->type;
+    public function update(Request $request, $id) {
+        $name = $request->name;
+        $type = $request->type;
 
-       $categories=UploadCategory::where('id',$id)->update(['name'=>$name,'type'=>$type]);
-         Session::flash('message','Category Updated Successfully!!');
-       return redirect()->route('uploadCategory.index');
+        $categories = UploadCategory::where('id', $id)->update(['name' => $name, 'type' => $type]);
+        Session::flash('message', 'Category Updated Successfully!!');
+        return redirect()->route('uploadCategory.index');
     }
 
     /**
@@ -99,10 +92,10 @@ class UploadCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        UploadCategory::where('id',$id)->delete();
-         Session::flash('message','Category Deleted Successfully!!');
-       return redirect()->route('uploadCategory.index');
+    public function destroy($id) {
+        UploadCategory::where('id', $id)->delete();
+        Session::flash('message', 'Category Deleted Successfully!!');
+        return redirect()->route('uploadCategory.index');
     }
+
 }

@@ -6,20 +6,19 @@ use Illuminate\Http\Request;
 use DB;
 use Session;
 
-class ProductCategoryController extends Controller
-{
+class ProductCategoryController extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $datas=DB::table('product_categories')
-                    ->join('users','users.id','=','product_categories.addedby')
-                    ->select('users.name as username','product_categories.*')->get();
+    public function index() {
+        $datas = DB::table('product_categories')
+                        ->join('users', 'users.id', '=', 'product_categories.addedby')
+                        ->select('users.name as username', 'product_categories.*')->get();
         //dd($datas);
-        return view('inventory_management.product_category.index',compact('datas'));
+        return view('inventory_management.product_category.index', compact('datas'));
     }
 
     /**
@@ -27,9 +26,8 @@ class ProductCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-       return view('inventory_management.product_category.create');
+    public function create() {
+        return view('inventory_management.product_category.create');
     }
 
     /**
@@ -38,15 +36,14 @@ class ProductCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-       //dd($request->all());
-       $name=$request->name;
-       $addedby=$request->addedby;
-       $parent_id=0;
-        $product_cat=DB::table('product_categories')->insert(['name'=>$name,'addedby'=>$addedby,'parent_id'=>$parent_id]);
-         Session::flash('message','Product Category added Successfully!!');
-       return redirect()->route('product.category');
+    public function store(Request $request) {
+        //dd($request->all());
+        $name = $request->name;
+        $addedby = $request->addedby;
+        $parent_id = 0;
+        $product_cat = DB::table('product_categories')->insert(['name' => $name, 'addedby' => $addedby, 'parent_id' => $parent_id]);
+        Session::flash('message', 'Product Category added Successfully!!');
+        return redirect()->route('product.category');
     }
 
     /**
@@ -55,8 +52,7 @@ class ProductCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -66,12 +62,11 @@ class ProductCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-         $datas=DB::table('product_categories')
-                    ->where('id',$id)->get();
+    public function edit($id) {
+        $datas = DB::table('product_categories')
+                        ->where('id', $id)->get();
         //dd($datas);
-        return view('inventory_management.product_category.edit',compact(['datas','id']));
+        return view('inventory_management.product_category.edit', compact(['datas', 'id']));
     }
 
     /**
@@ -81,15 +76,14 @@ class ProductCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-       // dd($id);
-         $name=$request->name;
-       $addedby=$request->addedby;
-       $parent_id=0;
-        $product_cat=DB::table('product_categories')->where('id',$id)->update(['name'=>$name,'addedby'=>$addedby,'parent_id'=>$parent_id]);
-         Session::flash('message','Product Category Updated Successfully!!');
-       return redirect()->route('product.category');
+    public function update(Request $request, $id) {
+        // dd($id);
+        $name = $request->name;
+        $addedby = $request->addedby;
+        $parent_id = 0;
+        $product_cat = DB::table('product_categories')->where('id', $id)->update(['name' => $name, 'addedby' => $addedby, 'parent_id' => $parent_id]);
+        Session::flash('message', 'Product Category Updated Successfully!!');
+        return redirect()->route('product.category');
     }
 
     /**
@@ -98,15 +92,14 @@ class ProductCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        DB::table('product_categories')->where('id',$id)->delete();
-           Session::flash('message','Product Category Deleted Successfully!!');
-       return redirect()->route('product.category');
+    public function destroy($id) {
+        DB::table('product_categories')->where('id', $id)->delete();
+        Session::flash('message', 'Product Category Deleted Successfully!!');
+        return redirect()->route('product.category');
     }
 
-    public function mailer()
-    {
-       return view('mail.leaveRequestApproved');
+    public function mailer() {
+        return view('mail.leaveRequestApproved');
     }
+
 }

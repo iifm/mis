@@ -10,32 +10,29 @@ use Session;
 use App\User;
 use App\UserDetails;
 
-class EOFController extends Controller
-{
+class EOFController extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-      public function __construct()
-    {
+    public function __construct() {
         $this->middleware('auth');
     }
 
-    public function index()
-    {
-      $eom=  HallOfFame::join('users','users.id','=','hall_of_fames.empname')
-                        ->select('hall_of_fames.*','users.name as empname')->orderBy('id','DESC')
-                        ->get();
-                        //dd($eom);
-      return view('mis.eof.index',compact('eom'));
-
+    public function index() {
+        $eom = HallOfFame::join('users', 'users.id', '=', 'hall_of_fames.empname')
+                ->select('hall_of_fames.*', 'users.name as empname')->orderBy('id', 'DESC')
+                ->get();
+        //dd($eom);
+        return view('mis.eof.index', compact('eom'));
     }
-    public function getDepartment($id)
-    {
-        $department=UserDetails::where('user_id',$id)
-                    ->join('departments','departments.id','=','user_details.department')
-                    ->select('departments.name as department')->pluck('department');
+
+    public function getDepartment($id) {
+        $department = UserDetails::where('user_id', $id)
+                        ->join('departments', 'departments.id', '=', 'user_details.department')
+                        ->select('departments.name as department')->pluck('department');
         return $department;
     }
 
@@ -44,15 +41,14 @@ class EOFController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-         $users=User::join('user_details','user_details.user_id','=','users.id')
-                        ->where('user_details.status','Active')
-                        ->select('users.id as user_id','users.*','user_details.*')
-                        ->orderBy('users.name')
-                        ->get();
-                      //$users= strtoupper($users);
-         return view('mis.eof.create',compact('users'));
+    public function create() {
+        $users = User::join('user_details', 'user_details.user_id', '=', 'users.id')
+                ->where('user_details.status', 'Active')
+                ->select('users.id as user_id', 'users.*', 'user_details.*')
+                ->orderBy('users.name')
+                ->get();
+        //$users= strtoupper($users);
+        return view('mis.eof.create', compact('users'));
     }
 
     /**
@@ -61,42 +57,38 @@ class EOFController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-      
+    public function store(Request $request) {
+
         $this->validate($request, [
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-          
-      //  dd($request->all());
 
-           $sip=\Request::ip();
-        $id=Auth::user()->id;
-        $filename=$request->file('image');
-        $empname=$request->input('empname');
-        $month=$request->input('month');
-        $department=$request->input('department');
-        $description=$request->input('description');
-        $addedby=Auth::user()->name;
+        //  dd($request->all());
 
-         $image = $request->file('image');
-        $filename=$id.$image->getClientOriginalName();
-      $request->file('image')->storeAs('/public/images', $filename);
+        $sip = \Request::ip();
+        $id = Auth::user()->id;
+        $filename = $request->file('image');
+        $empname = $request->input('empname');
+        $month = $request->input('month');
+        $department = $request->input('department');
+        $description = $request->input('description');
+        $addedby = Auth::user()->name;
 
-      if ($request->description) {
-          $data=HallOfFame::create(['empname'=>$empname,'month'=>$month,'department'=>$department,'addedby'=>$addedby,'image'=>$filename,'sip'=>$sip,'description'=>$description]);
-      }
-      else{
-          $data=HallOfFame::create(['empname'=>$empname,'month'=>$month,'department'=>$department,'addedby'=>$addedby,'image'=>$filename,'sip'=>$sip]);
-      }
+        $image = $request->file('image');
+        $filename = $id . $image->getClientOriginalName();
+        $request->file('image')->storeAs('/public/images', $filename);
 
-      
+        if ($request->description) {
+            $data = HallOfFame::create(['empname' => $empname, 'month' => $month, 'department' => $department, 'addedby' => $addedby, 'image' => $filename, 'sip' => $sip, 'description' => $description]);
+        } else {
+            $data = HallOfFame::create(['empname' => $empname, 'month' => $month, 'department' => $department, 'addedby' => $addedby, 'image' => $filename, 'sip' => $sip]);
+        }
 
-          Session::flash('message','Employee of Month Added Successfully !!');
+
+
+        Session::flash('message', 'Employee of Month Added Successfully !!');
 
         return redirect()->route('eof.index');
-     
-
     }
 
     /**
@@ -105,8 +97,7 @@ class EOFController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -116,8 +107,7 @@ class EOFController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
     }
 
@@ -128,8 +118,7 @@ class EOFController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         //
     }
 
@@ -139,8 +128,8 @@ class EOFController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //
     }
+
 }
